@@ -1,7 +1,7 @@
 from sanic import Sanic
 import sanic.response
 
-import privblur_api
+import privblur_extractor
 import orjson
 import logging
 
@@ -15,7 +15,7 @@ app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps)
 async def initialize(app):
     # We use the default client for now. But in the future, we'll pass in our own custom
     # aiohttp client when the need arises for it.
-    app.ctx.TumblrAPI = await privblur_api.TumblrAPI.create(json_loads=orjson.loads)
+    app.ctx.TumblrAPI = await privblur_extractor.TumblrAPI.create(json_loads=orjson.loads)
 
 
 @app.get("/")
