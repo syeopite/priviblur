@@ -1,0 +1,19 @@
+[project]
+name = "privblur"
+requires-python = ">=3.10"
+dependencies = [
+    "sanic[ext] == 22.9.0",
+    "orjson == 3.8.0",
+    "babel",
+    "privblur-api",
+    "npf_renderer"
+]
+
+dynamic=["version"]
+
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "src.version.VERSION"}
