@@ -3,7 +3,7 @@ import logging
 from sanic import Sanic
 import sanic.response
 import orjson
-from privblur_extractor import TumblrAPI, parse_item, parse_container
+from privblur_extractor import TumblrAPI
 
 from helpers import setup_logging
 from version import VERSION
