@@ -7,6 +7,7 @@ from privblur_extractor import TumblrAPI, parse_item, parse_container
 
 from helpers import setup_logging
 from version import VERSION
+import routes
 
 setup_logging.setup_logging(logging.WARN)
 
@@ -41,6 +42,12 @@ async def main_startup_listener(app):
 @app.get("/")
 async def root(request):
     return sanic.response.text(VERSION)
+
+
+# Register all routes:
+for route in routes.BLUEPRINTS:
+    app.blueprint(route)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
