@@ -3,9 +3,10 @@ import logging
 from sanic import Sanic
 import sanic.response
 import orjson
+import aiohttp
 from privblur_extractor import TumblrAPI
 
-from helpers import setup_logging
+from helpers import setup_logging, helpers
 from version import VERSION
 import routes
 
@@ -15,12 +16,25 @@ app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps)
 app.ctx.LOGGER = logging.getLogger("privblur")
 app.ctx.VERSION = VERSION
 
+app.ctx.URL_HANDLER = helpers.url_handler
+app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
+
 
 @app.listener("before_server_start")
 async def initialize(app):
     # We use the default client for now. But in the future, we'll pass in our own custom
     # aiohttp client when the need arises for it.
     app.ctx.TumblrAPI = await TumblrAPI.create(json_loads=orjson.loads)
+
+    # We'll also have a separate HTTP client for images
+    media_request_headers = TumblrAPI.DEFAULT_HEADERS
+    del media_request_headers["authorization"]
+
+    app.ctx.ImageClient = aiohttp.ClientSession(
+                "https://64.media.tumblr.com",
+                headers=media_request_headers,
+                timeout=aiohttp.ClientTimeout(total=5)
+            )
 
 
 @app.listener("main_process_start")

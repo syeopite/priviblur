@@ -15,7 +15,7 @@ async def _main(request):
     doc = dominate.document(title="Trending topics")
     rendered = []
     for element in results.elements:
-        tag = npf_renderer.format_npf(element.content)
+        tag = npf_renderer.format_npf(element.content, url_handler=request.app.ctx.URL_HANDLER)
         rendered.append(tag)
 
     for tag in rendered:
