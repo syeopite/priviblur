@@ -44,6 +44,26 @@ async def root(request):
     return sanic.response.text(VERSION)
 
 
+@app.middleware("response")
+async def before_all_routes(request, response):
+    # https://github.com/iv-org/invidious/blob/master/src/invidious/routes/before_all.cr
+    response.headers["x-xss-protection"] = "1; mode=block"
+    response.headers["x-content-type-options"] = "nosniff"
+    response.headers["referrer-policy"] = "nosniff"
+
+    response.headers["content-security-policy"] = '; '.join([
+      "default-src 'none'",
+      "script-src 'self'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data:",
+      "font-src 'self' data:",
+      "connect-src 'self'",
+      "manifest-src 'self'",
+      "media-src 'self'",
+      "child-src 'self' blob:",
+    ])
+
+
 # Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
