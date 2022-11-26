@@ -58,7 +58,7 @@ async def _gifs(request):
 
 
 @explore.get("/quotes")
-async def _chats(request):
+async def _quotes(request):
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
         request.app.ctx.TumblrAPI.config.PostType.QUOTES
     )
