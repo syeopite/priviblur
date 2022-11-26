@@ -1,2 +1,8 @@
-{% set content_tag = format_npf(element.content, element.layout, url_handler=url_handler) %}
-{{ content_tag.render() }}
+<div class="post">
+    <header class="post-header">
+        <a class="link blog-name" href="{{element.post_url}}">{{element.blog.name}}</a>
+    </header>
+    {% set content_tag = format_npf(element.content, element.layout, url_handler=url_handler) %}
+    {{ content_tag.render() }}
+    <footer class="post-footer"></footer>
+</div>
