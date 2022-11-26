@@ -1,5 +1,6 @@
 import dominate
 import sanic
+import sanic_ext
 
 import npf_renderer
 import privblur_extractor
@@ -7,53 +8,49 @@ import privblur_extractor
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
 
-async def render_content(results, url_handler):
-    results = privblur_extractor.parse_container(results)
+async def render_results(initial_results, url_handler):
+        timeline = privblur_extractor.parse_container(initial_results)
 
-    doc = dominate.document(title="Trending topics")
-    rendered = []
-    for element in results.elements:
-        tag = npf_renderer.format_npf(element.content, url_handler=url_handler)
-        rendered.append(tag)
-
-    for tag in rendered:
-        doc.add(tag)
-        doc.add(dominate.tags.hr())
-        doc.add(dominate.tags.br())
-
-    return doc
+        return await sanic_ext.render(
+            "explore.jinja",
+            context={
+                "url_handler": url_handler,
+                "timeline": timeline,
+                "format_npf": npf_renderer.format_npf
+            }
+        )
 
 
 @explore.get("/")
 async def _main(request):
-    results = await request.app.ctx.TumblrAPI.explore_trending()
-    doc = await render_content(results, request.app.ctx.URL_HANDLER)
-    return sanic.response.html(doc.render(pretty=False))
+    initial_results = await request.app.ctx.TumblrAPI.explore_trending()
+    return await render_results(initial_results, request.app.ctx.URL_HANDLER)
+
 
 @explore.get("/text")
 async def _text(request):
-    results = await request.app.ctx.TumblrAPI.explore_post(
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
         request.app.ctx.TumblrAPI.config.PostType.TEXT
     )
-    doc = await render_content(results, request.app.ctx.URL_HANDLER)
-    return sanic.response.html(doc.render(pretty=False))
+    return await render_results(initial_results, request.app.ctx.URL_HANDLER)
+
 
 
 @explore.get("/photos")
 async def _photos(request):
-    results = await request.app.ctx.TumblrAPI.explore_post(
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
         request.app.ctx.TumblrAPI.config.PostType.PHOTOS
     )
-    doc = await render_content(results, request.app.ctx.URL_HANDLER)
-    return sanic.response.html(doc.render(pretty=False))
+    return await render_results(initial_results, request.app.ctx.URL_HANDLER)
+
 
 
 @explore.get("/gifs")
 async def _gifs(request):
-    results = await request.app.ctx.TumblrAPI.explore_post(
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
         request.app.ctx.TumblrAPI.config.PostType.GIFS
     )
-    doc = await render_content(results, request.app.ctx.URL_HANDLER)
-    return sanic.response.html(doc.render(pretty=False))
+    return await render_results(initial_results, request.app.ctx.URL_HANDLER)
+
 
 

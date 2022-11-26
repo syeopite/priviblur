@@ -1,0 +1,10 @@
+{% extends "base.jinja" %}
+{% block title %}{{query}} - Privblur{% endblock %}
+{% block content %}
+    {% for element in timeline.elements %}
+        {% include 'macros/post.jinja' %}
+        <br>
+        <hr>
+        <br>
+    {% endfor %}
+{%endblock %}
