@@ -10,12 +10,13 @@ import privblur_extractor
 search = sanic.Blueprint("search", url_prefix="/search")
 
 
-async def render_results(initial_results, query, url_handler):
+async def render_results(app, initial_results, query, url_handler):
         timeline = privblur_extractor.parse_container(initial_results)
 
         return await sanic_ext.render(
             "search.jinja",
             context={
+                "app": app,
                 "timeline": timeline,
                 "query": query,
                 "url_handler": url_handler,
@@ -30,4 +31,4 @@ async def _main(request: sanic.Request, query: str):
     timeline_type = request.app.ctx.TumblrAPI.config.TimelineType
 
     initial_results = await request.app.ctx.TumblrAPI.timeline_search(query, timeline_type.POST)
-    return await render_results(initial_results, query, request.app.ctx.URL_HANDLER)
+    return await render_results(request.app, initial_results, query, request.app.ctx.URL_HANDLER)

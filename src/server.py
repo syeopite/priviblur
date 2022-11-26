@@ -9,7 +9,7 @@ from privblur_extractor import TumblrAPI
 
 from . import routes
 from .helpers import setup_logging, helpers
-from .version import VERSION
+from .version import VERSION, CURRENT_COMMIT
 
 setup_logging.setup_logging(logging.WARN)
 
@@ -17,6 +17,7 @@ app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps)
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 
 app.ctx.LOGGER = logging.getLogger("privblur")
+app.ctx.CURRENT_COMMIT = CURRENT_COMMIT  # Used for cache busting
 app.ctx.VERSION = VERSION
 
 app.ctx.URL_HANDLER = helpers.url_handler
