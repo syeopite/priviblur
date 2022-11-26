@@ -1,8 +1,8 @@
-import sanic
 import dominate
-import privblur_extractor
-import npf_renderer
+import sanic
 
+import npf_renderer
+import privblur_extractor
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 

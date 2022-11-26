@@ -1,10 +1,10 @@
 import urllib.parse
 
-import sanic
 import dominate
-import privblur_extractor
-import npf_renderer
+import sanic
 
+import npf_renderer
+import privblur_extractor
 
 search = sanic.Blueprint("search", url_prefix="/search")
 

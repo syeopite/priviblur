@@ -1,14 +1,14 @@
 import logging
 
-from sanic import Sanic
-import sanic.response
-import orjson
 import aiohttp
-from privblur_extractor import TumblrAPI
+import orjson
+import sanic.response
+from sanic import Sanic
 
-from helpers import setup_logging, helpers
-from version import VERSION
 import routes
+from helpers import setup_logging, helpers
+from privblur_extractor import TumblrAPI
+from version import VERSION
 
 setup_logging.setup_logging(logging.WARN)
 
