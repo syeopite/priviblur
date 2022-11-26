@@ -41,14 +41,12 @@ async def _text(request):
     return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
 
 
-
 @explore.get("/photos")
 async def _photos(request):
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
         request.app.ctx.TumblrAPI.config.PostType.PHOTOS
     )
     return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
-
 
 
 @explore.get("/gifs")
@@ -59,4 +57,18 @@ async def _gifs(request):
     return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
 
 
+@explore.get("/quotes")
+async def _chats(request):
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
+        request.app.ctx.TumblrAPI.config.PostType.QUOTES
+    )
+    return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
+
+
+@explore.get("/chats")
+async def _chats(request):
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
+        request.app.ctx.TumblrAPI.config.PostType.CHATS
+    )
+    return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
 
