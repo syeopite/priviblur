@@ -23,6 +23,11 @@ async def render_results(initial_results, url_handler):
 
 @explore.get("/")
 async def _main(request):
+    return sanic.redirect(request.app.url_for("explore._trending"))  # /explore/trending
+
+
+@explore.get("/trending")
+async def _trending(request):
     initial_results = await request.app.ctx.TumblrAPI.explore_trending()
     return await render_results(initial_results, request.app.ctx.URL_HANDLER)
 
