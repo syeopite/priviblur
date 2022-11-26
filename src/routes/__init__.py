@@ -1,6 +1,7 @@
-from . import explore, media
+from . import explore, media, search
 
 BLUEPRINTS = (
     explore.explore,
-    media.media
+    media.media,
+    search.search
 )
