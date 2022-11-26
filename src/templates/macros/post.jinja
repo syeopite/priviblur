@@ -1,2 +1,2 @@
-{% set content_tag = format_npf(element.content, url_handler=url_handler) %}
+{% set content_tag = format_npf(element.content, element.layout, url_handler=url_handler) %}
 {{ content_tag.render() }}

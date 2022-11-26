@@ -3,22 +3,28 @@ import logging
 import aiohttp
 import orjson
 import sanic.response
+import sanic_ext
 from sanic import Sanic
-
-import routes
-from helpers import setup_logging, helpers
 from privblur_extractor import TumblrAPI
-from version import VERSION
+
+from . import routes
+from .helpers import setup_logging, helpers
+from .version import VERSION
 
 setup_logging.setup_logging(logging.WARN)
 
 app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps)
+app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
+
 app.ctx.LOGGER = logging.getLogger("privblur")
 app.ctx.VERSION = VERSION
 
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
+app.extend(
+
+)
 
 @app.listener("before_server_start")
 async def initialize(app):
@@ -81,6 +87,9 @@ async def before_all_routes(request, response):
 # Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
+
+# Static assets
+app.static("/assets", "assets")
 
 
 if __name__ == "__main__":
