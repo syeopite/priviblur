@@ -1,10 +1,5 @@
 {% extends "base.jinja" %}
 {% block title %}Trending Topics - Privblur{% endblock %}
 {% block content %}
-    {% for element in timeline.elements %}
-        {% include 'components/post.jinja' %}
-        <br>
-        <hr>
-        <br>
-    {% endfor %}
+    {% include 'components/timeline.jinja' %}
 {%endblock %}
