@@ -4,5 +4,11 @@
     </header>
     {% set content_tag = format_npf(element.content, element.layout, url_handler=url_handler) %}
     {{ content_tag.render() }}
-    <footer class="post-footer"></footer>
+    <footer class="post-footer">
+        <div class="post-tags">
+            {%for tag in element.tags%}
+            <a class="post-tag" href="/tagged/{{tag}}">#{{tag}}</a>
+            {%endfor%}
+        </div>
+    </footer>
 </div>
