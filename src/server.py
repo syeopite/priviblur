@@ -3,9 +3,9 @@ import logging
 import aiohttp
 import orjson
 import sanic.response
-import sanic_ext
 from sanic import Sanic
 from privblur_extractor import TumblrAPI
+from npf_renderer.utils import BASIC_LAYOUT_CSS
 
 from . import routes
 from .helpers import setup_logging, helpers
@@ -78,6 +78,11 @@ async def main_startup_listener(app):
 @app.get("/")
 async def root(request):
     return sanic.response.text(VERSION)
+
+
+@app.get("/assets/base-post-layout.css")
+async def base_post_layout(request):
+    return sanic.response.text(BASIC_LAYOUT_CSS, content_type="text/css")
 
 
 @app.middleware("response")
