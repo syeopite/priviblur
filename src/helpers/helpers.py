@@ -6,7 +6,11 @@ def url_handler(raw_url):
     url = urllib.parse.urlparse(raw_url)
 
     if url.hostname.endswith("64.media.tumblr.com"):
-        return f"/media/image{url.path}"
+        return f"/tblr/media/64{url.path}"
+    elif url.hostname.endswith("assets.tumblr.com"):
+        return f"/tblr/assets{url.path}"
+    elif url.hostname.endswith("49.media.tumblr.com"):
+        return f"/tblr/media/49{url.path}"
 
     return raw_url
 

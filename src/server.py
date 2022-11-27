@@ -27,6 +27,7 @@ app.extend(
 
 )
 
+
 @app.listener("before_server_start")
 async def initialize(app):
     # We use the default client for now. But in the future, we'll pass in our own custom
@@ -37,11 +38,25 @@ async def initialize(app):
     media_request_headers = TumblrAPI.DEFAULT_HEADERS
     del media_request_headers["authorization"]
 
-    app.ctx.ImageClient = aiohttp.ClientSession(
+    # TODO set pool size
+
+    app.ctx.Media64Client = aiohttp.ClientSession(
                 "https://64.media.tumblr.com",
                 headers=media_request_headers,
                 timeout=aiohttp.ClientTimeout(total=5)
             )
+
+    app.ctx.Media49Client = aiohttp.ClientSession(
+                "https://49.media.tumblr.com",
+                headers=media_request_headers,
+                timeout=aiohttp.ClientTimeout(total=5)
+            )
+
+    app.ctx.TumblrAssetClient = aiohttp.ClientSession(
+            "https://assets.tumblr.com",
+            headers=media_request_headers,
+            timeout=aiohttp.ClientTimeout(total=5)
+        )
 
 
 @app.listener("main_process_start")
