@@ -1,6 +1,8 @@
 {% for element in timeline.elements %}
-    {% include 'components/post.jinja' %}
-    <br>
-    <hr>
-    <br>
+    {% if not element.is_advertisement %}
+        {% include 'components/post.jinja' %}
+            <br>
+            <hr>
+            <br
+    {% endif %}
 {% endfor %}
