@@ -72,3 +72,11 @@ async def _chats(request):
     )
     return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
 
+
+@explore.get("/asks")
+async def _asks(request):
+    initial_results = await request.app.ctx.TumblrAPI.explore_post(
+        request.app.ctx.TumblrAPI.config.PostType.ASKS
+    )
+    return await render_results(request.app,  initial_results, request.app.ctx.URL_HANDLER)
+
