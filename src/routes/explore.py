@@ -1,4 +1,6 @@
-import dominate
+import html
+import urllib.parse
+
 import sanic
 import sanic_ext
 
@@ -16,6 +18,8 @@ async def render_results(app, endpoint, initial_results, url_handler):
             context={
                 "app": app,
                 "endpoint": endpoint,
+                "html_escape": html.escape,
+                "url_escape": urllib.parse.quote,
                 "url_handler": url_handler,
                 "timeline": timeline,
                 "format_npf": npf_renderer.format_npf
@@ -30,15 +34,21 @@ async def _main(request):
 
 @explore.get("/trending")
 async def _trending(request):
-    initial_results = await request.app.ctx.TumblrAPI.explore_trending(continuation=request.args.get("continuation"))
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
+    initial_results = await request.app.ctx.TumblrAPI.explore_trending(continuation=continuation)
     return await render_results(request.app, request.app.url_for("explore._trending"),
                                 initial_results, request.app.ctx.URL_HANDLER)
 
 
 @explore.get("/text")
 async def _text(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.TEXT, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.TEXT, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._text"),
                                 initial_results, request.app.ctx.URL_HANDLER)
@@ -46,8 +56,11 @@ async def _text(request):
 
 @explore.get("/photos")
 async def _photos(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.PHOTOS, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.PHOTOS, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._photos"),
                                 initial_results, request.app.ctx.URL_HANDLER)
@@ -55,8 +68,11 @@ async def _photos(request):
 
 @explore.get("/gifs")
 async def _gifs(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.GIFS, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.GIFS, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._gifs"),
                                 initial_results, request.app.ctx.URL_HANDLER)
@@ -64,8 +80,11 @@ async def _gifs(request):
 
 @explore.get("/quotes")
 async def _quotes(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.QUOTES, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.QUOTES, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._quotes"),
                                 initial_results, request.app.ctx.URL_HANDLER)
@@ -73,8 +92,11 @@ async def _quotes(request):
 
 @explore.get("/chats")
 async def _chats(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.CHATS, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.CHATS, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._chats"),
                                 initial_results, request.app.ctx.URL_HANDLER)
@@ -82,8 +104,11 @@ async def _chats(request):
 
 @explore.get("/asks")
 async def _asks(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
     initial_results = await request.app.ctx.TumblrAPI.explore_post(
-        request.app.ctx.TumblrAPI.config.PostType.ASKS, continuation=request.args.get("continuation")
+        request.app.ctx.TumblrAPI.config.PostType.ASKS, continuation=continuation
     )
     return await render_results(request.app, request.app.url_for("explore._asks"),
                                 initial_results, request.app.ctx.URL_HANDLER)

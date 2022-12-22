@@ -1,11 +1,11 @@
 {% extends "base.jinja" %}
-{% block title %}{{query}} - Privblur{% endblock %}
+{% block title %}{{html_escape(query)}} - Privblur{% endblock %}
 {% block content %}
     {% include 'components/timeline.jinja' %}
 
     {%- if timeline.next %}
         <div class="paging">
-            <a href="{{ app.url_for("search._main", query=query)}}?continuation={{timeline.next.cursor}}">Next Page</a>
+            <a href="{{ app.url_for("search._main", query=query)}}?continuation={{url_escape(timeline.next.cursor)}}">Next Page</a>
         </div>
     {% endif %}
 {% endblock %}

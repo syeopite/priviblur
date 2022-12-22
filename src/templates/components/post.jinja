@@ -10,7 +10,7 @@
     <footer class="post-footer">
         <div class="post-tags">
             {% for tag in element.tags %}
-            <a class="post-tag" href="/tagged/{{tag}}">#{{tag}}</a>
+            <a class="post-tag" href="/tagged/{{url_escape(tag)}}">#{{html_escape(tag)}}</a>
             {% endfor %}
         </div>
 
