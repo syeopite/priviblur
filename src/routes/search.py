@@ -30,5 +30,10 @@ async def _main(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
     timeline_type = request.app.ctx.TumblrAPI.config.TimelineType
 
-    initial_results = await request.app.ctx.TumblrAPI.timeline_search(query, timeline_type.POST)
+    initial_results = await request.app.ctx.TumblrAPI.timeline_search(
+        query,
+        timeline_type.POST,
+        continuation=request.args.get("continuation")
+    )
+
     return await render_results(request.app, initial_results, query, request.app.ctx.URL_HANDLER)

@@ -2,4 +2,11 @@
 {% block title %}Trending Topics - Privblur{% endblock %}
 {% block content %}
     {% include 'components/timeline.jinja' %}
-{%endblock %}
+
+    {%- if timeline.next %}
+        <div class="paging">
+            <a href="{{endpoint}}?continuation={{timeline.next.cursor}}">Next Page</a>
+        </div>
+    {% endif %}
+
+{%- endblock %}
