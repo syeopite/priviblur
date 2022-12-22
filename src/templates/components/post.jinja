@@ -3,6 +3,7 @@
 
     <header class="post-header">
         <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}">{{element.blog.name}}</a>
+        <span> <time>{{element.date.strftime("%Y-%m-%d %H:%M %p")}}</time> </span>
     </header>
 
     {{- content_tag.render(pretty=False) -}}
