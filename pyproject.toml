@@ -7,7 +7,7 @@ dependencies = [
     "aiohttp == 3.8.3",
     "babel",
     "privblur-extractor",
-    "npf_renderer"
+    "npf_renderer == 0.6.0"
 ]
 
 dynamic=["version"]

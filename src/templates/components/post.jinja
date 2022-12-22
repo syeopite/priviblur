@@ -1,14 +1,17 @@
 <div class="post">
+    {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+
     <header class="post-header">
         <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}">{{element.blog.name}}</a>
     </header>
-    {% set content_tag = format_npf(element.content, element.layout, url_handler=url_handler) %}
-    {{ content_tag.render() }}
+
+    {{- content_tag.render() -}}
+
     <footer class="post-footer">
         <div class="post-tags">
-            {%for tag in element.tags%}
+            {% for tag in element.tags %}
             <a class="post-tag" href="/tagged/{{tag}}">#{{tag}}</a>
-            {%endfor%}
+            {% endfor %}
         </div>
     </footer>
 </div>
