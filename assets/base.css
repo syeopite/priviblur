@@ -7,6 +7,20 @@
     max-width: 540px;
 }
 
+.navbar  {
+    text-align: center;
+}
+
+.search-bar {
+    padding: 10px;
+    margin: 1em;
+}
+
+.search-bar input {
+    width: 540px;
+    padding: 5px 10px;
+}
+
 .timeline {
     display: flex;
     gap: 2em;

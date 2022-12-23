@@ -10,6 +10,15 @@
     {% endblock %}
 </head>
 <body>
+    <nav class="navbar">
+        <form class="search-bar" method="get" action="/search" autocomplete="off">
+        {% if query is defined%}
+            <input name="q" type="text" value="{{query}}" placeholder="Search"></input>
+        {% else %}
+            <input name="q" type="text" placeholder="Search"></input>
+        {% endif %}
+        </form>
+    </nav>
     <div class="container">
         <div class="layout-left-column"></div>
         <div class="layout-middle-column">

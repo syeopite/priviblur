@@ -26,6 +26,14 @@ async def render_results(app, initial_results, query, url_handler):
             }
         )
 
+@search.get("/")
+async def query_param_redirect(request: sanic.Request): 
+    """Endpoint for /search to redirect q= queries to /search/<query>"""
+    if query := request.args.get("q"):
+        return sanic.redirect(request.app.url_for("search._main", query=urllib.parse.quote(query)))
+    else:
+        return sanic.redirect(request.app.url_for("explore._trending"))
+
 
 @search.get("/<query:str>")
 async def _main(request: sanic.Request, query: str):
