@@ -1,4 +1,8 @@
 .post-header {
-    display: flex;
+  display: flex;
+  margin-bottom: 5px;
+}
 
+.post-timestamp {
+  margin-left: auto;
 }
