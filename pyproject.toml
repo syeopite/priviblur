@@ -17,4 +17,4 @@ requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
-version = {attr = "src.version.VERSION"}
+version = {attr = "version.PROJECT_VERSION"}

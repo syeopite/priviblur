@@ -18,4 +18,5 @@ CURRENT_VERSION = subprocess.run(
 ).stdout.decode("utf-8").split()[0].replace("-", ".")
 
 
+PROJECT_VERSION = f"{CURRENT_VERSION}"
 VERSION = f"{CURRENT_VERSION}-{CURRENT_COMMIT} @ {CURRENT_BRANCH}"
