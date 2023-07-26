@@ -2,7 +2,7 @@
 name = "privblur"
 requires-python = ">=3.10"
 dependencies = [
-    "sanic[ext] == 22.9.0",
+    "sanic[ext] == 23.3.0",
     "orjson == 3.8.0",
     "aiohttp == 3.8.3",
     "babel",
