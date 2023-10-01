@@ -1,4 +1,6 @@
+import sys
 import logging
+import tomllib
 
 import aiohttp
 import orjson
@@ -15,7 +17,7 @@ TumblrAPI = privblur_extractor.TumblrAPI
 
 setup_logging.setup_logging(logging.WARN)
 
-app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps)
+app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix='PRIVBLUR_')
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 
 app.ctx.LOGGER = logging.getLogger("privblur")
@@ -25,16 +27,26 @@ app.ctx.VERSION = VERSION
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
-app.extend(
+# Privblur behavior configs
 
-)
-
+try:
+    with open(app.config.get("PRIVBLUR_CONFIG_LOCATION", "./config.toml"), "rb") as config_file:
+        app.ctx.PRIVBLUR_CONFIG = tomllib.load(config_file)
+except FileNotFoundError:
+    print("Cannot find configuration file at \"./config.toml\". Did you mean to set a new location with the environmental variable \"PRIVBLUR_CONFIG_LOCATION\"?")
+    sys.exit()
 
 @app.listener("before_server_start")
 async def initialize(app):
     # We use the default client for now. But in the future, we'll pass in our own custom
     # aiohttp client when the need arises for it.
-    app.ctx.TumblrAPI = await TumblrAPI.create(json_loads=orjson.loads)
+
+    privblur_backend = app.ctx.PRIVBLUR_CONFIG["privblur_backend"]
+
+    app.ctx.TumblrAPI = await TumblrAPI.create(
+        main_request_timeout=privblur_backend["main_response_timeout"],
+        json_loads=orjson.loads
+    )
 
     # We'll also have a separate HTTP client for images
     media_request_headers = TumblrAPI.DEFAULT_HEADERS
@@ -45,19 +57,19 @@ async def initialize(app):
     app.ctx.Media64Client = aiohttp.ClientSession(
                 "https://64.media.tumblr.com",
                 headers=media_request_headers,
-                timeout=aiohttp.ClientTimeout(total=5)
+                timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
             )
 
     app.ctx.Media49Client = aiohttp.ClientSession(
                 "https://49.media.tumblr.com",
                 headers=media_request_headers,
-                timeout=aiohttp.ClientTimeout(total=5)
+                timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
             )
 
     app.ctx.TumblrAssetClient = aiohttp.ClientSession(
             "https://assets.tumblr.com",
             headers=media_request_headers,
-            timeout=aiohttp.ClientTimeout(total=5)
+            timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
         )
 
 

@@ -30,13 +30,13 @@ class TumblrAPI:
     }
 
     @classmethod
-    async def create(cls, client=None, json_loads=json.loads):
+    async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads):
         """Creates a Tumblr API instance with the given client. Automatically creates a client obj if not given."""
         if not client:
             client = aiohttp.ClientSession(
                 "https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
-                timeout=aiohttp.ClientTimeout(total=5)
+                timeout=aiohttp.ClientTimeout(total=main_request_timeout)
             )
 
         return cls(client, json_loads)

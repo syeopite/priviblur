@@ -1,6 +1,6 @@
 [project]
 name = "privblur"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "sanic[ext] == 23.3.0",
     "orjson == 3.8.0",
