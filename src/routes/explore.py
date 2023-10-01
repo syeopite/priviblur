@@ -5,7 +5,8 @@ import sanic
 import sanic_ext
 
 import npf_renderer
-import privblur_extractor
+
+from .. import privblur_extractor
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 

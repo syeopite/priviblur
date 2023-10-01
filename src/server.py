@@ -4,12 +4,14 @@ import aiohttp
 import orjson
 import sanic.response
 from sanic import Sanic
-from privblur_extractor import TumblrAPI
 from npf_renderer.utils import BASIC_LAYOUT_CSS
 
 from . import routes
+from . import privblur_extractor
 from .helpers import setup_logging, helpers
 from .version import VERSION, CURRENT_COMMIT
+
+TumblrAPI = privblur_extractor.TumblrAPI
 
 setup_logging.setup_logging(logging.WARN)
 

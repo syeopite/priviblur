@@ -1,0 +1,187 @@
+import datetime
+
+from . import helpers, models
+
+logger = helpers.LOGGER.getChild("parse")
+
+
+class _CursorParser:
+    @staticmethod
+    def process(initial_data):
+        if target := helpers.dig_dict(initial_data, ("links", "next")):
+            return _CursorParser.__parse(target)
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+        target = target["queryParams"]
+        return models.base.Cursor(
+            cursor=target["cursor"],
+            limit=target.get("days"),
+            days=target.get("query"),
+            query=target.get("mode"),
+            mode=target.get("timelineType"),
+            skip_components=target.get("skipComponent"),
+            reblog_info=target.get("reblogInfo"),
+            post_type_filter=target.get("postTypeFilter")
+        )
+
+
+class _TimelineParser:
+    """Parses Tumblr's Internal API response into a Timeline object"""
+
+    @staticmethod
+    def process(initial_data):
+        if target := initial_data.get("timeline"):
+            logger.debug("_TimelineParser: Parser found! Beginning parsing...")
+            return _TimelineParser.__parse(target)
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+        # First let's begin with the cursor object
+        cursor = _CursorParser.process(target)
+
+        # Now the elements contained within
+        elements = []
+        total_raw_elements = len(target["elements"])
+        for element_index, element in enumerate(target["elements"]):
+            if result := parse_item(element, element_index, total_raw_elements):
+                elements.append(result)
+
+        return models.timeline.Timeline(
+            elements=elements,
+            next = cursor,
+        )
+
+
+class _TimelineBlogParser:
+    @staticmethod
+    def process(initial_data, force_parse=False):
+        if initial_data.get("objectType") == "blog" or force_parse:
+
+            if not force_parse:
+                logger.debug("_TimelineBlogParser: Parser found! Beginning parsing...")
+
+            return _TimelineBlogParser.__parse(initial_data["resources"][0])
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+        return models.timeline.TimelineBlog(
+            name=target["name"],
+            avatar=target["avatar"],
+            title=target["title"],
+            url=target["url"],
+            is_adult=target["isAdult"],
+            description_npf=target["descriptionNpf"],
+            uuid=target["uuid"],
+            is_paywall_on=target["isPaywallOn"]
+        )
+
+
+class _TimelinePostParser:
+    @staticmethod
+    def process(initial_data):
+        if initial_data.get("objectType") == "post":
+            logger.debug("_TimelinePostParser: Parser found! Beginning parsing...")
+            return _TimelinePostParser.__parse(initial_data)
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+
+        blog = _TimelineBlogParser.process(
+            {"resources": [target["blog"]]},  # Reuse an existing pathway
+            force_parse=True
+        )
+
+        assert blog is not None
+
+        note_count = target.get("noteCount")
+        like_count = None
+        reblog_count = None
+        reply_count = None
+
+        if can_like := target["canReply"]:
+            reply_count = target["replyCount"]
+        if can_reblog := target["canReblog"]:
+            reblog_count = target["reblogCount"]
+        if can_reply := target["canLike"]:
+            like_count = target["likeCount"]
+
+        # We check multiple keys as a precautionary measure.
+        if target.get("advertiserId") or target.get("adId") or target.get("adProviderId"):
+            is_advertisement = True
+        else:
+            is_advertisement = False
+
+        content = target["content"]
+        layout = target["layout"]
+        trail = target["trail"]
+
+        return models.timeline.TimelinePost(
+            blog=blog,
+            id=target["id"],
+            is_nsfw=target["isNsfw"],
+            is_advertisement=is_advertisement,
+            post_url=target["postUrl"],
+            slug=target["slug"],
+            date=datetime.datetime.fromtimestamp(target["timestamp"]),
+            tags=target["tags"],
+            summary=target["summary"],
+
+            content=content,
+            layout=layout,
+            trail=trail,
+
+            can_like=can_like,
+            can_reblog=can_reblog,
+            can_reply=can_reply,
+            display_avatar=target["displayAvatar"],
+
+            reply_count=reply_count,
+            reblog_count=reblog_count,
+            like_count=like_count,
+            note_count=note_count,
+        )
+
+
+ELEMENT_PARSERS = (_TimelineBlogParser, _TimelinePostParser)
+CONTAINER_PARSERS = (_TimelineParser,)
+
+
+def parse_item(element, element_index=0, total_elements=1):
+    """Parses an item from Tumblr's internal JSON response into a more usable structure"""
+    item_number = f"({element_index + 1}/{total_elements})"
+    logger.info(f"parse_item: Parsing item {item_number}")
+
+    for parser_index, parser in enumerate(ELEMENT_PARSERS):
+        logger.debug(f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
+                     f"({parser_index + 1}/{len(ELEMENT_PARSERS)})...")
+
+        if parsed_element := parser.process(element):
+            return parsed_element
+
+    return None
+
+
+def parse_container(initial_data):
+    """Parses a container of items from Tumblr's internal JSON response into a more usable structure"""
+    initial_data = initial_data["response"]
+    logger.info(f"parse_container: Parsing container...")
+
+    for parser_index, parser in enumerate(CONTAINER_PARSERS):
+        logger.debug(f"parse_container: Attempting to match container with `{parser.__name__}` "
+                     f"({parser_index+1}/{len(CONTAINER_PARSERS)})...")
+
+        if container := parser.process(initial_data):
+            logger.info(f"parse_container: A {type(container).__name__} container has been parsed!")
+
+            return container
+
+    return None
