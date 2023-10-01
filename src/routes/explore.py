@@ -76,4 +76,4 @@ async def _chats(request):
 
 @explore.get("/asks")
 async def _asks(request):
-    return await _handle_explore(request, "explore._askss", request.app.ctx.TumblrAPI.config.PostType.ASKS)
+    return await _handle_explore(request, "explore._asks", request.app.ctx.TumblrAPI.config.PostType.ASKS)
