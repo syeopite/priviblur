@@ -4,7 +4,7 @@ requires-python = ">=3.11"
 dependencies = [
     "sanic[ext] == 23.3.0",
     "orjson == 3.8.0",
-    "aiohttp == 3.8.3",
+    "httpx[http2]==0.25.0",
     "babel == 2.13.1",
     "jinja2==3.1.2",
     "npf-renderer == 0.9.0"

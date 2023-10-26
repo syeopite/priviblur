@@ -7,7 +7,7 @@ import json
 import urllib.parse
 from typing import Optional
 
-import aiohttp
+import httpx
 
 from . import request_config as rconf
 from .. import helpers
@@ -33,15 +33,16 @@ class TumblrAPI:
     async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads):
         """Creates a Tumblr API instance with the given client. Automatically creates a client obj if not given."""
         if not client:
-            client = aiohttp.ClientSession(
-                "https://www.tumblr.com",
+            client = httpx.AsyncClient(
+                base_url="https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
-                timeout=aiohttp.ClientTimeout(total=main_request_timeout)
+                http2=True,
+                timeout=main_request_timeout  # TODO allow fine-tuning the different types of timeouts
             )
 
         return cls(client, json_loads)
 
-    def __init__(self, client: aiohttp.ClientSession, json_loads=json.loads):
+    def __init__(self, client: httpx.AsyncClient, json_loads=json.loads):
         """Initializes a TumblrAPI instance with the given client"""
         self.client = client
         self.json_loader = json_loads
@@ -60,28 +61,33 @@ class TumblrAPI:
         except ImportError:
             def _format(obj): return obj
 
+        log_params = _format(url_params)
+
         logger.info(f"Requesting endpoint: {endpoint}")
-        logger.info(f"with the following queries: {_format(url_params)}")
+        logger.info(f"with the following queries: {log_params}")
 
-        async with self.client.get(f"/api/v2/{url}") as response:
-            try:
-                result = await response.json(loads=self.json_loader)
-            except Exception as e:
-                logger.error("Failed to parse JSON response from Tumblr!")
-                logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
+        response = await self.client.get(f"/api/v2/{url}")
 
-                raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
+        logger.debug(f"Requested endpoint '{endpoint}' with queries '{log_params}' via '#{response.http_version}'")
 
-            # Invalid response handling
-            if response.status != 200:
-                message = result["meta"]["msg"]
-                code = result["meta"]["status"]
+        try:
+            result = self.json_loader(response.text)
+        except Exception as e:
+            logger.error("Failed to parse JSON response from Tumblr!")
+            logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
 
-                logger.error(f"Error response received")
-                logger.error(f"Code f{code} with the following reason: {message}")
-                logger.debug(f"Response headers: {_format(response.headers)}")
+            raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
 
-                raise exceptions.TumblrErrorResponse(message, code)
+        # Invalid response handling
+        if response.status_code != 200:
+            message = result["meta"]["msg"]
+            code = result["meta"]["status"]
+
+            logger.error(f"Error response received")
+            logger.error(f"Code f{code} with the following reason: {message}")
+            logger.debug(f"Response headers: {_format(response.headers)}")
+
+            raise exceptions.TumblrErrorResponse(message, code)
 
         return result
 

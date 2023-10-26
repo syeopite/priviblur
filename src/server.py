@@ -2,7 +2,7 @@ import sys
 import logging
 import tomllib
 
-import aiohttp
+import httpx
 import orjson
 import sanic.response
 from sanic import Sanic
@@ -38,9 +38,6 @@ except FileNotFoundError:
 
 @app.listener("before_server_start")
 async def initialize(app):
-    # We use the default client for now. But in the future, we'll pass in our own custom
-    # aiohttp client when the need arises for it.
-
     privblur_backend = app.ctx.PRIVBLUR_CONFIG["privblur_backend"]
 
     app.ctx.TumblrAPI = await TumblrAPI.create(
@@ -52,25 +49,25 @@ async def initialize(app):
     media_request_headers = TumblrAPI.DEFAULT_HEADERS
     del media_request_headers["authorization"]
 
-    # TODO set pool size
+    # TODO set pool size for image requests
 
-    app.ctx.Media64Client = aiohttp.ClientSession(
-                "https://64.media.tumblr.com",
-                headers=media_request_headers,
-                timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
-            )
+    def create_image_client(url, timeout):
+        return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
 
-    app.ctx.Media49Client = aiohttp.ClientSession(
-                "https://49.media.tumblr.com",
-                headers=media_request_headers,
-                timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
-            )
+    app.ctx.Media64Client = create_image_client(
+        "https://64.media.tumblr.com",
+        privblur_backend["image_response_timeout"]
+    )
 
-    app.ctx.TumblrAssetClient = aiohttp.ClientSession(
-            "https://assets.tumblr.com",
-            headers=media_request_headers,
-            timeout=aiohttp.ClientTimeout(total=privblur_backend["image_response_timeout"])
-        )
+    app.ctx.Media49Client = create_image_client(
+        "https://49.media.tumblr.com",
+        privblur_backend["image_response_timeout"]
+    )
+
+    app.ctx.TumblrAssetClient = create_image_client(
+        "https://assets.tumblr.com",
+        privblur_backend["image_response_timeout"]
+    )
 
 
 @app.listener("main_process_start")

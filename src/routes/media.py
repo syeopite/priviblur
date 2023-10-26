@@ -3,17 +3,18 @@ import sanic
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
 
-async def get_media(request, client_to_use, path_to_request):
-    async with client_to_use.get(f"/{path_to_request}") as tumblr_img_resp:
+async def get_media(request, client, path_to_request):
+    async with client.stream("GET", path_to_request) as tumblr_response:
+        # Sanitize the headers given by Tumblr
         privblur_response_headers = {}
-        for header_key, header_value in tumblr_img_resp.headers.items():
+        for header_key, header_value in tumblr_response.headers.items():
             if header_key.lower() not in request.app.ctx.BLACKLIST_RESPONSE_HEADERS:
                 privblur_response_headers[header_key] = header_value
 
-        privblur_img_resp = await request.respond(headers=privblur_response_headers)
+        privblur_response = await request.respond(headers=privblur_response_headers)
 
-        async for chunk in tumblr_img_resp.content.iter_any():
-            await privblur_img_resp.send(chunk)
+        async for chunk in tumblr_response.aiter_bytes():
+            await privblur_response.send(chunk)
 
 
 @media.get(r"/media/64/<path:path>")
