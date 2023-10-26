@@ -5,15 +5,15 @@ dependencies = [
     "sanic[ext] == 23.3.0",
     "orjson == 3.8.0",
     "aiohttp == 3.8.3",
-    "babel",
+    "babel == 2.13.1",
     "jinja2==3.1.2",
-    "npf_renderer == 0.7.0"
+    "npf-renderer == 0.9.0"
 ]
+
+dynamic=["version"]
 
 [project.optional-dependencies]
 dev = ["prettyprinter==0.18.0"]
-
-dynamic=["version"]
 
 [build-system]
 requires = ["setuptools", "setuptools_scm"]
