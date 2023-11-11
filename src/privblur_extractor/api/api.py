@@ -197,3 +197,31 @@ class TumblrAPI:
 
         return await self._get_json(f"timeline/search", url_parameters)
 
+    async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False, 
+                            limit: int = 14, fields: str = rconf.TUMBLR_TAG_BLOG_INFO_FIELDS):
+        """Requests the /hubs/<tag>/timeline endpoint
+
+        Parameters:
+            tag: tag to query
+
+            continuation: Continuation token for fetching the next batch of content
+            latest: Whether to filter results by "latest" or most popular
+            limit: Amount of posts to return. In practice, the amount returned is half this value (or 1 if <= 2)
+
+            fields: See `explore_trending`
+        """
+
+        url_parameters = {
+            "fields[blogs]": fields,
+            "sort": "top" if not latest else "recent",
+            "limit": limit,
+        }
+
+        if continuation:
+            url_parameters["hub_name"] = tag
+            url_parameters["rawurldecode"] = 1
+            url_parameters["skip_header"] = 1
+
+            url_parameters["cursor"] = continuation
+
+        return await self._get_json(f"hubs/{urllib.parse.quote(tag)}/timeline", url_parameters)
