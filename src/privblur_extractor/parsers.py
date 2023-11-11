@@ -29,7 +29,7 @@ class _CursorParser:
 
 
 class _TimelineParser:
-    """Parses Tumblr's Internal API response into a Timeline object"""
+    """Parses Tumblr's API response into a Timeline object"""
 
     @staticmethod
     def process(initial_data):
@@ -156,7 +156,7 @@ CONTAINER_PARSERS = (_TimelineParser,)
 
 
 def parse_item(element, element_index=0, total_elements=1):
-    """Parses an item from Tumblr's internal JSON response into a more usable structure"""
+    """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
     logger.info(f"parse_item: Parsing item {item_number}")
 
@@ -171,7 +171,7 @@ def parse_item(element, element_index=0, total_elements=1):
 
 
 def parse_container(initial_data):
-    """Parses a container of items from Tumblr's internal JSON response into a more usable structure"""
+    """Parses a container of items from Tumblr API's JSON response into a more usable structure"""
     initial_data = initial_data["response"]
     logger.info(f"parse_container: Parsing container...")
 

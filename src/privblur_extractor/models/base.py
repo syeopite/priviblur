@@ -2,7 +2,7 @@ from typing import Optional, NamedTuple, Tuple
 
 
 class Cursor(NamedTuple):
-    """ Object representing Tumblr's internal API's "Next" object.
+    """ Object representing Tumblr's API's "Next" object.
 
     Used to link to the next section of results. IE in search, explore, etc.
     """

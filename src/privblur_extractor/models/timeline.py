@@ -68,7 +68,7 @@ TimelineObjects = Union[TimelineBlog]
 
 
 class Timeline(NamedTuple):
-    """ Object representing Tumblr's internal API's Timeline object.
+    """Object representing Tumblr API's Timeline object.
 
     Refers to data on a certain page. IE Search or explore
     """
