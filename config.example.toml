@@ -5,3 +5,18 @@
 
     # Timeout for fetching image responses from Tumblr 
     image_response_timeout = 30
+
+
+# Controls logging behavior
+#
+# Use Python's numerical logging levels
+# https://docs.python.org/3/howto/logging.html#logging-levels
+[logging]
+    # Sanic (Server)'s logging level'
+    sanic_logging_level = 30
+
+    # Privblur's logging level
+    privblur_logging_level = 30
+
+    # Privblur extractor's logging level
+    privblur_extractor_logging_level = 20

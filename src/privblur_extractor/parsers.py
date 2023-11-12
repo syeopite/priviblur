@@ -158,7 +158,7 @@ CONTAINER_PARSERS = (_TimelineParser,)
 def parse_item(element, element_index=0, total_elements=1):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
-    logger.info(f"parse_item: Parsing item {item_number}")
+    logger.debug(f"parse_item: Parsing item {item_number}")
 
     for parser_index, parser in enumerate(ELEMENT_PARSERS):
         logger.debug(f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
@@ -173,14 +173,14 @@ def parse_item(element, element_index=0, total_elements=1):
 def parse_container(initial_data):
     """Parses a container of items from Tumblr API's JSON response into a more usable structure"""
     initial_data = initial_data["response"]
-    logger.info(f"parse_container: Parsing container...")
+    logger.debug(f"parse_container: Parsing container...")
 
     for parser_index, parser in enumerate(CONTAINER_PARSERS):
         logger.debug(f"parse_container: Attempting to match container with `{parser.__name__}` "
                      f"({parser_index+1}/{len(CONTAINER_PARSERS)})...")
 
         if container := parser.process(initial_data):
-            logger.info(f"parse_container: A {type(container).__name__} container has been parsed!")
+            logger.debug(f"parse_container: A {type(container).__name__} container has been parsed!")
 
             return container
 

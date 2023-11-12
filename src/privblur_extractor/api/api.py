@@ -63,12 +63,11 @@ class TumblrAPI:
 
         log_params = _format(url_params)
 
-        logger.info(f"Requesting endpoint: {endpoint}")
-        logger.info(f"with the following queries: {log_params}")
+        logger.info(f"Requesting endpoint: /api/v2/{url}")
 
         response = await self.client.get(f"/api/v2/{url}")
 
-        logger.debug(f"Requested endpoint '{endpoint}' with queries '{log_params}' via '#{response.http_version}'")
+        logger.debug(f"Requested endpoint: /api/v2/{url} via '#{response.http_version}'")
 
         try:
             result = self.json_loader(response.text)
