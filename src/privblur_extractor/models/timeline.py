@@ -1,5 +1,5 @@
 import datetime
-from typing import Union, NamedTuple, List, Optional
+from typing import Union, NamedTuple, List, Tuple, Optional
 
 from . import base
 
@@ -56,7 +56,7 @@ class TimelinePost(NamedTuple):
 
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-    trail: Optional[list[dict]]
+    trail: Optional[List[Tuple[dict]]]
 
     note_count: Optional[int] = None
     like_count: Optional[int] = None

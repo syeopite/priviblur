@@ -60,12 +60,11 @@ class _TimelineParser:
 class _TimelineBlogParser:
     @staticmethod
     def process(initial_data, force_parse=False):
-        if initial_data.get("objectType") == "blog" or force_parse:
-
-            if not force_parse:
-                logger.debug("_TimelineBlogParser: Parser found! Beginning parsing...")
-
+        if initial_data.get("objectType") == "blog":
             return _TimelineBlogParser.__parse(initial_data["resources"][0])
+        elif force_parse:
+            # Assume packaged as {"blog": <blog data>}
+            return _TimelineBlogParser.__parse(initial_data)
         else:
             return None
 
@@ -94,13 +93,11 @@ class _TimelinePostParser:
 
     @staticmethod
     def __parse(target):
-
-        blog = _TimelineBlogParser.process(
-            {"resources": [target["blog"]]},  # Reuse an existing pathway
-            force_parse=True
-        )
+        blog = _TimelineBlogParser.process(target["blog"], force_parse=True)
 
         assert blog is not None
+
+        id = target["id"]
 
         note_count = target.get("noteCount")
         like_count = None
@@ -124,9 +121,23 @@ class _TimelinePostParser:
         layout = target["layout"]
         trail = target["trail"]
 
+        trails = []
+        for trail_post in trail:
+            try:
+                trail_blog = _TimelineBlogParser.process(trail_post["blog"], force_parse=True)
+                trail_content = trail_post["content"]
+                trail_layout = trail_post["layout"]
+
+                trails.append((
+                    trail_blog, trail_content, trail_layout
+                ))
+            except KeyError as e:
+                logger.warning(f"Unexpected key while parsing post trail for post '{id}'")
+                continue
+
         return models.timeline.TimelinePost(
             blog=blog,
-            id=target["id"],
+            id=id,
             is_nsfw=target["isNsfw"],
             is_advertisement=is_advertisement,
             post_url=target["postUrl"],
@@ -137,7 +148,7 @@ class _TimelinePostParser:
 
             content=content,
             layout=layout,
-            trail=trail,
+            trail=trails,
 
             can_like=can_like,
             can_reblog=can_reblog,
