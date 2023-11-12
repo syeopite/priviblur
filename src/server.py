@@ -7,7 +7,6 @@ import httpx
 import orjson
 import sanic.response
 from sanic import Sanic
-from npf_renderer.utils import BASIC_LAYOUT_CSS
 
 from . import routes
 from . import privblur_extractor
@@ -99,11 +98,6 @@ async def root(request):
     return sanic.response.text(VERSION)
 
 
-@app.get("/assets/base-post-layout.css")
-async def base_post_layout(request):
-    return sanic.response.text(BASIC_LAYOUT_CSS, content_type="text/css")
-
-
 @app.middleware("response")
 async def before_all_routes(request, response):
     # https://github.com/iv-org/invidious/blob/master/src/invidious/routes/before_all.cr
@@ -129,10 +123,6 @@ async def before_all_routes(request, response):
 # Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
-
-
-# Static assets
-app.static("/assets", "assets")
 
 
 if __name__ == "__main__":
