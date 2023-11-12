@@ -136,4 +136,4 @@ app.static("/assets", "assets")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(dev=config["misc"]["dev_mode"])

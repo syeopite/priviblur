@@ -20,3 +20,7 @@
 
     # Privblur extractor's logging level
     privblur_extractor_logging_level = 20
+
+[misc]
+    # Enable sanic's dev mode
+    dev_mode=false
