@@ -13,15 +13,19 @@ explore = sanic.Blueprint("explore", url_prefix="/explore")
 
 async def _handle_explore(request, endpoint, post_type = None):
     app = request.app
+    raw_endpoint = endpoint
     endpoint = request.app.url_for(endpoint)
 
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    if not post_type:
-        initial_results = await request.app.ctx.TumblrAPI.explore_trending(continuation=continuation)
-    else:
-        initial_results = await request.app.ctx.TumblrAPI.explore_post(post_type=post_type, continuation=continuation)
+    match raw_endpoint:
+        case "explore._trending":
+            initial_results = await request.app.ctx.TumblrAPI.explore_trending(continuation=continuation)
+        case "explore._today":
+            initial_results = await request.app.ctx.TumblrAPI.explore_today(continuation=continuation)
+        case _:
+            initial_results = await request.app.ctx.TumblrAPI.explore_post(post_type=post_type, continuation=continuation)        
 
     timeline = privblur_extractor.parse_container(initial_results)
 
@@ -47,6 +51,10 @@ async def _main(request):
 @explore.get("/trending")
 async def _trending(request):
     return await _handle_explore(request, "explore._trending")
+
+@explore.get("/today")
+async def _today(request):
+    return await _handle_explore(request, "explore._today")
 
 
 @explore.get("/text")

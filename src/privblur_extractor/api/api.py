@@ -133,6 +133,26 @@ class TumblrAPI:
 
         return await self._get_json("explore/trending", url_parameters)
 
+    
+    async def explore_today(self, *, continuation: Optional[str] = None, fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS):
+        """Requests the /explore/home/today endpoint
+
+        fields:
+            What information regarding a blog gets sent back. By default, everything is sent (and description
+            won't be neue post format)
+        """
+
+        url_parameters = {
+            "fields[blogs]": fields,
+            "reblog_info": True,
+        }
+
+        if continuation:
+            url_parameters["cursor"] = continuation
+
+        return await self._get_json("explore/home/today", url_parameters)
+    
+    
     async def explore_post(self, post_type: rconf.PostType, *, continuation: Optional[str] = None,
                            reblog_info: bool = True,
                            fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):
