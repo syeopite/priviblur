@@ -29,9 +29,14 @@ async def _49_media(request: sanic.Request, path: str):
     return await get_media(request, request.app.ctx.Media49Client, path)
 
 
+@media.get(r"/media/44/<path:path>")
+async def _44_media(request: sanic.Request, path: str):
+    """Proxies the requested media from 44.media.tumblr.com"""
+    return await get_media(request, request.app.ctx.Media44Client, path)
+
+
 @media.get(r"/assets/<path:path>")
 async def _tb_assets(request: sanic.Request, path: str):
     """Proxies the requested media from assets.tumblr.com"""
     return await get_media(request, request.app.ctx.TumblrAssetClient, path)
-
 

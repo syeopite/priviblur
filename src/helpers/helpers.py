@@ -11,6 +11,8 @@ def url_handler(raw_url):
         return f"/tblr/assets{url.path}"
     elif url.hostname.endswith("49.media.tumblr.com"):
         return f"/tblr/media/49{url.path}"
+    elif url.hostname.endswith("44.media.tumblr.com"):
+        return f"/tblr/media/44{url.path}"
 
     return raw_url
 

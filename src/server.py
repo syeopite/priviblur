@@ -73,6 +73,10 @@ async def initialize(app):
         "https://49.media.tumblr.com", privblur_backend["image_response_timeout"]
     )
 
+    app.ctx.Media44Client = create_image_client(
+        "https://44.media.tumblr.com", privblur_backend["image_response_timeout"]
+    )
+
     app.ctx.TumblrAssetClient = create_image_client(
         "https://assets.tumblr.com", privblur_backend["image_response_timeout"]
     )
