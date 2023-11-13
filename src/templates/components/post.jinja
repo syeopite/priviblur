@@ -1,22 +1,44 @@
 <div class="post">
-    {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+    {% if element.content %}
+        {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+    {% elif element.trail %}
+        {% set contains_errors, content_tag = format_npf(element.trail[0][1], element.trail[0][2], url_handler=url_handler) -%}
+    {% endif %}
 
-    <header class="post-header">
-        <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}">{{element.blog.name}}</a>
-        <span class="post-timestamp"> <time>{{element.date.strftime("%Y-%m-%d %H:%M %p")}}</time> </span>
-    </header>
+    <div class="post-header">
+        <div class="post-author">
+            <img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[0].url)}}">
+            <div class="author-information">
+                <div class="primary-post-author">
+                    <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}">{{element.blog.name}}</a>
+                    <span class="separator">•</span>
+                    <span class="post-timestamp"><time>{{element.date.strftime("%b %d, %Y")}}</time></span>
+                </div>
+                {% if element.trail %} 
+                    <div class="reblog-attribution">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path fill="#6b7280" d="M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z"/></svg>
+                        <a class="link blog-name" href="/{{element.trail[0][0].name}}">{{element.trail[0][0].name}}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
     {{- content_tag -}}
 
     <footer class="post-footer">
-        <div class="post-tags">
-            {% for tag in element.tags %}
-            <a class="post-tag" href="/tagged/{{url_escape(tag)}}">#{{html_escape(tag)}}</a>
-            {% endfor %}
-        </div>
+        {%- if element.tags -%}
+            <div class="post-tags">
+                {%- for tag in element.tags -%}
+                <a class="post-tag" href="/tagged/{{url_escape(tag)}}"><span>#{{html_escape(tag)}}</span></a>
+                {%- endfor -%}
+            </div>
+        {%- endif -%}
 
-        <div class="note-count">
-            <span> {{- element.note_count }} </span>
+        <div class="post-interaction">
+            <div class="note-count">
+                <span> {{- element.note_count }} Notes</span>
+            </div>
         </div>
     </footer>
 </div>

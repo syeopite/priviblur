@@ -1,0 +1,65 @@
+body {
+    font-family: Inter;
+    font-size: 14px;
+    background: #E8E9EA;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/assets/fonts/Inter.var.woff2");
+}
+
+.container {
+    display: flex;
+}
+
+.layout-middle-column {
+    margin: auto;
+    max-width: 590px;
+}
+
+.navbar  {
+    text-align: center;
+}
+
+.search-bar {
+    padding: 10px 10px;
+    margin: 1em 0;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 5px 0 5px 0;
+    text-indent: 10px;
+}
+
+@media (min-width: 590px) {
+    .search-bar input {
+        width: 590px;
+    }
+}
+
+.timeline {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.paging {
+    text-align: center;
+    margin: 2.5em auto;
+}
+
+.paging .button {
+    border: 3px solid rgba(0, 0, 0, 0.07);
+    display: inline-block;
+    padding: 2px 5px;
+}

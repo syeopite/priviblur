@@ -10,7 +10,7 @@ assets = sanic.Blueprint("assets", url_prefix="/assets")
 assets.static("/", "assets")
 
 
-@assets.get("/base-post-layout.css")
+@assets.get("/css/base-post-layout.css")
 async def base_post_layout(request):
     return sanic.response.text(BASIC_LAYOUT_CSS, content_type="text/css")
 

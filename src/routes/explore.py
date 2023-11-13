@@ -56,6 +56,17 @@ async def _trending(request):
 async def _today(request):
     return await _handle_explore(request, "explore._today")
 
+@explore.get("/today/json")
+async def _today_json(request):
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+    else:
+        continuation = None
+
+
+    initial_results = await request.app.ctx.TumblrAPI.explore_today(continuation=continuation)
+    return sanic.response.json(initial_results)
+
 
 @explore.get("/text")
 async def _text(request):

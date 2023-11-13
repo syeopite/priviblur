@@ -50,3 +50,21 @@ async def _main(request: sanic.Request, query: str):
     )
 
     return await render_results(request.app, initial_results, query, request.app.ctx.URL_HANDLER)
+
+
+
+@search.get("/<query:str>/json")
+async def _main_name(request: sanic.Request, query: str):
+    query = urllib.parse.unquote(query)
+    timeline_type = request.app.ctx.TumblrAPI.config.TimelineType
+
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
+    initial_results = await request.app.ctx.TumblrAPI.timeline_search(
+        query,
+        timeline_type.POST,
+        continuation=continuation
+    )
+
+    return sanic.response.json(initial_results)

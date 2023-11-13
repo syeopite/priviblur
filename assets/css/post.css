@@ -1,0 +1,113 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 25px 25px;
+  background: white;
+  border-radius: 10px;
+}
+
+.post-header {
+  display: flex;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.reblog-attribution {
+  display: flex;
+  gap: 2px;
+  position: relative;
+  right: 3px;
+}
+
+.reblog-attribution .blog-name {
+  color: #6b7280;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 5px;
+}
+
+.author-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 2px;
+}
+
+.primary-post-author {
+  display: flex;
+  gap: 5px;
+  color: #6b7280;
+}
+
+.blog-name {
+  color: black;
+  align-self: center;
+}
+
+.primary-post-author .separator {
+  font-size: 8px;
+  align-self: center;
+}
+
+.post-timestamp {
+  align-self: center;
+}
+
+.post-body > * {
+  margin: unset;
+  margin-bottom: 4px;
+}
+
+.post-body a {
+  color: unset;
+  text-decoration: unset;
+}
+
+.post-footer {
+  display: flex;
+  color: #ACACAC;
+  justify-content: space-around;
+  flex-direction: column;
+  align-self: end;
+  margin-top: 15px;
+  width: 100%;
+  gap: 30px;
+}
+
+.post-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.post-tag {
+  display: inline-block;
+  background: #f5f5f5;
+  color: #ACACAC;
+  border-radius: 6px;
+  padding: 0 3px;
+  font-weight: 500;
+}
+
+.post-interaction {
+  display: flex;
+}
+
+.note-count {
+  /* background: #f5f5f5;
+  border-radius: 5px;
+  padding: 5px 10px; */
+  font-weight: bold;
+}
