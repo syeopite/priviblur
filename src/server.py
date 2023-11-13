@@ -7,6 +7,7 @@ import httpx
 import orjson
 import sanic.response
 from sanic import Sanic
+from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes
 from . import privblur_extractor
@@ -40,6 +41,7 @@ app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 app.ctx.LOGGER = logging.getLogger("privblur")
 
 app.ctx.CURRENT_COMMIT = CURRENT_COMMIT  # Used for cache busting
+app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
 app.ctx.VERSION = VERSION
 
 app.ctx.URL_HANDLER = helpers.url_handler
