@@ -1,0 +1,5 @@
+{% extends "base.jinja" %}
+{% block title %}{{html_escape(element.blog.name)}} - Privblur{% endblock %}
+{% block content %}
+    {%- include 'components/post.jinja' -%}
+{% endblock %}

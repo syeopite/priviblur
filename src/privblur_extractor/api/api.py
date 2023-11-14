@@ -244,3 +244,16 @@ class TumblrAPI:
             url_parameters["cursor"] = continuation
 
         return await self._get_json(f"hubs/{urllib.parse.quote(tag)}/timeline", url_parameters)
+
+    async def blog_post(self, blog_name, post_id):
+        """Requests the /blog/<blog name>/posts/<post id> endpoint
+
+        Parameters:
+            blog_name: the blog the post is from
+            post_id: the id of the post
+        """
+
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_name)}/posts/{post_id}/permalink",
+            url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": True}
+        )
