@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="/assets/css/base.css?v={{app.ctx.CURRENT_COMMIT}}" as="style">
+    <link rel="preload" href="/assets/css/base-post-layout.css?v={{app.ctx.NPF_RENDERER_VERSION}}" as="style">
     <link rel="stylesheet" type="text/css" href="/assets/css/base.css?v={{app.ctx.CURRENT_COMMIT}}">
     <link rel="stylesheet" type="text/css" href="/assets/css/base-post-layout.css?v={{app.ctx.NPF_RENDERER_VERSION}}">
     <link rel="stylesheet" type="text/css" href="/assets/css/post.css?v={{app.ctx.CURRENT_COMMIT}}">
@@ -16,18 +18,18 @@
 <body>
     <nav class="navbar">
         <form class="search-bar" method="get" action="/search" autocomplete="off">
-        {% if query is defined %}
+        {%- if query is defined -%}
             <input name="q" type="text" value="{{query}}" placeholder="Search"></input>
-        {% else %}
+        {%- else -%}
             <input name="q" type="text" placeholder="Search"></input>
-        {% endif %}
+        {%- endif -%}
         </form>
     </nav>
     <div class="container">
         <div class="layout-left-column"></div>
         <div class="layout-middle-column">
-            {% block content %}
-            {% endblock %}
+            {%- block content -%}
+            {%- endblock -%}
         </div>
         <div class="layout-right-column"></div>
     </div>

@@ -1,7 +1,7 @@
 <div class="timeline">
-{% for element in timeline.elements %}
-    {% if not element.is_advertisement %}
-        {% include 'components/post.jinja' %}
-    {% endif %}
-{% endfor %}
+{%- for element in timeline.elements -%}
+    {%- if not element.is_advertisement -%}
+        {%- include 'components/post.jinja' -%}
+    {%- endif -%}
+{%- endfor -%}
 </div>

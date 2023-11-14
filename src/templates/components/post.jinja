@@ -1,9 +1,9 @@
 <div class="post">
-    {% if element.content %}
+    {%- if element.content -%}
         {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
-    {% elif element.trail %}
+    {%- elif element.trail -%}
         {% set contains_errors, content_tag = format_npf(element.trail[0][1], element.trail[0][2], url_handler=url_handler) -%}
-    {% endif %}
+    {%- endif -%}
 
     <div class="post-header">
         <div class="post-author">
@@ -14,12 +14,12 @@
                     <span class="separator">•</span>
                     <span class="post-timestamp"><time>{{element.date.strftime("%b %d, %Y")}}</time></span>
                 </div>
-                {% if element.trail %} 
+                {%- if element.trail -%}
                     <div class="reblog-attribution">
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path fill="#6b7280" d="M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z"/></svg>
                         <a class="link blog-name" href="/{{element.trail[0][0].name}}">{{element.trail[0][0].name}}</a>
                     </div>
-                {% endif %}
+                {%- endif -%}
             </div>
         </div>
     </div>
@@ -39,7 +39,6 @@
             <div class="note-count">
                 <span> {{- element.note_count }} Notes</span>
             </div>
-
             <div class="interaction-buttons">
                 <a href="https://www.tumblr.com/{{element.blog.name}}/{{element.id}}">
                     <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 320 512" role="img" aria-label="View on Tumblr">
