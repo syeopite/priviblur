@@ -103,6 +103,8 @@
 
 .post-interaction {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .note-count {
