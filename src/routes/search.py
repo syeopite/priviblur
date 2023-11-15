@@ -17,6 +17,7 @@ async def render_results(app, initial_results, query, url_handler):
             "search.jinja",
             context={
                 "app": app,
+                "endpoint": "/search",
                 "html_escape": html.escape,
                 "url_escape": urllib.parse.quote,
                 "timeline": timeline,
