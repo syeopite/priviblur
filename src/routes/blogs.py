@@ -38,6 +38,15 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
         return await render_blog_post(request.app, post, request.app.ctx.URL_HANDLER)
 
 
+@blogs.get("/<blog:str>/<post_id:int>/json")
+async def _blog_post_no_slug_json(request: sanic.Request, blog: str, post_id: str):
+    blog = urllib.parse.unquote(blog)
+
+    initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
+    return sanic.response.json(initial_results)
+
+
+
 @blogs.get("/<blog:str>/<post_id:int>/<slug:str>")
 async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str):
     blog = urllib.parse.unquote(blog)

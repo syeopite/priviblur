@@ -135,6 +135,27 @@ class _TimelinePostParser:
                 logger.warning(f"Unexpected key while parsing post trail for post '{id}'")
                 continue
 
+        # Reblogged from data
+        reblog_from_information = None
+        reblog_root_information = None
+
+        if reblogged_from_id := target.get("rebloggedFromId"):
+            reblog_from_information = models.misc.ReblogAttribution(
+                post_id=reblogged_from_id,
+                post_url=target["rebloggedFromUrl"],
+                blog_name=target["rebloggedFromName"],
+                blog_title=target["rebloggedFromTitle"],
+            )
+
+            if root_reblogged_from_id := target.get("rebloggedRootId"):
+                reblog_root_information = models.misc.ReblogAttribution(
+                    post_id=root_reblogged_from_id,
+                    post_url=target["rebloggedRootUrl"],
+                    blog_name=target["rebloggedRootName"],
+                    blog_title=target["rebloggedRootTitle"],
+                )
+
+
         return models.timeline.TimelinePost(
             blog=blog,
             id=id,
@@ -159,6 +180,9 @@ class _TimelinePostParser:
             reblog_count=reblog_count,
             like_count=like_count,
             note_count=note_count,
+
+            reblog_from=reblog_from_information,
+            reblog_root=reblog_root_information
         )
 
 

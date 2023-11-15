@@ -1,7 +1,7 @@
 import datetime
 from typing import Union, NamedTuple, List, Tuple, Optional
 
-from . import base
+from . import base, misc
 
 
 # Avatars = namedtuple("avatars", "")
@@ -62,6 +62,9 @@ class TimelinePost(NamedTuple):
     like_count: Optional[int] = None
     reblog_count: Optional[int] = None
     reply_count: Optional[int] = None
+
+    reblog_from: Optional[misc.ReblogAttribution] = None
+    reblog_root: Optional[misc.ReblogAttribution] = None
 
 
 TimelineObjects = Union[TimelineBlog]

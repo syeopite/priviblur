@@ -14,10 +14,21 @@
                     <span class="separator">•</span>
                     <span class="post-timestamp"><time>{{element.date.strftime("%b %d, %Y")}}</time></span>
                 </div>
-                {%- if element.trail -%}
+                {%- if element.reblog_from -%}
+                    {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same-#}
+                    {%- if not element.reblog_from.blog_name -%}
+                        {%- if element.reblog_root and element.reblog_root.post_id == element.reblog_from.post_id -%}
+                            {%- set reblog_post_author, reblog_post_id = element.reblog_root.blog_name, element.reblog_root.post_id -%}
+                        {%- else -%}
+                            {%- set reblog_post_author, reblog_post_id = "PRIVBLURERRORBLOG", element.reblog_from.post_id %}
+                        {%- endif -%}
+                    {%- else -%}
+                        {%- set reblog_post_author, reblog_post_id = element.reblog_from.blog_name, element.reblog_from.post_id -%}
+                    {%- endif -%}
+
                     <div class="reblog-attribution">
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path fill="#6b7280" d="M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z"/></svg>
-                        <a class="link blog-name" href="/{{element.trail[0][0].name}}">{{element.trail[0][0].name}}</a>
+                        <a class="link blog-name" href="/{{reblog_post_author}}/{{reblog_post_id}}">{{reblog_post_author}}</a>
                     </div>
                 {%- endif -%}
             </div>
