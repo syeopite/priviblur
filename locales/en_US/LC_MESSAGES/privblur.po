@@ -1,0 +1,89 @@
+# English (United States) translations for Privblur.
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Privblur project.
+# syeopite <syeopite@syeopite.dev>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  Privblur\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: 2023-11-16 00:31-0800\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+
+msgid "project_title"
+msgstr "Privblur"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "%d note"
+msgstr[1] "%d notes"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "Sort by"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "Popular"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "Latest"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "Filter by date"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "All Time"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "Today"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "Last week"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "Last month"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "Last 6 months"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "Last year"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "All Types"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "Filter by post type"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "Text"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "Photo"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "Gifs"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "Quote"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "Link"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "Chat"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "Audio"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "Video"
+
+msgid "timeline_search_post_type_filter_answer"
+msgstr "Ask"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "Poll"
+

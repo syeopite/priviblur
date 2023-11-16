@@ -1,6 +1,7 @@
 import sys
 import os
 import logging
+import gettext
 import tomllib
 
 import httpx
@@ -49,7 +50,6 @@ app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", 
 
 app.ctx.PRIVBLUR_CONFIG = config
 
-
 @app.listener("before_server_start")
 async def initialize(app):
     privblur_backend = app.ctx.PRIVBLUR_CONFIG["privblur_backend"]
@@ -88,6 +88,12 @@ async def initialize(app):
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
+    
+    app.ext.environment.globals["translate"] = helpers.translate
+
+    # Initialize locales
+    gettext_instances = {"en": gettext.translation("privblur", localedir="locales", languages=["en"])}
+    app.ctx.GETTEXT_INSTANCES = gettext_instances
 
 
 @app.listener("main_process_start")

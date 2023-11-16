@@ -1,3 +1,5 @@
+import sanic
+
 import copy
 import urllib.parse
 from typing import Sequence
@@ -62,3 +64,15 @@ def remove_query_params(base_query_args, key):
 
 def deseq_urlencode(query_args):
     return urllib.parse.urlencode(query_args, doseq=True)
+
+
+def translate(language, id, number=None):
+    app = sanic.Sanic.get_app("Privblur")
+
+    gettext_instance = app.ctx.GETTEXT_INSTANCES[language]
+
+    if number is not None:
+        return gettext_instance.ngettext(id, f"{id}_plural", number) % number
+    else:
+        return gettext_instance.gettext(id)
+    

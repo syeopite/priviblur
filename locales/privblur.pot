@@ -1,0 +1,84 @@
+# Translations template for Privblur.
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Privblur project.
+# syeopite <syeopite@syeopite.dev>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Privblur\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+
+msgid "project_title"
+msgstr ""
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr ""
+
+msgid "timeline_sort_by_filter_title"
+msgstr ""
+
+msgid "timeline_sort_by_filter_popular"
+msgstr ""
+
+msgid "timeline_sort_by_filter_recent"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_title"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_0"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_1"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_7"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_30"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_180"
+msgstr ""
+
+msgid "timeline_filter_by_date_filter_365"
+msgstr ""
+
+msgid "timeline_search_post_type_filter_none"
+msgstr ""
+
+msgid "timeline_post_type_filter_title"
+msgstr ""
+
+msgid "timeline_post_type_filter_text"
+msgstr ""
+
+msgid "timeline_post_type_filter_photo"
+msgstr ""
+
+msgid "timeline_post_type_filter_gif"
+msgstr ""
+
+msgid "timeline_post_type_filter_quote"
+msgstr ""
+
+msgid "timeline_post_type_filter_link"
+msgstr ""
+
+msgid "timeline_post_type_filter_chat"
+msgstr ""
+
+msgid "timeline_post_type_filter_audio"
+msgstr ""
+
+msgid "timeline_post_type_filter_video"
+msgstr ""
+
+msgid "timeline_post_type_filter_answer"
+msgstr ""
+
+msgid "timeline_post_type_filter_poll"
+msgstr ""
