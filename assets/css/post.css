@@ -112,6 +112,12 @@
   width: 100%;
 }
 
+.interaction-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
 .note-count {
   /* background: #f5f5f5;
   border-radius: 5px;
