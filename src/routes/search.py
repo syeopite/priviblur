@@ -24,10 +24,6 @@ async def _main(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
     timeline_type = request.app.ctx.TumblrAPI.config.TimelineType
 
-    # Default
-    sort_by = "popular"
-    post_filter = None
-
     time_filter = request.args.get("t")
     if not time_filter or time_filter not in ("365", "180", "30", "7", "1"):
         time_filter = 0
@@ -36,7 +32,7 @@ async def _main(request: sanic.Request, query: str):
 
     timeline = privblur_extractor.parse_container(initial_results)
 
-    return await _render(request, timeline, query, f"/search/{html.escape(query)}", time_filter=time_filter, sort_by=sort_by)
+    return await _render(request, timeline, query, f"/search/{html.escape(query)}", time_filter=time_filter, sort_by="popular", post_filter=None)
 
 
 @search.get("/<query:str>/recent")
@@ -53,7 +49,7 @@ async def _sort_by_search(request: sanic.Request, query: str):
 
     endpoint = f"/search/{html.escape(query)}/recent"
 
-    return await _render(request, timeline, query, endpoint, time_filter=time_filter, sort_by="recent")
+    return await _render(request, timeline, query, endpoint, time_filter=time_filter, sort_by="recent", post_filter=None)
 
 
 @search.get("/<query:str>/<post_filter:str>")
