@@ -93,6 +93,7 @@ async def initialize(app):
 
     app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
     app.ext.environment.filters["format_date"] = babel.dates.format_date
+    app.ext.environment.filters["format_datetime"] = babel.dates.format_datetime
 
     app.ext.environment.globals["translate"] = helpers.translate
 
