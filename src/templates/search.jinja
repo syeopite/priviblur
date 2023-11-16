@@ -1,9 +1,7 @@
 {% extends "base.jinja" %}
 {% block title %}{{html_escape(query)}} - Privblur{% endblock %}
 {% from 'components/icons/expand.jinja' import dropdown_icon  %}
-{%- macro add_query(query_string) -%}
-    {% if query_string %}?{{query_string}}{% endif %}
-{%-endmacro-%}
+{% from 'macros/add_query.jinja' import add_query  %}
 {% block content %}
     <ul id="post-filters">
         <li class="filter-options" id="sort-by-filter"title="{{translate("en", "timeline_search_sort_by_filter_title")}}">{{translate("en", "timeline_search_sort_by_filter_" + sort_by)}}{{dropdown_icon(16,16, "#6b7280")}}

@@ -87,3 +87,11 @@ msgstr "Ask"
 msgid "timeline_search_post_type_filter_poll"
 msgstr "Poll"
 
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "Sort by"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "Top"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "Latest"

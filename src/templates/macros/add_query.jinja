@@ -1,0 +1,3 @@
+{%- macro add_query(query_string) -%}
+    {% if query_string %}?{{query_string}}{% endif %}
+{%-endmacro-%}
