@@ -56,6 +56,11 @@
   align-self: center;
 }
 
+.blog-name:hover {
+  color: black;
+  align-self: center;
+}
+
 .primary-post-author .separator {
   font-size: 8px;
   align-self: center;

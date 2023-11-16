@@ -1,12 +1,53 @@
 {% extends "base.jinja" %}
 {% block title %}{{html_escape(query)}} - Privblur{% endblock %}
+{% from 'components/icons/expand.jinja' import dropdown_icon  %}
 {% block content %}
-    {% include 'components/timeline.jinja' %}
+    <ul id="post-filters">
+        {%- macro add_query(query_string) -%}
+            {% if query_string %}?{{query_string}}{% endif %}
+        {%-endmacro-%}
+
+        <li class="filter-options" id="sort-by-filter"title="Sort by">Popular{{dropdown_icon(16,16, "#6b7280")}}
+            <ul class="filter-dropdown-menu">
+                {% if post_filter %}
+                    <li {% if sort_by == "popular"%} class="selected-filter" {% endif %} ><a href="/search/{{query}}/{{post_filter}}{{ add_query(query_args | deseq_urlencode) }}">Popular</a></li>
+                    <li {% if sort_by == "recent"%} class="selected-filter" {% endif %} ><a href="/search/{{query}}/recent/{{post_filter}}{{ add_query(query_args | deseq_urlencode) }}">Latest</a></li>
+                {% else %}
+                    <li {% if sort_by == "popular"%} class="selected-filter"{% endif %}> <a href="/search/{{query}}{{ add_query(query_args | deseq_urlencode) }}">Popular</a></li>
+                    <li {% if sort_by == "recent"%} class="selected-filter"{% endif %}> <a href="/search/{{query}}/recent{{ add_query(query_args | deseq_urlencode )}}">Latest</a></li>    
+                {% endif %}
+            </ul>
+        </li>
+        <li class="filter-options" id="filter-by-date-filter" title="Filter by date">All Time{{dropdown_icon(16,16, "#6b7280")}}
+            <ul class="filter-dropdown-menu">
+                <li {% if time_filter == 0 %} class="selected-filter" {% endif %}><a href="{{endpoint}}{{ add_query(query_args | remove_query_params("t")) }}">All Time</a></li>
+                {%- for time, name in (("365", "Last year"), ("180", "Last 6 months"), ("30", "Last month"), ("7", "Last week"), ("1", "Today")) -%}
+                    <li {% if time_filter == time %} class="selected-filter" {% endif %}><a href="{{endpoint}}{{ add_query(query_args | update_query_params("t", time)) }}">{{name}}</a></li>
+                {%- endfor -%}
+            </ul>
+        </li>
+        <li class="filter-options" id="filter-by-post-type-filter" title="Filter by tile">Type{{dropdown_icon(16,16, "#6b7280")}}
+            {# Supported post filters for search #}
+            <ul class="filter-dropdown-menu">
+                {%- for post_type in ("text", "photo", "gif", "quote", "link", "chat", "audio", "video", "answer", "poll") -%}
+
+                {% if sort_by == "recent" %}
+                    <li {% if post_filter == post_type %} class="selected-filter" {% endif %} ><a href="/search/{{query}}/recent/{{post_type}}{{ add_query(query_args | deseq_urlencode) }}">{{post_type | title }}</a></li>
+                {% else %}
+                    <li {% if post_filter == post_type%} class="selected-filter"{% endif %}> <a href="/search/{{query}}/{{post_type}}{{ add_query(query_args | deseq_urlencode) }}">{{post_type | title }}</a></li>
+                {% endif %}
+
+                {%- endfor -%}
+            </ul>
+        </li>
+    </ul>
+
+    {%- include 'components/timeline.jinja' -%}
 
     {%- if timeline.next %}
         <div class="paging">
             <div class="next-page button">
-                <a href="{{endpoint}}/{{query}}?continuation={{url_escape(timeline.next.cursor)}}">Next Page</a>
+                <a href="{{endpoint}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">Next Page</a>
             </div>
         </div>
     {% endif %}

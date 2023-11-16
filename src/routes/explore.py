@@ -70,29 +70,29 @@ async def _today_json(request):
 
 @explore.get("/text")
 async def _text(request):
-    return await _handle_explore(request, "explore._text", request.app.ctx.TumblrAPI.config.PostType.TEXT)
+    return await _handle_explore(request, "explore._text", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.TEXT)
 
 
 @explore.get("/photos")
 async def _photos(request):
-    return await _handle_explore(request, "explore._photos", request.app.ctx.TumblrAPI.config.PostType.PHOTOS)
+    return await _handle_explore(request, "explore._photos", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.PHOTOS)
 
 
 @explore.get("/gifs")
 async def _gifs(request):
-    return await _handle_explore(request, "explore._gifs", request.app.ctx.TumblrAPI.config.PostType.GIFS)
+    return await _handle_explore(request, "explore._gifs", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.GIFS)
 
 
 @explore.get("/quotes")
 async def _quotes(request):
-    return await _handle_explore(request, "explore._quotes", request.app.ctx.TumblrAPI.config.PostType.QUOTES)
+    return await _handle_explore(request, "explore._quotes", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.QUOTES)
 
 
 @explore.get("/chats")
 async def _chats(request):
-    return await _handle_explore(request, "explore._chats", request.app.ctx.TumblrAPI.config.PostType.CHATS)
+    return await _handle_explore(request, "explore._chats", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.CHATS)
 
 
 @explore.get("/asks")
 async def _asks(request):
-    return await _handle_explore(request, "explore._asks", request.app.ctx.TumblrAPI.config.PostType.ASKS)
+    return await _handle_explore(request, "explore._asks", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.ASKS)

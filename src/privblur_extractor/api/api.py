@@ -153,7 +153,7 @@ class TumblrAPI:
         return await self._get_json("explore/home/today", url_parameters)
     
     
-    async def explore_post(self, post_type: rconf.PostType, *, continuation: Optional[str] = None,
+    async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
                            reblog_info: bool = True,
                            fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):
         """Requests the /explore/posts/<post-type> endpoint with a post type, to get a trending posts of said type"""
@@ -171,7 +171,7 @@ class TumblrAPI:
     async def timeline_search(self, query: str, timeline_type: rconf.TimelineType, *,
                               continuation: Optional[str] = None,
                               latest: bool = False, limit: int = 20, days: int = 0,
-                              post_type_filter: Optional[rconf.PostType] = None, reblog_info: bool = True,
+                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None, reblog_info: bool = True,
                               fields: str = rconf.TUMBLR_SEARCH_BLOG_INFO_FIELDS):
         """Requests the /timeline/search endpoint
 

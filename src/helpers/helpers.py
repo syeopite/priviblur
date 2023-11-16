@@ -1,5 +1,6 @@
+import copy
 import urllib.parse
-
+from typing import Sequence
 
 def url_handler(raw_url):
     """Change URLs found in posts to privacy-friendly alternatives"""
@@ -37,3 +38,27 @@ def url_handler(raw_url):
     return raw_url
 
 
+def update_query_params(base_query_args, key, value):
+    """Returns a URL query string with a parameter replaced/added"""
+    base_query_args = copy.copy(base_query_args)
+
+    if isinstance(value, Sequence):
+        base_query_args[key] = value
+    else:
+        base_query_args[key] = [value]
+
+    return urllib.parse.urlencode(base_query_args, doseq=True)
+
+
+def remove_query_params(base_query_args, key):
+    """Returns a URL query string with a parameter replaced/added"""
+    base_query_args = copy.copy(base_query_args)
+
+    if base_query_args.get(key):
+        del base_query_args[key]
+
+    return urllib.parse.urlencode(base_query_args, doseq=True)
+
+
+def deseq_urlencode(query_args):
+    return urllib.parse.urlencode(query_args, doseq=True)

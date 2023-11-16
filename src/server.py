@@ -83,6 +83,12 @@ async def initialize(app):
         "https://assets.tumblr.com", privblur_backend["image_response_timeout"]
     )
 
+    # Add additional jinja filters
+
+    app.ext.environment.filters["update_query_params"] = helpers.update_query_params
+    app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
+    app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
+
 
 @app.listener("main_process_start")
 async def main_startup_listener(app):
