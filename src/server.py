@@ -8,6 +8,8 @@ import httpx
 import orjson
 import sanic.response
 from sanic import Sanic
+import babel.numbers
+import babel.dates
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes
@@ -88,7 +90,10 @@ async def initialize(app):
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
-    
+
+    app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
+    app.ext.environment.filters["format_date"] = babel.dates.format_date
+
     app.ext.environment.globals["translate"] = helpers.translate
 
     # Initialize locales

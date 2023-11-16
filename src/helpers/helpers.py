@@ -66,13 +66,18 @@ def deseq_urlencode(query_args):
     return urllib.parse.urlencode(query_args, doseq=True)
 
 
-def translate(language, id, number=None):
+def translate(language, id, number=None, substitution=None):
     app = sanic.Sanic.get_app("Privblur")
 
     gettext_instance = app.ctx.GETTEXT_INSTANCES[language]
 
     if number is not None:
-        return gettext_instance.ngettext(id, f"{id}_plural", number) % number
+        translated = gettext_instance.ngettext(id, f"{id}_plural", number)
     else:
-        return gettext_instance.gettext(id)
+        translated = gettext_instance.gettext(id)
+
+    if substitution:
+        translated = translated.format(substitution)
+
+    return translated 
     

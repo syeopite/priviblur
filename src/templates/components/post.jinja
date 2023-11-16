@@ -12,7 +12,7 @@
                 <div class="primary-post-author">
                     <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">{{element.blog.name}}</a>
                     <span class="separator">•</span>
-                    <span class="post-timestamp"><time>{{element.date.strftime("%b %d, %Y")}}</time></span>
+                    <span class="post-timestamp"><time>{{element.date | format_date (locale="en")}}</time></span>
                 </div>
                 {%- if element.reblog_from -%}
                     {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same-#}
@@ -48,7 +48,7 @@
 
         <div class="post-interaction">
             <div class="note-count">
-                <span> {{- element.note_count }} Notes</span>
+                <span> {{- translate("en", "post_note_count", element.note_count, element.note_count | format_decimal(locale="en_US")) }}</span>
             </div>
             <div class="interaction-buttons">
                 <a href="https://www.tumblr.com/{{element.blog.name}}/{{element.id}}">
