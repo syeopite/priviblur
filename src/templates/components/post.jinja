@@ -7,12 +7,16 @@
 
     <div class="post-header">
         <div class="post-author">
-            <img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}">
+            <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
             <div class="author-information">
                 <div class="primary-post-author">
-                    <a class="link blog-name" href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">{{element.blog.name}}</a>
+                    <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
                     <span class="separator">•</span>
-                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}"><time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time></span>
+                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
+                        <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
+                            <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
+                        </a>
+                    </span>
                 </div>
                 {%- if element.reblog_from -%}
                     {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same-#}
