@@ -158,14 +158,14 @@ a.logo {
     padding: 2px 5px;
 }
 
-#post-filters {
+#timeline-control-bar {
     display: flex;
     gap: 15px;
     margin-bottom: 25px;
     padding: 0;
 }
 
-.filter-options {
+.control-bar-action {
     display: flex;
     align-items: center;
     background: none;
@@ -180,15 +180,15 @@ a.logo {
     position: relative;
 }
 
-li.filter-options:hover {
+li.control-bar-action:hover {
     background: #dcdcdc;
 }
 
-.filter-options > svg {
+.control-bar-action > svg {
     vertical-align: middle;
 }
 
-.filter-dropdown-menu {
+.control-bar-dropdown-menu {
     visibility: hidden;
     position: absolute;
     top: 40px;
@@ -203,19 +203,19 @@ li.filter-options:hover {
     width: fit-content;
 }
 
-.filter-dropdown-menu li {
+.control-bar-dropdown-menu li {
     padding: 10px 20px;
     white-space: nowrap;
 }
 
-.filter-dropdown-menu li:hover {
+.control-bar-dropdown-menu li:hover {
     background: #dcdcdc;
 }
 
-.selected-filter {
+.control-bar-dropdown-menu .selected {
     background: #dcdcdc;
 }
 
-li.filter-options:hover .filter-dropdown-menu {
+li.control-bar-action:hover .control-bar-dropdown-menu {
     visibility: visible;
 }

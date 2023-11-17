@@ -3,11 +3,11 @@
 {% from 'macros/add_query.jinja' import add_query  %}
 {% block title %}{{html_escape(tag)}} - Privblur{% endblock %}
 {% block content %}
-    <ul id="post-filters">
-        <li class="filter-options" id="sort-by-filter" title="{{translate("en", "timeline_tagged_sort_by_filter_title")}}">{{translate("en", "timeline_tagged_sort_by_filter_" + sort_by)}}{{dropdown_icon(16,16, "#6b7280")}}
-            <ul class="filter-dropdown-menu">
-                <li {% if sort_by == "top"%} class="selected-filter" {% endif %}><a href="/tagged/{{tag}}{{ add_query(query_args | update_query_params("sort", "top")) }}">{{translate("en", "timeline_tagged_sort_by_filter_top")}}</a></li>
-                <li {% if sort_by == "recent"%} class="selected-filter" {% endif %}><a href="/tagged/{{tag}}{{ add_query(query_args | update_query_params("sort", "recent")) }}">{{translate("en", "timeline_tagged_sort_by_filter_recent")}}</a></li>
+    <ul id="timeline-control-bar">
+        <li class="control-bar-action" id="sort-by-filter" title="{{translate("en", "timeline_tagged_sort_by_filter_title")}}">{{translate("en", "timeline_tagged_sort_by_filter_" + sort_by)}}{{dropdown_icon(16,16, "#6b7280")}}
+            <ul class="control-bar-dropdown-menu">
+                <li {% if sort_by == "top"%} class="selected" {% endif %}><a href="/tagged/{{tag}}{{ add_query(query_args | update_query_params("sort", "top")) }}">{{translate("en", "timeline_tagged_sort_by_filter_top")}}</a></li>
+                <li {% if sort_by == "recent"%} class="selected" {% endif %}><a href="/tagged/{{tag}}{{ add_query(query_args | update_query_params("sort", "recent")) }}">{{translate("en", "timeline_tagged_sort_by_filter_recent")}}</a></li>
             </ul>
         </li>
     </ul>
