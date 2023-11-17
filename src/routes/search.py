@@ -101,6 +101,10 @@ async def _query_search(request, query, **kwargs):
 
 
 async def _render(request, timeline, query, **kwargs):
+    # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't
+    # added when applying a search filter
+    if request.args.get("continuation"):
+        del request.args["continuation"]
 
     context = {
         "app": request.app, "timeline": timeline, "query_args": request.args, "query": query, "endpoint": request.endpoint, "path": request.path,

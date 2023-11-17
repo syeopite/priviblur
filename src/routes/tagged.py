@@ -28,6 +28,11 @@ async def _main(request: sanic.Request, tag: str):
 
     timeline = privblur_extractor.parse_container(initial_results)
 
+    # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't 
+    # added when applying a search filter
+    if request.args.get("continuation"):
+        del request.args["continuation"]
+
     return await sanic_ext.render(
         "tagged.jinja",
         context={
