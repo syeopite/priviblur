@@ -127,7 +127,7 @@ async def before_all_routes(request, response):
     # https://github.com/iv-org/invidious/blob/master/src/invidious/routes/before_all.cr
     response.headers["x-xss-protection"] = "1; mode=block"
     response.headers["x-content-type-options"] = "nosniff"
-    response.headers["referrer-policy"] = "nosniff"
+    response.headers["referrer-policy"] = "same-origin"
 
     response.headers["content-security-policy"] = "; ".join(
         [
