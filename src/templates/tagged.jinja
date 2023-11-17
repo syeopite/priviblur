@@ -17,7 +17,7 @@
     {%- if timeline.next %}
         <div class="paging">
             <div class="next-page button">
-                <a href="{{endpoint}}?continuation={{url_escape(timeline.next.cursor)}}">Next Page</a>
+                <a href="{{request.path}}?continuation={{url_escape(timeline.next.cursor)}}">Next Page</a>
             </div>
         </div>
     {% endif %}

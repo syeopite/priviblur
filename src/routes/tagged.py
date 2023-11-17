@@ -32,6 +32,7 @@ async def _main(request: sanic.Request, tag: str):
         "tagged.jinja",
         context={
             "app": request.app,
+            "endpoint": request.endpoint,
             "query_args": request.args,
             "html_escape": html.escape,
             "url_escape": urllib.parse.quote,

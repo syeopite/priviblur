@@ -33,7 +33,7 @@ async def _handle_explore(request, endpoint, post_type = None):
         "explore.jinja",
         context={
             "app": app,
-            "endpoint": endpoint,
+            "endpoint": request.endpoint,
             "html_escape": html.escape,
             "url_escape": urllib.parse.quote,
             "url_handler": app.ctx.URL_HANDLER,

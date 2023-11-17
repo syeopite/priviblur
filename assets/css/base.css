@@ -2,6 +2,7 @@ body {
     font-family: Inter;
     font-size: 14px;
     background: #EEEEEF;
+    margin: 0;
 }
 
 p {
@@ -28,23 +29,118 @@ a, a:visited, a:hover, a:active {
 }
 
 .navbar  {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    background: white;
+
+    padding: 20px 25px 0;
+
+    margin-bottom: 30px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+.navbar div {
+    display: flex;
+    align-items: center;
+} 
+
+div.left-section {
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+}
+
+a.logo {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    color: #6b7280;
 }
 
 .search-bar {
+    display: flex;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 25px;
     padding: 10px 10px;
-    margin: 1em 0;
 }
 
 .search-bar input {
     width: 100%;
-    padding: 5px 0 5px 0;
     text-indent: 10px;
+    border: 0;
+    background: none;
 }
 
-@media (min-width: 590px) {
-    .search-bar input {
-        width: 590px;
+.search-bar input:focus {
+    outline: 0;
+}
+
+.center-section {
+    height: 100%;
+    width: unset;
+}
+
+.nav-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.nav-tab:hover {
+    background: #f8f8f8;
+}
+
+.selected-tab {
+    border-color: #6b7280;
+    border-width: 0 0 3px;
+    border-style: solid;
+}
+
+.nav-tab svg {
+    width: 30px;
+    height: 30px;
+}
+
+.right-section {
+    width: 100%;
+    flex-direction: row-reverse;
+
+    position: absolute;
+    right: 30px;
+
+}
+
+@media screen and (min-width: 768px) {
+    .navbar {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 0 25px;
+    }
+    
+    div.left-section {
+        flex-direction: row;
+    }
+
+    .logo {
+        display: unset;
+    }
+
+    .right-section {
+        position: unset;
+    }
+}
+
+@media screen and (min-width: 1680px) {
+    .search-bar {
+        width: 390px;
     }
 }
 

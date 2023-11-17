@@ -32,7 +32,7 @@ async def _main(request: sanic.Request, query: str):
 
     timeline = privblur_extractor.parse_container(initial_results)
 
-    return await _render(request, timeline, query, f"/search/{html.escape(query)}", time_filter=time_filter, sort_by="popular", post_filter=None)
+    return await _render(request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None)
 
 
 @search.get("/<query:str>/recent")
@@ -47,9 +47,7 @@ async def _sort_by_search(request: sanic.Request, query: str):
     initial_results = await _query_search(request, query, days=time_filter, latest=True)
     timeline = privblur_extractor.parse_container(initial_results)
 
-    endpoint = f"/search/{html.escape(query)}/recent"
-
-    return await _render(request, timeline, query, endpoint, time_filter=time_filter, sort_by="recent", post_filter=None)
+    return await _render(request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None)
 
 
 @search.get("/<query:str>/<post_filter:str>")
@@ -89,15 +87,9 @@ async def _request_search_filter_post(request, query, post_filter, latest):
     post_filter = post_filter.name.lower()
 
     timeline = privblur_extractor.parse_container(initial_results)
+    sort_by = "recent" if latest else "popular"
 
-    if latest:
-        endpoint = f"/search/{html.escape(query)}/recent/{post_filter}"
-        sort_by = "recent"
-    else:
-        sort_by = "popular"
-        endpoint = f"/search/{html.escape(query)}/{post_filter}"
-
-    return await _render(request, timeline, query, endpoint, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by)
+    return await _render(request, timeline, query, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by)
 
 
 async def _query_search(request, query, **kwargs):
@@ -108,10 +100,10 @@ async def _query_search(request, query, **kwargs):
     return await request.app.ctx.TumblrAPI.timeline_search(query, request.app.ctx.TumblrAPI.config.TimelineType.POST, continuation=continuation, **kwargs)
 
 
-async def _render(request, timeline, query, endpoint, **kwargs):
+async def _render(request, timeline, query, **kwargs):
 
     context = {
-        "app": request.app, "timeline": timeline, "query_args": request.args, "query": query, "endpoint": endpoint,
+        "app": request.app, "timeline": timeline, "query_args": request.args, "query": query, "endpoint": request.endpoint, "path": request.path,
         "url_escape": urllib.parse.quote, "url_handler": request.app.ctx.URL_HANDLER, 
         "format_npf": npf_renderer.format_npf, "html_escape": html.escape,
     }
