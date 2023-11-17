@@ -32,12 +32,9 @@ a, a:visited, a:hover, a:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     background: white;
-
     padding: 20px 25px 0;
-
     margin-bottom: 30px;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
@@ -175,7 +172,7 @@ a.logo {
     color: #6b7280;
     height: 40px;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     border: 0;
     border-radius: 25px;
@@ -207,7 +204,7 @@ li.filter-options:hover {
 }
 
 .filter-dropdown-menu li {
-    padding: 5px 15px;
+    padding: 10px 20px;
     white-space: nowrap;
 }
 
