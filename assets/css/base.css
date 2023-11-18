@@ -161,7 +161,7 @@ a.logo {
 #timeline-control-bar {
     display: flex;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     padding: 0;
 }
 
@@ -218,4 +218,15 @@ li.control-bar-action:hover {
 
 li.control-bar-action:hover .control-bar-dropdown-menu {
     visibility: visible;
+}
+
+
+@media screen and (max-width: 768px) {
+    #timeline-control-bar {
+        margin-left: 10px;
+    }
+
+    .control-bar-action {
+        font-size: 16px;
+    }
 }

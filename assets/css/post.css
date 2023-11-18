@@ -7,6 +7,16 @@
   border-radius: 10px;
 }
 
+.post {
+  width: 100%;
+}
+
+@media (min-width: 590px) {
+  .post {
+    width: 590px;
+  }
+}
+
 .post-header {
   display: flex;
   margin-bottom: 15px;
@@ -51,12 +61,12 @@
   color: #6b7280;
 }
 
-.blog-name {
+a.blog-name {
   color: black;
   align-self: center;
 }
 
-.blog-name:hover {
+a.blog-name:hover {
   color: black;
   align-self: center;
 }
