@@ -84,7 +84,7 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
         return await render_blog_post(request.app, blog_info, post)
 
 
-@blogs.get("/<post_id:int>/<slug:slug>")
+@blogs.get("/<post_id:int>/<slug:str>")
 async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str):
     blog = urllib.parse.unquote(blog)
     slug = urllib.parse.unquote(slug)
