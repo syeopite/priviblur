@@ -93,6 +93,15 @@ async def _chats(request):
     return await _handle_explore(request, "explore._chats", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.CHATS)
 
 
+@explore.get("/audio")
+async def _audio(request):
+    return await _handle_explore(request, "explore._audio", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.AUDIO)
+
+
+@explore.get("/videos")
+async def _videos(request):
+    return await _handle_explore(request, "explore._videos", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.VIDEO)
+
 @explore.get("/asks")
 async def _asks(request):
     return await _handle_explore(request, "explore._asks", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.ASKS)
