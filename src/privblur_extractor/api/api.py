@@ -245,20 +245,32 @@ class TumblrAPI:
 
         return await self._get_json(f"hubs/{urllib.parse.quote(tag)}/timeline", url_parameters)
 
-    async def blog_posts(self, blog_name, continuation = None, before_id = None):
+    async def blog_posts(self, blog_name, continuation = None, tag = None, post_type = None, before_id = None):
         """Requests the /blog/<blog name>/posts endpoint
 
         Parameters:
             blog_name: the blog the post is from
+
+        Optional:
             continuation: Continuation token for fetching the next batch of content
+            tag: Search posts tagged with a tag within the blog
+            post_type: Filter by post type when browsing tags or searching
+            before_id: Returns posts before the given ID
         """
 
         url_parameters = {
          "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
          "npf": True,
          "reblog_info": True,
-         "include_pinned_posts": True
         }
+
+        if tag:
+            url_parameters["tag"] = tag
+
+            if post_type:
+                url_parameters["post_type"] = post_type
+        else:
+            url_parameters["url_parameters"] = True
 
         if before_id:
             url_parameters["before_id"] = before_id

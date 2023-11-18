@@ -26,8 +26,9 @@ async def render_blog_post(app, blog, post, url_handler):
         )
 
 @blogs.get("/")
-async def _blog(request: sanic.Request, blog: str):
+async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
+
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
@@ -49,6 +50,35 @@ async def _blog(request: sanic.Request, blog: str):
         }
     )
 
+
+# Tags
+
+@blogs.get("/tagged/<tag:str>")
+async def _blog_tags(request: sanic.Request, blog: str, tag: str):
+    blog = urllib.parse.unquote(blog)
+    tag = urllib.parse.unquote(tag)
+
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
+
+    initial_results = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation, tag=tag)
+    blog = privblur_extractor.parse_container(initial_results)
+
+    return await sanic_ext.render(
+        "blog.jinja",
+        context={
+            "app": request.app,
+            "blog": blog,
+            "tag": "tag",
+            "html_escape": html.escape,
+            "url_escape": urllib.parse.quote,
+            "url_handler": request.app.ctx.URL_HANDLER,
+            "format_npf": npf_renderer.format_npf
+        }
+    )
+
+
+# Single post
 
 @blogs.get("/<post_id:int>")
 async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
