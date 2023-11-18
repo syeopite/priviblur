@@ -10,7 +10,7 @@ import sanic.response
 from sanic import Sanic
 import babel.numbers
 import babel.dates
-from npf_renderer import VERSION as NPF_RENDERER_VERSION
+from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
 from . import routes
 from . import privblur_extractor
@@ -96,6 +96,8 @@ async def initialize(app):
     app.ext.environment.filters["format_datetime"] = babel.dates.format_datetime
 
     app.ext.environment.globals["translate"] = helpers.translate
+    app.ext.environment.globals["url_handler"] = helpers.url_handler
+    app.ext.environment.globals["format_npf"] = format_npf
 
     # Initialize locales
     gettext_instances = {"en": gettext.translation("privblur", localedir="locales", languages=["en"])}

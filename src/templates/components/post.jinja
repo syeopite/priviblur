@@ -46,9 +46,9 @@
             <div class="post-tags">
                 {%- for tag in element.tags -%}
                     {% if blog is defined %}
-                        <a class="post-tag" href="/{{blog.blog_info.name}}/tagged/{{url_escape(tag)}}"><span>#{{html_escape(tag)}}</span></a>
+                        <a class="post-tag" href="/{{blog.blog_info.name}}/tagged/{{tag | urlencode}}"><span>#{{tag | e}}</span></a>
                     {% else%}
-                        <a class="post-tag" href="/tagged/{{url_escape(tag)}}"><span>#{{html_escape(tag)}}</span></a>
+                        <a class="post-tag" href="/tagged/{{tag | urlencode}}"><span>#{{tag | e}}</span></a>
                     {% endif %}
                 {%- endfor -%}
             </div>

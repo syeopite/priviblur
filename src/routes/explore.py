@@ -33,12 +33,7 @@ async def _handle_explore(request, endpoint, post_type = None):
         "explore.jinja",
         context={
             "app": app,
-            "endpoint": request.endpoint,
-            "html_escape": html.escape,
-            "url_escape": urllib.parse.quote,
-            "url_handler": app.ctx.URL_HANDLER,
             "timeline": timeline,
-            "format_npf": npf_renderer.format_npf
         }
     )
 
@@ -55,18 +50,6 @@ async def _trending(request):
 @explore.get("/today")
 async def _today(request):
     return await _handle_explore(request, "explore._today")
-
-@explore.get("/today/json")
-async def _today_json(request):
-    if continuation := request.args.get("continuation"):
-        continuation = urllib.parse.unquote(continuation)
-    else:
-        continuation = None
-
-
-    initial_results = await request.app.ctx.TumblrAPI.explore_today(continuation=continuation)
-    return sanic.response.json(initial_results)
-
 
 @explore.get("/text")
 async def _text(request):

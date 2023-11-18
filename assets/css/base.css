@@ -132,6 +132,11 @@ a.logo {
     .right-section {
         position: unset;
     }
+
+    .next-page {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
 }
 
 @media screen and (min-width: 1680px) {
@@ -151,11 +156,29 @@ a.logo {
     margin: 2.5em auto;
 }
 
-.paging .button {
-    border: 3px solid rgba(0, 0, 0, 0.07);
+.next-page {
     display: inline-block;
-    padding: 2px 5px;
+    color: #383b42;
+    font-weight: 450;
+    letter-spacing: 0.3px;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    background: #eeeeef;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+.next-page:hover {
+    background: #dcdcdc;
+}
+
+@media screen and (min-width: 768px) {
+    .next-page {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
 
 #timeline-control-bar {
     display: flex;

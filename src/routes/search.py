@@ -107,9 +107,7 @@ async def _render(request, timeline, query, **kwargs):
         del request.args["continuation"]
 
     context = {
-        "app": request.app, "timeline": timeline, "query_args": request.args, "query": query, "endpoint": request.endpoint, "path": request.path,
-        "url_escape": urllib.parse.quote, "url_handler": request.app.ctx.URL_HANDLER, 
-        "format_npf": npf_renderer.format_npf, "html_escape": html.escape,
+        "app": request.app, "timeline": timeline, "query_args": request.args, "query": query
     }
 
     context.update(kwargs)

@@ -1,5 +1,5 @@
 {% extends "base.jinja" %}
-{% block title %}{{html_escape(query)}} - Privblur{% endblock %}
+{% block title %}{{query | e}} - Privblur{% endblock %}
 {% from 'components/icons/expand.jinja' import dropdown_icon  %}
 {% from 'macros/add_query.jinja' import add_query  %}
 {% block content %}
@@ -19,9 +19,9 @@
         {%- if sort_by == "popular" -%}
             <li class="control-bar-action" id="filter-by-date-filter" title="{{translate("en", "timeline_search_filter_by_date_filter_title")}}">{{translate("en", "timeline_search_filter_by_date_filter_" + (time_filter | string))}}{{dropdown_icon(16,16, "#6b7280")}}
                 <ul class="control-bar-dropdown-menu">
-                    <li {% if time_filter == 0 %} class="selected" {% endif %}><a href="{{path}}{{ add_query(query_args | remove_query_params("t")) }}">{{translate("en", "timeline_search_filter_by_date_filter_0")}}</a></li>
+                    <li {% if time_filter == 0 %} class="selected" {% endif %}><a href="{{request.path}}{{ add_query(query_args | remove_query_params("t")) }}">{{translate("en", "timeline_search_filter_by_date_filter_0")}}</a></li>
                     {%- for time in ("365", "180", "30", "7", "1") -%}
-                        <li {% if time_filter == time %} class="selected" {% endif %}><a href="{{path}}{{ add_query(query_args | update_query_params("t", time)) }}">{{translate("en", "timeline_search_filter_by_date_filter_" + time | string)}}</a></li>
+                        <li {% if time_filter == time %} class="selected" {% endif %}><a href="{{request.path}}{{ add_query(query_args | update_query_params("t", time)) }}">{{translate("en", "timeline_search_filter_by_date_filter_" + time | string)}}</a></li>
                     {%- endfor -%}
                 </ul>
             </li>
@@ -58,7 +58,7 @@
     {%- if timeline.next %}
         <div class="paging">
             <div class="next-page button">
-                <a href="{{path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">Next Page</a>
+                <a href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">{{translate("en", "pagination_next_page")}}</a>
             </div>
         </div>
     {% endif %}

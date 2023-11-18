@@ -95,3 +95,6 @@ msgstr "Top"
 
 msgid "timeline_tagged_sort_by_filter_recent"
 msgstr "Latest"
+
+msgid "pagination_next_page"
+msgstr "Next page"

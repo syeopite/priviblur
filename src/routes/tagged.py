@@ -37,14 +37,9 @@ async def _main(request: sanic.Request, tag: str):
         "tagged.jinja",
         context={
             "app": request.app,
-            "endpoint": request.endpoint,
             "query_args": request.args,
-            "html_escape": html.escape,
-            "url_escape": urllib.parse.quote,
             "timeline": timeline,
             "tag": tag,
-            "url_handler": request.app.ctx.URL_HANDLER,
-            "format_npf": npf_renderer.format_npf,
             "sort_by": sort_by
         }
     )

@@ -3,7 +3,7 @@
 <link rel="preload" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}" as="style">
 <link rel="stylesheet" type="text/css" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}">
 {% endblock %}
-{% block title %}{{html_escape(blog.blog_info.name)}} - Privblur{% endblock %}
+{% block title %}{{blog.blog_info.name | e}} - Privblur{% endblock %}
 
 {% block content %}
     {% include 'components/blog_header.jinja' %}
@@ -12,7 +12,7 @@
     {%- if blog.next %}
         <div class="paging">
             <div class="next-page button">
-                <a href="{{request.path}}?continuation={{url_escape(blog.next.cursor)}}">Next Page</a>
+                <a href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}">{{translate("en", "pagination_next_page")}}</a>
             </div>
         </div>
     {% endif %}
