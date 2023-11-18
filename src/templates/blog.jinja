@@ -1,0 +1,20 @@
+{% extends "base.jinja" %}
+{% block head %}
+<link rel="preload" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}" as="style">
+<link rel="stylesheet" type="text/css" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}">
+{% endblock %}
+{% block title %}{{html_escape(blog.blog_info.name)}} - Privblur{% endblock %}
+
+{% block content %}
+    {% include 'components/blog_header.jinja' %}
+    {% include 'components/blog_contents.jinja' %}
+
+    {%- if blog.next %}
+        <div class="paging">
+            <div class="next-page button">
+                <a href="{{request.path}}?continuation={{url_escape(blog.next.cursor)}}">Next Page</a>
+            </div>
+        </div>
+    {% endif %}
+
+{%- endblock %}

@@ -1,0 +1,17 @@
+{% if blog.blog_info.description_npf -%}
+    {% set contains_errors, content_tag = format_npf(blog.blog_info.description_npf, url_handler=url_handler) -%}
+{% else -%}
+    {% set content_tag = "" %}
+{% endif -%}
+
+<header id="blog-header">
+    <img id="banner" title="Blog banner" src="{{url_handler(blog.blog_info.theme.header_info.focused_header_image)}}"/>
+    <a href="/{{blog.blog_info.name}}"><img class="avatar" title="Blog Avatar" src="{{url_handler(blog.blog_info.avatar[-2].url)}}"/></a>
+    <div class="blog-header-textual-content">
+        {% if blog.blog_info.title %}<h1 id="blog-title">{{blog.blog_info.title}}</h1>{% endif %}
+        <p class="blog-name"><a href="/{{blog.blog_info.name}}">@{{blog.blog_info.name}}</a></p>
+        <div id="blog-description">
+            {{- content_tag -}}
+        </div>
+    </div>
+</header>

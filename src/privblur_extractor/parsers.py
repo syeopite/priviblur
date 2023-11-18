@@ -17,7 +17,7 @@ class _CursorParser:
     def __parse(target):
         target = target["queryParams"]
         return models.base.Cursor(
-            cursor=target["cursor"],
+            cursor=target.get("cursor") or target.get("pageNumber"),
             limit=target.get("days"),
             days=target.get("query"),
             query=target.get("mode"),
@@ -57,6 +57,64 @@ class _TimelineParser:
         )
 
 
+class _BlogParser:
+    """Parses Tumblr's API response into a Blog object"""
+    @staticmethod
+    def process(initial_data):
+        if initial_data.get("blog"):
+            logger.debug("_BlogParser: Parser found! Beginning parsing...")
+            return _BlogParser.__parse(initial_data)
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+        # First let's begin with the cursor object
+        cursor = _CursorParser.process(target)
+
+        # Then the blog info
+        blog = _TimelineBlogParser.process(target["blog"], force_parse=True)
+
+        # Now the posts contained within
+        posts = []
+        total_raw_posts = len(target["posts"])
+        for post_index, post in enumerate(target["posts"]):
+            if result := parse_item(post, post_index, total_raw_posts):
+                posts.append(result)
+
+        return models.blog.Blog(
+            blog_info=blog,
+            posts=posts,
+            total_posts = target.get("totalPosts"),
+            next = cursor,
+        )
+
+
+class _BlogThemeParser:
+    @staticmethod
+    def process(initial_data):
+        if theme := initial_data.get("theme"):
+            logger.debug("_BlogThemeParser: Parser found! Beginning parsing...")
+            return _BlogThemeParser.__parse(theme)
+        else:
+            return None
+
+    @staticmethod
+    def __parse(target):
+        # TODO more theme data
+        header_info = models.misc.HeaderInfo(
+            target["headerImage"],
+            target["headerImageFocused"],
+            target["headerImageScaled"],
+        )
+
+        return models.misc.BlogTheme(
+            avatar_shape = target["avatarShape"],
+            background_color = target["backgroundColor"],
+            body_font = target["bodyFont"],
+            header_info=header_info
+        )
+
 class _TimelineBlogParser:
     @staticmethod
     def process(initial_data, force_parse=False):
@@ -70,6 +128,8 @@ class _TimelineBlogParser:
 
     @staticmethod
     def __parse(target):
+        theme = _BlogThemeParser.process(target)
+
         return models.timeline.TimelineBlog(
             name=target["name"],
             avatar=target["avatar"],
@@ -78,6 +138,7 @@ class _TimelineBlogParser:
             is_adult=target["isAdult"],
             description_npf=target["descriptionNpf"],
             uuid=target["uuid"],
+            theme=theme,
             is_paywall_on=target["isPaywallOn"]
         )
 
@@ -187,7 +248,7 @@ class _TimelinePostParser:
 
 
 ELEMENT_PARSERS = (_TimelineBlogParser, _TimelinePostParser)
-CONTAINER_PARSERS = (_TimelineParser,)
+CONTAINER_PARSERS = (_TimelineParser, _BlogParser)
 
 
 def parse_item(element, element_index=0, total_elements=1):
@@ -205,6 +266,7 @@ def parse_item(element, element_index=0, total_elements=1):
     return None
 
 
+# TODO refactor into parse_timeline and parse_blog_timeline
 def parse_container(initial_data):
     """Parses a container of items from Tumblr API's JSON response into a more usable structure"""
     initial_data = initial_data["response"]

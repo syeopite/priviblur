@@ -5,15 +5,12 @@
   padding: 25px 25px;
   background: white;
   border-radius: 10px;
-}
-
-.post {
   width: 100%;
 }
 
-@media (min-width: 590px) {
-  .post {
-    width: 590px;
+@media (max-width: 590px) {
+  .post-body {
+    width: auto;
   }
 }
 
@@ -87,7 +84,7 @@ a.blog-name:hover {
 
 .post-body a {
   color: unset;
-  text-decoration: unset;
+  text-decoration: underline;
 }
 
 .post-footer {

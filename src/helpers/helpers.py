@@ -34,6 +34,8 @@ def url_handler(raw_url):
             if potential_blog_name != "tumblr":
                 if url.path.startswith("/post"):
                     return f"/{potential_blog_name}{url.path[5:]}"
+                else:
+                    return f"/{potential_blog_name}{url.path}"
             else:
                 return f"{url.path}"
 

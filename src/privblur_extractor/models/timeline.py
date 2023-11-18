@@ -28,8 +28,8 @@ class TimelineBlog(NamedTuple):
     # Else it'd just be pure HTML. TODO add support in the parser
     #
     description_npf: list[dict]
-
     uuid: str
+    theme: misc.BlogTheme
     is_paywall_on: bool
 
 

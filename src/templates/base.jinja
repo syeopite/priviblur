@@ -10,10 +10,11 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/base-post-layout.css?v={{app.ctx.NPF_RENDERER_VERSION}}">
     <link rel="stylesheet" type="text/css" href="/assets/css/post.css?v={{app.ctx.CURRENT_COMMIT}}">
     <link rel="stylesheet" type="text/css" href="/assets/css/post-layout.css?v={{app.ctx.CURRENT_COMMIT}}">
-    
     {%- block head -%}
-        <title>{% block title %}{% endblock %}</title>
+
     {%- endblock -%}
+
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <nav class="navbar">

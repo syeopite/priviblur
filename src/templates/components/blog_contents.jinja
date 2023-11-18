@@ -1,0 +1,7 @@
+<div class="blog-posts">
+{%- for element in blog.posts -%}
+    {%- if not element.is_advertisement -%}
+        {%- include 'components/post.jinja' -%}
+    {%- endif -%}
+{%- endfor -%}
+</div>

@@ -7,3 +7,13 @@ class ReblogAttribution(NamedTuple):
     blog_name: str
     blog_title: str
 
+class HeaderInfo(NamedTuple):
+    header_image: str
+    focused_header_image: str
+    scaled_header_image: str
+
+class BlogTheme(NamedTuple):
+    avatar_shape: str
+    background_color: str
+    body_font: str
+    header_info : HeaderInfo

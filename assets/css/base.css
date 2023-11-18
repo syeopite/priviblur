@@ -39,7 +39,6 @@ a, a:visited, a:hover, a:active {
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
-
 .navbar div {
     display: flex;
     align-items: center;
@@ -141,7 +140,7 @@ a.logo {
     }
 }
 
-.timeline {
+.timeline, .blog-posts {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
