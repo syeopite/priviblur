@@ -6,6 +6,7 @@ import tomllib
 
 import httpx
 import orjson
+import sanic_ext
 import sanic.response
 from sanic import Sanic
 import babel.numbers

@@ -1,0 +1,40 @@
+{% extends "base.jinja" %}
+{% block head %}
+<style>#licence{color:#383b42}#licence h1{border-style:solid;border-width:0 0 3px;margin:0;text-indent:5px;padding-bottom:5px}.asset-licence-item{display:flex;flex-direction:column;gap:15px;list-style:None}.asset-licence-header>*{margin:0}.asset-licence-header h2{font-size:18px}.asset-licence-header h4{margin-top:2px;font-weight:600;font-size:10px;color:#5e6471}#asset-licences{margin-top:15px;padding:0 5px;display:flex;flex-direction:column;gap:15px}.asset-licence-item p{font-size:12px}.licence-description a{text-decoration:underline}</style>
+{% endblock %}
+{% block title %}Licence - Privblur{% endblock %}
+
+{% block content %}
+<section id="licence" aria-label="Licences">
+    <h1> Licences </h1>
+
+    <ul id="asset-licences">
+        <li class="asset-licence-item">
+            <div class="asset-licence-header">
+                <h2><a href="https://fonts.google.com/icons"> Material Symbols </a></h2>
+                <h4><a href="https://google.com">By Google</a></h4>
+            </div>
+            
+            <p class="licence-description"> Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0</a></p>
+        </li>
+
+        <li class="asset-licence-item">
+            <div class="asset-licence-header">
+                <h2><a href="https://fontawesome.com">Font Awesome</a></h2>
+                <h4><a href="https://fontawesome.com">By Font Awesome</a></h4>
+            </div>
+
+            <p class="licence-description"> Licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 license</a></p>
+        </li>
+
+        <li class="asset-licence-item">
+            <div class="asset-licence-header">
+                <h2><a href="https://rsms.me/inter/">Inter Font Family</a></h2>
+                <h4><a href="https://rsms.me/">By Rasmus Andersson</a></h4>
+            </div>
+
+            <p class="licence-description"> Licensed under the <a href="https://github.com/rsms/inter/blob/master/LICENSE.txt">SIL Open Font License 1.1</a></p>
+        </li>
+    </ul>
+</section>
+{%- endblock %}

@@ -1,3 +1,7 @@
+html, body, .container {
+    height: 100%;
+}
+
 body {
     font-family: Inter;
     font-size: 14px;
@@ -21,11 +25,17 @@ a, a:visited, a:hover, a:active {
 
 .container {
     display: flex;
+    flex-direction: column;
 }
 
-.layout-middle-column {
+.contents {
     margin: auto;
     max-width: 590px;
+}
+
+.footer-buffer {
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .navbar  {
@@ -153,7 +163,7 @@ a.logo {
 
 .paging {
     text-align: center;
-    margin: 2.5em auto;
+    margin-top: 25px;
 }
 
 .next-page {
@@ -251,4 +261,22 @@ li.control-bar-action:hover .control-bar-dropdown-menu {
     .control-bar-action {
         font-size: 16px;
     }
+}
+
+.page-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding: 25px 0 10px 0;
+    gap: 10px;
+    color: #4f4f4f;
+}
+
+.page-footer a {
+    text-decoration: underline;
+}
+
+.page-footer a {
+    text-decoration: underline;
 }
