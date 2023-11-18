@@ -21,6 +21,8 @@ def url_handler(raw_url):
             return f"/tblr/media/49{url.path}"
         elif hostname.endswith("44.media.tumblr.com"):
             return f"/tblr/media/44{url.path}"
+        elif hostname.endswith("static.tumblr.com"):
+            return f"/tblr/static/{url.path}"
         else:
             # Check for subdomain blog
             sub_domains = hostname.split(".")

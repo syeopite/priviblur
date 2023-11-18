@@ -85,6 +85,10 @@ async def initialize(app):
         "https://assets.tumblr.com", privblur_backend["image_response_timeout"]
     )
 
+    app.ctx.TumblrStaticClient = create_image_client(
+        "https://static.tumblr.com", privblur_backend["image_response_timeout"]
+    )
+
     # Add additional jinja filters and functions
 
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
