@@ -20,7 +20,7 @@
     <div class="container">
         <nav class="navbar">
             <div class="left-section">
-                <a class="logo" href="/" version="1.1" viewBox="0 0 114.14 26.133">Privblur</a>
+                <a class="logo" href="/" version="1.1" viewBox="0 0 114.14 26.133">Priviblur</a>
                 <form class="search-bar" method="get" action="/search" autocomplete="off">
                     <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path fill="#9c9c9c" d="M765-144 526-383q-30 22-65.792 34.5T384.035-336Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.035q0 40.381-12.5 76.173T577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/></svg>
                     {%- if query is defined -%}
@@ -33,10 +33,10 @@
                 </form> 
             </div>
             <div class="center-section">
-                <a class="nav-tab{% if request.endpoint and (request.endpoint == "Privblur.explore._today" or (request.endpoint.startswith("Privblur.explore") and not request.endpoint.endswith("trending"))) %} selected-tab{% endif %}" href="/explore/today" title="Explore">
+                <a class="nav-tab{% if request.endpoint and (request.endpoint == "Priviblur.explore._today" or (request.endpoint.startswith("Priviblur.explore") and not request.endpoint.endswith("trending"))) %} selected-tab{% endif %}" href="/explore/today" title="Explore">
                     <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path fill="#6b7280" d="m260-260 300-140 140-300-300 140-140 300Zm220-180q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520q17 0 28.5 11.5T520-480q0 17-11.5 28.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
                 </a>
-                <a class="nav-tab{% if request.endpoint == "Privblur.explore._trending"%} selected-tab{%endif%}" href="/explore/trending" title="Trending">
+                <a class="nav-tab{% if request.endpoint == "Priviblur.explore._trending"%} selected-tab{%endif%}" href="/explore/trending" title="Trending">
                     <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path fill="#6b7280" d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"/></svg>
                 </a>
             </div>
@@ -57,9 +57,9 @@
         <div class="footer-buffer"></div>
         <footer class="page-footer">
             <span title="Version"> Version {{app.ctx.VERSION}}</span>
-            <a href="https://www.github.com/syeopite/privblur" title="Source"> Source</a>
-            <a href="https://www.github.com/syeopite/privblur#donate" title="Donate"> Donate</a>
-            <a href="/privblur/licences" title="Licences"> Licences</a>
+            <a href="https://www.github.com/syeopite/priviblur" title="Source"> Source</a>
+            <a href="https://www.github.com/syeopite/priviblur#donate" title="Donate"> Donate</a>
+            <a href="/priviblur/licences" title="Licences"> Licences</a>
         </footer>
     </div>
 </body>

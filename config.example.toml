@@ -3,11 +3,11 @@
     host = "127.0.0.1"
     port = 8000
 
-    # Amount of worker Privblur instances to spawn. Increases speed significantly.
+    # Amount of worker Priviblur instances to spawn. Increases speed significantly.
     workers = 1
 
-    # If you're running Privblur behind a remote proxy, one or more of the following must be set
-    # can also be set via env variables by captialzing and prefixing with PRIVBLUR_
+    # If you're running Priviblur behind a remote proxy, one or more of the following must be set
+    # can also be set via env variables by captialzing and prefixing with PRIVIBLUR_
 
     # For more information see
     # https://sanic.dev/en/guide/advanced/proxy-headers.html
@@ -15,8 +15,8 @@
     real_ip_header = ""
     proxies_count = ""
 
-# Controls behaviors pertaining to the way Privblur requests Tumblr
-[privblur_backend]
+# Controls behaviors pertaining to the way Priviblur requests Tumblr
+[priviblur_backend]
     # Timeout for requests to Tumblr's API
     main_response_timeout = 10
 
@@ -32,11 +32,11 @@
     # Sanic (Server)'s logging level'
     sanic_logging_level = 30
 
-    # Privblur's logging level
-    privblur_logging_level = 30
+    # Priviblur's logging level
+    priviblur_logging_level = 30
 
-    # Privblur extractor's logging level
-    privblur_extractor_logging_level = 20
+    # Priviblur extractor's logging level
+    priviblur_extractor_logging_level = 20
 
 [misc]
     # Enable sanic's dev mode

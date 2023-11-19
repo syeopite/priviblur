@@ -6,7 +6,7 @@ import sanic_ext
 
 import npf_renderer
 
-from .. import privblur_extractor
+from .. import priviblur_extractor
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
@@ -27,7 +27,7 @@ async def _handle_explore(request, endpoint, post_type = None):
         case _:
             initial_results = await request.app.ctx.TumblrAPI.explore_post(post_type=post_type, continuation=continuation)        
 
-    timeline = privblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_container(initial_results)
 
     return await sanic_ext.render(
         "explore.jinja",

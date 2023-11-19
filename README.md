@@ -1,9 +1,9 @@
-# Privblur
+# Priviblur
 A privacy-focused frontend to Tumblr with a touch of modern design 
 
 ![Example output](./screenshots/example.png)
 
-Privblur is a proxy. It makes requests to Tumblr in lieu of you allowing you browse without being tracked. 
+Priviblur is a proxy. It makes requests to Tumblr in lieu of you allowing you browse without being tracked. 
 
 It has no account requirement either. Allowing you to view your favorite blogs without ever needing to login.
 
@@ -17,26 +17,26 @@ It is licensed under the AGPLv3 ensuring that itself and all instances are free 
 
 [A list of public instances can be found here.](./instances.md). 
 
-Privblur has no official instance
+Priviblur has no official instance
 
 ## Installation
 
 ```bash
 
-git clone "https://github.com/syeopite/privblur"
-cd privblur 
+git clone "https://github.com/syeopite/priviblur"
+cd priviblur 
 
 python -m venv venv 
 source venv/bin/activate
 
 pip install -r requirements.txt
 
-pybabel compile -d locales -D privblur
+pybabel compile -d locales -D priviblur
 
 python -m src.server
 
-# You can also launch Privblur through Sanic (our web framework)'s CLI tool
-# Prefix any environmental variables with PRIVBLUR_ instead of SANIC_
+# You can also launch Priviblur through Sanic (our web framework)'s CLI tool
+# Prefix any environmental variables with PRIVIBLUR_ instead of SANIC_
 # For more information see https://sanic.dev/en/guide/deployment/running.html and related pages
 sanic src.server.app  --host 0.0.0.0  --worker <WORKERS>
 ```

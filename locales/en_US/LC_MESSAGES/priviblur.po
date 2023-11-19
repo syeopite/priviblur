@@ -1,11 +1,11 @@
-# English (United States) translations for Privblur.
+# English (United States) translations for Priviblur.
 # Copyright (C) 2023 Syeopite
-# This file is distributed under the same license as the Privblur project.
+# This file is distributed under the same license as the Priviblur project.
 # syeopite <syeopite@syeopite.dev>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  Privblur\n"
+"Project-Id-Version:  Priviblur\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
 "PO-Revision-Date: 2023-11-16 00:31-0800\n"
 "Language: en_US\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 
 msgid "project_title"
-msgstr "Privblur"
+msgstr "Priviblur"
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"

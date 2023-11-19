@@ -14,7 +14,7 @@ import babel.dates
 from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
 from . import routes
-from . import privblur_extractor
+from . import priviblur_extractor
 from .helpers import setup_logging, helpers, error_handlers
 from .version import VERSION, CURRENT_COMMIT
 
@@ -22,12 +22,12 @@ from .version import VERSION, CURRENT_COMMIT
 # Load configuration file 
 
 try:
-    with open(os.environ.get("PRIVBLUR_CONFIG_LOCATION", "./config.toml"), "rb") as config_file:
+    with open(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"), "rb") as config_file:
         config = tomllib.load(config_file)
 except FileNotFoundError:
     print(
         'Cannot find configuration file at "./config.toml". '
-        'Did you mean to set a new location with the environmental variable "PRIVBLUR_CONFIG_LOCATION"?'
+        'Did you mean to set a new location with the environmental variable "PRIVIBLUR_CONFIG_LOCATION"?'
     )
     sys.exit()
 except PermissionError:
@@ -36,7 +36,7 @@ except PermissionError:
 
 
 LOG_CONFIG = setup_logging.setup_logging(config["logging"])
-app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVBLUR_", log_config=LOG_CONFIG)
+app = Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
 
 
 if config["deployment"]["forwarded_secret"] and not app.config.FORWARDED_SECRET:
@@ -54,7 +54,7 @@ if config["deployment"]["proxies_count"] and not app.config.PROXIES_COUNT:
 
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 
-app.ctx.LOGGER = logging.getLogger("privblur")
+app.ctx.LOGGER = logging.getLogger("priviblur")
 
 app.ctx.CURRENT_COMMIT = CURRENT_COMMIT  # Used for cache busting
 app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
@@ -63,19 +63,19 @@ app.ctx.VERSION = VERSION
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
-app.ctx.PRIVBLUR_CONFIG = config
+app.ctx.PRIVIBLUR_CONFIG = config
 app.ctx.translate = helpers.translate
 
 @app.listener("before_server_start")
 async def initialize(app):
-    privblur_backend = app.ctx.PRIVBLUR_CONFIG["privblur_backend"]
+    priviblur_backend = app.ctx.PRIVIBLUR_CONFIG["priviblur_backend"]
 
-    app.ctx.TumblrAPI = await privblur_extractor.TumblrAPI.create(
-        main_request_timeout=privblur_backend["main_response_timeout"], json_loads=orjson.loads
+    app.ctx.TumblrAPI = await priviblur_extractor.TumblrAPI.create(
+        main_request_timeout=priviblur_backend["main_response_timeout"], json_loads=orjson.loads
     )
 
     # We'll also have a separate HTTP client for images
-    media_request_headers = privblur_extractor.TumblrAPI.DEFAULT_HEADERS
+    media_request_headers = priviblur_extractor.TumblrAPI.DEFAULT_HEADERS
     del media_request_headers["authorization"]
 
     # TODO set pool size for image requests
@@ -84,23 +84,23 @@ async def initialize(app):
         return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
-        "https://64.media.tumblr.com", privblur_backend["image_response_timeout"]
+        "https://64.media.tumblr.com", priviblur_backend["image_response_timeout"]
     )
 
     app.ctx.Media49Client = create_image_client(
-        "https://49.media.tumblr.com", privblur_backend["image_response_timeout"]
+        "https://49.media.tumblr.com", priviblur_backend["image_response_timeout"]
     )
 
     app.ctx.Media44Client = create_image_client(
-        "https://44.media.tumblr.com", privblur_backend["image_response_timeout"]
+        "https://44.media.tumblr.com", priviblur_backend["image_response_timeout"]
     )
 
     app.ctx.TumblrAssetClient = create_image_client(
-        "https://assets.tumblr.com", privblur_backend["image_response_timeout"]
+        "https://assets.tumblr.com", priviblur_backend["image_response_timeout"]
     )
 
     app.ctx.TumblrStaticClient = create_image_client(
-        "https://static.tumblr.com", privblur_backend["image_response_timeout"]
+        "https://static.tumblr.com", priviblur_backend["image_response_timeout"]
     )
 
     # Add additional jinja filters and functions
@@ -118,14 +118,14 @@ async def initialize(app):
     app.ext.environment.globals["format_npf"] = format_npf
 
     # Initialize locales
-    gettext_instances = {"en": gettext.translation("privblur", localedir="locales", languages=["en"])}
+    gettext_instances = {"en": gettext.translation("priviblur", localedir="locales", languages=["en"])}
     app.ctx.GETTEXT_INSTANCES = gettext_instances
 
 
 @app.listener("main_process_start")
 async def main_startup_listener(app):
-    """Startup listener to notify of privblur startup"""
-    print(f"Starting up Privblur version {VERSION}")
+    """Startup listener to notify of priviblur startup"""
+    print(f"Starting up Priviblur version {VERSION}")
 
 
 @app.get("/")
@@ -155,9 +155,9 @@ async def before_all_routes(request, response):
     )
 
 
-app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
-app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
-app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
+app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
+app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
+app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 
 # Register all routes:
