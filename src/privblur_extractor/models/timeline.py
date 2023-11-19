@@ -33,6 +33,12 @@ class TimelineBlog(NamedTuple):
     is_paywall_on: bool
 
 
+class TimelinePostTrail(NamedTuple):
+    blog : TimelineBlog
+    content: Optional[list[dict]]
+    layout: Optional[list[dict]]
+
+
 class TimelinePost(NamedTuple):
     blog: TimelineBlog
 
@@ -56,7 +62,7 @@ class TimelinePost(NamedTuple):
 
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-    trail: Optional[List[Tuple[dict]]]
+    trail: Optional[TimelinePostTrail]
 
     note_count: Optional[int] = None
     like_count: Optional[int] = None

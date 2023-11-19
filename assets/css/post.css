@@ -81,6 +81,31 @@ a.blog-name:hover {
 
 .post-timestamp {
   align-self: center;
+  font-weight: 600;
+}
+
+.post-trails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trail-post .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.trail-post {
+  border-top: 1px solid #d1d1d1;
+  padding: 20px 0px;
+}
+
+.post-trails .trail-post:last-child {
+  padding-bottom: 0px;
+}
+
+.hidden-reblog {
+  font-weight: normal;
 }
 
 .post-body > * {

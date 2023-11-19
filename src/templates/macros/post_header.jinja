@@ -1,0 +1,40 @@
+{% from 'components/icons/reblog.jinja' import reblog_icon  %}
+
+{% macro create_post_header(element, skip_reblog = False) %}
+<div class="post-header">
+    <div class="post-author">
+        <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
+        <div class="author-information">
+            <div class="primary-post-author">
+                <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
+                {% if element.date is defined %}
+                    <span class="separator">•</span>
+                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
+                        <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
+                            <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
+                        </a>
+                    </span>
+                {% endif %}
+            </div>
+            {%- if element.reblog_from and not skip_reblog -%}
+                {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same -#}
+                {# Though sometimes the reblog data is just hidden #}
+                    <div class="reblog-attribution">
+                        {%- if not element.reblog_from.blog_name -%}
+                            {%- if element.reblog_root and element.reblog_root.post_id == element.reblog_from.post_id -%}
+                                {{reblog_icon(16, 16, "#6b7280")}}
+                                <a class="link blog-name" href="{{url_handler(element.reblog_root.post_url)}}">{{element.reblog_root.blog_name}}</a>
+                            {%- else -%}
+                                {{reblog_icon(16, 16, "#6b7280")}}
+                                <a class="link blog-name hidden-reblog" href="{{url_handler(element.reblog_from.post_url)}}">reblogged</a>
+                            {%- endif -%}
+                        {%- else -%}
+                            {{reblog_icon(16, 16, "#6b7280")}}
+                            <a class="link blog-name" href="{{url_handler(element.reblog_from.post_url)}}">{{element.reblog_from.blog_name}}</a>
+                        {%- endif -%}
+                    </div>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+{% endmacro %}

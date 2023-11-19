@@ -189,9 +189,7 @@ class _TimelinePostParser:
                 trail_content = trail_post["content"]
                 trail_layout = trail_post["layout"]
 
-                trails.append((
-                    trail_blog, trail_content, trail_layout
-                ))
+                trails.append(models.timeline.TimelinePostTrail(trail_blog, trail_content, trail_layout))
             except KeyError as e:
                 logger.warning(f"Unexpected key while parsing post trail for post '{id}'")
                 continue

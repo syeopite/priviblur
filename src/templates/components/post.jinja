@@ -1,45 +1,40 @@
+{% from 'macros/post_header.jinja' import create_post_header  %}
 <div class="post">
     {%- if element.content -%}
         {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
-    {%- elif element.trail -%}
-        {% set contains_errors, content_tag = format_npf(element.trail[0][1], element.trail[0][2], url_handler=url_handler) -%}
     {%- endif -%}
 
-    <div class="post-header">
-        <div class="post-author">
-            <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
-            <div class="author-information">
-                <div class="primary-post-author">
-                    <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
-                    <span class="separator">•</span>
-                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
-                        <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
-                            <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
-                        </a>
-                    </span>
-                </div>
-                {%- if element.reblog_from -%}
-                    {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same-#}
-                    {%- if not element.reblog_from.blog_name -%}
-                        {%- if element.reblog_root and element.reblog_root.post_id == element.reblog_from.post_id -%}
-                            {%- set reblog_post_author, reblog_post_id = element.reblog_root.blog_name, element.reblog_root.post_id -%}
-                        {%- else -%}
-                            {%- set reblog_post_author, reblog_post_id = "PRIVBLURERRORBLOG", element.reblog_from.post_id %}
-                        {%- endif -%}
-                    {%- else -%}
-                        {%- set reblog_post_author, reblog_post_id = element.reblog_from.blog_name, element.reblog_from.post_id -%}
-                    {%- endif -%}
+    {{ create_post_header(element) }}
+    {%- if element.trail -%}
+        <div class="post-trails">
+    {% endif %}
 
-                    <div class="reblog-attribution">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path fill="#6b7280" d="M280-80 120-240l160-160 56 58-62 62h406v-160h80v240H274l62 62-56 58Zm-80-440v-240h486l-62-62 56-58 160 160-160 160-56-58 62-62H280v160h-80Z"/></svg>
-                        <a class="link blog-name" href="/{{reblog_post_author}}/{{reblog_post_id}}">{{reblog_post_author}}</a>
-                    </div>
-                {%- endif -%}
+    {%- if element.trail -%}
+        {% set current_element = element %}
+
+        {% for element in element.trail %}
+            <div class="trail-post">
+                {{create_post_header(element)}}
+                {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+                {{- trail_content_tag -}}
             </div>
-        </div>
-    </div>
 
-    {{- content_tag -}}
+        {% endfor %}
+
+        {% set element = current_element %}
+    {%- endif -%}
+
+    {# Repaste the author's header again if they have something to reply to the post trail#}
+    {% if element.trail and element.content %}
+        {{create_post_header(element, skip_reblog=True)}}
+        {{- content_tag -}}
+    {% else %}
+        {{- content_tag -}}
+    {% endif %}
+
+    {%- if element.trail -%}
+        </div>
+    {% endif %}
 
     <footer class="post-footer">
         {%- if element.tags -%}
