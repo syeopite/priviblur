@@ -38,6 +38,18 @@ except PermissionError:
 LOG_CONFIG = setup_logging.setup_logging(config["logging"])
 app = Sanic("Privblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVBLUR_", log_config=LOG_CONFIG)
 
+
+if config["deployment"]["forwarded_secret"] and not app.config.FORWARDED_SECRET:
+    app.config.FORWARDED_SECRET = config["deployment"]["forwarded_secret"]
+
+
+if config["deployment"]["real_ip_header"] and not app.config.REAL_IP_HEADER:
+    app.config.REAL_IP_HEADER = config["deployment"]["real_ip_header"]
+
+
+if config["deployment"]["proxies_count"] and not app.config.PROXIES_COUNT:
+    app.config.PROXIES_COUNT = config["deployment"]["proxies_count"]
+
 # Constants
 
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
@@ -154,4 +166,9 @@ for route in routes.BLUEPRINTS:
 
 
 if __name__ == "__main__":
-    app.run(dev=config["misc"]["dev_mode"])
+    app.run(
+        host=config["deployment"]["host"],
+        port=config["deployment"]["port"],
+        workers=config["deployment"]["workers"],
+        dev=config["misc"]["dev_mode"]
+    )
