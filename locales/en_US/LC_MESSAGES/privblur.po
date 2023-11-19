@@ -98,3 +98,21 @@ msgstr "Latest"
 
 msgid "pagination_next_page"
 msgstr "Next page"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "This blog requires an account to view"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "Try finding reblogs instead!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "This tag has been restricted on Tumblr"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "Try doing a searching instead?"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "Unable to find the requested blog"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "The blog may have been deleted or just never existed in the first place"

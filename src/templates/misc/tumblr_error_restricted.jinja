@@ -1,0 +1,20 @@
+{% extends "base.jinja" %}
+{% block head %}
+<style>
+#tumblr-error-body {
+    text-align: center;
+}
+</style>
+
+{% endblock %}
+{% block title %}Error - Privblur{% endblock %}
+
+{% block content %}
+<section id="tumblr-error">
+    <div id="tumblr-error-icon" aria-hidden="true"></div>
+    <div id="tumblr-error-body">
+        <h1 aria-label="Error explanation heading">{{error_heading}}</h1>
+        <p aria-label="Error explanation">{{error_description}}</h1>
+    </div>
+</section>
+{%- endblock %}

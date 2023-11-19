@@ -83,16 +83,30 @@ class TumblrAPI:
             code = result["meta"]["status"]
 
             logger.error(f"Error response received")
-            logger.error(f"Code {code} with the following reason: {message}")
+            logger.error(f"HTTP Status code: {code}")
 
             if error := result.get("errors"):
                 details = error[0].get('detail')
+                internal_code = error[0].get("code")
                 logger.error(f"Reason: {details}")
+                logger.error(f"Tumblr internal error code: {internal_code}")
             else:
+                internal_code = None
                 details = ""
 
+            match internal_code:
+                case 13001:
+                    raise exceptions.TumblrRestrictedTagError(message, code, details, internal_code)
+                case 4012:
+                    raise exceptions.TumblrLoginRequiredError(message, code, details, internal_code)
+                case 0:
+                    raise exceptions.TumblrBlogNotFoundError(message, code, details, internal_code)
+                case _:
+                    raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
+
             logger.debug(f"Response headers: {_format(response.headers)}")
-            raise exceptions.TumblrErrorResponse(message, code, details)
+
+            raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
 
         return result
 

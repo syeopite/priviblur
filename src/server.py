@@ -15,7 +15,7 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
 from . import routes
 from . import privblur_extractor
-from .helpers import setup_logging, helpers
+from .helpers import setup_logging, helpers, error_handlers
 from .version import VERSION, CURRENT_COMMIT
 
 
@@ -52,6 +52,7 @@ app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
 app.ctx.PRIVBLUR_CONFIG = config
+app.ctx.translate = helpers.translate
 
 @app.listener("before_server_start")
 async def initialize(app):
@@ -150,6 +151,11 @@ async def before_all_routes(request, response):
         ]
     )
 
+
+app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
+app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
+app.error_handler.add(privblur_extractor.privblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
+app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 
 # Register all routes:
 for route in routes.BLUEPRINTS:
