@@ -1,7 +1,7 @@
 {% extends "base.jinja" %}
 {% block head %}
-<link rel="preload" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}" as="style">
-<link rel="stylesheet" type="text/css" href="/assets/css/blog.css?v={{app.ctx.NPF_RENDERER_VERSION}}">
+<link rel="preload" href="/assets/css/blog.css?v={{app.ctx.CURRENT_COMMIT}}" as="style">
+<link rel="stylesheet" type="text/css" href="/assets/css/blog.css?v={{app.ctx.CURRENT_COMMIT}}">
 {% endblock %}
 {% block title %}{{blog.blog_info.name | e}} - Privblur{% endblock %}
 

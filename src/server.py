@@ -113,16 +113,7 @@ async def initialize(app):
 @app.listener("main_process_start")
 async def main_startup_listener(app):
     """Startup listener to notify of privblur startup"""
-    # Are we able to print colored output? If so we do it.
-    try:
-        import colorful
-    except ImportError:
-        colorful = None
-
-    if not colorful:
-        print(f"Starting up Privblur version {VERSION}")
-    else:
-        print(f"{colorful.green('Launching up')} {colorful.cyan('Privblur')} " f"{colorful.bold(f'{VERSION}')}")
+    print(f"Starting up Privblur version {VERSION}")
 
 
 @app.get("/")
