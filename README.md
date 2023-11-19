@@ -31,6 +31,8 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
+pybabel compile -d locales -D privblur
+
 python -m src.server
 
 # You can also launch Privblur through Sanic (our web framework)'s CLI tool
