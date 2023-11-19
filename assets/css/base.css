@@ -277,7 +277,7 @@ li.control-bar-action:hover .control-bar-dropdown-menu {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 12px;
     padding: 25px 0 10px 0;
     gap: 10px;
     color: #4f4f4f;
