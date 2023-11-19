@@ -6,7 +6,7 @@ import sanic_ext
 
 from .. import privblur_extractor
 
-blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{1,30}[a-z\d]{1})>")
+blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>")
 
 
 async def render_blog_post(app, blog, post):
