@@ -1,7 +1,7 @@
 {% from 'macros/post_header.jinja' import create_post_header  %}
 <div class="post">
     {%- if element.content -%}
-        {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+        {% set contains_errors, content_tag = format_npf(element.content, element.layout, url_handler=url_handler, skip_cropped_images=True) -%}
     {%- endif -%}
 
     {{ create_post_header(element) }}
@@ -15,7 +15,7 @@
         {% for element in element.trail %}
             <div class="trail-post">
                 {{create_post_header(element)}}
-                {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler) -%}
+                {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler, skip_cropped_images=True) -%}
                 {{- trail_content_tag -}}
             </div>
 
