@@ -21,6 +21,13 @@
   text-decoration: none;
 }
 
+.ask-body {
+  padding: 15px 15px 0;
+  background: #eeeeef;
+  border-radius: 5px;
+  width: 100%;
+}
+
 .reblog-attribution {
   display: flex;
   gap: 2px;
