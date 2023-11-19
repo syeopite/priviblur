@@ -57,9 +57,9 @@
 
     {%- if timeline.next %}
         <div class="paging">
-            <div class="next-page button">
-                <a href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">{{translate("en", "pagination_next_page")}}</a>
-            </div>
+            <a class="next-page button" href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}">
+                {{translate("en", "pagination_next_page")}}
+            </a>
         </div>
     {% endif %}
 {% endblock %}

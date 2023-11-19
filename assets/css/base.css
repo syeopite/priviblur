@@ -146,11 +146,6 @@ a.logo {
     .right-section {
         position: unset;
     }
-
-    .next-page {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
 }
 
 @media screen and (min-width: 1680px) {
@@ -168,6 +163,7 @@ a.logo {
 .paging {
     text-align: center;
     margin-top: 25px;
+    padding: 0 25px;
 }
 
 .next-page {
@@ -175,11 +171,13 @@ a.logo {
     color: #383b42;
     font-weight: 450;
     letter-spacing: 0.3px;
-    padding: 15px 20px;
-    font-size: 18px;
-    border-radius: 5px;
+    padding: 12px 0px;
+    font-size: 16px;
+    width: 100%;
+    font-weight: 550;
+
+    border-radius: 25px;
     background: #eeeeef;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .next-page:hover {
@@ -187,9 +185,17 @@ a.logo {
 }
 
 @media screen and (min-width: 768px) {
+    .paging {
+        padding: 0 0;
+    }
+
     .next-page {
         padding: 10px 15px;
         font-size: 14px;
+        width: auto;
+        font-weight: unset;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 }
 
