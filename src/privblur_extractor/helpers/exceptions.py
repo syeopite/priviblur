@@ -3,10 +3,13 @@ class InitialTumblrAPIParseException(Exception):
         super().__init__(message)
 
 
+# TODO replace 
 class TumblrErrorResponse(Exception):
-    def __init__(self, message, code):
-        super().__init__(
-            f"Tumblr has returned an error reponse!\n"
-            f"Code: {code}\n"
-            f"Message: {message}"
-        )
+    def __init__(self, message, code, details):
+        message = f"Tumblr has returned an error response\nCode: {code}\nMessage: {message}"
+
+        if details:
+            message += f"\nDetails: {details}" 
+
+        super().__init__(message)
+

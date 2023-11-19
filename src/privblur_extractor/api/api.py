@@ -83,10 +83,16 @@ class TumblrAPI:
             code = result["meta"]["status"]
 
             logger.error(f"Error response received")
-            logger.error(f"Code f{code} with the following reason: {message}")
-            logger.debug(f"Response headers: {_format(response.headers)}")
+            logger.error(f"Code {code} with the following reason: {message}")
 
-            raise exceptions.TumblrErrorResponse(message, code)
+            if error := result.get("errors"):
+                details = error[0].get('detail')
+                logger.error(f"Reason: {details}")
+            else:
+                details = ""
+
+            logger.debug(f"Response headers: {_format(response.headers)}")
+            raise exceptions.TumblrErrorResponse(message, code, details)
 
         return result
 
