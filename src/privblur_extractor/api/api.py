@@ -282,6 +282,7 @@ class TumblrAPI:
          "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
          "npf": True,
          "reblog_info": True,
+         "include_pinned_posts": True
         }
 
         if tag:

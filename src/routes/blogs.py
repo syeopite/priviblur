@@ -107,10 +107,3 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
 
         return await render_blog_post(request.app, blog_info, post)
 
-
-@blogs.get("/<post_id:int>/json")
-async def _blog_post_json(request: sanic.Request, blog: str, post_id: str, ):
-    blog = urllib.parse.unquote(blog)
-
-    initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    return sanic.response.json(initial_results)
