@@ -1,7 +1,11 @@
 .text-block {
-    line-height: 1.6;
-    letter-spacing: -1px;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
     margin-bottom: 15px;
+}
+
+.post-body > .text-block:last-of-type, .post-body > .layout-row:last-of-type > .text-block {
+  margin-bottom: 0;
 }
 
 a.link-block-link {

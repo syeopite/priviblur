@@ -3,7 +3,7 @@
     background: #FFF;
     margin-bottom: 28px;
     border-radius: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
 }
 
 #blog-header, .blog-header-textual-content {
@@ -25,9 +25,9 @@
     height: 96px;
     width: 96px;
     position: relative;
-    bottom: 65px;
+    bottom: 85px;
     border: 4px solid #FFF;
-    margin-bottom: -65px;
+    margin-bottom: -85px;
 }
 
 #blog-header #blog-title {

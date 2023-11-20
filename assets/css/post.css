@@ -1,7 +1,7 @@
 .post {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   padding: 25px 25px;
   background: white;
   border-radius: 10px;
@@ -14,9 +14,12 @@
   }
 }
 
+.post-body {
+  gap: 4px;
+}
+
 .post-header {
   display: flex;
-  margin-bottom: 15px;
   font-weight: bold;
   text-decoration: none;
 }
@@ -87,17 +90,24 @@ a.blog-name:hover {
 .post-trails {
   display: flex;
   flex-direction: column;
+}
+
+.post-trails > .trail-post:first-child {
+  padding-top: 25px;
+}
+
+.trail-post {
+  display: flex;
+  flex-direction: column;
   gap: 15px;
+
+  border-top: 1px solid #d1d1d1;
+  padding: 25px 0px;
 }
 
 .trail-post .avatar {
   width: 40px;
   height: 40px;
-}
-
-.trail-post {
-  border-top: 1px solid #d1d1d1;
-  padding: 20px 0px;
 }
 
 .post-trails .trail-post:last-child {
@@ -110,7 +120,6 @@ a.blog-name:hover {
 
 .post-body > * {
   margin: unset;
-  margin-bottom: 4px;
 }
 
 .post-body a {

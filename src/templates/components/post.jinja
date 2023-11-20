@@ -24,10 +24,13 @@
         {% set element = current_element %}
     {%- endif -%}
 
-    {# Repaste the author's header again if they have something to reply to the post trail#}
+    {# If the post contains content in addition the the trail then it is the author replying #}
     {% if element.trail and element.content %}
-        {{create_post_header(element, skip_reblog=True)}}
-        {{- content_tag -}}
+        <div class="trail-post">
+            {{create_post_header(element, skip_reblog=True)}}
+            {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler, skip_cropped_images=True) -%}
+            {{- content_tag -}}
+        </div>
     {% else %}
         {{- content_tag -}}
     {% endif %}
