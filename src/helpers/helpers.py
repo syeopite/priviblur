@@ -71,7 +71,7 @@ def deseq_urlencode(query_args):
 
 
 def translate(language, id, number=None, substitution=None):
-    app = sanic.Sanic.get_app("Privblur")
+    app = sanic.Sanic.get_app("Priviblur")
 
     gettext_instance = app.ctx.GETTEXT_INSTANCES[language]
 

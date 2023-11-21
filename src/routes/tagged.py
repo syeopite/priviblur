@@ -6,7 +6,7 @@ import sanic_ext
 
 import npf_renderer
 
-from .. import privblur_extractor
+from .. import priviblur_extractor
 
 tagged = sanic.Blueprint("tagged", url_prefix="/tagged")
 
@@ -26,7 +26,7 @@ async def _main(request: sanic.Request, tag: str):
 
     initial_results = await request.app.ctx.TumblrAPI.hubs_timeline(tag, continuation=continuation, latest=latest)
 
-    timeline = privblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_container(initial_results)
 
     # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't 
     # added when applying a search filter
