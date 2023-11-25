@@ -115,6 +115,7 @@ class _BlogThemeParser:
             header_info=header_info
         )
 
+
 class _TimelineBlogParser:
     @staticmethod
     def process(initial_data, force_parse=False):
@@ -191,7 +192,7 @@ class _TimelinePostParser:
 
                 trails.append(models.timeline.TimelinePostTrail(trail_blog, trail_content, trail_layout))
             except KeyError as e:
-                logger.warning(f"Unexpected key while parsing post trail for post '{id}'")
+                logger.warning(f"KeyError: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
                 continue
 
         # Reblogged from data
