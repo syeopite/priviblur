@@ -11,6 +11,15 @@ async def get_media(request, client, path_to_request):
             if header_key.lower() not in request.app.ctx.BLACKLIST_RESPONSE_HEADERS:
                 priviblur_response_headers[header_key] = header_value
 
+        if tumblr_response.status_code == 301:
+            if location := priviblur_response_headers.get("location"):
+                location = request.app.ctx.URL_HANDLER(location)
+                if not location.startswith("/"):
+                    return sanic.response.text("Media is redirecting to foreign URL", status=500)
+
+                return sanic.redirect(location)
+            
+
         priviblur_response = await request.respond(headers=priviblur_response_headers)
 
         async for chunk in tumblr_response.aiter_bytes():
