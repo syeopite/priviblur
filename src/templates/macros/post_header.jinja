@@ -18,10 +18,15 @@
                     <span class="link blog-name broken-blog" href="/{{element.blog.name}}">{{element.blog.name}}</span>
                 {%- endif -%}
 
-                {%- if element.date is defined -%}
+                {% if element.date %}
                     <span class="separator">•</span>
-                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
-                        <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
+                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">  
+                        {% set post_url = "/" + element.blog.name|e + "/" + element.id %}
+                        {% if element.slug %}
+                            {% set post_url = post_url + "/" + element.slug | e %}
+                        {% endif %}
+
+                        <a href="{{post_url}}">
                             <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
                         </a>
                     </span>

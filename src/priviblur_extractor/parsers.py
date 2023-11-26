@@ -197,9 +197,13 @@ class _TimelinePostParser:
 
         trails = []
         for trail_post in trail:
+            trail_post_id = None
+            trail_post_creation_date = None
             trail_blog = None
             trail_content = None
             trail_layout = None
+
+            has_error = False
 
             try:
                 if raw_trail_blog := trail_post.get("blog"):
@@ -209,6 +213,11 @@ class _TimelinePostParser:
 
                 trail_content = trail_post["content"]
                 trail_layout = trail_post["layout"]
+
+                if trail_post_data := trail_post.get("post"):
+                    trail_post_id = trail_post_data["id"]
+                    trail_post_creation_date = datetime.datetime.fromtimestamp(trail_post_data["timestamp"])
+
             except KeyError as e:
                 logger.warning(f"KeyError: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
 
@@ -227,7 +236,16 @@ class _TimelinePostParser:
                 if trail_layout is None:
                     trail_layout = []
 
-            trails.append(models.timeline.TimelinePostTrail(trail_blog, trail_content, trail_layout))
+                has_error = True
+
+            trails.append(models.timeline.TimelinePostTrail(
+                trail_post_id,
+                trail_post_creation_date,
+                trail_blog,
+                trail_content,
+                trail_layout,
+                has_error
+            ))
 
 
         # Reblogged from data
