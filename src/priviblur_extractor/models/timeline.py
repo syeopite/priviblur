@@ -28,6 +28,7 @@ class BrokenBlog(NamedTuple):
     name: str
     avatar: list[dict]
 
+
 class TimelinePostTrail(NamedTuple):
     blog : Union[TimelineBlog]
     content: Optional[list[dict]]

@@ -3,7 +3,11 @@
 {% macro create_post_header(element, skip_reblog = False) %}
 <div class="post-header">
     <div class="post-author">
-        <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
+        {% if element.blog.active %}
+            <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
+        {% else %}
+            <img class="avatar" loading="lazy" src="/assets/images/anon_96px.png?v=1">
+        {% endif %}
         <div class="author-information">
             <div class="primary-post-author">
                 {% if element.blog.active is false %}

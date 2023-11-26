@@ -78,8 +78,8 @@ a.blog-name:hover {
 }
 
 .broken-blog, .deactivated-blog {
-  color: #6b7280;
-  font-weight: 600;
+  color: black;
+  font-weight: normal;
 }
 
 .primary-post-author .separator {
