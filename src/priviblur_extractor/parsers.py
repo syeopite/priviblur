@@ -5,6 +5,9 @@ from . import helpers, models
 logger = helpers.LOGGER.getChild("parse")
 
 
+# TODO refactor module
+
+
 class _CursorParser:
     @staticmethod
     def process(initial_data):
@@ -144,6 +147,13 @@ class _TimelineBlogParser:
         )
 
 
+class _TimelineBrokenBlogParser:
+    def parse(target):
+        return models.timeline.BrokenBlog(
+            name=target["name"],
+            avatar=target["avatar"],
+        )
+
 class _TimelinePostParser:
     @staticmethod
     def process(initial_data):
@@ -185,15 +195,38 @@ class _TimelinePostParser:
 
         trails = []
         for trail_post in trail:
+            trail_blog = None
+            trail_content = None
+            trail_layout = None
+
             try:
-                trail_blog = _TimelineBlogParser.process(trail_post["blog"], force_parse=True)
+                if raw_trail_blog := trail_post.get("blog"):
+                    trail_blog = _TimelineBlogParser.process(raw_trail_blog, force_parse=True)
+                else:
+                    trail_blog = _TimelineBrokenBlogParser.parse(trail_post["brokenBlog"])
+
                 trail_content = trail_post["content"]
                 trail_layout = trail_post["layout"]
-
-                trails.append(models.timeline.TimelinePostTrail(trail_blog, trail_content, trail_layout))
             except KeyError as e:
                 logger.warning(f"KeyError: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
-                continue
+
+                if trail_blog is None:
+                    trail_blog = get_placeholder_blog()
+
+                if trail_content is None:
+                    trail_content = get_placeholder_content()
+
+                    # When the contents failed to parse it doesn't make sense to use successfully parsed layouts
+                    # thus we'll set it to an empty list. This has also the added benefit of handling when the layouts also
+                    # failed to parse
+                    trail_layout = []
+
+                # If its just the trail layout that failed to parse then we should also reset it to an empty list
+                if trail_layout is None:
+                    trail_layout = []
+
+            trails.append(models.timeline.TimelinePostTrail(trail_blog, trail_content, trail_layout))
+
 
         # Reblogged from data
         reblog_from_information = None
@@ -244,6 +277,20 @@ class _TimelinePostParser:
             reblog_from=reblog_from_information,
             reblog_root=reblog_root_information
         )
+
+
+def get_placeholder_blog():
+    return models.timeline.BrokenBlog("PriviblurErrorBlog", (
+        {"width": 40, "height": 40, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_40-3af33dc0.png"},
+        {"width": 96, "height": 96, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_96-223fabe0.png"}
+    ))
+
+
+def get_placeholder_content():
+    return (
+        {"type": "text", "text": "Priviblur Parse error", "subtype": "heading1"},
+        {"type": "text", "text": "Error: Priviblur has failed to parse this post"}
+    )
 
 
 ELEMENT_PARSERS = (_TimelineBlogParser, _TimelinePostParser)

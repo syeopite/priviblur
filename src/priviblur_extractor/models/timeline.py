@@ -1,5 +1,5 @@
 import datetime
-from typing import Union, NamedTuple, List, Tuple, Optional
+from typing import Union, NamedTuple, List, Tuple, Optional, Union
 
 from . import base, misc
 
@@ -33,10 +33,16 @@ class TimelineBlog(NamedTuple):
     is_paywall_on: bool
 
 
+class BrokenBlog(NamedTuple):
+    name: str
+    avatar: list[dict]
+
 class TimelinePostTrail(NamedTuple):
-    blog : TimelineBlog
+    blog : Union[TimelineBlog]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
+
+    has_error : bool = False
 
 
 class TimelinePost(NamedTuple):

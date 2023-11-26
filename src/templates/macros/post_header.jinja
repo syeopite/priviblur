@@ -6,7 +6,12 @@
         <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
         <div class="author-information">
             <div class="primary-post-author">
-                <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
+                {% if element.blog.url is defined %}
+                    <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
+                {% else %}
+                    <span class="link blog-name broken-blog" href="/{{element.blog.name}}">{{element.blog.name}}</span>
+                {% endif %}
+
                 {% if element.date is defined %}
                     <span class="separator">•</span>
                     <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
