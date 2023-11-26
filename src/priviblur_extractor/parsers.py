@@ -143,7 +143,8 @@ class _TimelineBlogParser:
             description_npf=target["descriptionNpf"],
             uuid=target["uuid"],
             theme=theme,
-            is_paywall_on=target["isPaywallOn"]
+            is_paywall_on=target["isPaywallOn"],
+            active=target.get("active", True)
         )
 
 

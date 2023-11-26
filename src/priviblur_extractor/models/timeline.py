@@ -15,22 +15,13 @@ class TimelineBlog(NamedTuple):
     url: str
     is_adult: bool
 
-    # If Neue Post Format this is the result:
-    #  [
-    #      {"type": "text", "text": "...",
-    #       "formatting": [
-    #           {"start": 0, "end": 10, type:"link", url: ""},
-    #           {"start": 15, "end":40, type: "bold"} # More research needed!
-    #           ],
-    #
-    #       }
-    #  ]
-    # Else it'd just be pure HTML. TODO add support in the parser
-    #
     description_npf: list[dict]
     uuid: str
     theme: misc.BlogTheme
     is_paywall_on: bool
+
+    # If blog is deactivated or not
+    active: bool = False
 
 
 class BrokenBlog(NamedTuple):

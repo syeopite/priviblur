@@ -6,7 +6,9 @@
         <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
         <div class="author-information">
             <div class="primary-post-author">
-                {% if element.blog.url is defined %}
+                {% if element.blog.active is false %}
+                    <span class="link blog-name deactivated-blog">{{element.blog.name}}</span>
+                {% elif element.blog.url is defined %}
                     <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
                 {% else %}
                     <span class="link blog-name broken-blog" href="/{{element.blog.name}}">{{element.blog.name}}</span>

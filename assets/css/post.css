@@ -77,6 +77,11 @@ a.blog-name:hover {
   align-self: center;
 }
 
+.broken-blog, .deactivated-blog {
+  color: #6b7280;
+  font-weight: 600;
+}
+
 .primary-post-author .separator {
   font-size: 8px;
   align-self: center;
