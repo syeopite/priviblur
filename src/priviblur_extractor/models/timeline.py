@@ -30,6 +30,8 @@ class BrokenBlog(NamedTuple):
 
 
 class TimelinePostTrail(NamedTuple):
+    id: str
+    date: datetime.datetime
     blog : Union[TimelineBlog]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
