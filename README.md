@@ -1,8 +1,10 @@
-# Priviblur
+<div align="center"> 
+  <h1> Priviblur </h1>
+  <blockquote> <h4> Inspired by projects like <a href="https://github.com/iv-org/invidious"> Invidious:</a></h4> </blockquote>
+  <h2> Priviblur is an alternative frontend to Tumblr with a touch of privacy </h2>
+</div>
 
-Inspired by projects like [Invidious](https://github.com/iv-org/invidious):
-
-> ## Priviblur is an alternative frontend to Tumblr with a touch of privacy 
+<br/>
 
 ![Example output](./screenshots/example.png)
 
