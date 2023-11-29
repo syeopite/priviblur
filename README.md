@@ -1,6 +1,6 @@
 <div align="center"> 
   <h1> Priviblur </h1>
-  <blockquote> <h4> Inspired by projects like <a href="https://github.com/iv-org/invidious"> Invidious:</a></h4> </blockquote>
+  <blockquote> <h4> Inspired by projects like <a href="https://github.com/iv-org/invidious"> Invidious</a></h4> </blockquote>
   <h3> Priviblur is an alternative frontend to Tumblr with a touch of modern design </h3>
 </div>
 
