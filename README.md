@@ -1,5 +1,8 @@
 # Priviblur
-A privacy-focused frontend to Tumblr with a touch of modern design 
+
+Inspired by projects like [Invidious](https://github.com/iv-org/invidious):
+
+> ## Priviblur is an alternative frontend to Tumblr with a touch of privacy 
 
 ![Example output](./screenshots/example.png)
 
