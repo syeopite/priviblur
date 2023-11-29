@@ -20,7 +20,7 @@ It is licensed under the AGPLv3 ensuring that itself and all instances are free 
 
 ## Instances
 
-[A list of public instances can be found here.](./instances.md). 
+[A list of public instances can be found here.](./instances.md)
 
 Priviblur has no official instance
 
