@@ -2,6 +2,7 @@
 
 |URL|Protocol|Location|Cloudflare|
 |-|-|-|-|
+|pb.bloat.cat|https|Romania|No|
 
 ### Rules
   - Your instance must not be more than a month out of date compared with either the latest commit or latest release. 
