@@ -2,6 +2,7 @@ import sys
 import os
 import logging
 import gettext
+import copy
 
 import httpx
 import orjson
@@ -63,13 +64,20 @@ async def initialize(app):
         main_request_timeout=priviblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
-    # We'll also have a separate HTTP client for images
-    media_request_headers = priviblur_extractor.TumblrAPI.DEFAULT_HEADERS
-    del media_request_headers["authorization"]
+    media_request_headers = {
+        "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+        "accept-encoding": "gzip, deflate, br",
+        "accept": "image/avif,image/webp,*/*",
+        "accept-language": "en-US,en;q=0.5",
+        "te": "trailers",
+        "referer": "https://www.tumblr.com",
+    }
 
     # TODO set pool size for image requests
 
     def create_image_client(url, timeout):
+        media_headers = copy.copy(media_request_headers)
+        media_headers["host"] = url
         return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
