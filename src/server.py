@@ -2,6 +2,7 @@ import sys
 import os
 import logging
 import gettext
+import copy
 
 import httpx
 import orjson
@@ -14,7 +15,6 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
-
 from .config import load_config
 from .helpers import setup_logging, helpers, error_handlers
 from .version import VERSION, CURRENT_COMMIT
@@ -63,13 +63,20 @@ async def initialize(app):
         main_request_timeout=priviblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
-    # We'll also have a separate HTTP client for images
-    media_request_headers = priviblur_extractor.TumblrAPI.DEFAULT_HEADERS
-    del media_request_headers["authorization"]
+    media_request_headers = {
+        "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+        "accept-encoding": "gzip, deflate, br",
+        "accept": "image/avif,image/webp,*/*",
+        "accept-language": "en-US,en;q=0.5",
+        "te": "trailers",
+        "referer": "https://www.tumblr.com",
+    }
 
     # TODO set pool size for image requests
 
     def create_image_client(url, timeout):
+        media_headers = copy.copy(media_request_headers)
+        media_headers["host"] = url
         return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
@@ -144,9 +151,18 @@ async def before_all_routes(request, response):
     )
 
 
+# TODO Extract
+
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
+
+for request_timeouts in {
+    httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout
+}:
+    app.error_handler.add(request_timeouts, error_handlers.request_timeout)
+
+app.error_handler.add(httpx.PoolTimeout, error_handlers.pool_timeout_error)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 
 # Register all routes:

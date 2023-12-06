@@ -18,11 +18,12 @@ async def get_media(request, client, path_to_request):
                     return sanic.response.text("Media is redirecting to foreign URL", status=500)
 
                 return sanic.redirect(location)
-            
+        elif tumblr_response.status_code == 429:
+            return sanic.response.empty(status=502)
 
         priviblur_response = await request.respond(headers=priviblur_response_headers)
 
-        async for chunk in tumblr_response.aiter_bytes():
+        async for chunk in tumblr_response.aiter_raw():
             await priviblur_response.send(chunk)
 
 

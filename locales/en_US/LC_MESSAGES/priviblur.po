@@ -116,3 +116,15 @@ msgstr "Unable to find the requested blog"
 
 msgid "tumblr_error_blog_not_found_error_description"
 msgstr "The blog may have been deleted or just never existed in the first place"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "Error: Request to Tumblr timed out"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr "Priviblur was unable to complete the request to Tumblr before timing out"
+
+msgid "priviblur_error_pool_timeout_error_heading"
+msgstr "Error: Unable to fetch HTTP client in time"
+
+msgid "priviblur_error_pool_timeout_error_description"
+msgstr "Priviblur was unable to fetch a HTTP client to request Tumblr in time. Please try again later"
