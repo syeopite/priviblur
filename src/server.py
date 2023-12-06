@@ -2,7 +2,6 @@ import sys
 import os
 import logging
 import gettext
-import tomllib
 
 import httpx
 import orjson
@@ -13,42 +12,32 @@ import babel.numbers
 import babel.dates
 from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
-from . import routes
+from . import routes, priviblur_extractor
 from . import priviblur_extractor
+
+from .config import load_config
 from .helpers import setup_logging, helpers, error_handlers
 from .version import VERSION, CURRENT_COMMIT
 
 
 # Load configuration file 
 
-try:
-    with open(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"), "rb") as config_file:
-        config = tomllib.load(config_file)
-except FileNotFoundError:
-    print(
-        'Cannot find configuration file at "./config.toml". '
-        'Did you mean to set a new location with the environmental variable "PRIVIBLUR_CONFIG_LOCATION"?'
-    )
-    sys.exit()
-except PermissionError:
-    print("Cannot access the configuration file. Do I have the right permissions?")
-    sys.exit()
+config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"))
 
-
-LOG_CONFIG = setup_logging.setup_logging(config["logging"])
+LOG_CONFIG = setup_logging.setup_logging(config.logging)
 app = Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
 
 
-if config["deployment"]["forwarded_secret"] and not app.config.FORWARDED_SECRET:
-    app.config.FORWARDED_SECRET = config["deployment"]["forwarded_secret"]
+if config.deployment.forwarded_secret and not app.config.FORWARDED_SECRET:
+    app.config.FORWARDED_SECRET = config.deployment.forwarded_secret
 
 
-if config["deployment"]["real_ip_header"] and not app.config.REAL_IP_HEADER:
-    app.config.REAL_IP_HEADER = config["deployment"]["real_ip_header"]
+if config.deployment.real_ip_header and not app.config.REAL_IP_HEADER:
+    app.config.REAL_IP_HEADER = config.deployment.real_ip_header
 
 
-if config["deployment"]["proxies_count"] and not app.config.PROXIES_COUNT:
-    app.config.PROXIES_COUNT = config["deployment"]["proxies_count"]
+if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
+    app.config.PROXIES_COUNT = config.deployment.proxies_count
 
 # Constants
 
@@ -68,10 +57,10 @@ app.ctx.translate = helpers.translate
 
 @app.listener("before_server_start")
 async def initialize(app):
-    priviblur_backend = app.ctx.PRIVIBLUR_CONFIG["priviblur_backend"]
+    priviblur_backend = app.ctx.PRIVIBLUR_CONFIG.backend
 
     app.ctx.TumblrAPI = await priviblur_extractor.TumblrAPI.create(
-        main_request_timeout=priviblur_backend["main_response_timeout"], json_loads=orjson.loads
+        main_request_timeout=priviblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
     # We'll also have a separate HTTP client for images
@@ -84,23 +73,23 @@ async def initialize(app):
         return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
-        "https://64.media.tumblr.com", priviblur_backend["image_response_timeout"]
+        "https://64.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     app.ctx.Media49Client = create_image_client(
-        "https://49.media.tumblr.com", priviblur_backend["image_response_timeout"]
+        "https://49.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     app.ctx.Media44Client = create_image_client(
-        "https://44.media.tumblr.com", priviblur_backend["image_response_timeout"]
+        "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     app.ctx.TumblrAssetClient = create_image_client(
-        "https://assets.tumblr.com", priviblur_backend["image_response_timeout"]
+        "https://assets.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     app.ctx.TumblrStaticClient = create_image_client(
-        "https://static.tumblr.com", priviblur_backend["image_response_timeout"]
+        "https://static.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     # Add additional jinja filters and functions
@@ -167,8 +156,8 @@ for route in routes.BLUEPRINTS:
 
 if __name__ == "__main__":
     app.run(
-        host=config["deployment"]["host"],
-        port=config["deployment"]["port"],
-        workers=config["deployment"]["workers"],
-        dev=config["misc"]["dev_mode"]
+        host=config.deployment.host,
+        port=config.deployment.port,
+        workers=config.deployment.workers,
+        dev=config.misc.dev_mode
     )
