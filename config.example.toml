@@ -4,24 +4,27 @@
     port = 8000
 
     # Amount of worker Priviblur instances to spawn. Increases speed significantly.
-    workers = 1
+    # workers = 1
 
-    # If you're running Priviblur behind a remote proxy, one or more of the following must be set
-    # can also be set via env variables by captialzing and prefixing with PRIVIBLUR_
-
-    # For more information see
-    # https://sanic.dev/en/guide/advanced/proxy-headers.html
-    forwarded_secret = ""
-    real_ip_header = ""
-    proxies_count = ""
+    # # If you're running Priviblur behind a remote proxy, one or more of the following must be set
+    # # can also be set via env variables by captialzing and prefixing with PRIVIBLUR_
+    # #
+    # # For more information see
+    # # https://sanic.dev/en/guide/advanced/proxy-headers.html
+    # #
+    # # Default: None
+    # #
+    # forwarded_secret =
+    # real_ip_header =
+    # proxies_count =
 
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 [priviblur_backend]
-    # Timeout for requests to Tumblr's API
-    main_response_timeout = 10
+    # # Timeout for requests to Tumblr's API
+    # main_response_timeout = 10
 
-    # Timeout for fetching image responses from Tumblr 
-    image_response_timeout = 30
+    # # Timeout for fetching image responses from Tumblr 
+    # image_response_timeout = 30
 
 
 # Controls logging behavior
@@ -29,15 +32,15 @@
 # Use Python's numerical logging levels
 # https://docs.python.org/3/howto/logging.html#logging-levels
 [logging]
-    # Sanic (Server)'s logging level'
-    sanic_logging_level = 30
+    # # Sanic (Server)'s logging level'
+    # sanic_logging_level = 30
 
-    # Priviblur's logging level
-    priviblur_logging_level = 30
+    # # Priviblur's logging level
+    # priviblur_logging_level = 30
 
-    # Priviblur extractor's logging level
-    priviblur_extractor_logging_level = 20
+    # # Priviblur extractor's logging level
+    # priviblur_extractor_logging_level = 20
 
 [misc]
-    # Enable sanic's dev mode
-    dev_mode=false
+    # # Enable sanic's dev mode
+    # dev_mode = false
