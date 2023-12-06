@@ -15,7 +15,6 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
-
 from .config import load_config
 from .helpers import setup_logging, helpers, error_handlers
 from .version import VERSION, CURRENT_COMMIT
@@ -152,9 +151,18 @@ async def before_all_routes(request, response):
     )
 
 
+# TODO Extract
+
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
+
+for request_timeouts in {
+    httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout
+}:
+    app.error_handler.add(request_timeouts, error_handlers.request_timeout)
+
+app.error_handler.add(httpx.PoolTimeout, error_handlers.pool_timeout_error)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 
 # Register all routes:
