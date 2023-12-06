@@ -1,11 +1,19 @@
 .text-block {
-    line-height: 1.5;
-    letter-spacing: -0.5px;
+    line-height: 1.7;
+    letter-spacing: -0.2px;
     margin-bottom: 15px;
 }
 
-.post-body > .text-block:last-of-type, .post-body > .layout-row:last-of-type > .text-block {
+.post-body > .text-block:last-child, .post-body > .layout-row:last-child > .text-block {
   margin-bottom: 0;
+}
+
+.heading1, .heading2, .quote {
+  font-weight: 500;
+}
+
+.inline-bold {
+  font-weight: 600;
 }
 
 a.link-block-link {
