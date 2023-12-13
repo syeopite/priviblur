@@ -19,3 +19,8 @@
 a.link-block-link {
   text-decoration: underline;
 }
+
+.quote {
+  margin-left: 0;
+  margin-top: 0;
+}
