@@ -105,6 +105,10 @@ async def initialize(app):
         "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
+    app.ctx.MediaVaClient = create_image_client(
+        "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
     app.ctx.TumblrAssetClient = create_image_client(
         "https://assets.tumblr.com", priviblur_backend.image_response_timeout
     )
@@ -137,7 +141,7 @@ async def initialize(app):
     app.ext.environment.globals["format_npf"] = functools.partial(
         format_npf,
         url_handler=helpers.url_handler,
-        skip_cropped_images=True
+        forbid_external_iframes=True,
     )
 
 

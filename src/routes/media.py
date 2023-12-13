@@ -1,12 +1,13 @@
 import sanic
+import aiohttp
 
 from ..helpers import exceptions
 
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
 
-async def get_media(request, client, path_to_request):
-    async with client.get(f"/{path_to_request}") as tumblr_response:
+async def get_media(request, client : aiohttp.ClientSession, path_to_request, additional_headers = None):
+    async with client.get(f"/{path_to_request}", headers=additional_headers) as tumblr_response:
         # Sanitize the headers given by Tumblr
         priviblur_response_headers = {}
         for header_key, header_value in tumblr_response.headers.items():
@@ -28,6 +29,8 @@ async def get_media(request, client, path_to_request):
         async for chunk in tumblr_response.content.iter_any():
             await priviblur_response.send(chunk)
 
+    await priviblur_response.eof()
+
 
 @media.get(r"/media/64/<path:path>")
 async def _64_media(request: sanic.Request, path: str):
@@ -45,6 +48,16 @@ async def _49_media(request: sanic.Request, path: str):
 async def _44_media(request: sanic.Request, path: str):
     """Proxies the requested media from 44.media.tumblr.com"""
     return await get_media(request, request.app.ctx.Media44Client, path)
+
+
+@media.get(r"/media/va/<path:path>")
+async def _va_media(request: sanic.Request, path: str):
+    """Proxies the requested media from va.media.tumblr.com"""
+    additional_headers={
+        "accept": "video/webm,video/ogg,video/*;q=0.9," \
+                  "application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"
+    }
+    return await get_media(request, request.app.ctx.MediaVaClient, path, additional_headers=additional_headers)
 
 
 @media.get(r"/assets/<path:path>")
