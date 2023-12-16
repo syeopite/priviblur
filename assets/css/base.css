@@ -1,3 +1,64 @@
+:root {
+    --color-primary-font: #6b7280;
+    --color-selected-tab-border: #6b7280;
+    --color-base-background: #EEEEEF;
+    --color-surface-font: black;
+    --color-surface-background: white;
+    --color-search-bar-border: #d9d9d9;
+    --color-nav-tab-hover-background: #f8f8f8;
+    --color-navbar-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    --color-next-page-font: #383b42;
+    --color-next-page-background: #eeeeef;
+    --color-next-page-hover-background: #dcdcdc;
+    --color-next-page-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    --color-blog-name-font: black;
+    --color-broken-blog: black;
+    --color-trail-post-border: #d1d1d1;
+    --color-post-tag-background: #f5f5f5;
+    --color-post-tag-font: #ACACAC;
+    --color-post-footer-font: #ACACAC;
+    --color-footer-font: #4f4f4f;
+    --color-control-bar-action-hover-background: #dcdcdc;
+    --color-control-bar-dropdown-menu-hover-background: #dcdcdc;
+    --color-control-bar-dropdown-menu-background: #dcdcdc;
+    --color-control-bar-dropdown-menu-shadow:0 8px 10px 1px rgba(0,0,0,.14), 0 5px 5px -3px rgba(0,0,0,.2), 0 3px 14px 2px rgba(0,0,0,.12);
+    --color-timeline-shadow: 0 8px 10px 1px rgba(0,0,0,.14), 0 5px 5px -3px rgba(0,0,0,.2), 0 3px 14px 2px rgba(0,0,0,.12);
+    --color-blog-header-font: #ACACAC;
+    --color-blog-header-background: #FFF;
+    --color-blog-header-border: #FFF;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary-font: #6b7280;
+        --color-selected-tab-border: #6b7280;
+        --color-base-background: #202124;
+        --color-surface-font: #e6e6e6;
+        --color-surface-background: #171717;
+        --color-search-bar-border: #2B2E33;
+        --color-nav-tab-hover-background: #2B2B2B;
+        --color-navbar-shadow: none;
+        --color-next-page-font: #BDC0C7;
+        --color-next-page-background: #171717;
+        --color-next-page-hover-background: #353940;
+        --color-next-page-box-shadow:  none;
+        --color-blog-name-font: #e6e6e6;
+        --color-broken-blog: white;
+        --color-trail-post-border: #2B2E33;
+        --color-post-tag-background: #222;
+        --color-post-tag-font: #777;
+        --color-post-footer-font: #777;
+        --color-footer-font: #9DA0A6;
+        --color-control-bar-action-hover-background: #353940;
+        --color-control-bar-dropdown-menu-hover-background: #353940;
+        --color-control-bar-dropdown-menu-background: #353940;
+        --color-control-bar-dropdown-menu-shadow: none;
+        --color-timeline-shadow: none;
+        --color-blog-header-font: #777;
+        --color-blog-header-background: #000;
+        --color-blog-header-border: #000;
+    }
+}
+
 html, body, .container {
     min-height: 100vh;
 }
@@ -5,7 +66,8 @@ html, body, .container {
 body {
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    background: #EEEEEF;
+    color: var(--color-surface-font);
+    background: var(--color-base-background);
     margin: 0;
 }
 
@@ -47,16 +109,16 @@ a, a:visited, a:hover, a:active {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    background: white;
+    background: var(--color-surface-background);
     padding: 20px 25px 0;
     margin-bottom: 30px;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--color-navbar-shadow);
 }
 
 .navbar div {
     display: flex;
     align-items: center;
-} 
+}
 
 div.left-section {
     flex-direction: column;
@@ -68,13 +130,13 @@ a.logo {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1.2px;
-    color: #6b7280;
+    color: var(--color-primary-font);
 }
 
 .search-bar {
     display: flex;
     width: 100%;
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--color-search-bar-border);
     border-radius: 25px;
     padding: 10px 10px;
 }
@@ -83,6 +145,7 @@ a.logo {
     width: 100%;
     text-indent: 10px;
     border: 0;
+    color: var(--color-search-bar-font);
     background: none;
 }
 
@@ -105,11 +168,11 @@ a.logo {
 }
 
 .nav-tab:hover {
-    background: #f8f8f8;
+    background: var(--color-nav-tab-hover-background);
 }
 
 .selected-tab {
-    border-color: #6b7280;
+    border-color: var(--color-selected-tab-border);
     border-width: 0 0 3px;
     border-style: solid;
 }
@@ -134,7 +197,7 @@ a.logo {
         grid-template-columns: 1fr 1fr 1fr;
         padding: 0 25px;
     }
-    
+
     div.left-section {
         flex-direction: row;
     }
@@ -168,7 +231,7 @@ a.logo {
 
 .next-page {
     display: inline-block;
-    color: #383b42;
+    color: var(--color-next-page-font);
     font-weight: 450;
     letter-spacing: 0.3px;
     padding: 12px 0px;
@@ -177,11 +240,11 @@ a.logo {
     font-weight: 550;
 
     border-radius: 25px;
-    background: #eeeeef;
+    background: var(--color-next-page-background);
 }
 
 .next-page:hover {
-    background: #dcdcdc;
+    background: var(--color-next-page-hover-background);
 }
 
 @media screen and (min-width: 768px) {
@@ -195,7 +258,7 @@ a.logo {
         width: auto;
         font-weight: unset;
         border-radius: 5px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: var(--color-next-page-box-shadow);
     }
 }
 
@@ -223,7 +286,7 @@ a.logo {
 }
 
 li.control-bar-action:hover {
-    background: #dcdcdc;
+    background: var(--color-control-bar-action-hover-background);
 }
 
 .control-bar-action > svg {
@@ -236,8 +299,8 @@ li.control-bar-action:hover {
     top: 40px;
     padding: 0;
     list-style: None;
-    background: #EEEEEF;
-	box-shadow: 0 8px 10px 1px rgba(0,0,0,.14), 0 5px 5px -3px rgba(0,0,0,.2), 0 3px 14px 2px rgba(0,0,0,.12);
+    background: var(--color-base-background);
+    box-shadow: var(--color-control-bar-dropdown-menu-shadow);
     border-radius: 5px;
     left: 50%;
     transform: translateX(-50%);
@@ -251,11 +314,11 @@ li.control-bar-action:hover {
 }
 
 .control-bar-dropdown-menu li:hover {
-    background: #dcdcdc;
+    background: var(--color-control-bar-dropdown-menu-hover-background);
 }
 
 .control-bar-dropdown-menu .selected {
-    background: #dcdcdc;
+    background: var(--color-control-bar-dropdown-menu-background);
 }
 
 li.control-bar-action:hover .control-bar-dropdown-menu {
@@ -280,7 +343,7 @@ li.control-bar-action:hover .control-bar-dropdown-menu {
     font-size: 12px;
     padding: 25px 0 10px 0;
     gap: 10px;
-    color: #4f4f4f;
+    color: var(--color-footer-font);
 }
 
 .page-footer a {
