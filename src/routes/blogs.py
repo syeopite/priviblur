@@ -59,7 +59,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
         context={
             "app": request.app,
             "blog": blog,
-            "tag": "tag",
+            "tag": tag,
         }
     )
 
