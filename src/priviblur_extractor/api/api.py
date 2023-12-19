@@ -263,7 +263,7 @@ class TumblrAPI:
 
             url_parameters["cursor"] = continuation
 
-        return await self._get_json(f"hubs/{urllib.parse.quote(tag)}/timeline", url_parameters)
+        return await self._get_json(f"hubs/{urllib.parse.quote(tag, safe='')}/timeline", url_parameters)
 
     async def blog_posts(self, blog_name, continuation = None, tag = None, post_type = None, before_id = None):
         """Requests the /blog/<blog name>/posts endpoint
@@ -300,7 +300,7 @@ class TumblrAPI:
             url_parameters["tumblelog"] = blog_name
             url_parameters["page_number"] = continuation
 
-        return await self._get_json(f"blog/{urllib.parse.quote(blog_name)}/posts", url_params=url_parameters)
+        return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/posts", url_params=url_parameters)
  
     async def blog_post(self, blog_name, post_id):
         """Requests the /blog/<blog name>/posts/<post id> endpoint
@@ -311,6 +311,6 @@ class TumblrAPI:
         """
 
         return await self._get_json(
-            f"blog/{urllib.parse.quote(blog_name)}/posts/{post_id}/permalink",
+            f"blog/{urllib.parse.quote(blog_name, safe='')}/posts/{post_id}/permalink",
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": True}
         )

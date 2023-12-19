@@ -1,6 +1,8 @@
 import sys
 import os
 import logging
+import urllib.parse
+import functools
 import gettext
 import copy
 
@@ -100,6 +102,9 @@ async def initialize(app):
     )
 
     # Add additional jinja filters and functions
+
+
+    app.ext.environment.filters["encodepathsegment"] = functools.partial(urllib.parse.quote, safe="")
 
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
