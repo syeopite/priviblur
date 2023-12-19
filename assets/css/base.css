@@ -243,6 +243,7 @@ li.control-bar-action:hover {
     transform: translateX(-50%);
     overflow: hidden;
     width: fit-content;
+    z-index: 1;
 }
 
 .control-bar-dropdown-menu li {
