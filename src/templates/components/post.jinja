@@ -7,37 +7,37 @@
     {{ create_post_header(element) }}
     {%- if element.trail -%}
         <div class="post-trails">
-    {% endif %}
+    {%- endif -%}
 
     {%- if element.trail -%}
-        {% set current_element = element %}
+        {%- set current_element = element -%}
 
-        {% for element in element.trail %}
+        {%- for element in element.trail -%}
             <div class="trail-post">
                 {{create_post_header(element)}}
                 {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler, skip_cropped_images=True) -%}
                 {{- trail_content_tag -}}
             </div>
 
-        {% endfor %}
+        {%- endfor -%}
 
-        {% set element = current_element %}
+        {%- set element = current_element -%}
     {%- endif -%}
 
     {# If the post contains content in addition the the trail then it is the author replying #}
-    {% if element.trail and element.content %}
+    {%- if element.trail and element.content -%}
         <div class="trail-post">
             {{create_post_header(element, skip_reblog=True)}}
             {% set trail_contains_errors, trail_content_tag = format_npf(element.content, element.layout, url_handler=url_handler, skip_cropped_images=True) -%}
             {{- content_tag -}}
         </div>
-    {% else %}
+    {%- else -%}
         {{- content_tag -}}
-    {% endif %}
+    {%- endif -%}
 
     {%- if element.trail -%}
         </div>
-    {% endif %}
+    {%- endif -%}
 
     <footer class="post-footer">
         {%- if element.tags -%}

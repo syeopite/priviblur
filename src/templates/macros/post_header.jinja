@@ -1,31 +1,31 @@
 {% from 'components/icons/reblog.jinja' import reblog_icon  %}
 
-{% macro create_post_header(element, skip_reblog = False) %}
+{%macro create_post_header(element, skip_reblog = False)%}
 <div class="post-header">
     <div class="post-author">
-        {% if element.blog.active %}
+        {%- if element.blog.active -%}
             <a href="/{{element.blog.name}}"><img class="avatar" loading="lazy" src="{{url_handler(element.blog.avatar[-1].url)}}"></a>
-        {% else %}
+        {%- else -%}
             <img class="avatar" loading="lazy" src="/assets/images/anon_96px.png?v=1">
         {% endif %}
         <div class="author-information">
             <div class="primary-post-author">
-                {% if element.blog.active is false %}
+                {%- if element.blog.active is false -%}
                     <span class="link blog-name deactivated-blog">{{element.blog.name}}</span>
-                {% elif element.blog.url is defined %}
+                {%- elif element.blog.url is defined -%}
                     <a class="link blog-name" href="/{{element.blog.name}}">{{element.blog.name}}</a>
-                {% else %}
+                {%- else -%}
                     <span class="link blog-name broken-blog" href="/{{element.blog.name}}">{{element.blog.name}}</span>
-                {% endif %}
+                {%- endif -%}
 
-                {% if element.date is defined %}
+                {%- if element.date is defined -%}
                     <span class="separator">•</span>
                     <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">
                         <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
                             <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
                         </a>
                     </span>
-                {% endif %}
+                {%- endif -%}
             </div>
             {%- if element.reblog_from and not skip_reblog -%}
                 {#- The reblog from data can sometimes have an empty blog name. Thus we'll extract the name from the root reblog info if they're the same -#}
@@ -48,4 +48,4 @@
         </div>
     </div>
 </div>
-{% endmacro %}
+{% endmacro -%}
