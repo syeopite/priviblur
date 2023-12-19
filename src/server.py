@@ -116,7 +116,11 @@ async def initialize(app):
 
     app.ext.environment.globals["translate"] = helpers.translate
     app.ext.environment.globals["url_handler"] = helpers.url_handler
-    app.ext.environment.globals["format_npf"] = format_npf
+    app.ext.environment.globals["format_npf"] = functools.partial(
+        format_npf,
+        url_handler=helpers.url_handler,
+        skip_cropped_images=True
+    )
 
     # Initialize locales
     gettext_instances = {"en": gettext.translation("priviblur", localedir="locales", languages=["en"])}
