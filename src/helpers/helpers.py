@@ -12,6 +12,10 @@ def url_handler(raw_url):
 
     if hostname.endswith("href.li"):
         return url_handler(url.query)
+    elif hostname.endswith("t.umblr.com"):
+        parsed_query = urllib.parse.parse_qs(url.query)
+        if redirect_url := parsed_query.get("z"):
+            return url_handler(redirect_url[0])
     elif hostname.endswith("tumblr.com"):
         if hostname.endswith("64.media.tumblr.com"):
             return f"/tblr/media/64{url.path}"
