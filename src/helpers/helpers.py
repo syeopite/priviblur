@@ -10,13 +10,20 @@ def url_handler(raw_url):
 
     hostname = url.hostname
 
-    if hostname.endswith("href.li"):
-        return url_handler(url.query)
-    elif hostname.endswith("t.umblr.com"):
-        parsed_query = urllib.parse.parse_qs(url.query)
-        if redirect_url := parsed_query.get("z"):
-            return url_handler(redirect_url[0])
-    elif hostname.endswith("tumblr.com"):
+    # Redirects links can have malformed URLs such as https://href.li/?http://
+    # As those are not proper links by themselves, we'll just use the entire
+    # redirect link.
+    try:
+        if hostname.endswith("href.li"):
+            return url_handler(url.query)
+        elif hostname.endswith("t.umblr.com"):
+            parsed_query = urllib.parse.parse_qs(url.query)
+            if redirect_url := parsed_query.get("z"):
+                return url_handler(redirect_url[0])
+    except AttributeError:
+        pass
+
+    if hostname.endswith("tumblr.com"):
         if hostname.endswith("64.media.tumblr.com"):
             return f"/tblr/media/64{url.path}"
         elif hostname.endswith("assets.tumblr.com"):
