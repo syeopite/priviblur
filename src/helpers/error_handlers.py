@@ -53,6 +53,11 @@ async def request_timeout(request, exception):
 
 
 async def pool_timeout_error(request, exception):
+    if request.endpoint.startswith("Priviblur.TumblrMedia"):
+        request.app.ctx.PoolTimeoutTracker.increment_total(request.endpoint)
+    else:
+        request.app.ctx.PoolTimeoutTracker.increment_total("main")
+
     return await sanic_ext.render(
         "misc/generic_error.jinja",
         context={
