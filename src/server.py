@@ -79,7 +79,7 @@ async def initialize(app):
     def create_image_client(url, timeout):
         media_headers = copy.copy(media_request_headers)
         media_headers["host"] = url
-        return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
+        return httpx.AsyncClient(base_url=url, headers=media_request_headers, http1=True, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
         "https://64.media.tumblr.com", priviblur_backend.image_response_timeout
@@ -91,6 +91,10 @@ async def initialize(app):
 
     app.ctx.Media44Client = create_image_client(
         "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
+    app.ctx.MediaVaClient = create_image_client(
+        "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
     app.ctx.TumblrAssetClient = create_image_client(
@@ -119,7 +123,9 @@ async def initialize(app):
     app.ext.environment.globals["format_npf"] = functools.partial(
         format_npf,
         url_handler=helpers.url_handler,
-        skip_cropped_images=True
+        skip_cropped_images=True,
+        reserve_space_for_images=True,
+        forbid_external_iframes=True,
     )
 
     # Initialize locales
