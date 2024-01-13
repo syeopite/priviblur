@@ -18,7 +18,7 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
 from .config import load_config
-from .helpers import setup_logging, helpers, error_handlers, pool_timeout_tracker
+from .helpers import setup_logging, helpers, error_handlers, exceptions, pool_timeout_tracker
 from .version import VERSION, CURRENT_COMMIT
 from .jobs import refresh_pool
 
@@ -64,7 +64,6 @@ tasks = []
 
 @app.listener("before_server_start")
 async def initialize(app):
-
     priviblur_backend = app.ctx.PRIVIBLUR_CONFIG.backend
 
     app.ctx.TumblrAPI = await priviblur_extractor.TumblrAPI.create(
@@ -99,6 +98,13 @@ async def initialize(app):
     app.ctx.TumblrStaticClient = create_image_client("https://static.tumblr.com")
 
     tasks.append(app.add_task(refresh_pool.refresh_pool_task(app, create_image_client)))
+
+    app.ctx.TumblrAtClient = httpx.AsyncClient(
+        base_url="https://at.tumblr.com",
+        headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
+        http2=True,
+        timeout=priviblur_backend.main_response_timeout
+    )
 
     # Add additional jinja filters and functions
 
@@ -182,6 +188,7 @@ for request_timeouts in {
 
 app.error_handler.add(httpx.PoolTimeout, error_handlers.pool_timeout_error)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
+app.error_handler.add(exceptions.TumblrInvalidRedirect, error_handlers.invalid_redirect)
 
 # Register all routes:
 for route in routes.BLUEPRINTS:

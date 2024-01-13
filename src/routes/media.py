@@ -1,5 +1,7 @@
 import sanic
 
+from ..helpers import exceptions
+
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
 
@@ -15,7 +17,7 @@ async def get_media(request, client, path_to_request):
             if location := priviblur_response_headers.get("location"):
                 location = request.app.ctx.URL_HANDLER(location)
                 if not location.startswith("/"):
-                    return sanic.response.text("Media is redirecting to foreign URL", status=500)
+                    raise exceptions.TumblrInvalidRedirect()
 
                 return sanic.redirect(location)
         elif tumblr_response.status_code == 429:

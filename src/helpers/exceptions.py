@@ -1,0 +1,2 @@
+class TumblrInvalidRedirect(Exception):
+    pass

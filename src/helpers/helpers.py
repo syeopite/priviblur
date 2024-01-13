@@ -1,8 +1,8 @@
-import sanic
-
 import copy
 import urllib.parse
 from typing import Sequence
+
+import sanic
 
 def url_handler(raw_url):
     """Change URLs found in posts to privacy-friendly alternatives"""

@@ -26,6 +26,7 @@ async def tumblr_error_restricted_tag(request, exception):
         status=403
     )
 
+
 async def tumblr_error_unknown_blog(request, exception):
     return await sanic_ext.render(
         "misc/generic_error.jinja",
@@ -80,4 +81,16 @@ async def error_404(request, exception):
             "error_description": f"The requested URL \"{request.path}\" was not found",
         },
     status=404
+    )
+
+
+async def invalid_redirect(request, exception):
+    return await sanic_ext.render(
+        "misc/generic_error.jinja",
+        context={
+            "app": request.app,
+            "exception": exception,
+            "error_heading": "Error: Internal Tumblr link is redirecting to foreign URL",
+        },
+    status=502
     )
