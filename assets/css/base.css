@@ -231,9 +231,10 @@ li.control-bar-action:hover {
 }
 
 .control-bar-dropdown-menu {
+    opacity: 0;
     visibility: hidden;
     position: absolute;
-    top: 40px;
+    top: 50px;
     padding: 0;
     list-style: None;
     background: #EEEEEF;
@@ -259,8 +260,24 @@ li.control-bar-action:hover {
     background: #dcdcdc;
 }
 
-li.control-bar-action:hover .control-bar-dropdown-menu {
+.active-dropdown-menu {
+    background: #dcdcdc;
+}
+
+.active-dropdown-menu .control-bar-dropdown-menu{
+    opacity: 1;
     visibility: visible;
+    transition: all 150ms ease-in-out;
+}
+
+li.no-js:hover .control-bar-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transition: all 150ms ease-in-out;
+}
+
+li.no-js .control-bar-dropdown-menu {
+    top: 40px;
 }
 
 
