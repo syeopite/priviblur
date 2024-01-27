@@ -1,22 +1,12 @@
-{% extends "base.jinja" %}
+{% extends "timeline.jinja" %}
 {% from 'components/icons/expand.jinja' import dropdown_icon  %}
 {% from 'macros/add_query.jinja' import add_query  %}
 {% block title %}{{tag | e}} - Priviblur{% endblock %}
-{% block content %}
-    <ul id="timeline-control-bar">
-        <li class="control-bar-action" id="sort-by-filter" title="{{translate("en", "timeline_tagged_sort_by_filter_title")}}">{{translate("en", "timeline_tagged_sort_by_filter_" + sort_by)}}{{dropdown_icon(16,16, "#6b7280")}}
-            <ul class="control-bar-dropdown-menu">
-                <li {% if sort_by == "top"%} class="selected" {% endif %}><a href="/tagged/{{tag | encodepathsegment}}{{ add_query(query_args | update_query_params("sort", "top")) }}">{{translate("en", "timeline_tagged_sort_by_filter_top")}}</a></li>
-                <li {% if sort_by == "recent"%} class="selected" {% endif %}><a href="/tagged/{{tag | encodepathsegment}}{{ add_query(query_args | update_query_params("sort", "recent")) }}">{{translate("en", "timeline_tagged_sort_by_filter_recent")}}</a></li>
-            </ul>
-        </li>
-    </ul>
-
-    {% include 'components/timeline.jinja' %}
-
-    {%- if timeline.next %}
-        <div class="paging">
-            <a class="next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate("en", "pagination_next_page")}}</a>
-        </div>
-    {% endif %}
+{% block control_bar %}
+    <li class="control-bar-action" id="sort-by-filter" title="{{translate("en", "timeline_tagged_sort_by_filter_title")}}">{{translate("en", "timeline_tagged_sort_by_filter_" + sort_by)}}{{dropdown_icon(16,16, "#6b7280")}}
+        <ul class="control-bar-dropdown-menu">
+            <li {% if sort_by == "top"%} class="selected" {% endif %}><a href="/tagged/{{tag | encodepathsegment}}{{ add_query(query_args | update_query_params("sort", "top")) }}">{{translate("en", "timeline_tagged_sort_by_filter_top")}}</a></li>
+            <li {% if sort_by == "recent"%} class="selected" {% endif %}><a href="/tagged/{{tag | encodepathsegment}}{{ add_query(query_args | update_query_params("sort", "recent")) }}">{{translate("en", "timeline_tagged_sort_by_filter_recent")}}</a></li>
+        </ul>
+    </li>
 {% endblock %}

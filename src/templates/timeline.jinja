@@ -1,0 +1,24 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+    <ul id="timeline-control-bar">
+        {% block control_bar %}
+        {% endblock %}
+    </ul>
+
+    <div class="timeline" id="m">
+        {%- for element in timeline.elements -%}
+            {%- if not element.is_advertisement -%}
+                {%- include 'components/post.jinja' -%}
+            {%- endif -%}
+        {%- endfor -%}
+    </div>
+
+    {%- if timeline.next %}
+        <div class="paging">
+            {%- block paging -%}
+                <a class="next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate("en", "pagination_next_page")}}</a>
+            {%- endblock -%}
+        </div>
+    {% endif %}
+{% endblock %}

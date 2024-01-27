@@ -30,6 +30,7 @@ a, a:visited, a:hover, a:active {
 .container {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
 .contents {
@@ -49,7 +50,6 @@ a, a:visited, a:hover, a:active {
     justify-items: center;
     background: white;
     padding: 20px 25px 0;
-    margin-bottom: 10px;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -204,6 +204,7 @@ a.logo {
     display: flex;
     gap: 15px;
     padding: 0;
+    margin: 0 0 15px 0;
 }
 
 .control-bar-action {

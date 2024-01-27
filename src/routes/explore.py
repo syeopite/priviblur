@@ -28,9 +28,10 @@ async def _handle_explore(request, endpoint, post_type = None):
     timeline = priviblur_extractor.parse_timeline(initial_results)
 
     return await sanic_ext.render(
-        "explore.jinja",
+        "timeline.jinja",
         context={
             "app": app,
+            "title": "Trending Topics - Priviblur",
             "timeline": timeline,
         }
     )
