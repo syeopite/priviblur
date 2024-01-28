@@ -57,9 +57,3 @@ async def _tb_assets(request: sanic.Request, path: str):
 async def _tb_static(request: sanic.Request, path: str):
     """Proxies the requested media from static.tumblr.com"""
     return await get_media(request, request.app.ctx.TumblrStaticClient, path)
-
-
-@media.on_response
-async def post_response(request, response):
-    if response.status == 200:
-        request.app.ctx.PoolTimeoutTracker.increment(request.endpoint)

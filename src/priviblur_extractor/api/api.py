@@ -30,7 +30,7 @@ class TumblrAPI:
     }
 
     @classmethod
-    async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads,  post_success_function = lambda: True):
+    async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads):
         """Creates a Tumblr API instance with the given client. Automatically creates a client obj if not given."""
         if not client:
             client = httpx.AsyncClient(
@@ -40,13 +40,12 @@ class TumblrAPI:
                 timeout=main_request_timeout  # TODO allow fine-tuning the different types of timeouts
             )
 
-        return cls(client, json_loads, post_success_function)
+        return cls(client, json_loads)
 
-    def __init__(self, client: httpx.AsyncClient, json_loads=json.loads, post_success_function = lambda: True):
+    def __init__(self, client: httpx.AsyncClient, json_loads=json.loads):
         """Initializes a TumblrAPI instance with the given client"""
         self.client = client
         self.json_loader = json_loads
-        self.post_success_function = post_success_function
 
     async def _get_json(self, endpoint, url_params=""):
         """Internal method that does the actual request to Tumblr"""
@@ -109,8 +108,6 @@ class TumblrAPI:
 
             raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
 
-        self.post_success_function()
-
         return result
 
     async def explore(self):
@@ -155,6 +152,7 @@ class TumblrAPI:
         url_parameters["fields[blogs]"] = fields
 
         return await self._get_json("explore/trending", url_parameters)
+
     
     async def explore_today(self, *, continuation: Optional[str] = None, fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS):
         """Requests the /explore/home/today endpoint
@@ -173,7 +171,8 @@ class TumblrAPI:
             url_parameters["cursor"] = continuation
 
         return await self._get_json("explore/home/today", url_parameters)
-
+    
+    
     async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
                            reblog_info: bool = True,
                            fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):
