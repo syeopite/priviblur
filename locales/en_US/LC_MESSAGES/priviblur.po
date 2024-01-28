@@ -128,3 +128,6 @@ msgstr "Error: Unable to fetch HTTP client in time"
 
 msgid "priviblur_error_pool_timeout_error_description"
 msgstr "Priviblur was unable to fetch a HTTP client to request Tumblr in time. Please try again later"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "Error: Tumblr HTTP 301 redirect points to foreign URL"

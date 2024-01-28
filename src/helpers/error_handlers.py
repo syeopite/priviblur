@@ -90,7 +90,7 @@ async def invalid_redirect(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": "Error: Internal Tumblr link is redirecting to foreign URL",
+            "error_heading": request.app.ctx.translate("en", "priviblur_error_invalid_internal_tumblr_redirect"),
         },
     status=502
     )
