@@ -60,6 +60,15 @@ async def _va_media(request: sanic.Request, path: str):
     return await get_media(request, request.app.ctx.MediaVaClient, path, additional_headers=additional_headers)
 
 
+@media.get(r"/a/<path:path>")
+async def _a_media(request: sanic.Request, path: str):
+    """Proxies the requested media from va.media.tumblr.com"""
+    additional_headers={
+        "accept": "audio/webm,audio/ogg,audio/wav,audio/*;q=0.9,application/ogg;q=0.7,video/*;q=0.6,*/*;q=0.5"
+    }
+    return await get_media(request, request.app.ctx.AudioClient, path, additional_headers=additional_headers)
+
+
 @media.get(r"/assets/<path:path>")
 async def _tb_assets(request: sanic.Request, path: str):
     """Proxies the requested media from assets.tumblr.com"""

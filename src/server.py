@@ -109,6 +109,10 @@ async def initialize(app):
         "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
+    app.ctx.AudioClient = create_image_client(
+        "https://a.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
     app.ctx.TumblrAssetClient = create_image_client(
         "https://assets.tumblr.com", priviblur_backend.image_response_timeout
     )

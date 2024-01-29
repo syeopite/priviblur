@@ -36,6 +36,8 @@ def url_handler(raw_url):
             return f"/tblr/static{url.path}"
         elif hostname.startswith("va.media"):
             return f"/tblr/media/va{url.path}"
+        elif hostname.startswith("a."):
+            return f"/tblr/a{url.path}"
         else:
             # Check for subdomain blog
             sub_domains = hostname.split(".")
