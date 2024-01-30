@@ -107,3 +107,14 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
 
         return await render_blog_post(request.app, blog_info, post)
 
+
+# Redirects for /post/...
+
+@blogs.get("/post/<post_id:int>")
+async def redirect_slash_post_no_slug(request: sanic.Request, blog: str, post_id: str):
+    return sanic.redirect(request.app.url_for("blogs._blog_post_no_slug", blog=blog, post_id=post_id))
+
+
+@blogs.get("/post/<post_id:int>/<slug:str>")
+async def redirect_slash_post(request: sanic.Request, blog: str, post_id: str, slug: str):
+    return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=slug))
