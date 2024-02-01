@@ -16,7 +16,7 @@
 
     {%- if timeline.next %}
         <div class="paging">
-            <a class="next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}">{{translate("en", "pagination_next_page")}}</a>
+            <a class="next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate("en", "pagination_next_page")}}</a>
         </div>
     {% endif %}
 {% endblock %}

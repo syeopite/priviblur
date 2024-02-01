@@ -17,7 +17,7 @@
 
     {%- if blog.next %}
         <div class="paging">
-            <a class="next-page button" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}">
+            <a class="next-page button" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}#m">
                 {{translate("en", "pagination_next_page")}}
             </a>
         </div>
