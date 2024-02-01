@@ -99,4 +99,11 @@ def translate(language, id, number=None, substitution=None):
         translated = translated.format(substitution)
 
     return translated 
-    
+
+
+async def create_poll_callback(tumblr_api, blog, post_id):
+    async def poll_callable(poll_id):
+        initial_results = await tumblr_api.poll_results(blog, post_id, poll_id)
+        return initial_results["response"]
+
+    return poll_callable

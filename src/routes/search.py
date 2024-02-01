@@ -4,7 +4,6 @@ import urllib.parse
 import sanic
 import sanic_ext
 
-import npf_renderer
 from .. import priviblur_extractor
 
 search = sanic.Blueprint("search", url_prefix="/search")
