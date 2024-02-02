@@ -1,12 +1,13 @@
 import sys
 import os
+import asyncio
 import logging
 import urllib.parse
 import functools
 import gettext
 import copy
 
-import httpx
+import aiohttp
 import orjson
 import sanic_ext
 import sanic.response
@@ -18,9 +19,8 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
 from .config import load_config
-from .helpers import setup_logging, helpers, error_handlers, exceptions, pool_timeout_tracker
+from .helpers import setup_logging, helpers, error_handlers, exceptions
 from .version import VERSION, CURRENT_COMMIT
-from .jobs import refresh_pool
 
 
 # Load configuration file 
@@ -58,18 +58,12 @@ app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", 
 app.ctx.PRIVIBLUR_CONFIG = config
 app.ctx.translate = helpers.translate
 
-app.ctx.PoolTimeoutTracker = pool_timeout_tracker.PoolTimeoutTracker()
-
-tasks = []
-
 @app.listener("before_server_start")
 async def initialize(app):
     priviblur_backend = app.ctx.PRIVIBLUR_CONFIG.backend
 
     app.ctx.TumblrAPI = await priviblur_extractor.TumblrAPI.create(
-        main_request_timeout=priviblur_backend.main_response_timeout,
-        json_loads=orjson.loads,
-        post_success_function=functools.partial(app.ctx.PoolTimeoutTracker.increment, "main")
+        main_request_timeout=priviblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
     media_request_headers = {
@@ -83,30 +77,38 @@ async def initialize(app):
 
     # TODO set pool size for image requests
 
-    def create_image_client(url):
-        return httpx.AsyncClient(
-            base_url=url,
-            headers=media_request_headers,
-            http2=True,
-            timeout=priviblur_backend.image_response_timeout
-        )
+    def create_image_client(url, timeout):
+        timeout = aiohttp.ClientTimeout(timeout)
+        return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
 
-    app.ctx.Media64Client = create_image_client("https://64.media.tumblr.com")
-    app.ctx.Media49Client = create_image_client("https://49.media.tumblr.com")
-    app.ctx.Media44Client = create_image_client("https://44.media.tumblr.com")
-    app.ctx.TumblrAssetClient = create_image_client("https://assets.tumblr.com")
-    app.ctx.TumblrStaticClient = create_image_client("https://static.tumblr.com")
+    app.ctx.Media64Client = create_image_client(
+        "https://64.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
 
-    tasks.append(app.add_task(refresh_pool.refresh_pool_task(app, create_image_client)))
+    app.ctx.Media49Client = create_image_client(
+        "https://49.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
 
-    app.ctx.TumblrAtClient = httpx.AsyncClient(
-        base_url="https://at.tumblr.com",
+    app.ctx.Media44Client = create_image_client(
+        "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
+    app.ctx.TumblrAssetClient = create_image_client(
+        "https://assets.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
+    app.ctx.TumblrStaticClient = create_image_client(
+        "https://static.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
+    app.ctx.TumblrAtClient = aiohttp.ClientSession(
+        "https://at.tumblr.com",
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
-        http2=True,
-        timeout=priviblur_backend.main_response_timeout
+        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout)
     )
 
     # Add additional jinja filters and functions
+
 
     app.ext.environment.filters["encodepathsegment"] = functools.partial(urllib.parse.quote, safe="")
 
@@ -164,17 +166,6 @@ async def before_all_routes(request, response):
     )
 
 
-@app.listener("after_server_stop")
-async def shutdown(app):
-    # Stop all background tasks
-    for task in tasks:
-        task.cancel()
-        await task
-
-@app.listener("reload_process_stop")
-async def reload_shutdown(app):
-    return await shutdown(app)
-
 # TODO Extract
 
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
@@ -182,11 +173,10 @@ app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedT
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
 
 for request_timeouts in {
-    httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout
+    asyncio.TimeoutError
 }:
     app.error_handler.add(request_timeouts, error_handlers.request_timeout)
 
-app.error_handler.add(httpx.PoolTimeout, error_handlers.pool_timeout_error)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 app.error_handler.add(exceptions.TumblrInvalidRedirect, error_handlers.invalid_redirect)
 

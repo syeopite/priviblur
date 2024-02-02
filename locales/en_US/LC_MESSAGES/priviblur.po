@@ -109,7 +109,7 @@ msgid "tumblr_error_restricted_tag_error_heading"
 msgstr "This tag has been restricted on Tumblr"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr "Try doing a searching instead?"
+msgstr "Try performing a search instead"
 
 msgid "tumblr_error_blog_not_found_error_heading"
 msgstr "Unable to find the requested blog"
@@ -122,12 +122,6 @@ msgstr "Error: Request to Tumblr timed out"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
 msgstr "Priviblur was unable to complete the request to Tumblr before timing out"
-
-msgid "priviblur_error_pool_timeout_error_heading"
-msgstr "Error: Unable to fetch HTTP client in time"
-
-msgid "priviblur_error_pool_timeout_error_description"
-msgstr "Priviblur was unable to fetch a HTTP client to request Tumblr in time. Please try again later"
 
 msgid "priviblur_error_invalid_internal_tumblr_redirect"
 msgstr "Error: Tumblr HTTP 301 redirect points to foreign URL"
