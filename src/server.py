@@ -42,6 +42,18 @@ if config.deployment.real_ip_header and not app.config.REAL_IP_HEADER:
 if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
     app.config.PROXIES_COUNT = config.deployment.proxies_count
 
+# Initialize locales
+try:
+    gettext_instances = {"en": gettext.translation("priviblur", localedir="locales", languages=["en"])}
+except FileNotFoundError as e:
+    print(
+        'Error: Unable to find locale files. '
+        'Did you forget to compile them?'
+    )
+    sys.exit()
+
+app.ctx.GETTEXT_INSTANCES = gettext_instances
+
 # Constants
 
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
@@ -127,10 +139,6 @@ async def initialize(app):
         url_handler=helpers.url_handler,
         skip_cropped_images=True
     )
-
-    # Initialize locales
-    gettext_instances = {"en": gettext.translation("priviblur", localedir="locales", languages=["en"])}
-    app.ctx.GETTEXT_INSTANCES = gettext_instances
 
 
 @app.listener("main_process_start")
