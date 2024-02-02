@@ -109,7 +109,7 @@ msgid "tumblr_error_restricted_tag_error_heading"
 msgstr "This tag has been restricted on Tumblr"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr "Try doing a searching instead?"
+msgstr "Try performing a search instead"
 
 msgid "tumblr_error_blog_not_found_error_heading"
 msgstr "Unable to find the requested blog"
