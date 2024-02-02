@@ -127,7 +127,7 @@ a.blog-name:hover {
   margin: unset;
 }
 
-.post-body a {
+a.inline-link {
   color: unset;
   text-decoration: underline;
 }
