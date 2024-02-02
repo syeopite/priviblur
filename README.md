@@ -31,6 +31,8 @@ Priviblur has no official instance
 git clone "https://github.com/syeopite/priviblur"
 cd priviblur 
 
+git checkout "v0.1.0"
+
 python -m venv venv 
 source venv/bin/activate
 
