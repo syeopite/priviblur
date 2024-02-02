@@ -53,19 +53,6 @@ async def request_timeout(request, exception):
     )
 
 
-async def pool_timeout_error(request, exception):
-    return await sanic_ext.render(
-        "misc/generic_error.jinja",
-        context={
-            "app": request.app,
-            "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "priviblur_error_pool_timeout_error_heading"),
-            "error_description": request.app.ctx.translate("en", "priviblur_error_pool_timeout_error_description")
-        },
-        status=504
-    )
-
-
 async def error_404(request, exception):
     return await sanic_ext.render(
         "misc/generic_error.jinja",
