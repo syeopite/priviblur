@@ -7,7 +7,7 @@ import json
 import urllib.parse
 from typing import Optional
 
-import httpx
+import aiohttp
 
 from . import request_config as rconf
 from .. import helpers
@@ -33,16 +33,17 @@ class TumblrAPI:
     async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads):
         """Creates a Tumblr API instance with the given client. Automatically creates a client obj if not given."""
         if not client:
-            client = httpx.AsyncClient(
-                base_url="https://www.tumblr.com",
+            main_request_timeout = aiohttp.ClientTimeout(main_request_timeout)
+
+            client = aiohttp.ClientSession(
+                "https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
-                http2=True,
                 timeout=main_request_timeout  # TODO allow fine-tuning the different types of timeouts
             )
 
         return cls(client, json_loads)
 
-    def __init__(self, client: httpx.AsyncClient, json_loads=json.loads):
+    def __init__(self, client: aiohttp.ClientSession, json_loads=json.loads):
         """Initializes a TumblrAPI instance with the given client"""
         self.client = client
         self.json_loader = json_loads
@@ -67,10 +68,10 @@ class TumblrAPI:
 
         response = await self.client.get(f"/api/v2/{url}")
 
-        logger.debug(f"Requested endpoint: /api/v2/{url} via '#{response.http_version}'")
+        logger.debug(f"Requested endpoint: /api/v2/{url}")
 
         try:
-            result = self.json_loader(response.text)
+            result = await response.json(loads=self.json_loader)
         except Exception as e:
             logger.error("Failed to parse JSON response from Tumblr!")
             logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
@@ -78,7 +79,7 @@ class TumblrAPI:
             raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
 
         # Invalid response handling
-        if response.status_code != 200:
+        if response.status != 200:
             message = result["meta"]["msg"]
             code = result["meta"]["status"]
 
@@ -153,7 +154,6 @@ class TumblrAPI:
 
         return await self._get_json("explore/trending", url_parameters)
 
-    
     async def explore_today(self, *, continuation: Optional[str] = None, fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS):
         """Requests the /explore/home/today endpoint
 
@@ -171,8 +171,7 @@ class TumblrAPI:
             url_parameters["cursor"] = continuation
 
         return await self._get_json("explore/home/today", url_parameters)
-    
-    
+
     async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
                            reblog_info: bool = True,
                            fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):

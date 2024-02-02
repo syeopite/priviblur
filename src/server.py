@@ -1,12 +1,13 @@
 import sys
 import os
+import asyncio
 import logging
 import urllib.parse
 import functools
 import gettext
 import copy
 
-import httpx
+import aiohttp
 import orjson
 import sanic_ext
 import sanic.response
@@ -77,9 +78,8 @@ async def initialize(app):
     # TODO set pool size for image requests
 
     def create_image_client(url, timeout):
-        media_headers = copy.copy(media_request_headers)
-        media_headers["host"] = url
-        return httpx.AsyncClient(base_url=url, headers=media_request_headers, http2=True, timeout=timeout)
+        timeout = aiohttp.ClientTimeout(timeout)
+        return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
 
     app.ctx.Media64Client = create_image_client(
         "https://64.media.tumblr.com", priviblur_backend.image_response_timeout
@@ -101,11 +101,10 @@ async def initialize(app):
         "https://static.tumblr.com", priviblur_backend.image_response_timeout
     )
 
-    app.ctx.TumblrAtClient = httpx.AsyncClient(
-        base_url="https://at.tumblr.com",
+    app.ctx.TumblrAtClient = aiohttp.ClientSession(
+        "https://at.tumblr.com",
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
-        http2=True,
-        timeout=priviblur_backend.main_response_timeout
+        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout)
     )
 
     # Add additional jinja filters and functions
@@ -174,11 +173,10 @@ app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedT
 app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
 
 for request_timeouts in {
-    httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout
+    asyncio.TimeoutError
 }:
     app.error_handler.add(request_timeouts, error_handlers.request_timeout)
 
-app.error_handler.add(httpx.PoolTimeout, error_handlers.pool_timeout_error)
 app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
 app.error_handler.add(exceptions.TumblrInvalidRedirect, error_handlers.invalid_redirect)
 
