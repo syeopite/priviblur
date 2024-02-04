@@ -1,7 +1,24 @@
 {% from 'macros/post_header.jinja' import create_post_header  %}
-<div class="post">
+<div class="post" data-post-id="{{element.id}}">
     {%- if element.content -%}
-        {% set contains_errors, content_tag = format_npf(element.content, element.layout, poll_callback=create_poll_callback(request.app.ctx.TumblrAPI, element.blog.name, element.id)) -%}
+        {%- if request_poll_data -%}
+            {%- set contains_errors, content_tag = format_npf(
+                        element.content,
+                        element.layout,
+                        poll_callback=create_poll_callback(
+                            request.app.ctx.TumblrAPI, element.blog.name, element.id
+                        ),
+                    )
+            -%}
+        {%- else -%}
+            {%- set contains_errors, content_tag = format_npf(
+                        element.content,
+                        element.layout,
+                        element.blog.name,
+                        element.id,
+                    )
+            -%}
+        {% endif %}
     {%- endif -%}
 
     {{ create_post_header(element) }}
@@ -14,7 +31,25 @@
         {%- for trail_element in element.trail -%}
             <div class="trail-post">
                 {{create_post_header(trail_element)}}
-                {% set trail_contains_errors, trail_content_tag = format_npf(trail_element.content, trail_element.layout, poll_callback=create_poll_callback(request.app.ctx.TumblrAPI, element.blog.name, element.id)) -%}
+                {%- if request_poll_data -%}
+                    {%- set trail_contains_errors, trail_content_tag = format_npf(
+                                trail_element.content,
+                                trail_element.layout,
+                                poll_callback=create_poll_callback(
+                                    request.app.ctx.TumblrAPI, trail_element.blog.name, trail_element.id
+                                ),
+                            )
+                    -%}
+
+                {%- else -%}
+                    {%- set trail_contains_errors, trail_content_tag = format_npf(
+                                trail_element.content,
+                                trail_element.layout,
+                                trail_element.blog.name,
+                                trail_element.id,
+                            )
+                    -%}
+                {% endif %}
                 {{- trail_content_tag -}}
             </div>
         {%- endfor -%}

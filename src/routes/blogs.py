@@ -9,13 +9,14 @@ from .. import priviblur_extractor
 blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>")
 
 
-async def render_blog_post(app, blog, post):
+async def render_blog_post(app, blog, post, request_poll_data = False):
         return await sanic_ext.render(
             "blog_post.jinja",
             context={
                 "app": app,
                 "blog": blog,
                 "element": post,
+                "request_poll_data" : request_poll_data
             }
         )
 
@@ -75,13 +76,18 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
     post = timeline.elements[0]
 
     if post.slug:
-        return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug))
+        return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug, **request.args))
     else:
         # Fetch blog info and some posts from before this post
         initial_blog_results = await request.app.ctx.TumblrAPI.blog_posts(blog, before_id=post.id)
         blog_info = priviblur_extractor.parse_container(initial_blog_results)
 
-        return await render_blog_post(request.app, blog_info, post)
+        if request.args.get("fetch_polls") in {1, "true"}:
+            fetch_poll_results = True
+        else:
+            fetch_poll_results = False
+
+        return await render_blog_post(request.app, blog_info, post, fetch_poll_results)
 
 
 @blogs.get("/<post_id:int>/<slug:str>")
@@ -97,15 +103,20 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
     if post.slug != slug:
         # Unless of course the slug is empty. In that case we'll remove the slug. 
         if post.slug:
-            return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug))
+            return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug, **request.args))
         else:
-            return sanic.redirect(request.app.url_for("blogs._blog_post_no_slug", blog=blog, post_id=post_id))
+            return sanic.redirect(request.app.url_for("blogs._blog_post_no_slug", blog=blog, post_id=post_id, **request.args))
     else:
         # Fetch blog info and some posts from before this post
         initial_blog_results = await request.app.ctx.TumblrAPI.blog_posts(blog, before_id=post.id)
         blog_info = priviblur_extractor.parse_container(initial_blog_results)
 
-        return await render_blog_post(request.app, blog_info, post)
+        if request.args.get("fetch_polls") in ("1", "true"):
+            fetch_poll_results = True
+        else:
+            fetch_poll_results = False
+
+        return await render_blog_post(request.app, blog_info, post, fetch_poll_results)
 
 
 # Redirects for /post/...

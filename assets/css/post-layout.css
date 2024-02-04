@@ -85,3 +85,8 @@ a.inline-link, a.inline-mention {
   text-transform: uppercase;
   font-size: 12px;
 }
+
+a.toggle-poll-results {
+  color: unset;
+  text-decoration: underline;
+}

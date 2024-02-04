@@ -101,7 +101,51 @@ class NPFParser(npf_renderer.parse.Parser):
         return self.parsed_result
 
 
-async def format_npf(contents, layouts=None, *, poll_callback=None):
+class NPFFormatter(npf_renderer.format.Formatter):
+    def __init__(self, content, layout=None, blog_name=None, post_id=None, *, url_handler=None, forbid_external_iframes=False):
+        super().__init__(content, layout, url_handler=url_handler, forbid_external_iframes=forbid_external_iframes)
+
+        # We store the blog and post ID as to be able to render a link to
+        # fetch poll results for JS disabled users
+        self.blog_name = blog_name
+        self.post_id = post_id
+
+    def _format_poll(self, block):
+        poll_html = super()._format_poll(block)
+        poll_html["data-poll-id"] = block.poll_id
+
+        poll_body = poll_html[1]
+        for index, answer_id in enumerate(block.answers.keys()):
+            poll_body[index]["id"] = answer_id
+
+        if (self.blog_name and self.post_id) and not block.votes:
+            poll_footer = poll_html[2]
+            poll_footer.add(
+                dominate.tags.noscript(
+                    dominate.tags.a(
+                        "See Results",
+                        href=f"/{self.blog_name}/{self.post_id}?fetch_polls=true",
+                        cls="toggle-poll-results"
+                    )
+                )
+            )
+
+        return poll_html
+
+
+async def format_npf(contents, layouts=None, blog_name=None, post_id=None,*, poll_callback=None):
+    """Wrapper around npf_renderer.format_npf for extra functionalities
+
+    - Replaces internal Parser and Formatter with the modified variants above
+    - Accepts extra arguments to add additional details to formatted results
+    - Automatically sets Priviblur-specific rendering arguments
+
+    Arguments (new):
+        blog_name:
+            Name of the blog the post comes from. This is used to render links to the parent post
+        post_id:
+            Unique ID of the post. This is used to render links to the parent post
+    """
     try:
         contents = await NPFParser(contents, poll_callback=poll_callback).parse()
         if layouts:
@@ -109,7 +153,11 @@ async def format_npf(contents, layouts=None, *, poll_callback=None):
 
         contains_render_errors = False
 
-        formatted = npf_renderer.format.Formatter(contents, layouts, url_handler=url_handler,
+        formatted = NPFFormatter(
+            contents, layouts,
+            blog_name=blog_name,
+            post_id=post_id,
+            url_handler=url_handler,
             forbid_external_iframes=True,
         ).format()
 
@@ -118,7 +166,6 @@ async def format_npf(contents, layouts=None, *, poll_callback=None):
         formatted = e.rendered_result
         assert formatted is not None
     except Exception as e:
-
         formatted = dominate.tags.div(cls="post-body has-error")
         contains_render_errors = True
 

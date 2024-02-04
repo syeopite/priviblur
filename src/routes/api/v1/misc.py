@@ -10,4 +10,4 @@ async def poll_results(request, blog : str, post_id : int, poll_id : int):
     poll_id = urllib.parse.unquote(poll_id)
 
     initial_results = await request.app.ctx.TumblrAPI.poll_results(blog, post_id, poll_id)
-    return sanic.response.json(initial_results)
+    return sanic.response.json(initial_results, headers={"Cache-Control": "max-age=600, immutable"})
