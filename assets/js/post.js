@@ -37,7 +37,13 @@ function fill_poll_results(poll_element, results) {
         const [answer_id, answer_votes] = sorted_poll_results[i];
         const choiceElement = answerIdToChoiceElement[answer_id]
 
-        const numericalVoteProportion = answer_votes/total_votes
+        let numericalVoteProportion
+
+        if (answer_votes == 0 || total_votes == 0) {
+            numericalVoteProportion = 0;
+        } else {
+            numericalVoteProportion = answer_votes/total_votes;
+        }
 
         const voteProportionElement = document.createElement("span");
         voteProportionElement.classList.add("vote-proportion");
@@ -47,7 +53,8 @@ function fill_poll_results(poll_element, results) {
         voteCountElement.classList.add("vote-count");
 
         // A greater rounding precision is needed here
-        if ((Math.round((numericalVoteProportion) * 10000)/10000) > 0.001) {
+        const comparison = Math.round((numericalVoteProportion) * 10000)/10000
+        if ((comparison > 0.001) || comparison == 0) {
             voteCountElement.innerHTML = new Intl.NumberFormat("en-US", {style: "percent", maximumSignificantDigits: 3}).format(Math.round((numericalVoteProportion) * 1000)/1000);
         } else {
             voteCountElement.innerHTML = "< 0.1%";
