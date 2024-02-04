@@ -76,8 +76,10 @@ function fill_poll_results(poll_element, results) {
         totalVotesElement.innerHTML = `${total_votes} votes`
     }
 
-    const poll_footer = poll_element.getElementsByTagName("footer")
-    poll_footer[0].insertBefore(totalVotesElement, poll_footer[0].firstChild)
+    const pollFooter = poll_element.getElementsByTagName("footer")
+    pollFooter[0].insertBefore(totalVotesElement, pollFooter[0].firstChild)
+
+    poll_element.classList.add("populated")
 }
 
 const pollBlocks = document.getElementsByClassName("poll-block");
