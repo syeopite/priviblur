@@ -25,9 +25,17 @@ function fill_poll_results(poll_element, results) {
         total_votes += votes[1];
     };
 
+    // Create mapping of answer-id to answer choice element
+    const answerIdToChoiceElement = {}
+    const pollBody = poll_element.getElementsByClassName("poll-body")[0]
+
+    for (let choiceElement of pollBody.children) {
+        answerIdToChoiceElement[choiceElement.dataset.answerId] = choiceElement
+    }
+
     for (let i = 0; i < sorted_poll_results.length; ++i) {
         const [answer_id, answer_votes] = sorted_poll_results[i];
-        const choiceElement = document.getElementById(answer_id);
+        const choiceElement = answerIdToChoiceElement[answer_id]
 
         const numericalVoteProportion = answer_votes/total_votes
 

@@ -116,7 +116,7 @@ class NPFFormatter(npf_renderer.format.Formatter):
 
         poll_body = poll_html[1]
         for index, answer_id in enumerate(block.answers.keys()):
-            poll_body[index]["id"] = answer_id
+            poll_body[index]["data-answer-id"] = answer_id
 
         if (self.blog_name and self.post_id) and not block.votes:
             poll_footer = poll_html[2]
