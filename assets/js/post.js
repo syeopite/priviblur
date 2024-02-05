@@ -39,7 +39,7 @@ function fill_poll_results(poll_element, results) {
     }
 
     for (let [answer_id, choiceElement] of answerIdChoiceElementArray) {
-        const answer_results = processed_poll_results[answer_id];
+        const answer_results = processed_poll_results[answer_id] || {"is_winner": false, "votes": 0};
         const is_winner = answer_results.is_winner;
         const answer_votes = answer_results.votes;
 
