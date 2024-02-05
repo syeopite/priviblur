@@ -36,7 +36,7 @@
                                 trail_element.content,
                                 trail_element.layout,
                                 poll_callback=create_poll_callback(
-                                    request.app.ctx.TumblrAPI, trail_element.blog.name, trail_element.id
+                                    request.app.ctx.TumblrAPI, element.blog.name, element.id
                                 ),
                             )
                     -%}
@@ -45,8 +45,8 @@
                     {%- set trail_contains_errors, trail_content_tag = format_npf(
                                 trail_element.content,
                                 trail_element.layout,
-                                trail_element.blog.name,
-                                trail_element.id,
+                                element.blog.name,
+                                element.id,
                             )
                     -%}
                 {% endif %}
