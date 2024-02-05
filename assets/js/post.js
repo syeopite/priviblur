@@ -19,23 +19,29 @@ function requestPollResults(poll_element, pollId) {
 function fill_poll_results(poll_element, results) {
     const sorted_poll_results = Object.entries(results.response.results).sort((a,b) => (a[1]-b[1])).reverse();
 
-    // Find total votes first
+    // First we must find the total number of votes and the winner(s) of the poll
     let total_votes = 0;
-    for (let votes of sorted_poll_results) {
-        total_votes += votes[1];
-    };
 
-    // Create mapping of answer-id to answer choice element
-    const answerIdToChoiceElement = {}
-    const pollBody = poll_element.getElementsByClassName("poll-body")[0]
+    // Answer ID to winner status and amount of votes
+    const processed_poll_results = {};
+    const winner_vote_count = sorted_poll_results[0][1];
+
+    for (let [answer_id, votes] of sorted_poll_results) {
+        processed_poll_results[answer_id] = {"is_winner": (winner_vote_count == votes), "votes": votes};
+        total_votes += votes
+    }
+    
+    const answerIdChoiceElementArray = [];
+    const pollBody = poll_element.getElementsByClassName("poll-body")[0];
 
     for (let choiceElement of pollBody.children) {
-        answerIdToChoiceElement[choiceElement.dataset.answerId] = choiceElement
+        answerIdChoiceElementArray.push([choiceElement.dataset.answerId, choiceElement]);
     }
 
-    for (let i = 0; i < sorted_poll_results.length; ++i) {
-        const [answer_id, answer_votes] = sorted_poll_results[i];
-        const choiceElement = answerIdToChoiceElement[answer_id]
+    for (let [answer_id, choiceElement] of answerIdChoiceElementArray) {
+        const answer_results = processed_poll_results[answer_id];
+        const is_winner = answer_results.is_winner;
+        const answer_votes = answer_results.votes;
 
         let numericalVoteProportion
 
@@ -60,7 +66,7 @@ function fill_poll_results(poll_element, results) {
             voteCountElement.innerHTML = "< 0.1%";
         }
 
-        if (i == 0) {
+        if (is_winner) {
             choiceElement.classList.add("poll-winner");
         }
 
