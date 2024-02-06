@@ -171,7 +171,7 @@ class TumblrAPI:
             url_parameters["cursor"] = continuation
 
         return await self._get_json("explore/home/today", url_parameters)
-
+    
     async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
                            reblog_info: bool = True,
                            fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):
@@ -312,4 +312,17 @@ class TumblrAPI:
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_name, safe='')}/posts/{post_id}/permalink",
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": True}
+        )
+
+    async def poll_results(self, blog_name, post_id, poll_id):
+        """Requests the /polls/<blog name>/<post id>/<poll_id>/results endpoint
+
+        Parameters:
+            blog_name: the blog the post is from
+            post_id: the id of the post
+            poll_id: the id of the poll
+        """
+
+        return await self._get_json(
+            f"polls/{urllib.parse.quote(blog_name, safe='')}/{post_id}/{poll_id}/results",
         )

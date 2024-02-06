@@ -4,8 +4,6 @@ import urllib.parse
 import sanic
 import sanic_ext
 
-import npf_renderer
-
 from .. import priviblur_extractor
 
 tagged = sanic.Blueprint("tagged", url_prefix="/tagged")

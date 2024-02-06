@@ -14,12 +14,12 @@ import sanic.response
 from sanic import Sanic
 import babel.numbers
 import babel.dates
-from npf_renderer import VERSION as NPF_RENDERER_VERSION, format_npf
+from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
 from .config import load_config
-from .helpers import setup_logging, helpers, error_handlers, exceptions
+from .helpers import setup_logging, helpers, error_handlers, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
 
 
@@ -105,6 +105,14 @@ async def initialize(app):
         "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
+    app.ctx.MediaVaClient = create_image_client(
+        "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
+    app.ctx.AudioClient = create_image_client(
+        "https://a.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
     app.ctx.TumblrAssetClient = create_image_client(
         "https://assets.tumblr.com", priviblur_backend.image_response_timeout
     )
@@ -134,11 +142,8 @@ async def initialize(app):
 
     app.ext.environment.globals["translate"] = helpers.translate
     app.ext.environment.globals["url_handler"] = helpers.url_handler
-    app.ext.environment.globals["format_npf"] = functools.partial(
-        format_npf,
-        url_handler=helpers.url_handler,
-        skip_cropped_images=True
-    )
+    app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
+    app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
 
 
 @app.listener("main_process_start")

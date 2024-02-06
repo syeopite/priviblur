@@ -34,6 +34,10 @@ def url_handler(raw_url):
             return f"/tblr/media/44{url.path}"
         elif hostname.endswith("static.tumblr.com"):
             return f"/tblr/static{url.path}"
+        elif hostname.startswith("va.media"):
+            return f"/tblr/media/va{url.path}"
+        elif hostname.startswith("a."):
+            return f"/tblr/a{url.path}"
         else:
             # Check for subdomain blog
             sub_domains = hostname.split(".")
@@ -95,4 +99,11 @@ def translate(language, id, number=None, substitution=None):
         translated = translated.format(substitution)
 
     return translated 
-    
+
+
+async def create_poll_callback(tumblr_api, blog, post_id):
+    async def poll_callable(poll_id):
+        initial_results = await tumblr_api.poll_results(blog, post_id, poll_id)
+        return initial_results["response"]
+
+    return poll_callable
