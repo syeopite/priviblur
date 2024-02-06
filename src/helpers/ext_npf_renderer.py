@@ -120,15 +120,15 @@ class NPFFormatter(npf_renderer.format.Formatter):
 
         if (self.blog_name and self.post_id) and not block.votes:
             poll_footer = poll_html[2]
-            poll_footer.add(
-                dominate.tags.noscript(
+            no_script_fallback = dominate.tags.noscript(
                     dominate.tags.a(
                         "See Results",
                         href=f"/{self.blog_name}/{self.post_id}?fetch_polls=true",
                         cls="toggle-poll-results"
                     )
                 )
-            )
+
+            poll_footer.children.insert(0, no_script_fallback)
 
         return poll_html
 

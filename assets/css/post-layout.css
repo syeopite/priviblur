@@ -90,3 +90,58 @@ a.toggle-poll-results {
   color: unset;
   text-decoration: underline;
 }
+
+.poll-block {
+  gap: 15px;
+  border: unset;
+
+  padding: 0 10px;
+  margin: 10px 0;
+}
+
+.poll-block > header > h3 {
+  font-weight: normal;
+  margin: 0;
+  font-size: 24px;
+}
+
+.poll-choice {
+  border: 0;
+  border-radius: 10px;
+  background: #edeeee;
+  padding: 8px 18px;
+  overflow: hidden;
+}
+
+.poll-choice > .answer {
+  font-weight: 550;
+}
+
+.vote-proportion {
+  background: #dcdcdc;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.poll-winner >.vote-proportion {
+  background: #BABABA;
+}
+
+.poll-block footer {
+  font-size: 15px;
+  margin-top: 0;
+  color: #6b7280;
+}
+
+.toggle-poll-results {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.toggle-poll-results:hover {
+  font-weight: 700;
+}
+
+.separator {
+  font-size: 12px;
+}

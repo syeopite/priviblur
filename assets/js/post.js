@@ -74,16 +74,21 @@ function fill_poll_results(poll_element, results) {
         choiceElement.appendChild(voteCountElement);
     }
 
-    const totalVotesElement = document.createElement("p")
+    const pollMetadataElement = poll_element.getElementsByClassName("poll-metadata")[0]
 
-    if (poll_element.classList.contains("expired")) {
-        totalVotesElement.innerHTML = `Final result from ${total_votes} votes`
-    } else {
-        totalVotesElement.innerHTML = `${total_votes} votes`
-    }
+    const totalVotesElement = document.createElement("span")
+    totalVotesElement.innerHTML = `${total_votes} votes`
 
-    const pollFooter = poll_element.getElementsByTagName("footer")
-    pollFooter[0].insertBefore(totalVotesElement, pollFooter[0].firstChild)
+    const separatorElement = document.createElement("span")
+    separatorElement.innerHTML = '•'
+    separatorElement.classList.add("separator")
+
+    const pollTimestamp = pollMetadataElement.children[0]
+
+    const newMetadataContents = document.createDocumentFragment()
+    newMetadataContents.append(totalVotesElement, separatorElement, pollTimestamp.cloneNode(true))
+
+    pollTimestamp.replaceWith(newMetadataContents)
 
     poll_element.classList.add("populated")
 }
