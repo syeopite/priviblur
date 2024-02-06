@@ -86,11 +86,6 @@ a.inline-link, a.inline-mention {
   font-size: 12px;
 }
 
-a.toggle-poll-results {
-  color: unset;
-  text-decoration: underline;
-}
-
 .poll-block {
   gap: 15px;
   border: unset;
@@ -132,6 +127,11 @@ a.toggle-poll-results {
   color: #6b7280;
 }
 
+a.toggle-poll-results {
+  color: unset;
+  text-decoration: underline;
+}
+
 .toggle-poll-results {
   display: block;
   margin-top: 10px;
@@ -144,4 +144,14 @@ a.toggle-poll-results {
 
 .separator {
   font-size: 12px;
+}
+
+
+@media (max-width: 590px) {
+  .poll-metadata {
+    flex-direction: column;
+  }
+  .poll-metadata .separator {
+    display: none;
+  }
 }
