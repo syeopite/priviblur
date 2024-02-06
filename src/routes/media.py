@@ -50,6 +50,12 @@ async def _44_media(request: sanic.Request, path: str):
     return await get_media(request, request.app.ctx.Media44Client, path)
 
 
+@media.get(r"/media/ve/<path:path>")
+async def _ve_media(request: sanic.Request, path: str):
+    """Proxies the requested media from ve.media.tumblr.com"""
+    return await get_media(request, request.app.ctx.MediaVeClient, path)
+
+
 @media.get(r"/media/va/<path:path>")
 async def _va_media(request: sanic.Request, path: str):
     """Proxies the requested media from va.media.tumblr.com"""

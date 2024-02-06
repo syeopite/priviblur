@@ -105,6 +105,10 @@ async def initialize(app):
         "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
+    app.ctx.MediaVeClient = create_image_client(
+        "https://ve.media.tumblr.com", priviblur_backend.image_response_timeout
+    )
+
     app.ctx.MediaVaClient = create_image_client(
         "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
     )
