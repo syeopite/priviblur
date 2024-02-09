@@ -25,7 +25,7 @@ async def _handle_explore(request, endpoint, post_type = None):
         case _:
             initial_results = await request.app.ctx.TumblrAPI.explore_post(post_type=post_type, continuation=continuation)        
 
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_timeline(initial_results)
 
     return await sanic_ext.render(
         "explore.jinja",

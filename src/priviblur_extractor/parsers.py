@@ -155,6 +155,7 @@ class _TimelineBrokenBlogParser:
             avatar=target["avatar"],
         )
 
+
 class _TimelinePostParser:
     @staticmethod
     def process(initial_data):
@@ -294,7 +295,7 @@ def get_placeholder_content():
     )
 
 
-ELEMENT_PARSERS = (_TimelineBlogParser, _TimelinePostParser)
+ELEMENT_PARSERS = (_TimelinePostParser, _TimelineBlogParser)
 CONTAINER_PARSERS = (_TimelineParser, _BlogParser)
 
 
@@ -313,19 +314,11 @@ def parse_item(element, element_index=0, total_elements=1):
     return None
 
 
-# TODO refactor into parse_timeline and parse_blog_timeline
-def parse_container(initial_data):
-    """Parses a container of items from Tumblr API's JSON response into a more usable structure"""
+def parse_timeline(initial_data):
     initial_data = initial_data["response"]
-    logger.debug(f"parse_container: Parsing container...")
+    return _TimelineParser.process(initial_data)
 
-    for parser_index, parser in enumerate(CONTAINER_PARSERS):
-        logger.debug(f"parse_container: Attempting to match container with `{parser.__name__}` "
-                     f"({parser_index+1}/{len(CONTAINER_PARSERS)})...")
 
-        if container := parser.process(initial_data):
-            logger.debug(f"parse_container: A {type(container).__name__} container has been parsed!")
-
-            return container
-
-    return None
+def parse_blog_timeline(initial_data):
+    initial_data = initial_data["response"]
+    return _BlogParser.process(initial_data)

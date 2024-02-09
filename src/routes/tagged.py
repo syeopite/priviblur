@@ -24,7 +24,7 @@ async def _main(request: sanic.Request, tag: str):
 
     initial_results = await request.app.ctx.TumblrAPI.hubs_timeline(tag, continuation=continuation, latest=latest)
 
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_timeline(initial_results)
 
     # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't 
     # added when applying a search filter

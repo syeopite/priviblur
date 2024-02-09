@@ -29,7 +29,7 @@ async def _main(request: sanic.Request, query: str):
 
     initial_results = await _query_search(request, query, days=time_filter)
 
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_timeline(initial_results)
 
     return await _render(request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None)
 
@@ -44,7 +44,7 @@ async def _sort_by_search(request: sanic.Request, query: str):
         time_filter = 0
 
     initial_results = await _query_search(request, query, days=time_filter, latest=True)
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_timeline(initial_results)
 
     return await _render(request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None)
 
@@ -85,7 +85,7 @@ async def _request_search_filter_post(request, query, post_filter, latest):
 
     post_filter = post_filter.name.lower()
 
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_timeline(initial_results)
     sort_by = "recent" if latest else "popular"
 
     return await _render(request, timeline, query, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by)

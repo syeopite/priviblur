@@ -31,7 +31,7 @@ async def _blog_posts(request: sanic.Request, blog: str):
         continuation = urllib.parse.unquote(before_id)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation, before_id)
-    blog = priviblur_extractor.parse_container(initial_results)
+    blog = priviblur_extractor.parse_blog_timeline(initial_results)
 
     return await sanic_ext.render(
         "blog.jinja",
@@ -53,7 +53,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
         continuation = urllib.parse.unquote(continuation)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation, tag=tag)
-    blog = priviblur_extractor.parse_container(initial_results)
+    blog = priviblur_extractor.parse_blog_timeline(initial_results)
 
     return await sanic_ext.render(
         "blog.jinja",
@@ -72,7 +72,7 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
     blog = urllib.parse.unquote(blog)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_blog_timeline(initial_results)
     post = timeline.elements[0]
 
     if post.slug:
@@ -80,7 +80,7 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
     else:
         # Fetch blog info and some posts from before this post
         initial_blog_results = await request.app.ctx.TumblrAPI.blog_posts(blog, before_id=post.id)
-        blog_info = priviblur_extractor.parse_container(initial_blog_results)
+        blog_info = priviblur_extractor.parse_blog_timeline(initial_blog_results)
 
         if request.args.get("fetch_polls") in {1, "true"}:
             fetch_poll_results = True
@@ -96,7 +96,7 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
     slug = urllib.parse.unquote(slug)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    timeline = priviblur_extractor.parse_container(initial_results)
+    timeline = priviblur_extractor.parse_blog_timeline(initial_results)
     post = timeline.elements[0]
 
     # Redirect to the correct slug when the given slug does not match the one of the post
@@ -109,7 +109,7 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
     else:
         # Fetch blog info and some posts from before this post
         initial_blog_results = await request.app.ctx.TumblrAPI.blog_posts(blog, before_id=post.id)
-        blog_info = priviblur_extractor.parse_container(initial_blog_results)
+        blog_info = priviblur_extractor.parse_blog_timeline(initial_blog_results)
 
         if request.args.get("fetch_polls") in ("1", "true"):
             fetch_poll_results = True
