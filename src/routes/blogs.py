@@ -72,8 +72,9 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
     blog = urllib.parse.unquote(blog)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    timeline = priviblur_extractor.parse_blog_timeline(initial_results)
-    post = timeline.elements[0]
+    # For some reason querying a specific post returns a timeline instead of the expected
+    # blog timeline
+    post = priviblur_extractor.parse_timeline(initial_results).elements[0]
 
     if post.slug:
         return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug, **request.args))
@@ -96,8 +97,9 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
     slug = urllib.parse.unquote(slug)
 
     initial_results = await request.app.ctx.TumblrAPI.blog_post(blog, post_id)
-    timeline = priviblur_extractor.parse_blog_timeline(initial_results)
-    post = timeline.elements[0]
+    # For some reason querying a specific post returns a timeline instead of the expected
+    # blog timeline
+    post = priviblur_extractor.parse_timeline(initial_results).elements[0]
 
     # Redirect to the correct slug when the given slug does not match the one of the post
     if post.slug != slug:
