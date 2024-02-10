@@ -18,8 +18,14 @@
     # real_ip_header =
     # proxies_count =
 
+# Controls redis cache options
+# Ignore to disable the cache
+#
+# [cache]
+#  # url =
+
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
-[priviblur_backend]
+# [priviblur_backend]
     # # Timeout for requests to Tumblr's API
     # main_response_timeout = 10
 
@@ -31,7 +37,7 @@
 #
 # Use Python's numerical logging levels
 # https://docs.python.org/3/howto/logging.html#logging-levels
-[logging]
+# [logging]
     # # Sanic (Server)'s logging level'
     # sanic_logging_level = 30
 
@@ -41,6 +47,7 @@
     # # Priviblur extractor's logging level
     # priviblur_extractor_logging_level = 20
 
-[misc]
+
+# [misc]
     # # Enable sanic's dev mode
     # dev_mode = false
