@@ -1,8 +1,12 @@
+import datetime
 import copy
 import urllib.parse
 from typing import Sequence
 
 import sanic
+
+from ..cache import get_poll_results
+
 
 def url_handler(raw_url):
     """Change URLs found in posts to privacy-friendly alternatives"""
@@ -101,9 +105,11 @@ def translate(language, id, number=None, substitution=None):
     return translated 
 
 
-async def create_poll_callback(tumblr_api, blog, post_id):
-    async def poll_callable(poll_id):
-        initial_results = await tumblr_api.poll_results(blog, post_id, poll_id)
-        return initial_results["response"]
+async def create_poll_callback(ctx, blog, post_id):
+    async def poll_callable(poll_id, expiration_timestamp):
+        current_timestamp = round(datetime.datetime.utcnow().timestamp())
+        expired = current_timestamp > expiration_timestamp
+
+        return await get_poll_results(ctx, blog, post_id, poll_id, expired=expired)
 
     return poll_callable

@@ -137,9 +137,9 @@ async def initialize(app):
 
     # Initialize database
     if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
-        app.ctx.CacheDB = redis.from_url(cache_url, protocol=3, decode_responses=True)
+        app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
     else:
-        app.ctx.CacheDB = None
+        app.ctx.CacheDb = None
 
     # Add additional jinja filters and functions
 

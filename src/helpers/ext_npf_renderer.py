@@ -27,11 +27,14 @@ class NPFParser(npf_renderer.parse.Parser):
 
             answers[answer_id] = answer_text
 
+        creation_timestamp = self.current["timestamp"]
+        expires_after = self.current["settings"]["expireAfter"]
+
         votes = None
         total_votes = None
 
         if self.poll_result_callback:
-            callback_response = await self.poll_result_callback(poll_id)
+            callback_response = await self.poll_result_callback(poll_id, creation_timestamp + expires_after)
 
             #{answer_id: vote_count}
             raw_results = callback_response["results"].items()
@@ -53,9 +56,6 @@ class NPFParser(npf_renderer.parse.Parser):
                 timestamp=callback_response["timestamp"],
                 results=votes_dict
             )
-
-        creation_timestamp = self.current["timestamp"]
-        expires_after = self.current["settings"]["expireAfter"]
 
         return npf_renderer.objects.poll_block.PollBlock(
             poll_id=poll_id,

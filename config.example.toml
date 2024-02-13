@@ -22,7 +22,13 @@
 # Ignore to disable the cache
 #
 # [cache]
-#  # url =
+    # url =
+
+    # Number of seconds to cache poll results from active polls
+    # cache_active_poll_results_for = 3600
+
+    # Number of seconds to cache poll results from expired polls
+    # cache_expired_poll_results_for = 86400
 
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
