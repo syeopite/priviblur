@@ -24,20 +24,18 @@ def url_handler(raw_url):
         pass
 
     if hostname.endswith("tumblr.com"):
-        if hostname.endswith("64.media.tumblr.com"):
-            return f"/tblr/media/64{url.path}"
-        elif hostname.endswith("assets.tumblr.com"):
+        if hostname.endswith(".media.tumblr.com"):
+            sub_domains = hostname.split(".")
+            if sub_domains[1] == "media":
+                return f"/tblr/media/{sub_domains[0]}{url.path}"
+            elif sub_domains[0] == "www" and sub_domains[2] == "media":
+                return f"/tblr/media/{sub_domains[1]}{url.path}"
+
+        # Continue down the chain when the above doesn't match
+        if hostname.endswith("assets.tumblr.com"):
             return f"/tblr/assets{url.path}"
-        elif hostname.endswith("49.media.tumblr.com"):
-            return f"/tblr/media/49{url.path}"
-        elif hostname.endswith("44.media.tumblr.com"):
-            return f"/tblr/media/44{url.path}"
-        elif hostname.endswith("ve.media.tumblr.com"):
-            return f"/tblr/media/ve{url.path}"
         elif hostname.endswith("static.tumblr.com"):
             return f"/tblr/static{url.path}"
-        elif hostname.startswith("va.media"):
-            return f"/tblr/media/va{url.path}"
         elif hostname.startswith("a."):
             return f"/tblr/a{url.path}"
         else:

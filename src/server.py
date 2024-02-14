@@ -113,6 +113,11 @@ async def initialize(app):
         "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
     )
 
+    app.ctx.MediaGenericClient = aiohttp.ClientSession(
+        headers=media_request_headers,
+        timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout)
+    )
+
     app.ctx.AudioClient = create_image_client(
         "https://a.tumblr.com", priviblur_backend.image_response_timeout
     )

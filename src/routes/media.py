@@ -6,8 +6,8 @@ from ..helpers import exceptions
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
 
-async def get_media(request, client : aiohttp.ClientSession, path_to_request, additional_headers = None):
-    async with client.get(f"/{path_to_request}", headers=additional_headers) as tumblr_response:
+async def get_media(request, client : aiohttp.ClientSession, path_to_request, additional_headers = None, base_url = ""):
+    async with client.get(f"{base_url}/{path_to_request}", headers=additional_headers) as tumblr_response:
         # Sanitize the headers given by Tumblr
         priviblur_response_headers = {}
         for header_key, header_value in tumblr_response.headers.items():
@@ -32,38 +32,22 @@ async def get_media(request, client : aiohttp.ClientSession, path_to_request, ad
     await priviblur_response.eof()
 
 
-@media.get(r"/media/64/<path:path>")
-async def _64_media(request: sanic.Request, path: str):
-    """Proxies the requested media from 64.media.tumblr.com"""
-    return await get_media(request, request.app.ctx.Media64Client, path)
-
-
-@media.get(r"/media/49/<path:path>")
-async def _49_media(request: sanic.Request, path: str):
-    """Proxies the requested media from 49.media.tumblr.com"""
-    return await get_media(request, request.app.ctx.Media49Client, path)
-
-
-@media.get(r"/media/44/<path:path>")
-async def _44_media(request: sanic.Request, path: str):
-    """Proxies the requested media from 44.media.tumblr.com"""
-    return await get_media(request, request.app.ctx.Media44Client, path)
-
-
-@media.get(r"/media/ve/<path:path>")
-async def _ve_media(request: sanic.Request, path: str):
-    """Proxies the requested media from ve.media.tumblr.com"""
-    return await get_media(request, request.app.ctx.MediaVeClient, path)
-
-
-@media.get(r"/media/va/<path:path>")
-async def _va_media(request: sanic.Request, path: str):
-    """Proxies the requested media from va.media.tumblr.com"""
-    additional_headers={
-        "accept": "video/webm,video/ogg,video/*;q=0.9," \
-                  "application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"
-    }
-    return await get_media(request, request.app.ctx.MediaVaClient, path, additional_headers=additional_headers)
+@media.get("/media/<cdn:str>/<path:path>")
+async def _media_cdn(request: sanic.Request, cdn: str, path: str):
+    """Proxies media from *.media.tumblr.com"""
+    match cdn:
+        case "64":
+            return await get_media(request, request.app.ctx.Media64Client, path) 
+        case "49":
+            return await get_media(request, request.app.ctx.Media49Client, path) 
+        case "44":
+            return await get_media(request, request.app.ctx.Media44Client, path) 
+        case "ve":
+            return await get_media(request, request.app.ctx.MediaVeClient, path, additional_headers={"accept": "video/webm,video/ogg,video/*;q=0.9, application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"}) 
+        case "va":
+            return await get_media(request, request.app.ctx.MediaVaClient, path, additional_headers={"accept": "video/webm,video/ogg,video/*;q=0.9, application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"})
+        case _:
+            return await get_media(request, request.app.ctx.MediaGenericClient, path, base_url=f"https://{cdn}.media.tumblr.com") 
 
 
 @media.get(r"/a/<path:path>")
