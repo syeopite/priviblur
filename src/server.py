@@ -163,7 +163,7 @@ async def main_startup_listener(app):
 
 @app.get("/")
 async def root(request):
-    return sanic.redirect(request.app.url_for("explore._today"))
+    return sanic.redirect(request.app.url_for("explore._trending"))
 
 
 @app.middleware("response")
