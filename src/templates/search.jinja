@@ -42,7 +42,7 @@
                     <li {% if post_filter is none %} class="selected" {% endif %}> <a href="/search/{{query | encodepathsegment}}/{{ add_query(query_args | deseq_urlencode) }}">{{translate("en", "timeline_search_post_type_filter_none" )}}</a></li>
                 {%- endif -%}
 
-                {%- for post_type in ("text", "photo", "gif", "quote", "link", "chat", "audio", "video", "answer", "poll") -%}
+                {%- for post_type in ("text", "photo", "gif", "quote", "link", "chat", "audio", "video", "ask", "poll") -%}
                     {%- if sort_by == "recent" -%}
                         <li {% if post_filter == post_type %} class="selected" {% endif %} ><a href="/search/{{query | encodepathsegment}}/recent/{{post_type | encodepathsegment}}{{ add_query(query_args | deseq_urlencode) }}">{{translate("en", "timeline_search_post_type_filter_" + post_type )}}</a></li>
                     {%- else -%}

@@ -53,16 +53,30 @@ async def _sort_by_search(request: sanic.Request, query: str):
 async def _filter_by_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=False)
 
+
 @search.get("/<query:str>/recent/<post_filter:str>")
 async def _sort_by_and_filter_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=True)
 
+
 async def _request_search_filter_post(request, query, post_filter, latest):
     query = urllib.parse.unquote(query)
     post_filter = urllib.parse.unquote(post_filter)
-
     time_filter = request.args.get("t")
-    post_filter = getattr(request.app.ctx.TumblrAPI.config.PostTypeFilters, post_filter.upper(), None)
+
+    PostFiltersEnum = request.app.ctx.TumblrAPI.config.PostTypeFilters
+    post_filter = post_filter.upper()
+
+    # Tumblr internally uses "answer" to filter for ask posts but
+    # displays "ask" on the UI and URL. We'll need to handle this and swap back to ask
+    # once the search results are queried as so the correct localization and url is used.
+    #
+    # Note: due to the else branch, "answer" is (still) supported as a valid option. Should
+    # this be kept, or removed for consistency with Tumblr?
+    if post_filter == "ASK":
+        post_filter = PostFiltersEnum.ANSWER
+    else:
+        post_filter = getattr(PostFiltersEnum.ANSWER, post_filter, None)
 
     # As to match Tumblr's behavior we redirect to the main /search endpoint when the
     # given post filter is invalid
@@ -82,8 +96,10 @@ async def _request_search_filter_post(request, query, post_filter, latest):
         time_filter = 0
 
     initial_results = await _query_search(request, query, days=time_filter, post_type_filter=post_filter, latest=latest)
-
-    post_filter = post_filter.name.lower()
+    
+    # Swap "answer" to "ask"
+    # See above.
+    post_filter = "ask" if post_filter == PostFiltersEnum.ANSWER else post_filter.name.lower()
 
     timeline = priviblur_extractor.parse_timeline(initial_results)
     sort_by = "recent" if latest else "popular"

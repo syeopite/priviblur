@@ -81,7 +81,7 @@ msgstr "Audio"
 msgid "timeline_search_post_type_filter_video"
 msgstr "Video"
 
-msgid "timeline_search_post_type_filter_answer"
+msgid "timeline_search_post_type_filter_ask"
 msgstr "Ask"
 
 msgid "timeline_search_post_type_filter_poll"
