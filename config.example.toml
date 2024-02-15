@@ -30,6 +30,9 @@
     # Number of seconds to cache poll results from expired polls
     # cache_expired_poll_results_for = 86400
 
+    # Number of seconds to cache feed (explore, search, etc) results for
+    # cache_feed_results_for = 600
+
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
     # # Timeout for requests to Tumblr's API

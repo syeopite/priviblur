@@ -13,3 +13,5 @@ class CacheConfig(NamedTuple):
 
     cache_active_poll_results_for: int = 3600
     cache_expired_poll_results_for: int = 86400
+    cache_feed_results_for: int = 600
+

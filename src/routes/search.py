@@ -4,6 +4,7 @@ import urllib.parse
 import sanic
 import sanic_ext
 
+from ..cache import get_search_results
 from .. import priviblur_extractor
 
 search = sanic.Blueprint("search", url_prefix="/search")
@@ -27,9 +28,7 @@ async def _main(request: sanic.Request, query: str):
     if not time_filter or time_filter not in ("365", "180", "30", "7", "1"):
         time_filter = 0
 
-    initial_results = await _query_search(request, query, days=time_filter)
-
-    timeline = priviblur_extractor.parse_timeline(initial_results)
+    timeline = await _query_search(request, query, days=time_filter)
 
     return await _render(request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None)
 
@@ -43,8 +42,7 @@ async def _sort_by_search(request: sanic.Request, query: str):
     if not time_filter or time_filter not in ("365", "180", "30", "7", "1"):
         time_filter = 0
 
-    initial_results = await _query_search(request, query, days=time_filter, latest=True)
-    timeline = priviblur_extractor.parse_timeline(initial_results)
+    timeline = await _query_search(request, query, days=time_filter, latest=True)
 
     return await _render(request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None)
 
@@ -81,11 +79,10 @@ async def _request_search_filter_post(request, query, post_filter, latest):
     if not time_filter or time_filter not in ("365", "180", "30", "7", "1"):
         time_filter = 0
 
-    initial_results = await _query_search(request, query, days=time_filter, post_type_filter=post_filter, latest=latest)
+    timeline = await _query_search(request, query, days=time_filter, post_type_filter=post_filter, latest=latest)
 
     post_filter = post_filter.name.lower()
 
-    timeline = priviblur_extractor.parse_timeline(initial_results)
     sort_by = "recent" if latest else "popular"
 
     return await _render(request, timeline, query, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by)
@@ -96,8 +93,7 @@ async def _query_search(request, query, **kwargs):
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    return await request.app.ctx.TumblrAPI.timeline_search(query, request.app.ctx.TumblrAPI.config.TimelineType.POST, continuation=continuation, **kwargs)
-
+    return await get_search_results(request.app.ctx, query, continuation, **kwargs)
 
 async def _render(request, timeline, query, **kwargs):
     # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't
