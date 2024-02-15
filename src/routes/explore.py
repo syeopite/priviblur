@@ -45,9 +45,11 @@ async def _main(request):
 async def _trending(request):
     return await _handle_explore(request, "explore._trending")
 
+
 @explore.get("/today")
 async def _today(request):
     return await _handle_explore(request, "explore._today")
+
 
 @explore.get("/text")
 async def _text(request):
@@ -79,9 +81,10 @@ async def _audio(request):
     return await _handle_explore(request, "explore._audio", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.AUDIO)
 
 
-@explore.get("/videos")
-async def _videos(request):
-    return await _handle_explore(request, "explore._videos", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.VIDEO)
+@explore.get("/video")
+async def _video(request):
+    return await _handle_explore(request, "explore._video", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.VIDEO)
+
 
 @explore.get("/asks")
 async def _asks(request):
