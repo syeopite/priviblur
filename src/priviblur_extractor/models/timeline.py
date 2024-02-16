@@ -1,4 +1,5 @@
 import datetime
+import enum
 from typing import Union, NamedTuple, List, Tuple, Optional, Union
 
 from . import base, misc
@@ -37,15 +38,20 @@ class TimelinePostTrail(NamedTuple):
     has_error : bool = False
 
 
+class CommunityLabel(enum.Enum):
+    MATURE = 0  # Generic catch all
+    DRUG_USE = 1
+    VIOLENCE = 2
+    SEXUAL_THEMES = 3
+
+
 class TimelinePost(NamedTuple):
     blog: TimelineBlog
 
     id: str
     post_url: str
-    slug: str  # A custom URL slug to use in the post's permalink URL
+    slug: str
     date: datetime.datetime
-    # state: str  # TODO Enum as in published or not. Kinda useless for us.
-    # reblog_key: str
     tags: list[str]
     summary: str
 
@@ -69,6 +75,8 @@ class TimelinePost(NamedTuple):
 
     reblog_from: Optional[misc.ReblogAttribution] = None
     reblog_root: Optional[misc.ReblogAttribution] = None
+
+    community_labels: list[CommunityLabel] = []
 
 
 TimelineObjects = Union[TimelineBlog]

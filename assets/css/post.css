@@ -171,3 +171,62 @@ a.blog-name:hover {
   padding: 5px 10px; */
   font-weight: bold;
 }
+
+.mature-content {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.community-label-cover {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(40px);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0 30px;
+  text-wrap: balance;
+
+  background: linear-gradient(0deg, rgba(255, 255, 255) 0%, rgba(255,255,255,0.8) 100%);
+
+  color: #4f4f4f;
+  z-index: 2;
+}
+
+.no-js.mature-content:hover {
+  height: unset;
+}
+
+.no-js .community-label-cover:hover, .no-js.mature-content:hover .community-label-cover {
+  display: none;
+}
+
+.community-label-cover > h3 {
+  margin: 0;
+}
+
+.no-js-view-community-post-instruction {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #acacac;
+}
+
+.unblur-post-button {
+  background: none;
+  padding: 5px 15px;
+  border: 1px solid #cdcdcd;
+  border-radius: 25px;
+  margin-top: 25px;
+}
+
+.unblur-post-button:hover {
+  background: #e1e1e1;
+}

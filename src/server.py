@@ -14,6 +14,7 @@ import sanic.response
 from sanic import Sanic
 import babel.numbers
 import babel.dates
+import babel.lists
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, priviblur_extractor
@@ -138,6 +139,7 @@ async def initialize(app):
 
     # Add additional jinja filters and functions
 
+    app.ext.environment.add_extension("jinja2.ext.do")
 
     app.ext.environment.filters["encodepathsegment"] = functools.partial(urllib.parse.quote, safe="")
 
@@ -148,6 +150,8 @@ async def initialize(app):
     app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
     app.ext.environment.filters["format_date"] = babel.dates.format_date
     app.ext.environment.filters["format_datetime"] = babel.dates.format_datetime
+
+    app.ext.environment.filters["format_list"] = babel.lists.format_list
 
     app.ext.environment.globals["translate"] = helpers.translate
     app.ext.environment.globals["url_handler"] = helpers.url_handler
