@@ -12,15 +12,16 @@ tagged = sanic.Blueprint("tagged", url_prefix="/tagged")
 @tagged.get("/<tag:str>")
 async def _main(request: sanic.Request, tag: str):
     tag = urllib.parse.unquote(tag)
-    sort_by = time_filter = request.args.get("sort") or "top"
+    sort_by = time_filter = request.args.get("sort")
 
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    if sort_by == "top":
-        latest = False
-    else:
+    latest = False
+    if sort_by == "recent":
         latest = True
+    else:
+        sort_by = "top"
 
     initial_results = await request.app.ctx.TumblrAPI.hubs_timeline(tag, continuation=continuation, latest=latest)
 
