@@ -17,7 +17,7 @@ class SearchCache(AccessCache):
 
     @property
     def cache_ttl(self):
-        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_feed_results_for
+        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for
 
     async def fetch(self):
         """Fetches search results from Tumblr"""

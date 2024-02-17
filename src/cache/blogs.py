@@ -17,7 +17,7 @@ class BlogPostsCache(AccessCache):
 
     @property
     def cache_ttl(self):
-        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_blog_feed_results_for
+        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_blog_feed_for
 
     async def fetch(self):
         """Fetches blog posts from Tumblr"""

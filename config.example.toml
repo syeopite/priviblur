@@ -31,13 +31,13 @@
     # cache_expired_poll_results_for = 86400
 
     # Number of seconds to cache feed (explore, search, etc) results for
-    # cache_feed_results_for = 600
+    # cache_feed_for = 3600
 
     # Number of seconds to cache blog feed (blog posts, blog search, blog tagged posts, etc) results for
-    # cache_blog_feed_results_for
+    # cache_blog_feed_for = 3600
 
     # Number of seconds to cache individual posts for
-    # cache_blog_post_for
+    # cache_blog_post_for = 300
 
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
