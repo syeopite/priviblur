@@ -33,6 +33,12 @@
     # Number of seconds to cache feed (explore, search, etc) results for
     # cache_feed_results_for = 600
 
+    # Number of seconds to cache blog feed (blog posts, blog search, blog tagged posts, etc) results for
+    # cache_blog_feed_results_for
+
+    # Number of seconds to cache individual posts for
+    # cache_blog_post_for
+
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
     # # Timeout for requests to Tumblr's API
