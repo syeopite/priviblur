@@ -6,18 +6,15 @@ from .. import priviblur_extractor
 
 class BlogPostsCache(AccessCache):
     def __init__(self, ctx, blog, continuation, **kwargs):
-        self.ctx = ctx
+        super().__init__(
+            ctx=ctx,
+            prefix=f"blog:{blog}",
+            cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_blog_feed_for,
+            continuation=continuation,
+            **kwargs
+        )
+
         self.blog = blog
-        self.continuation = continuation
-        self.kwargs = kwargs
-
-    @property
-    def prefix(self):
-        return f"blog:{self.blog}"
-
-    @property
-    def cache_ttl(self):
-        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_blog_feed_for
 
     async def fetch(self):
         """Fetches blog posts from Tumblr"""
@@ -26,40 +23,27 @@ class BlogPostsCache(AccessCache):
     def parse(self, initial_results):
         return priviblur_extractor.parse_blog_timeline(initial_results)
 
-    def get_key(self):
+    def build_key(self):
         # blog:<blog_name>:<kwargs>:<continuation>
         path_to_cached_results = [self.prefix, ]
         for k,v in self.kwargs.items():
             if v:
                 path_to_cached_results.append(f"{k}:{v}")
 
-        base_key = ':'.join(path_to_cached_results)
-
-        if self.continuation:
-            full_key_with_continuation = f"{base_key}:{self.continuation}"
-        else:
-            full_key_with_continuation = base_key
-
-        return base_key, full_key_with_continuation
+        return ':'.join(path_to_cached_results)
 
 
 class BlogPostCache(AccessCache):
     def __init__(self, ctx, blog, post_id, **kwargs):
-        self.ctx = ctx
+        super().__init__(
+            ctx=ctx,
+            prefix=f"blog:{blog}:post:{post_id}",
+            cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_blog_post_for,
+            **kwargs
+        )
+
         self.blog = blog
         self.post_id = post_id
-
-        self.kwargs = kwargs
-
-        self.continuation = None
-
-    @property
-    def prefix(self):
-        return f"blog:{self.blog}:post:{self.post_id}"
-
-    @property
-    def cache_ttl(self):
-        return self.ctx.PRIVIBLUR_CONFIG.cache.cache_blog_post_for
 
     async def fetch(self):
         return await self.ctx.TumblrAPI.blog_post(self.blog, self.post_id, **self.kwargs)
@@ -67,16 +51,14 @@ class BlogPostCache(AccessCache):
     def parse(self, initial_results):
         return priviblur_extractor.parse_timeline(initial_results)
 
-    def get_key(self):
+    def build_key(self):
         # blog:<blog_name>:post:<post_id>:<kwargs>
         path_to_cached_results = [self.prefix, ]
         for k,v in self.kwargs.items():
             if v:
                 path_to_cached_results.append(f"{k}:{v}")
 
-        base_key = ':'.join(path_to_cached_results)
-
-        return base_key, base_key
+        return ':'.join(path_to_cached_results)
 
 
 async def get_blog_posts(ctx, blog, continuation=None, **kwargs):

@@ -4,10 +4,13 @@ import typing
 import orjson
 
 class AccessCache(abc.ABC):
-    @abc.abstractmethod
-    def get_key(self) -> typing.Tuple[str, str]:
-        """Creates a key to get/store an item within the cache"""
-        pass
+    def __init__(self, ctx, prefix, cache_ttl, continuation=None, **kwargs):
+        self.ctx = ctx
+        self.prefix = prefix
+        self.cache_ttl = cache_ttl
+
+        self.continuation = continuation
+        self.kwargs = kwargs
 
     @abc.abstractmethod
     def fetch(self) -> typing.Dict[str, typing.Any]:
@@ -19,17 +22,20 @@ class AccessCache(abc.ABC):
         """Parses the initial JSON response from Tumblr"""
         pass
 
-    @property
     @abc.abstractmethod
-    def prefix(self) -> str:
-        """The first segment of the key to get/store an item within the cache"""
+    def build_key(self) -> typing.Tuple[str, str]:
+        """Creates a key to get/store an item within the cache"""
         pass
 
-    @property
-    @abc.abstractmethod
-    def cache_ttl(self) -> int:
-        """How long the keep the item within the cache"""
-        pass
+    def get_key(self):
+        base_key = self.build_key()
+
+        if self.continuation:
+            full_key_with_continuation = f"{base_key}:{self.continuation}"
+        else:
+            full_key_with_continuation = base_key
+
+        return base_key, full_key_with_continuation
 
     async def parse_and_cache(self, base_key, full_key_with_continuation, initial_results):
         """Inserts the given results into the cache within the given key
