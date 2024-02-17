@@ -5,6 +5,7 @@ import sanic
 import sanic_ext
 
 from .. import priviblur_extractor
+from ..cache import get_explore_results
 
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
@@ -19,13 +20,27 @@ async def _handle_explore(request, endpoint, post_type = None):
 
     match raw_endpoint:
         case "explore._trending":
-            initial_results = await request.app.ctx.TumblrAPI.explore_trending(continuation=continuation)
+            timeline = await get_explore_results(
+                request.app.ctx,
+                request.app.ctx.TumblrAPI.explore_trending,
+                "trending",
+                continuation,
+            )
         case "explore._today":
-            initial_results = await request.app.ctx.TumblrAPI.explore_today(continuation=continuation)
+            timeline = await get_explore_results(
+                request.app.ctx,
+                request.app.ctx.TumblrAPI.explore_today,
+                "today",
+                continuation,
+            )
         case _:
-            initial_results = await request.app.ctx.TumblrAPI.explore_post(post_type=post_type, continuation=continuation)        
-
-    timeline = priviblur_extractor.parse_timeline(initial_results)
+            timeline = await get_explore_results(
+                request.app.ctx,
+                request.app.ctx.TumblrAPI.explore_post,
+                post_type.name.lower(),
+                continuation,
+                post_type=post_type
+            )
 
     return await sanic_ext.render(
         "explore.jinja",
