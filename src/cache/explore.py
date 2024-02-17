@@ -41,7 +41,6 @@ class ExploreCache(AccessCache):
             full_key_with_continuation = base_key
 
         return base_key, full_key_with_continuation
-    
 
 
 async def get_explore_results(ctx, fetch_function, type_, continuation, **kwargs):

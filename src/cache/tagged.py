@@ -4,16 +4,16 @@ from .base import AccessCache
 from .. import priviblur_extractor
 
 
-class SearchCache(AccessCache):
-    def __init__(self, ctx, query, continuation, **kwargs):
+class TagBrowseCache(AccessCache):
+    def __init__(self, ctx, tag, latest, continuation):
         self.ctx = ctx
-        self.query = query
+        self.tag = tag
+        self.latest = latest
         self.continuation = continuation
-        self.kwargs = kwargs
 
     @property
     def prefix(self):
-        return "search"
+        return "tagged"
 
     @property
     def cache_ttl(self):
@@ -21,26 +21,17 @@ class SearchCache(AccessCache):
 
     async def fetch(self):
         """Fetches search results from Tumblr"""
-        return await self.ctx.TumblrAPI.timeline_search(
-            self.query,
-            self.ctx.TumblrAPI.config.TimelineType.POST,
-            continuation=self.continuation, 
-            **self.kwargs
-        )
+        return await self.ctx.TumblrAPI.hubs_timeline(self.tag, latest=self.latest, continuation=self.continuation)
 
     def parse(self, initial_results):
         return priviblur_extractor.parse_timeline(initial_results)
 
     def get_key(self):
         # search:<query>:<latest>:<post_filter>:<time_filter>:<continuation>
-        path_to_cached_results = [self.query, ]
+        path_to_cached_results = [self.tag]
 
-        if self.kwargs.get("latest") is True:
+        if self.latest is True:
             path_to_cached_results.append("latest")
-        if post_filter := self.kwargs.get("post_type_filter"):
-            path_to_cached_results.append(post_filter.name.lower())
-        if days := self.kwargs.get("days"):
-            path_to_cached_results.append(days)
 
         base_key = f"{self.prefix}:{':'.join(path_to_cached_results)}"
 
@@ -52,6 +43,6 @@ class SearchCache(AccessCache):
         return base_key, full_key_with_continuation
     
 
-async def get_search_results(ctx, query, continuation=None, **kwargs):
-    search_cache = SearchCache(ctx, query, continuation, **kwargs)
-    return await search_cache.get()
+async def get_tag_browse_results(ctx, tag, latest=False, continuation=None):
+    tag_browse_cache = TagBrowseCache(ctx, tag, latest, continuation)
+    return await tag_browse_cache.get()
