@@ -20,6 +20,7 @@ async def render_blog_post(app, blog, post, request_poll_data = False):
             }
         )
 
+
 @blogs.get("/")
 async def _blog_posts(request: sanic.Request, blog: str):
     blog = urllib.parse.unquote(blog)
@@ -28,9 +29,9 @@ async def _blog_posts(request: sanic.Request, blog: str):
         continuation = urllib.parse.unquote(continuation)
 
     if before_id := request.args.get("before_id"):
-        continuation = urllib.parse.unquote(before_id)
+        before_id = urllib.parse.unquote(before_id)
 
-    initial_results = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation, before_id)
+    initial_results = await request.app.ctx.TumblrAPI.blog_posts(blog, continuation, before_id=before_id)
     blog = priviblur_extractor.parse_blog_timeline(initial_results)
 
     return await sanic_ext.render(
