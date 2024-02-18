@@ -23,18 +23,56 @@ class TimelineBlog(NamedTuple):
     # If blog is deactivated or not
     active: bool = False
 
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        if json_serializable["theme"]:
+            json_serializable["theme"] = json_serializable["theme"].to_json_serialisable()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        json["theme"] = misc.BlogTheme.from_json(json["theme"])
+        return cls(**json)
+
 
 class BrokenBlog(NamedTuple):
     name: str
     avatar: list[dict]
 
+    def to_json_serialisable(self):
+        return self._asdict()
+
+    @classmethod
+    def from_json(cls, json):
+        return cls(**json)
+
 
 class TimelinePostTrail(NamedTuple):
-    blog : Union[TimelineBlog]
+    blog : Union[TimelineBlog, BrokenBlog]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
 
     has_error : bool = False
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        if json_serializable["blog"]:
+            json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        # Broken blogs contains only two attributes
+        if len(json["blog"]) > 2:
+            json["blog"] = TimelineBlog.from_json(json["blog"])
+        else:
+            json["blog"] = BrokenBlog.from_json(json["blog"])
+
+        return cls(**json)
 
 
 class TimelinePost(NamedTuple):
@@ -42,10 +80,8 @@ class TimelinePost(NamedTuple):
 
     id: str
     post_url: str
-    slug: str  # A custom URL slug to use in the post's permalink URL
+    slug: str
     date: datetime.datetime
-    # state: str  # TODO Enum as in published or not. Kinda useless for us.
-    # reblog_key: str
     tags: list[str]
     summary: str
 
@@ -60,7 +96,7 @@ class TimelinePost(NamedTuple):
 
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-    trail: Optional[TimelinePostTrail]
+    trail: List[TimelinePostTrail]
 
     note_count: Optional[int] = None
     like_count: Optional[int] = None
@@ -70,8 +106,36 @@ class TimelinePost(NamedTuple):
     reblog_from: Optional[misc.ReblogAttribution] = None
     reblog_root: Optional[misc.ReblogAttribution] = None
 
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
 
-TimelineObjects = Union[TimelineBlog]
+        json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+        json_serializable["trail"] = [trail.to_json_serialisable() for trail in  self.trail]
+
+        # Serialize the attributes that are NamedTuples to JSON
+        for key in ("blog", "reblog_from", "reblog_root"):
+            if json_serializable[key]:
+                json_serializable[key] = json_serializable[key].to_json_serialisable()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
+
+        trails = []
+        for trail in json["trail"]:
+            trails.append(TimelinePostTrail.from_json(trail))
+        json["trail"] = trails
+
+        for key, object_ in (("blog", TimelineBlog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
+            if json[key]:
+                json[key] = object_.from_json(json[key])
+
+        return cls(**json)
+
+
+TimelineObjects = Union[TimelineBlog, TimelinePost]
 
 
 class Timeline(NamedTuple):
@@ -81,3 +145,39 @@ class Timeline(NamedTuple):
     """
     elements: List[TimelineObjects | None]
     next: Optional[base.Cursor] = None
+
+    def to_json_serialisable(self):
+        elements = []
+        for element in self.elements:
+            if isinstance(element, TimelineBlog):
+                elements.append({"blog": element.to_json_serialisable()})
+            else:
+                elements.append({"post": element.to_json_serialisable()})
+
+        next_ = self.next
+        if next_:
+            next_ = next_.to_json_serialisable()
+
+        return {
+            "version": base.VERSION,
+            "elements": elements,
+            "next": next_
+        }
+
+    @classmethod
+    def from_json(cls, json):
+        elements = []
+        for element in json["elements"]:
+            if blog := element.get("blog"):
+                elements.append(TimelineBlog.from_json(blog))
+            else:
+                elements.append(TimelinePost.from_json(element["post"]))
+
+        json["elements"] = elements
+
+        if json["next"]:
+            json["next"] = base.Cursor.from_json(json["next"])
+
+        del json["version"]
+
+        return cls(**json)
