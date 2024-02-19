@@ -51,7 +51,9 @@ class BrokenBlog(NamedTuple):
 
 
 class TimelinePostTrail(NamedTuple):
+    id: str
     blog : Union[TimelineBlog, BrokenBlog]
+    date: datetime.datetime
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
 
@@ -62,6 +64,8 @@ class TimelinePostTrail(NamedTuple):
 
         if json_serializable["blog"]:
             json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+        
+        json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
 
         return json_serializable
 
@@ -72,6 +76,8 @@ class TimelinePostTrail(NamedTuple):
             json["blog"] = TimelineBlog.from_json(json["blog"])
         else:
             json["blog"] = BrokenBlog.from_json(json["blog"])
+
+        json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
 
         return cls(**json)
 
