@@ -78,7 +78,7 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
         # Fetch blog info and some posts from before this post
         blog_info = await get_blog_posts(request.app.ctx, blog, before_id=post.id)
 
-        if request.args.get("fetch_polls") in {1, "true"}:
+        if request.args.get("fetch_polls") in {"1", "true"}:
             fetch_poll_results = True
         else:
             fetch_poll_results = False
