@@ -110,6 +110,14 @@ class NPFFormatter(npf_renderer.format.Formatter):
         self.blog_name = blog_name
         self.post_id = post_id
 
+    def _linkify_images(self, element):
+        if isinstance(element, dominate.tags.img):
+            return dominate.tags.a(element, href=element.src)
+
+        for index, child in enumerate(element):
+            element[index] = self._linkify_images(child)
+        return element
+
     def _format_poll(self, block):
         poll_html = super()._format_poll(block)
         poll_html["data-poll-id"] = block.poll_id
@@ -131,6 +139,10 @@ class NPFFormatter(npf_renderer.format.Formatter):
             poll_footer.children.insert(0, no_script_fallback)
 
         return poll_html
+
+    def _format_image(self, block, row_length=1, override_padding=None):
+        image_html = super()._format_image(block, row_length, override_padding)
+        return self._linkify_images(image_html)
 
 
 async def format_npf(contents, layouts=None, blog_name=None, post_id=None,*, poll_callback=None):
