@@ -116,3 +116,14 @@ function populate_polls() {
 
 // TODO lazy load polls
 populate_polls();
+
+const unblurCommunityLabledPostButtons = document.getElementsByClassName("unblur-post-button");
+for (let btn of unblurCommunityLabledPostButtons) {
+    btn.addEventListener('click', function(event) {
+        let postContentElement = btn.closest(".post-content");
+        let communityTagCoverElement = postContentElement.getElementsByClassName("community-label-cover")
+
+        communityTagCoverElement[0]["style"] = `display: none;`;
+        postContentElement["style"] = `height: unset;`;
+    })
+}

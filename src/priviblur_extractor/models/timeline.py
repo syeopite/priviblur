@@ -1,4 +1,5 @@
 import datetime
+import enum
 from typing import Union, NamedTuple, List, Tuple, Optional, Union
 
 from . import base, misc
@@ -75,6 +76,13 @@ class TimelinePostTrail(NamedTuple):
         return cls(**json)
 
 
+class CommunityLabel(enum.Enum):
+    MATURE = 0  # Generic catch all
+    DRUG_USE = 1
+    VIOLENCE = 2
+    SEXUAL_THEMES = 3
+
+
 class TimelinePost(NamedTuple):
     blog: TimelineBlog
 
@@ -106,6 +114,8 @@ class TimelinePost(NamedTuple):
     reblog_from: Optional[misc.ReblogAttribution] = None
     reblog_root: Optional[misc.ReblogAttribution] = None
 
+    community_labels: list[CommunityLabel] = []
+
     def to_json_serialisable(self):
         json_serializable = self._asdict()
 
@@ -131,6 +141,11 @@ class TimelinePost(NamedTuple):
         for key, object_ in (("blog", TimelineBlog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
             if json[key]:
                 json[key] = object_.from_json(json[key])
+
+        community_labels = []
+        for label_value in json["community_labels"]:
+            community_labels.append(CommunityLabel(label_value))
+        json["community_labels"] = community_labels
 
         return cls(**json)
 

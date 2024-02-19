@@ -19,7 +19,15 @@
         {% endif %}
     {%- endif -%}
 
-    {{ create_post_header(element) }}
+    {{- create_post_header(element) -}}
+
+    {%- if element.community_labels -%}
+        <div class="post-content mature-content no-js">
+        {% include 'components/community_tag_cover.jinja' %}
+    {%- else -%}
+        <div class="post-content">
+    {%- endif -%}
+
     {%- if element.trail -%}
         {# Start post trails div #}
         <div class="post-trails">
@@ -65,6 +73,7 @@
         {# End post-trails div #}
         </div>
     {%- endif -%}
+    </div>
 
     <footer class="post-footer">
         {%- if element.tags -%}

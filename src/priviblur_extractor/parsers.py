@@ -250,6 +250,17 @@ class _TimelinePostParser:
                     blog_title=target["rebloggedRootTitle"],
                 )
 
+        # Community label
+        community_labels = []
+        if raw_labels := target.get("communityLabels"):
+            if raw_labels["hasCommunityLabel"]:
+                for category in raw_labels["categories"]:
+                    label = getattr(models.timeline.CommunityLabel, category.upper(), None)
+                    if label:
+                        community_labels.append(label)
+
+                if not community_labels:
+                    community_labels.append(models.timeline.CommunityLabel.MATURE)
 
         return models.timeline.TimelinePost(
             blog=blog,
@@ -277,7 +288,9 @@ class _TimelinePostParser:
             note_count=note_count,
 
             reblog_from=reblog_from_information,
-            reblog_root=reblog_root_information
+            reblog_root=reblog_root_information,
+
+            community_labels=community_labels
         )
 
 
