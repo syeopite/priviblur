@@ -111,11 +111,19 @@ class NPFFormatter(npf_renderer.format.Formatter):
         self.post_id = post_id
 
     def _linkify_images(self, element):
-        if isinstance(element, dominate.tags.img):
-            return dominate.tags.a(element, href=element.src)
+        try:
+            image_element = element.getElementsByTagName("img")
+            image_container = element.get(cls="image-container")
 
-        for index, child in enumerate(element):
-            element[index] = self._linkify_images(child)
+            if image_container and image_element:
+                image_container = image_container[0]
+                image_element = image_element[0]
+
+                index_of_image = image_container.children.index(image_element)
+                image_container[index_of_image] = dominate.tags.a(image_element, href=image_element.src)
+        except (ValueError, IndexError):
+            pass
+
         return element
 
     def _format_poll(self, block):
@@ -178,6 +186,7 @@ async def format_npf(contents, layouts=None, blog_name=None, post_id=None,*, pol
         formatted = e.rendered_result
         assert formatted is not None
     except Exception as e:
+        raise e
         formatted = dominate.tags.div(cls="post-body has-error")
         contains_render_errors = True
 
