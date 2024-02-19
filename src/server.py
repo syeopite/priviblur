@@ -137,7 +137,12 @@ async def initialize(app):
 
     # Initialize database
     if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
-        app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
+        try:
+            app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
+            await app.ctx.CacheDb.ping()
+        except redis.exceptions.ConnectionError:
+            app.ctx.LOGGER.error("Error: Unable to connect to Redis! Disabling cache until the problem can be fixed. Please check your configuration file and the Redis server.")
+            app.ctx.CacheDb = None
     else:
         app.ctx.CacheDb = None
 
