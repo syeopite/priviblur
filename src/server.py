@@ -7,13 +7,12 @@ import functools
 import gettext
 import copy
 
+import sanic
 import aiohttp
 import orjson
-import sanic_ext
-import sanic.response
-from sanic import Sanic
 import babel.numbers
 import babel.dates
+import redis.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, priviblur_extractor
@@ -28,7 +27,7 @@ from .version import VERSION, CURRENT_COMMIT
 config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"))
 
 LOG_CONFIG = setup_logging.setup_logging(config.logging)
-app = Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
+app = sanic.Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
 
 
 if config.deployment.forwarded_secret and not app.config.FORWARDED_SECRET:
@@ -135,6 +134,17 @@ async def initialize(app):
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
         timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout)
     )
+
+    # Initialize database
+    if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
+        try:
+            app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
+            await app.ctx.CacheDb.ping()
+        except redis.exceptions.ConnectionError:
+            app.ctx.LOGGER.error("Error: Unable to connect to Redis! Disabling cache until the problem can be fixed. Please check your configuration file and the Redis server.")
+            app.ctx.CacheDb = None
+    else:
+        app.ctx.CacheDb = None
 
     # Add additional jinja filters and functions
 

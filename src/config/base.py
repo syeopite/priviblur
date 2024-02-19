@@ -3,7 +3,7 @@ import tomllib
 
 from typing import NamedTuple
 
-from . import deployment, priviblur_backend, logging_config, misc
+from . import deployment, priviblur_backend, cache_config, logging_config, misc
 
 
 class PriviblurConfig(NamedTuple):
@@ -21,6 +21,7 @@ class PriviblurConfig(NamedTuple):
 
     deployment: deployment.DeploymentConfig
     backend: priviblur_backend.PriviblurBackendConfig
+    cache: cache_config.CacheConfig
     logging: logging_config.LoggingConfig
     misc: misc.MiscellaneousConfig
 
@@ -41,11 +42,18 @@ def load_config(path : str):
         print("Cannot access the configuration file. Do I have the right permissions?")
         sys.exit()
 
+    deployment_config_values = config.get("deployment", {})
+    backend_config_values = config.get("priviblur_backend", {})
+    cache_config_values = config.get("cache", {})
+    logging_config_values = config.get("logging", {})
+    miscellaneous_config_values = config.get("misc",  {})
+
     return PriviblurConfig(
-        deployment=deployment.DeploymentConfig(**config["deployment"]),
-        backend=priviblur_backend.PriviblurBackendConfig(**config["priviblur_backend"]),
-        logging=logging_config.LoggingConfig(**config["logging"]),
-        misc=misc.MiscellaneousConfig(**config["misc"])
+        deployment=deployment.DeploymentConfig(**deployment_config_values),
+        backend=priviblur_backend.PriviblurBackendConfig(**backend_config_values),
+        cache=cache_config.CacheConfig(**cache_config_values),
+        logging=logging_config.LoggingConfig(**logging_config_values),
+        misc=misc.MiscellaneousConfig(**miscellaneous_config_values)
     )
 
 

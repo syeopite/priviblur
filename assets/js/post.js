@@ -6,7 +6,15 @@ function requestPollResults(poll_element, pollId) {
         const blogName = post.getElementsByClassName("blog-name")[0].innerHTML;
         const postId = post.dataset.postId;
 
-        const pollResultsFetch = fetch(`/api/v1/poll/${blogName}/${postId}/${pollId}/results`);
+        let poll_results_url;
+
+        if (poll_element.classList.contains("expired-poll")) {
+            poll_results_url = `/api/v1/poll/${blogName}/${postId}/${pollId}/results?expired=1`;
+        } else {
+            poll_results_url = `/api/v1/poll/${blogName}/${postId}/${pollId}/results`;
+        }
+
+        const pollResultsFetch = fetch(poll_results_url);
 
         pollResultsFetch.then((results) => {
             return results.json();
@@ -17,7 +25,7 @@ function requestPollResults(poll_element, pollId) {
 }
 
 function fill_poll_results(poll_element, results) {
-    const sorted_poll_results = Object.entries(results.response.results).sort((a,b) => (a[1]-b[1])).reverse();
+    const sorted_poll_results = Object.entries(results.results).sort((a,b) => (a[1]-b[1])).reverse();
 
     // First we must find the total number of votes and the winner(s) of the poll
     let total_votes = 0;
