@@ -180,6 +180,11 @@ async def root(request):
     return sanic.redirect(request.app.url_for("explore._trending"))
 
 
+@app.route("/robots.txt")
+async def handler(request):
+    return await sanic.file("./assets/robots.txt")
+
+
 @app.middleware("response")
 async def before_all_routes(request, response):
     # https://github.com/iv-org/invidious/blob/master/src/invidious/routes/before_all.cr
