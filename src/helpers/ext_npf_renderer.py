@@ -186,7 +186,6 @@ async def format_npf(contents, layouts=None, blog_name=None, post_id=None,*, pol
         formatted = e.rendered_result
         assert formatted is not None
     except Exception as e:
-        raise e
         formatted = dominate.tags.div(cls="post-body has-error")
         contains_render_errors = True
 
