@@ -300,7 +300,40 @@ class TumblrAPI:
             url_parameters["page_number"] = continuation
 
         return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/posts", url_params=url_parameters)
- 
+
+    async def blog_search(self, blog_name, query, *, continuation = None,
+                          top = None, original_posts = None, post_type = None):
+        """Requests the /blog/<blog name>/search/<query> endpoint
+            Parameters:
+                blog_name: name of the blog to search
+                query: search query
+
+            Optional Parameters:
+                continuation: Continuation token for fetching the next batch of content
+                top: Whether or not to sort by popularity
+                original_posts: Whether or not the search should only return original posts by the blog
+                post_type: Filter by post type
+        """
+        url_parameters = {
+         "reblog_info": "true",
+         "fields[blogs]": rconf.BLOG_SEARCH_BLOG_INFO_FIELDS,
+        }
+
+        if post_type:
+            url_parameters["post_type"] = post_type
+
+        url_parameters["npf"] = "true"
+
+        if original_posts:
+            url_parameters["post_role"] = "ORIGINAL"
+
+        if top:
+            url_parameters["post_role"] = "POPULARITY_DESC"
+        else:
+            url_parameters["post_role"] = "CREATED_DESC"
+
+        return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/search/{urllib.parse.quote(query)}", url_params=url_parameters)
+
     async def blog_post(self, blog_name, post_id):
         """Requests the /blog/<blog name>/posts/<post id> endpoint
 

@@ -65,6 +65,38 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     )
 
 
+# Tags
+
+@blogs.get("/search/<query:str>")
+async def _blog_search(request: sanic.Request, blog: str, query: str):
+    blog = urllib.parse.unquote(blog)
+    query = urllib.parse.unquote(query)
+
+    # if continuation := request.args.get("continuation"):
+    #     continuation = urllib.parse.unquote(continuation)
+
+    initial_results = await request.app.ctx.TumblrAPI.blog_search(blog, query)
+    post_list, cursor = priviblur_extractor.parse_post_list(initial_results)
+
+    blog_info = (await get_blog_posts(request.app.ctx, blog)).blog_info
+
+    blog = priviblur_extractor.models.blog.Blog(
+        blog_info=blog_info,
+        posts = post_list,
+        total_posts=None,
+        next=cursor
+    )
+
+    return await sanic_ext.render(
+        "blog.jinja",
+        context={
+            "app": request.app,
+            "blog": blog,
+            "query": query,
+        }
+    )
+
+
 # Single post
 
 @blogs.get("/<post_id:int>")
