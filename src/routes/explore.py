@@ -43,9 +43,10 @@ async def _handle_explore(request, endpoint, post_type = None):
             )
 
     return await sanic_ext.render(
-        "explore.jinja",
+        "timeline.jinja",
         context={
             "app": app,
+            "title": "Trending Topics - Priviblur",
             "timeline": timeline,
         }
     )
