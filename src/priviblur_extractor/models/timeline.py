@@ -53,7 +53,7 @@ class BrokenBlog(NamedTuple):
 class TimelinePostTrail(NamedTuple):
     id: str
     blog : Union[TimelineBlog, BrokenBlog]
-    date: datetime.datetime
+    date: Optional[datetime.datetime]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
 
@@ -64,8 +64,9 @@ class TimelinePostTrail(NamedTuple):
 
         if json_serializable["blog"]:
             json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
-        
-        json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        if json_serializable["date"]:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
 
         return json_serializable
 
@@ -77,7 +78,8 @@ class TimelinePostTrail(NamedTuple):
         else:
             json["blog"] = BrokenBlog.from_json(json["blog"])
 
-        json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
 
         return cls(**json)
 
@@ -95,7 +97,7 @@ class TimelinePost(NamedTuple):
     id: str
     post_url: str
     slug: str
-    date: datetime.datetime
+    date: Optional[datetime.datetime]
     tags: list[str]
     summary: str
 
@@ -125,7 +127,8 @@ class TimelinePost(NamedTuple):
     def to_json_serialisable(self):
         json_serializable = self._asdict()
 
-        json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+        if json_serializable["date"]:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
         json_serializable["trail"] = [trail.to_json_serialisable() for trail in  self.trail]
 
         # Serialize the attributes that are NamedTuples to JSON
@@ -137,7 +140,8 @@ class TimelinePost(NamedTuple):
 
     @classmethod
     def from_json(cls, json):
-        json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
 
         trails = []
         for trail in json["trail"]:
