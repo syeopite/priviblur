@@ -227,7 +227,7 @@ li.control-bar-action:hover {
     background: #dcdcdc;
 }
 
-.control-bar-action > svg {
+.control-bar-action > span > svg {
     vertical-align: middle;
 }
 
