@@ -220,6 +220,7 @@ a.logo {
     border-radius: 25px;
     box-sizing: border-box;
     position: relative;
+    cursor: pointer;
 }
 
 li.control-bar-action:hover {
@@ -245,9 +246,12 @@ li.control-bar-action:hover {
     overflow: hidden;
     width: fit-content;
     z-index: 2;
+
+    transition: all 50ms ease-in-out;
 }
 
-.control-bar-dropdown-menu li {
+.control-bar-dropdown-menu li > a {
+    display: flex;
     padding: 10px 20px;
     white-space: nowrap;
 }
@@ -267,13 +271,13 @@ li.control-bar-action:hover {
 .active-dropdown-menu .control-bar-dropdown-menu{
     opacity: 1;
     visibility: visible;
-    transition: all 150ms ease-in-out;
+    transition: all 50ms ease-in-out;
 }
 
 li.no-js:hover .control-bar-dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transition: all 150ms ease-in-out;
+    transition: all 50ms ease-in-out;
 }
 
 li.no-js .control-bar-dropdown-menu {
