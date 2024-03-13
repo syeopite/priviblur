@@ -1,0 +1,17 @@
+{% extends "blog/base_blog.jinja" %}
+{% from 'macros/add_query.jinja' import add_query  %}
+{% block blog_contents %}
+    {% include 'components/blog_contents.jinja' %}
+
+    {% if blog.posts %}
+        <div class="paging">
+            {%- block paging -%}
+                {% if page %}
+                    <a class="next-page button" href="{{-request.path}}?page={{page + 1}}">{{-translate("en", "pagination_next_page")}}</a>
+                {% else %}
+                    <a class="next-page button" href="{{-request.path}}?page=2">{{-translate("en", "pagination_next_page")}}</a>
+                {% endif %}
+            {%- endblock -%}
+        </div>
+    {% endif %}
+{%- endblock %}

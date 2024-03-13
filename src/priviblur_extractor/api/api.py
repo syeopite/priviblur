@@ -301,7 +301,7 @@ class TumblrAPI:
 
         return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/posts", url_params=url_parameters)
 
-    async def blog_search(self, blog_name, query, *, continuation = None,
+    async def blog_search(self, blog_name, query, *, page = None,
                           top = None, original_posts = None, post_type = None):
         """Requests the /blog/<blog name>/search/<query> endpoint
             Parameters:
@@ -328,9 +328,21 @@ class TumblrAPI:
             url_parameters["post_role"] = "ORIGINAL"
 
         if top:
-            url_parameters["post_role"] = "POPULARITY_DESC"
+            url_parameters["sort"] = "POPULARITY_DESC"
         else:
-            url_parameters["post_role"] = "CREATED_DESC"
+            url_parameters["sort"] = "CREATED_DESC"
+
+        # The following can vary on Tumblr. Some continuation requests won't have query or rawurldecode
+        # for example while next_offset can be incremented by something other than 10.
+        #
+        # Though for simplicities sake,  we'll just assume that everything is present and next_offset can
+        # only be incremented by 10.
+        #
+        # This allows us to just have a simple page attribute
+        if page:
+            url_parameters["query"] = query
+            url_parameters["rawurldecode"] = 1
+            url_parameters["next_offset"] = 10 * (page - 1)
 
         return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/search/{urllib.parse.quote(query)}", url_params=url_parameters)
 

@@ -72,10 +72,13 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     blog = urllib.parse.unquote(blog)
     query = urllib.parse.unquote(query)
 
-    # if continuation := request.args.get("continuation"):
-    #     continuation = urllib.parse.unquote(continuation)
+    try:
+        if page := request.args.get("page"):
+            page = int(urllib.parse.unquote(page))
+    except ValueError:
+        page = None
 
-    initial_results = await request.app.ctx.TumblrAPI.blog_search(blog, query)
+    initial_results = await request.app.ctx.TumblrAPI.blog_search(blog, query, page=page)
     post_list, cursor = priviblur_extractor.parse_post_list(initial_results)
 
     blog_info = (await get_blog_posts(request.app.ctx, blog)).blog_info
@@ -88,11 +91,12 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     )
 
     return await sanic_ext.render(
-        "blog/blog.jinja",
+        "blog/blog_search.jinja",
         context={
             "app": request.app,
             "blog": blog,
-            "query": query,
+            "blog_search_query": query,
+            "page": page,
         }
     )
 
