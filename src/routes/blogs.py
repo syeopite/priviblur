@@ -12,7 +12,7 @@ blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-
 
 async def render_blog_post(app, blog, post, request_poll_data = False):
         return await sanic_ext.render(
-            "blog_post.jinja",
+            "blog/blog_post.jinja",
             context={
                 "app": app,
                 "blog": blog,
@@ -35,7 +35,7 @@ async def _blog_posts(request: sanic.Request, blog: str):
     blog = await get_blog_posts(request.app.ctx, blog, continuation=continuation, before_id=before_id)
 
     return await sanic_ext.render(
-        "blog.jinja",
+        "blog/blog.jinja",
         context={
             "app": request.app,
             "blog": blog,
@@ -56,7 +56,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     blog = await get_blog_posts(request.app.ctx, blog, continuation=continuation, tag=tag)
 
     return await sanic_ext.render(
-        "blog.jinja",
+        "blog/blog.jinja",
         context={
             "app": request.app,
             "blog": blog,
@@ -88,7 +88,7 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     )
 
     return await sanic_ext.render(
-        "blog.jinja",
+        "blog/blog.jinja",
         context={
             "app": request.app,
             "blog": blog,

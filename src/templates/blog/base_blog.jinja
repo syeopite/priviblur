@@ -10,10 +10,10 @@
         {{blog.blog_info.name | e}} - Priviblur
     {%- endif -%}
 {% endblock %}
-{% block content %}
-{% include 'components/blog_header.jinja' %}
 
-<div class="blog-posts">
-{%- include 'components/post.jinja' -%}
-</div>
-{% endblock %}
+{% block content %}
+    {%- include 'components/blog_header.jinja' -%}
+    
+    {%- block blog_contents %}
+    {%- endblock %}
+{%- endblock %}

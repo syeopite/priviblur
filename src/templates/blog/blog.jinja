@@ -1,0 +1,12 @@
+{% extends "blog/base_blog.jinja" %}
+{% block blog_contents %}
+    {% include 'components/blog_contents.jinja' %}
+
+    {%- if blog.next %}
+        <div class="paging">
+            <a class="next-page button" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}#m">
+                {{translate("en", "pagination_next_page")}}
+            </a>
+        </div>
+    {% endif %}
+{%- endblock %}
