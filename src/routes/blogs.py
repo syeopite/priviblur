@@ -5,7 +5,7 @@ import sanic
 import sanic_ext
 
 from .. import priviblur_extractor
-from ..cache import get_blog_posts, get_blog_post
+from ..cache import get_blog_posts, get_blog_post, get_blog_search_results
 
 blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>")
 
@@ -78,16 +78,14 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     except ValueError:
         page = None
 
-    initial_results = await request.app.ctx.TumblrAPI.blog_search(blog, query, page=page)
-    post_list, cursor = priviblur_extractor.parse_post_list(initial_results)
-
+    post_list = (await get_blog_search_results(request.app.ctx, blog, query, page=page))
     blog_info = (await get_blog_posts(request.app.ctx, blog)).blog_info
 
     blog = priviblur_extractor.models.blog.Blog(
         blog_info=blog_info,
         posts = post_list,
         total_posts=None,
-        next=cursor
+        next=None
     )
 
     return await sanic_ext.render(

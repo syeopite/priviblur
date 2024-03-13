@@ -32,6 +32,9 @@ class AccessCache(abc.ABC):
     def parse_cached_json(self, json):
         return priviblur_extractor.models.timeline.Timeline.from_json(json)
 
+    def to_json(self, parsed_results):
+        return orjson.dumps(parsed_results.to_json_serialisable())
+
     def get_key(self):
         base_key = self.build_key()
 
@@ -48,10 +51,9 @@ class AccessCache(abc.ABC):
         Creates a placeholder item within the cache for the next continuation batch if applicable
         """
         pipeline = self.ctx.CacheDb.pipeline()
-
         timeline = self.parse(initial_results)
 
-        pipeline.set(full_key_with_continuation, orjson.dumps(timeline.to_json_serialisable()))
+        pipeline.set(full_key_with_continuation, self.to_json(timeline))
         pipeline.expire(full_key_with_continuation, self.cache_ttl)
 
         # Allocate key slot for the next continuation
@@ -62,7 +64,7 @@ class AccessCache(abc.ABC):
         # 
         # "0" is used as a placeholder 
 
-        if timeline.next and timeline.next.cursor:
+        if hasattr(timeline, "next") and timeline.next and timeline.next.cursor:
             next_key = f"{base_key}:{timeline.next.cursor}"
             pipeline.setnx(next_key, "0")
             pipeline.expire(next_key, self.cache_ttl)
