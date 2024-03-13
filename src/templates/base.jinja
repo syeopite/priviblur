@@ -1,4 +1,4 @@
-
+{% from 'components/icons/search.jinja' import search_icon  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +23,9 @@
     <div class="container">
         <nav class="navbar">
             <div class="left-section">
-                <a class="logo" href="/" version="1.1" viewBox="0 0 114.14 26.133">Priviblur</a>
+                <a class="logo" href="/">Priviblur</a>
                 <form class="search-bar" method="get" action="/search" autocomplete="off">
-                    <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path fill="#9c9c9c" d="M765-144 526-383q-30 22-65.792 34.5T384.035-336Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.035q0 40.381-12.5 76.173T577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/></svg>
+                    {{-search_icon(20, 20, fill="#9c9c9c")}}
                     {%- if query is defined -%}
                         <input name="q" type="text" value="{{query | e}}" placeholder="Search"></input>
                     {%- elif tag is defined -%}

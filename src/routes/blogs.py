@@ -65,7 +65,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
     )
 
 
-# Tags
+# Search
 
 @blogs.get("/search/<query:str>")
 async def _blog_search(request: sanic.Request, blog: str, query: str):
@@ -99,6 +99,14 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
             "page": page,
         }
     )
+
+@blogs.get("/search")
+async def query_param_redirect(request: sanic.Request, blog: str):
+    """Endpoint for /search to redirect q= queries to /search/<query>"""
+    if query := request.args.get("q"):
+        return sanic.redirect(request.app.url_for("blogs._blog_search", blog=blog, query=urllib.parse.quote(query, safe="")))
+    else:
+        return sanic.redirect(request.app.url_for("blogs._blog_posts", blog=blog))
 
 
 # Single post

@@ -11,7 +11,7 @@ search = sanic.Blueprint("search", url_prefix="/search")
 
 
 @search.get("/")
-async def query_param_redirect(request: sanic.Request): 
+async def query_param_redirect(request: sanic.Request):
     """Endpoint for /search to redirect q= queries to /search/<query>"""
     if query := request.args.get("q"):
         return sanic.redirect(request.app.url_for("search._main", query=urllib.parse.quote(query, safe="")))

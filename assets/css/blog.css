@@ -1,7 +1,7 @@
 #blog-header {
     text-align: center;
     background: #FFF;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
     border-radius: 10px;
     padding-bottom: 30px;
 }
@@ -51,4 +51,14 @@
     #banner {
         height: 326px;
     }
+}
+
+.blog-search-bar {
+    max-width: 590px;
+    width: unset;
+    margin-bottom: 10px;
+
+    border: 0;
+    border-radius: 10px;
+    background: #FFF;
 }

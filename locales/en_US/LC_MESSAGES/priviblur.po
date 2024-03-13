@@ -146,3 +146,6 @@ msgstr "Show post"
 
 msgid "post_community_label_no_js_show_post_instructions"
 msgstr "Hover over me to view the post"
+
+msgid "blog_search_placeholder_text"
+msgstr "Search posts"
