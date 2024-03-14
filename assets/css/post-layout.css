@@ -50,10 +50,20 @@ a.inline-link, a.inline-mention {
 }
 
 .poster-overlay-text {
-  padding: 0;
+  padding: 0px 15px;
   background: rgba(0,0,0,0.5);
   font-weight: bold;
   font-size: 28px;
+  box-sizing: border-box;
+}
+
+.poster-overlay-text span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .link-block-description-container {
