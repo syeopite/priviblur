@@ -1,10 +1,8 @@
-import sys
 import os
 import asyncio
 import logging
 import urllib.parse
 import functools
-import gettext
 import copy
 
 import sanic
@@ -19,7 +17,7 @@ from npf_renderer import VERSION as NPF_RENDERER_VERSION
 from . import routes, priviblur_extractor
 from . import priviblur_extractor
 from .config import load_config
-from .helpers import setup_logging, helpers, error_handlers, exceptions, ext_npf_renderer
+from .helpers import setup_logging, helpers, i18n, error_handlers, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
 
 
@@ -42,17 +40,8 @@ if config.deployment.real_ip_header and not app.config.REAL_IP_HEADER:
 if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
     app.config.PROXIES_COUNT = config.deployment.proxies_count
 
-# Initialize locales
-try:
-    gettext_instances = {"en": gettext.translation("priviblur", localedir="locales", languages=["en"])}
-except FileNotFoundError as e:
-    print(
-        'Error: Unable to find locale files. '
-        'Did you forget to compile them?'
-    )
-    sys.exit()
 
-app.ctx.GETTEXT_INSTANCES = gettext_instances
+app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
 
 # Constants
 
@@ -68,7 +57,7 @@ app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
 
 app.ctx.PRIVIBLUR_CONFIG = config
-app.ctx.translate = helpers.translate
+app.ctx.translate = i18n.translate
 
 @app.listener("before_server_start")
 async def initialize(app):
@@ -163,7 +152,7 @@ async def initialize(app):
 
     app.ext.environment.filters["format_list"] = babel.lists.format_list
 
-    app.ext.environment.globals["translate"] = helpers.translate
+    app.ext.environment.globals["translate"] = i18n.translate
     app.ext.environment.globals["url_handler"] = helpers.url_handler
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
@@ -184,9 +173,11 @@ async def root(request):
 async def robotstxt_route(request):
     return await sanic.file("./assets/robots.txt")
 
+
 @app.middleware("request")
 async def before_all_routes(request):
-    request.ctx.language = "en"
+    request.ctx.language = "en_US"
+
 
 @app.middleware("response")
 async def after_all_routes(request, response):

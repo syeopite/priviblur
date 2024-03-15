@@ -90,7 +90,7 @@
 
         <div class="post-interaction">
             <div class="note-count">
-                <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale="en_US")) }}</span>
+                <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</span>
             </div>
             <div class="interaction-buttons">
                 <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">

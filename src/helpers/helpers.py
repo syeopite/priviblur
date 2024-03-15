@@ -89,22 +89,6 @@ def deseq_urlencode(query_args):
     return urllib.parse.urlencode(query_args, doseq=True)
 
 
-def translate(language, id, number=None, substitution=None):
-    app = sanic.Sanic.get_app("Priviblur")
-
-    gettext_instance = app.ctx.GETTEXT_INSTANCES[language]
-
-    if number is not None:
-        translated = gettext_instance.ngettext(id, f"{id}_plural", number)
-    else:
-        translated = gettext_instance.gettext(id)
-
-    if substitution:
-        translated = translated.format(substitution)
-
-    return translated 
-
-
 async def create_poll_callback(ctx, blog, post_id):
     async def poll_callable(poll_id, expiration_timestamp):
         current_timestamp = round(datetime.datetime.utcnow().timestamp())
