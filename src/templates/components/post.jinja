@@ -19,7 +19,7 @@
         {% endif %}
     {%- endif -%}
 
-    {{- create_post_header(element) -}}
+    {{- create_post_header(request, element) -}}
 
     {%- if element.community_labels -%}
         <div class="post-content mature-content no-js">
@@ -36,7 +36,7 @@
     {%- if element.trail -%}
         {%- for trail_element in element.trail -%}
             <div class="trail-post">
-                {{create_post_header(trail_element)}}
+                {{create_post_header(request, trail_element)}}
                 {%- if request_poll_data -%}
                     {%- set trail_contains_errors, trail_content_tag = format_npf(
                                 trail_element.content,
@@ -62,7 +62,7 @@
     {# If the post contains content in addition to the trail then it is the reblogger replying #}
     {%- if element.trail and element.content -%}
         <div class="trail-post">
-            {{create_post_header(element, skip_reblog=True)}}
+            {{create_post_header(request, element, skip_reblog=True)}}
             {{- content_tag -}}
         </div>
     {%- else -%}
@@ -90,7 +90,7 @@
 
         <div class="post-interaction">
             <div class="note-count">
-                <span> {{- translate("en", "post_note_count", element.note_count, element.note_count | format_decimal(locale="en_US")) }}</span>
+                <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale="en_US")) }}</span>
             </div>
             <div class="interaction-buttons">
                 <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">

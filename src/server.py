@@ -181,12 +181,15 @@ async def root(request):
 
 
 @app.route("/robots.txt")
-async def handler(request):
+async def robotstxt_route(request):
     return await sanic.file("./assets/robots.txt")
 
+@app.middleware("request")
+async def before_all_routes(request):
+    request.ctx.language = "en"
 
 @app.middleware("response")
-async def before_all_routes(request, response):
+async def after_all_routes(request, response):
     # https://github.com/iv-org/invidious/blob/master/src/invidious/routes/before_all.cr
     response.headers["x-xss-protection"] = "1; mode=block"
     response.headers["x-content-type-options"] = "nosniff"

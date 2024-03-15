@@ -1,14 +1,14 @@
 <div class="community-label-cover">
-    <h3>{{translate("en", "post_community_label_mature_heading")}}</h3>
+    <h3>{{translate(request.ctx.language, "post_community_label_mature_heading")}}</h3>
     {%- if element.community_labels[0].value == 0 -%}
-        <p>{{translate("en", "post_community_label_generic_explanation")}}</p>
+        <p>{{translate(request.ctx.language, "post_community_label_generic_explanation")}}</p>
     {%- else -%}
         {% set labels = [] %}
         {% for label in element.community_labels %}
-            {% do labels.append(translate("en", "post_community_label_" + label.name.lower())) %}
+            {% do labels.append(translate(request.ctx.language, "post_community_label_" + label.name.lower())) %}
         {% endfor %}
-        <p> {{labels | format_list(locale="en")}} </p>
+        <p> {{labels | format_list(locale=request.ctx.language)}} </p>
     {%- endif -%}
-    <button class="with-js button unblur-post-button">{{translate("en", "post_community_label_show_post_button")}}</button>
-    <noscript><p class="no-js-view-community-post-instruction">{{translate("en", "post_community_label_no_js_show_post_instructions")}}</p></noscript>
+    <button class="with-js button unblur-post-button">{{translate(request.ctx.language, "post_community_label_show_post_button")}}</button>
+    <noscript><p class="no-js-view-community-post-instruction">{{translate(request.ctx.language, "post_community_label_no_js_show_post_instructions")}}</p></noscript>
 </div>

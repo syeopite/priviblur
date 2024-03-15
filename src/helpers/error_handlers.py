@@ -7,8 +7,8 @@ async def tumblr_error_login_walled(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "tumblr_error_blog_login_required_error_heading"),
-            "error_description": request.app.ctx.translate("en", "tumblr_error_blog_login_required_error_description"),
+            "error_heading": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_login_required_error_heading"),
+            "error_description": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_login_required_error_description"),
         },
         status=403
     )
@@ -20,8 +20,8 @@ async def tumblr_error_restricted_tag(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "tumblr_error_restricted_tag_error_heading"),
-            "error_description": request.app.ctx.translate("en", "tumblr_error_restricted_tag_description"),
+            "error_heading": request.app.ctx.translate(request.ctx.language, "tumblr_error_restricted_tag_error_heading"),
+            "error_description": request.app.ctx.translate(request.ctx.language, "tumblr_error_restricted_tag_description"),
         },
         status=403
     )
@@ -33,8 +33,8 @@ async def tumblr_error_unknown_blog(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "tumblr_error_blog_not_found_error_heading"),
-            "error_description": request.app.ctx.translate("en", "tumblr_error_blog_not_found_error_description"),
+            "error_heading": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_not_found_error_heading"),
+            "error_description": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_not_found_error_description"),
         },
         status=404
     )
@@ -46,8 +46,8 @@ async def request_timeout(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "priviblur_error_request_to_tumblr_timed_out_heading"),
-            "error_description": request.app.ctx.translate("en", "priviblur_error_request_to_tumblr_timed_out_description")
+            "error_heading": request.app.ctx.translate(request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_heading"),
+            "error_description": request.app.ctx.translate(request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_description")
         },
         status=504
     )
@@ -72,7 +72,7 @@ async def invalid_redirect(request, exception):
         context={
             "app": request.app,
             "exception": exception,
-            "error_heading": request.app.ctx.translate("en", "priviblur_error_invalid_internal_tumblr_redirect"),
+            "error_heading": request.app.ctx.translate(request.ctx.language, "priviblur_error_invalid_internal_tumblr_redirect"),
         },
     status=502
     )

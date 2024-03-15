@@ -1,6 +1,6 @@
 {% from 'components/icons/reblog.jinja' import reblog_icon  %}
 
-{%macro create_post_header(element, skip_reblog = False)%}
+{%macro create_post_header(request, element, skip_reblog = False)%}
 <div class="post-header">
     <div class="post-author">
         {%- if element.blog.active -%}
@@ -20,14 +20,14 @@
 
                 {% if element.date %}
                     <span class="separator">•</span>
-                    <span class="post-timestamp" title="{{element.date | format_datetime(locale="en")}}">  
+                    <span class="post-timestamp" title="{{element.date | format_datetime(locale=request.ctx.language)}}">  
                         {% set post_url = "/" + element.blog.name|e + "/" + element.id %}
                         {% if element.slug %}
                             {% set post_url = post_url + "/" + element.slug | e %}
                         {% endif %}
 
                         <a href="{{post_url}}">
-                            <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale="en")}}</time>
+                            <time datetime="{{element.date.strftime("%Y-%m-%dT%H:%M")}}">{{element.date | format_date(locale=request.ctx.language)}}</time>
                         </a>
                     </span>
                 {%- endif -%}
