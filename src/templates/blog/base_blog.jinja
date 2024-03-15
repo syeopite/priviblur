@@ -11,7 +11,7 @@
     {%- endif -%}
 {% endblock %}
 
-{% block content %}
+{% block center %}
     {%- include 'components/blog_header.jinja' -%}
 
     <form class="blog-search-bar search-bar" method="get" action="/{{blog.blog_info.name}}/search" autocomplete="off">
