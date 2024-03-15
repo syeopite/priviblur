@@ -34,8 +34,12 @@ a, a:visited, a:hover, a:active {
 }
 
 .contents {
-    margin: auto;
-    max-width: 590px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.center-column {
+    justify-self: center;
 }
 
 .footer-buffer {
@@ -88,11 +92,6 @@ a.logo {
 
 .search-bar input:focus {
     outline: 0;
-}
-
-.center-section {
-    height: 100%;
-    width: unset;
 }
 
 .nav-tab {
@@ -158,6 +157,8 @@ a.logo {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
+
+    max-width: 590px;
 }
 
 .paging {

@@ -54,8 +54,12 @@
             </div>
         </nav>
         <div class="contents">
-            {%- block content -%}
-            {%- endblock -%}
+            <div class="left-column"></div>
+            <div class="center-column">
+                {%- block center -%}
+                {%- endblock -%}
+            </div>
+            <div class="right-column"></div>
         </div>
         <div class="footer-buffer"></div>
         <footer class="page-footer">
