@@ -34,8 +34,9 @@ a, a:visited, a:hover, a:active {
 }
 
 .contents {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .center-column {
@@ -128,6 +129,11 @@ a.logo {
 }
 
 @media screen and (min-width: 768px) {
+    .contents {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .navbar {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
