@@ -6,8 +6,6 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  Priviblur\n"
-"POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2023-11-16 00:31-0800\n"
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
@@ -149,3 +147,6 @@ msgstr "Hover over me to view the post"
 
 msgid "blog_search_placeholder_text"
 msgstr "Search posts"
+
+msgid "settings_header"
+msgstr "Settings"
