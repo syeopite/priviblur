@@ -11,6 +11,21 @@
         <!-- Once more options are added, the various settings below
         will be sorted into separate tabs -->
         <div class="main-tab">
+            <div id="language-option">
+                <div class="option-info-box">
+                    <label for="language-selector">{{translate(request.ctx.language, "settings_language_selector")}}</label>
+                    <p id="language-selector-info-box">{{translate(request.ctx.language, "settings_language_selector_desc")}}</p>
+                </div>
+                <select name="language-selector" id="language-selector" aria-describedby="language-selector-info-box">
+                {%- for lang in request.app.ctx.SUPPORTED_LANGUAGES %}
+                    {% if lang == request.ctx.language %}
+                        <option name="{{lang}}" selected>{{-babellocale.parse(lang).get_language_name()}}</option>
+                    {% else %}
+                        <option name="{{lang}}">{{-babellocale.parse(lang).get_language_name()}}</option>
+                    {% endif %}
+                {%- endfor %}
+                </select>
+            </div>
         </div>
         <div class="buffer"></div>
         <div id="settings-footer">
