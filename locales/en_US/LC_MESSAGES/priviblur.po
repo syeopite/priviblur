@@ -150,3 +150,9 @@ msgstr "Search posts"
 
 msgid "settings_header"
 msgstr "Settings"
+
+msgid "settings_language_selector"
+msgstr "Language"
+
+msgid "settings_language_selector_desc"
+msgstr "Select display language"
