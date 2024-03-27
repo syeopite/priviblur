@@ -1,0 +1,59 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    border-radius: 10px;
+    background: white;
+    height: 300px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+    .settings {
+        width: 590px;
+    }
+}
+
+.settings .main-tab > * {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings > hr {
+    margin: 15px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.settings label {
+    font-weight: 600;
+}
+
+#setting-heading > h2 {
+    margin: 0;
+}
+
+#settings-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#save-settings-button {
+    background: #eeeeef;
+    color: #383b42;
+    font-weight: 450;
+    letter-spacing: 0.3px;
+    padding: 10px 15px;
+    font-size: 14px;
+
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#save-settings-button:hover {
+    background: #dcdcdc;
+}

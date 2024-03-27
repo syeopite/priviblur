@@ -43,7 +43,7 @@ a, a:visited, a:hover, a:active {
     justify-self: center;
 }
 
-.footer-buffer {
+.buffer {
     flex-grow: 1;
     flex-shrink: 1;
 }

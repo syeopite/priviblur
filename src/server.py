@@ -8,6 +8,7 @@ import copy
 import sanic
 import aiohttp
 import orjson
+import babel
 import babel.numbers
 import babel.dates
 import babel.lists
@@ -42,6 +43,7 @@ if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
 
 
 app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
+app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
 
 # Constants
 
@@ -156,6 +158,7 @@ async def initialize(app):
     app.ext.environment.globals["url_handler"] = helpers.url_handler
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
+    app.ext.environment.globals["babellocale"] = babel.Locale
 
 
 @app.listener("main_process_start")
