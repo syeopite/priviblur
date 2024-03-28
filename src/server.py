@@ -15,8 +15,7 @@ import babel.lists
 import redis.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, priviblur_extractor
-from . import priviblur_extractor
+from . import routes, priviblur_extractor, preferences
 from .config import load_config
 from .helpers import setup_logging, helpers, i18n, error_handlers, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
@@ -184,7 +183,17 @@ async def route(request):
 
 @app.middleware("request")
 async def before_all_routes(request):
-    request.ctx.language = "en_US"
+    request.ctx.preferences = preferences.UserPreferences(
+            **config.default_user_preferences._asdict()
+        )
+
+    if request.cookies.get("settings"):
+        request.ctx.preferences = preferences.dataclasses.replace(
+            request.ctx.preferences,
+            **dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+        )
+
+    request.ctx.language = request.ctx.preferences.language
 
 
 @app.middleware("response")

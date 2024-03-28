@@ -3,7 +3,7 @@ import tomllib
 
 from typing import NamedTuple
 
-from . import deployment, priviblur_backend, cache_config, logging_config, misc
+from . import deployment, priviblur_backend, cache_config, user_preferences, logging_config, misc
 
 
 class PriviblurConfig(NamedTuple):
@@ -21,6 +21,7 @@ class PriviblurConfig(NamedTuple):
 
     deployment: deployment.DeploymentConfig
     backend: priviblur_backend.PriviblurBackendConfig
+    default_user_preferences: user_preferences.DefaultUserPreferences
     cache: cache_config.CacheConfig
     logging: logging_config.LoggingConfig
     misc: misc.MiscellaneousConfig
@@ -50,6 +51,7 @@ def load_config(path : str) -> PriviblurConfig:
         # Corresponding object, internal name, section name in the config file
         (deployment.DeploymentConfig, "deployment", "deployment"),
         (priviblur_backend.PriviblurBackendConfig, "backend", "priviblur_backend"),
+        (user_preferences.DefaultUserPreferences, "default_user_preferences", "default_user_preferences"),
         (cache_config.CacheConfig, "cache", "cache"),
         (logging_config.LoggingConfig, "logging", "logging"),
         (misc.MiscellaneousConfig, "misc", "misc")
@@ -68,6 +70,8 @@ def load_config(path : str) -> PriviblurConfig:
                 arguments_to_load[k] = v
 
         priviblur_config_data[internal_name] = section_object(**arguments_to_load)
+
+    # TODO Validate invalid config values
 
     return PriviblurConfig(
         **priviblur_config_data

@@ -12,7 +12,6 @@
 # # 
 # # To enable caching, Redis is required, you then have to uncomment "url" and set it accordingly. Every other options in this section will use their default value (indicated next to them) if they are kept commented out.
 # [cache]
-
     # url =
     # # For docker use the following:
     # url = "redis://priviblur-redis:6379"
@@ -39,6 +38,13 @@
 
     # # Timeout for fetching image responses from Tumblr
     # image_response_timeout = 30
+
+
+# # Controls default user preferences
+# [default_user_preferences]
+#     # User interface language
+#     # For available options see locales dir
+#     language = "en_US"
 
 
 # Controls logging behavior
