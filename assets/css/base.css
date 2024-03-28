@@ -121,7 +121,8 @@ a.logo {
 
 .right-section {
     width: 100%;
-    flex-direction: row-reverse;
+    gap: 20px;
+    justify-content: flex-end;
 
     position: absolute;
     right: 30px;
