@@ -8,14 +8,14 @@ import copy
 import sanic
 import aiohttp
 import orjson
+import babel
 import babel.numbers
 import babel.dates
 import babel.lists
 import redis.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, priviblur_extractor
-from . import priviblur_extractor
+from . import routes, priviblur_extractor, preferences
 from .config import load_config
 from .helpers import setup_logging, helpers, i18n, error_handlers, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
@@ -42,6 +42,7 @@ if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
 
 
 app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
+app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
 
 # Constants
 
@@ -156,6 +157,7 @@ async def initialize(app):
     app.ext.environment.globals["url_handler"] = helpers.url_handler
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
+    app.ext.environment.globals["babellocale"] = babel.Locale
 
 
 @app.listener("main_process_start")
@@ -176,7 +178,17 @@ async def robotstxt_route(request):
 
 @app.middleware("request")
 async def before_all_routes(request):
-    request.ctx.language = "en_US"
+    request.ctx.preferences = preferences.UserPreferences(
+            **config.default_user_preferences._asdict()
+        )
+
+    if request.cookies.get("settings"):
+        request.ctx.preferences = preferences.dataclasses.replace(
+            request.ctx.preferences,
+            **dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+        )
+
+    request.ctx.language = request.ctx.preferences.language
 
 
 @app.middleware("response")

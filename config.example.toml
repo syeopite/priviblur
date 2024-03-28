@@ -3,11 +3,19 @@
     host = "127.0.0.1"
     port = 8000
 
+    # # Domain which the instance is hosted. By default it is unset.
+    # # This is primary used to generate links to the instance
+    # domain =
+
+    # # Tells Priviblur that it supports HTTPs.
+    # # This is primary used to generate links, and for secure cookies.
+    # https = false
+
     # Amount of worker Priviblur instances to spawn. Increases speed significantly.
     # workers = 1
 
     # # If you're running Priviblur behind a remote proxy, one or more of the following must be set
-    # # can also be set via env variables by captialzing and prefixing with PRIVIBLUR_
+    # # can also be set via env variables by capitalizing and prefixing with PRIVIBLUR_
     # #
     # # For more information see
     # # https://sanic.dev/en/guide/advanced/proxy-headers.html
@@ -17,6 +25,7 @@
     # forwarded_secret =
     # real_ip_header =
     # proxies_count =
+
 
 # Controls redis cache options
 # Ignore to disable the cache
@@ -39,6 +48,7 @@
     # Number of seconds to cache individual posts for
     # cache_blog_post_for = 300
 
+
 # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
     # # Timeout for requests to Tumblr's API
@@ -46,6 +56,13 @@
 
     # # Timeout for fetching image responses from Tumblr 
     # image_response_timeout = 30
+
+
+# # Controls default user preferences
+# [default_user_preferences]
+#     # User interface language
+#     # For available options see locales dir
+#     language = "en_US"
 
 
 # Controls logging behavior
