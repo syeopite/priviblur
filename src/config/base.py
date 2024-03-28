@@ -3,7 +3,7 @@ import tomllib
 
 from typing import NamedTuple
 
-from . import deployment, priviblur_backend, cache_config, logging_config, misc
+from . import deployment, priviblur_backend, cache_config, user_preferences, logging_config, misc
 
 
 class PriviblurConfig(NamedTuple):
@@ -21,6 +21,7 @@ class PriviblurConfig(NamedTuple):
 
     deployment: deployment.DeploymentConfig
     backend: priviblur_backend.PriviblurBackendConfig
+    default_user_preferences: user_preferences.DefaultUserPreferences
     cache: cache_config.CacheConfig
     logging: logging_config.LoggingConfig
     misc: misc.MiscellaneousConfig
@@ -44,13 +45,17 @@ def load_config(path : str):
 
     deployment_config_values = config.get("deployment", {})
     backend_config_values = config.get("priviblur_backend", {})
+    default_user_preferences = config.get("default_user_preferences", {})
     cache_config_values = config.get("cache", {})
     logging_config_values = config.get("logging", {})
     miscellaneous_config_values = config.get("misc",  {})
 
+    # TODO Validate invalid config values
+
     return PriviblurConfig(
         deployment=deployment.DeploymentConfig(**deployment_config_values),
         backend=priviblur_backend.PriviblurBackendConfig(**backend_config_values),
+        default_user_preferences=user_preferences.DefaultUserPreferences(**default_user_preferences),
         cache=cache_config.CacheConfig(**cache_config_values),
         logging=logging_config.LoggingConfig(**logging_config_values),
         misc=misc.MiscellaneousConfig(**miscellaneous_config_values)

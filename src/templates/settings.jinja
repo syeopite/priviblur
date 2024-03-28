@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/settings.css?v={{app.ctx.CURRENT_COMMIT}}">
 {% endblock %}
 {% block center %}
-    <form class="settings">
+    <form class="settings" method="post">
         <div id="setting-heading">
             <h2>{{translate(request.ctx.language, "settings_header")}}</h2>
         </div>
@@ -16,12 +16,12 @@
                     <label for="language-selector">{{translate(request.ctx.language, "settings_language_selector")}}</label>
                     <p id="language-selector-info-box">{{translate(request.ctx.language, "settings_language_selector_desc")}}</p>
                 </div>
-                <select name="language-selector" id="language-selector" aria-describedby="language-selector-info-box">
+                <select name="language" id="language-selector" aria-describedby="language-selector-info-box">
                 {%- for lang in request.app.ctx.SUPPORTED_LANGUAGES %}
                     {% if lang == request.ctx.language %}
-                        <option name="{{lang}}" selected>{{-babellocale.parse(lang).get_language_name()}}</option>
+                        <option value="{{lang}}" selected>{{-babellocale.parse(lang).get_language_name()}}</option>
                     {% else %}
-                        <option name="{{lang}}">{{-babellocale.parse(lang).get_language_name()}}</option>
+                        <option value="{{lang}}">{{-babellocale.parse(lang).get_language_name()}}</option>
                     {% endif %}
                 {%- endfor %}
                 </select>
