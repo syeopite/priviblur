@@ -2,11 +2,16 @@ import sys
 import gettext
 import typing
 
+import babel
 import sanic
 
 SUPPORTED_LANGUAGES = [
     "en_US"
 ]
+
+LANGUAGE_NAMES = {
+    locale : babel.Locale.parse(locale).get_language_name().capitalize() for locale in SUPPORTED_LANGUAGES
+}
 
 def initialize_locales() -> typing.Mapping[str, gettext.GNUTranslations]:
     """Initializes locales into GNUTranslations instances"""
