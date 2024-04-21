@@ -22,7 +22,8 @@
 # Ignore to disable the cache
 #
 # [cache]
-    # url =
+    # If you are using Docker Compose, set the URL to the Redis container like this:
+    # url = "redis://redis:6379"
 
     # Number of seconds to cache poll results from active polls
     # cache_active_poll_results_for = 3600
