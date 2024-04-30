@@ -1,3 +1,45 @@
+/* https://css-tricks.com/a-dry-approach-to-color-themes-in-css/ */
+
+:root {
+    --ON: initial;
+    --OFF: ;
+}
+
+.light-theme {
+    --light: var(--ON);
+    /* --dark: var(--OFF); */
+}
+
+.dark-theme {
+    --light: var(--OFF);
+    /* --dark: var(--ON); */
+}
+
+/* If user prefers dark, then that's what they'll get */
+@media (prefers-color-scheme: dark) {
+    .theme-default {
+      --light: var(--OFF);
+      /* --dark: var(--ON); */
+    }
+}
+
+:root {
+    --color-gray-900: var(--light, #000000);
+    --color-gray-800: var(--light, #383b42);
+    --color-gray-700: var(--light, #4f4f4f);
+    --color-gray-600: var(--light, #6b7280);
+    --color-gray-500: var(--light, #8e8e8e);
+    --color-gray-400: var(--light, #acacac);
+    --color-gray-350: var(--light, #BABABA);
+    --color-gray-300: var(--light, #dcdcdc);
+    --color-gray-250: var(--light, #edeeee);
+    --color-gray-200: var(--light, #eeeeef);
+    --color-gray-100: var(--light, #f5f5f5);
+    --color-gray-75: var(--light, #f8f8f8);
+    --color-gray-50: var(--light, #ffffff);
+}
+
+
 html, body, .container {
     min-height: 100vh;
 }
@@ -5,7 +47,7 @@ html, body, .container {
 body {
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    background: #EEEEEF;
+    background: var(--color-gray-200);
     margin: 0;
 }
 
@@ -53,7 +95,7 @@ a, a:visited, a:hover, a:active {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    background: white;
+    background: var(--color-gray-50);
     padding: 20px 25px 0;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
@@ -73,13 +115,13 @@ a.logo {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1.2px;
-    color: #6b7280;
+    color: var(--color-gray-600);
 }
 
 .search-bar {
     display: flex;
     width: 100%;
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--color-gray-300);
     border-radius: 25px;
     padding: 10px 10px;
 }
@@ -105,11 +147,11 @@ a.logo {
 }
 
 .nav-tab:hover {
-    background: #f8f8f8;
+    background:  var(--color-gray-75);
 }
 
 .selected-tab {
-    border-color: #6b7280;
+    border-color: var(--color-gray-600);
     border-width: 0 0 3px;
     border-style: solid;
 }
@@ -176,7 +218,7 @@ a.logo {
 
 .next-page {
     display: inline-block;
-    color: #383b42;
+    color: var(--color-gray-800);
     font-weight: 450;
     letter-spacing: 0.3px;
     padding: 12px 0px;
@@ -185,11 +227,11 @@ a.logo {
     font-weight: 550;
 
     border-radius: 25px;
-    background: #eeeeef;
+    background: var(--color-gray-200);
 }
 
 .next-page:hover {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 @media screen and (min-width: 768px) {
@@ -219,7 +261,7 @@ a.logo {
     display: flex;
     align-items: center;
     background: none;
-    color: #6b7280;
+    color: var(--color-gray-600);
     height: 40px;
     padding: 5px 10px;
     font-size: 14px;
@@ -232,7 +274,7 @@ a.logo {
 }
 
 li.control-bar-action:hover {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 .control-bar-action > span > svg {
@@ -246,7 +288,7 @@ li.control-bar-action:hover {
     top: 50px;
     padding: 0;
     list-style: None;
-    background: #EEEEEF;
+    background: var(--color-gray-200);
 	box-shadow: 0 8px 10px 1px rgba(0,0,0,.14), 0 5px 5px -3px rgba(0,0,0,.2), 0 3px 14px 2px rgba(0,0,0,.12);
     border-radius: 5px;
     left: 50%;
@@ -265,15 +307,15 @@ li.control-bar-action:hover {
 }
 
 .control-bar-dropdown-menu li:hover {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 .control-bar-dropdown-menu .selected {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 .active-dropdown-menu {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 .active-dropdown-menu .control-bar-dropdown-menu{
@@ -310,7 +352,7 @@ li.no-js .control-bar-dropdown-menu {
     font-size: 12px;
     margin-bottom: 10px;
     gap: 10px;
-    color: #4f4f4f;
+    color: var(--color-gray-700);
 }
 
 .page-footer a {

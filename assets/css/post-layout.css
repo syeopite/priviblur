@@ -91,7 +91,7 @@ a.inline-link, a.inline-mention {
 }
 
 .link-block-subtitles {
-  color: #6b7280;
+  color: var(--color-gray-600);
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -113,7 +113,7 @@ a.inline-link, a.inline-mention {
 .poll-choice {
   border: 0;
   border-radius: 10px;
-  background: #edeeee;
+  background: var(--color-gray-250);
   padding: 8px 18px;
   overflow: hidden;
 }
@@ -123,18 +123,18 @@ a.inline-link, a.inline-mention {
 }
 
 .vote-proportion {
-  background: #dcdcdc;
+  background: var(--color-gray-300);
   border-radius: 10px 0px 0px 10px;
 }
 
 .poll-winner >.vote-proportion {
-  background: #BABABA;
+  background: var(--color-gray-350);
 }
 
 .poll-block footer {
   font-size: 15px;
   margin-top: 0;
-  color: #6b7280;
+  color: var(--color-gray-600);
 }
 
 a.toggle-poll-results {

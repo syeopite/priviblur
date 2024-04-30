@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100vw;
     border-radius: 10px;
-    background: white;
+    background: var(--color-gray-50);
     height: 300px;
     padding: 25px;
     box-sizing: border-box;
@@ -44,8 +44,8 @@
 }
 
 #save-settings-button {
-    background: #eeeeef;
-    color: #383b42;
+    background: var(--color-gray-200);
+    color: var(--color-gray-800);
     font-weight: 450;
     letter-spacing: 0.3px;
     padding: 10px 15px;
@@ -57,12 +57,11 @@
 }
 
 #save-settings-button:hover {
-    background: #dcdcdc;
+    background: var(--color-gray-300);
 }
 
 .option-info-box p {
     margin-top: 5px;
-    color: #6b7280;
-    color: #8e8e8e;
+    color: var(--color-gray-500);
     font-weight: 500;
 }
