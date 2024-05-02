@@ -4,6 +4,7 @@
     margin-bottom: 10px;
     border-radius: 10px;
     padding-bottom: 30px;
+    max-width: 590px;
 }
 
 #blog-header, .blog-header-textual-content {
