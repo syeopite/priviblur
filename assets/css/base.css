@@ -137,6 +137,10 @@ a.logo {
     outline: 0;
 }
 
+.search-bar .icon path {
+    fill: var(--color-gray-400);
+}
+
 .nav-tab {
     display: flex;
     flex-direction: column;
@@ -161,6 +165,10 @@ a.logo {
     height: 30px;
 }
 
+.nav-tab path, .right-section path, .icon path {
+    fill: var(--color-gray-600);
+}
+
 .right-section {
     width: 100%;
     gap: 20px;
@@ -168,7 +176,6 @@ a.logo {
 
     position: absolute;
     right: 30px;
-
 }
 
 @media screen and (min-width: 768px) {

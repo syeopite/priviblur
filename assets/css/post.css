@@ -147,7 +147,7 @@ a.blog-name:hover {
 .post-tag {
   display: inline-block;
   background: var(--color-gray-100);
-  color: var(--color-gray-400);
+  color: var(--color-gray-350);
   border-radius: 6px;
   padding: 1px 5px;
   font-weight: 500;
@@ -163,6 +163,10 @@ a.blog-name:hover {
   display: flex;
   gap: 15px;
   align-items: center;
+}
+
+.interaction-buttons path {
+  fill: var(--color-gray-350);
 }
 
 .note-count {

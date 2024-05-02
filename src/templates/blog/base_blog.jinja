@@ -15,7 +15,7 @@
     {%- include 'components/blog_header.jinja' -%}
 
     <form class="blog-search-bar search-bar" method="get" action="/{{blog.blog_info.name}}/search" autocomplete="off">
-        {{-search_icon(20, 20, fill="#9c9c9c")}}
+        {{-search_icon(20, 20)}}
         {%- if blog_search_query is defined -%}
             <input name="q" type="text" value="{{blog_search_query | e}}" placeholder="{{translate(request.ctx.language, "blog_search_placeholder_text")}}"></input>
         {%- else -%}

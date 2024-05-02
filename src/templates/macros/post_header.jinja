@@ -38,14 +38,14 @@
                     <div class="reblog-attribution">
                         {%- if not element.reblog_from.blog_name -%}
                             {%- if element.reblog_root and element.reblog_root.post_id == element.reblog_from.post_id -%}
-                                {{reblog_icon(16, 16, "#6b7280")}}
+                                {{reblog_icon(16, 16)}}
                                 <a class="link blog-name" href="{{url_handler(element.reblog_root.post_url)}}">{{element.reblog_root.blog_name}}</a>
                             {%- else -%}
-                                {{reblog_icon(16, 16, "#6b7280")}}
+                                {{reblog_icon(16, 16)}}
                                 <a class="link blog-name hidden-reblog" href="{{url_handler(element.reblog_from.post_url)}}">reblogged</a>
                             {%- endif -%}
                         {%- else -%}
-                            {{reblog_icon(16, 16, "#6b7280")}}
+                            {{reblog_icon(16, 16)}}
                             <a class="link blog-name" href="{{url_handler(element.reblog_from.post_url)}}">{{element.reblog_from.blog_name}}</a>
                         {%- endif -%}
                     </div>
