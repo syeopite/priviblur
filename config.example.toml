@@ -10,7 +10,7 @@
 # # Controls redis cache options
 # # Ignore to disable the cache
 # # 
-# [cache] # To enable caching Redis is required, uncomment every lines to it
+# [cache] # To enable caching Redis is required and you then have uncomment every options in this section
 
     # url =
     # # For docker use the following:
