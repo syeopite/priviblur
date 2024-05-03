@@ -6,6 +6,7 @@
     # Amount of worker Priviblur instances to spawn. Increases speed significantly.
     # workers = 1
 
+
 # # Controls redis cache options
 # # Ignore to disable the cache
 # # 
