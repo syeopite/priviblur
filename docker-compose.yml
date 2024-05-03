@@ -6,11 +6,12 @@ services:
       dockerfile: docker/Dockerfile
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8000:8000" # Replace with "8000:8000" if you don't use a reverse proxy
     volumes:
       - ./config.toml:/priviblur/config.toml:Z,ro
 
-  # Taken from https://github.com/zedeus/nitter/blob/b62d73dbd373f08af07c7a79efcd790d3bc1a49c/docker-compose.yml#L27-L44
+  # Redis is technically optional but is used for caching
+  # Partially taken from https://github.com/zedeus/nitter/blob/b62d73dbd373f08af07c7a79efcd790d3bc1a49c/docker-compose.yml#L27-L44
   priviblur-redis:
     image: redis:6.2-alpine
     container_name: priviblur-redis
