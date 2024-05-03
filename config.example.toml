@@ -1,6 +1,6 @@
 # Controls deployment options
 [deployment]
-    host = "127.0.0.1"
+    host = "0.0.0.0" # Set to 127.0.0.1 if you use a reverse proxy, or access it locally
     port = 8000
 
     # Amount of worker Priviblur instances to spawn. Increases speed significantly.
@@ -21,7 +21,7 @@
 # Controls redis cache options
 # Ignore to disable the cache
 #
-# [cache]
+# [cache] # Redis required, uncomment every lines to enable caching
     # url =
 
     # Number of seconds to cache poll results from active polls
@@ -44,7 +44,7 @@
     # # Timeout for requests to Tumblr's API
     # main_response_timeout = 10
 
-    # # Timeout for fetching image responses from Tumblr 
+    # # Timeout for fetching image responses from Tumblr
     # image_response_timeout = 30
 
 
