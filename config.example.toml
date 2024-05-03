@@ -18,28 +18,31 @@
     # real_ip_header =
     # proxies_count =
 
-# Controls redis cache options
-# Ignore to disable the cache
-#
-# [cache] # Redis required, uncomment every lines to enable caching
-    # url =
+# # Controls redis cache options
+# # Ignore to disable the cache
+# # 
+# [cache] # To enable caching Redis is required, uncomment every lines to it
 
-    # Number of seconds to cache poll results from active polls
+    # url =
+    # # For docker use the following:
+    # url = "redis://priviblur-redis:6379"
+
+    # # Number of seconds to cache poll results from active polls
     # cache_active_poll_results_for = 3600
 
-    # Number of seconds to cache poll results from expired polls
+    # # Number of seconds to cache poll results from expired polls
     # cache_expired_poll_results_for = 86400
 
-    # Number of seconds to cache feed (explore, search, etc) results for
+    # # Number of seconds to cache feed (explore, search, etc) results for
     # cache_feed_for = 3600
 
-    # Number of seconds to cache blog feed (blog posts, blog search, blog tagged posts, etc) results for
+    # # Number of seconds to cache blog feed (blog posts, blog search, blog tagged posts, etc) results for
     # cache_blog_feed_for = 3600
 
-    # Number of seconds to cache individual posts for
+    # # Number of seconds to cache individual posts for
     # cache_blog_post_for = 300
 
-# Controls behaviors pertaining to the way Priviblur requests Tumblr
+# # Controls behaviors pertaining to the way Priviblur requests Tumblr
 # [priviblur_backend]
     # # Timeout for requests to Tumblr's API
     # main_response_timeout = 10
