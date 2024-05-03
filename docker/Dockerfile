@@ -13,7 +13,7 @@ RUN apk add --no-cache git python3 py3-pip rust cargo tini && \
     adduser -u 1000 -S priviblur -G priviblur && \
     pip3 install --break-system-packages -r requirements.txt && \
     pybabel compile -d locales -D priviblur && \
-    chown -R priviblur:priviblur /priviblur && \
+    chown -R priviblur:priviblur /priviblur && \ # Needed for the following command other it will error out with "fatal: detected dubious ownership in repository at '/priviblur'"
     git config --global --add safe.directory /priviblur
 
 EXPOSE 8000
