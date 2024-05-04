@@ -174,6 +174,11 @@ async def robotstxt_route(request):
     return await sanic.file("./assets/robots.txt")
 
 
+@app.route("/config")
+async def route(request):
+    import prettyprinter
+    prettyprinter.pprint(request.app.ctx.PRIVIBLUR_CONFIG)
+
 @app.middleware("request")
 async def before_all_routes(request):
     request.ctx.language = "en_US"

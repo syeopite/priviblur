@@ -13,7 +13,7 @@ class PriviblurConfig(NamedTuple):
 
     Attributes:
         deployment: Configuration settings for deploying Priviblur
-        backend: Configuration settings to customize 
+        backend: Configuration settings to customize
             how Priviblur requests Tumblr
         logging: Configuration settings to change logging behavior
         misc: Configuration settings that doesn't fit into any other categories
@@ -26,7 +26,7 @@ class PriviblurConfig(NamedTuple):
     misc: misc.MiscellaneousConfig
 
 
-def load_config(path : str):
+def load_config(path : str) -> PriviblurConfig:
     """Loads a TOML configuration file into a PriviblurConfig object"""
 
     try:
@@ -42,18 +42,35 @@ def load_config(path : str):
         print("Cannot access the configuration file. Do I have the right permissions?")
         sys.exit()
 
-    deployment_config_values = config.get("deployment", {})
-    backend_config_values = config.get("priviblur_backend", {})
-    cache_config_values = config.get("cache", {})
-    logging_config_values = config.get("logging", {})
-    miscellaneous_config_values = config.get("misc",  {})
+    # The config file can contain additional arguments that Priviblur does not recognize.
+    # As such some processing is needed to only retrieve what Priviblur can understand
+    
+    # Defines config sections
+    config_sections = (
+        # Corresponding object, internal name, section name in the config file
+        (deployment.DeploymentConfig, "deployment", "deployment"),
+        (priviblur_backend.PriviblurBackendConfig, "backend", "priviblur_backend"),
+        (cache_config.CacheConfig, "cache", "cache"),
+        (logging_config.LoggingConfig, "logging", "logging"),
+        (misc.MiscellaneousConfig, "misc", "misc")
+    )
+
+    priviblur_config_data = {}
+
+    for section_definition in config_sections:
+        section_object, internal_name, external_name = section_definition
+        arguments_to_load = {}
+        arguments_from_config = config.get(external_name, {})
+
+        # Ignore unknown config fields
+        for k, v in arguments_from_config.items():
+            if k in section_object._fields:
+                arguments_to_load[k] = v
+
+        priviblur_config_data[internal_name] = section_object(**arguments_to_load)
 
     return PriviblurConfig(
-        deployment=deployment.DeploymentConfig(**deployment_config_values),
-        backend=priviblur_backend.PriviblurBackendConfig(**backend_config_values),
-        cache=cache_config.CacheConfig(**cache_config_values),
-        logging=logging_config.LoggingConfig(**logging_config_values),
-        misc=misc.MiscellaneousConfig(**miscellaneous_config_values)
+        **priviblur_config_data
     )
 
 
