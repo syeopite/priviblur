@@ -24,19 +24,19 @@
 }
 
 :root {
-    --color-gray-900: var(--light, #000000);
-    --color-gray-800: var(--light, #383b42);
-    --color-gray-700: var(--light, #4f4f4f);
-    --color-gray-600: var(--light, #6b7280);
-    --color-gray-500: var(--light, #8e8e8e);
-    --color-gray-400: var(--light, #acacac);
-    --color-gray-350: var(--light, #BABABA);
-    --color-gray-300: var(--light, #dcdcdc);
-    --color-gray-250: var(--light, #edeeee);
-    --color-gray-200: var(--light, #eeeeef);
-    --color-gray-100: var(--light, #f5f5f5);
-    --color-gray-75: var(--light, #f8f8f8);
-    --color-gray-50: var(--light, #ffffff);
+    --color-gray-900: var(--light, hsl(255, 0%, 10%));
+    --color-gray-800: var(--light, hsl(255, 0%, 16%));
+    --color-gray-700: var(--light, hsl(255, 0%, 25%));
+    --color-gray-600: var(--light, hsl(255, 0%, 40%));
+    --color-gray-500: var(--light, hsl(255, 0%, 54%));
+    --color-gray-400: var(--light, hsl(255, 0%, 65%));
+    --color-gray-300: var(--light, hsl(255, 0%, 80%));
+    --color-gray-250: var(--light, hsl(255, 0%, 85%));
+    --color-gray-200: var(--light, hsl(255, 0%, 90%));
+    --color-gray-175: var(--light, hsl(255, 0%, 92%));
+    --color-gray-150: var(--light, hsl(255, 0%, 96%));
+    --color-gray-100: var(--light, hsl(255, 0%, 98%));
+    --color-gray-0: var(--light, #ffffff);
 }
 
 
@@ -47,7 +47,7 @@ html, body, .container {
 body {
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-size: 14px;
-    background: var(--color-gray-200);
+    background: var(--color-gray-175);
     margin: 0;
 }
 
@@ -95,7 +95,7 @@ a, a:visited, a:hover, a:active {
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    background: var(--color-gray-50);
+    background: var(--color-gray-0);
     padding: 20px 25px 0;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
@@ -138,7 +138,7 @@ a.logo {
 }
 
 .search-bar .icon path {
-    fill: var(--color-gray-400);
+    fill: var(--color-gray-500);
 }
 
 .nav-tab {
@@ -151,7 +151,7 @@ a.logo {
 }
 
 .nav-tab:hover {
-    background:  var(--color-gray-75);
+    background:  var(--color-gray-200);
 }
 
 .selected-tab {
@@ -281,7 +281,7 @@ a.logo {
 }
 
 li.control-bar-action:hover {
-    background: var(--color-gray-300);
+    background: var(--color-gray-250);
 }
 
 .control-bar-action > span > svg {
@@ -295,7 +295,7 @@ li.control-bar-action:hover {
     top: 50px;
     padding: 0;
     list-style: None;
-    background: var(--color-gray-200);
+    background: var(--color-gray-100);
 	box-shadow: 0 8px 10px 1px rgba(0,0,0,.14), 0 5px 5px -3px rgba(0,0,0,.2), 0 3px 14px 2px rgba(0,0,0,.12);
     border-radius: 5px;
     left: 50%;
@@ -314,7 +314,7 @@ li.control-bar-action:hover {
 }
 
 .control-bar-dropdown-menu li:hover {
-    background: var(--color-gray-300);
+    background: var(--color-gray-250);
 }
 
 .control-bar-dropdown-menu .selected {
@@ -322,7 +322,7 @@ li.control-bar-action:hover {
 }
 
 .active-dropdown-menu {
-    background: var(--color-gray-300);
+    background: var(--color-gray-250);
 }
 
 .active-dropdown-menu .control-bar-dropdown-menu{
