@@ -14,7 +14,6 @@ services:
   priviblur-redis:
     image: redis:6.2-alpine
     container_name: priviblur-redis
-    hostname: redis
     command: redis-server --loglevel warning
     volumes:
       - priviblur-redis:/data
