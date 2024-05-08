@@ -10,16 +10,32 @@ from ..cache import get_blog_posts, get_blog_post, get_blog_search_results
 blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>")
 
 
-async def render_blog_post(app, blog, post, request_poll_data = False):
-        return await sanic_ext.render(
-            "blog/blog_post.jinja",
-            context={
-                "app": app,
-                "blog": blog,
-                "element": post,
-                "request_poll_data" : request_poll_data
-            }
-        )
+async def render_blog_post(request, blog, post):
+    """Handles the logic for rendering viewing a single blog post"""
+    login_required = False
+
+    try:
+        # Fetches blog info and some posts from before this post
+        blog_info = await get_blog_posts(request.app.ctx, blog, before_id=post.id)
+    except priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError:
+        blog_info = priviblur_extractor.models.blog.Blog(post.blog, (), None, None)
+        login_required = True
+
+    if request.args.get("fetch_polls") in ("1", "true"):
+        fetch_poll_results = True
+    else:
+        fetch_poll_results = False
+
+    return await sanic_ext.render(
+        "blog/blog_post.jinja",
+        context={
+            "app": request.app,
+            "blog": blog_info,
+            "element": post,
+            "request_poll_data" : fetch_poll_results,
+            "login_required": login_required
+        }
+    )
 
 
 @blogs.get("/")
@@ -98,6 +114,7 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
         }
     )
 
+
 @blogs.get("/search")
 async def query_param_redirect(request: sanic.Request, blog: str):
     """Endpoint for /search to redirect q= queries to /search/<query>"""
@@ -117,15 +134,7 @@ async def _blog_post_no_slug(request: sanic.Request, blog: str, post_id: str):
     if post.slug:
         return sanic.redirect(request.app.url_for("blogs._blog_post", blog=blog, post_id=post_id, slug=post.slug, **request.args))
     else:
-        # Fetch blog info and some posts from before this post
-        blog_info = await get_blog_posts(request.app.ctx, blog, before_id=post.id)
-
-        if request.args.get("fetch_polls") in {"1", "true"}:
-            fetch_poll_results = True
-        else:
-            fetch_poll_results = False
-
-        return await render_blog_post(request.app, blog_info, post, fetch_poll_results)
+        return await render_blog_post(request, blog, post)
 
 
 @blogs.get("/<post_id:int>/<slug:str>")
@@ -143,15 +152,7 @@ async def _blog_post(request: sanic.Request, blog: str, post_id: str, slug: str)
         else:
             return sanic.redirect(request.app.url_for("blogs._blog_post_no_slug", blog=blog, post_id=post_id, **request.args))
     else:
-        # Fetch blog info and some posts from before this post
-        blog_info = await get_blog_posts(request.app.ctx, blog, before_id=post.id)
-
-        if request.args.get("fetch_polls") in ("1", "true"):
-            fetch_poll_results = True
-        else:
-            fetch_poll_results = False
-
-        return await render_blog_post(request.app, blog_info, post, fetch_poll_results)
+        return await render_blog_post(request, blog, post)
 
 
 # Redirects for /post/...
