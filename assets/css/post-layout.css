@@ -114,7 +114,8 @@ a.inline-link, a.inline-mention {
 .poll-choice {
   border: 0;
   border-radius: 10px;
-  background: var(--color-gray-150);
+  color: var(--color-primary-800);
+  background: var(--color-gray-175);
   padding: 8px 18px;
   overflow: hidden;
 }
@@ -124,18 +125,26 @@ a.inline-link, a.inline-mention {
 }
 
 .vote-proportion {
-  background: var(--color-gray-200);
+  background: var(--color-primary-200);
   border-radius: 10px 0px 0px 10px;
 }
 
+.poll-winner {
+  color: var(--color-primary-900);
+}
+
+.poll-winner, .poll-winner > .answer {
+  font-weight: bold;
+}
+
 .poll-winner >.vote-proportion {
-  background: var(--color-gray-300);
+  background: var(--color-primary-300);
 }
 
 .poll-block footer {
   font-size: 15px;
   margin-top: 0;
-  color: var(--color-gray-600);
+  color: var(--color-primary-800);
 }
 
 a.toggle-poll-results {

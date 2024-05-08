@@ -37,6 +37,16 @@
     --color-gray-150: var(--light, hsl(255, 0%, 96%));
     --color-gray-100: var(--light, hsl(255, 0%, 98%));
     --color-gray-0: var(--light, #ffffff);
+
+    --color-primary-900: var(--light, hsl(25, 100%, 15%));
+    --color-primary-800: var(--light, hsl(27, 50%, 30%));
+    --color-primary-700: var(--light, hsl(30, 50%, 40%));
+    --color-primary-600: var(--light, hsl(33, 70%, 45%));
+    --color-primary-500: var(--light, hsl(36, 80%, 50%));
+    --color-primary-400: var(--light, hsl(36, 90%, 60%));
+    --color-primary-300: var(--light, hsl(36, 100%, 70%));
+    --color-primary-200: var(--light, hsl(36, 100%, 85%));
+    --color-primary-100: var(--light, hsl(36, 100%, 95%));
 }
 
 
@@ -118,16 +128,15 @@ div.center-section {
 a.logo {
     font-size: 16px;
     font-weight: bold;
-    letter-spacing: 1.2px;
-    color: var(--color-gray-600);
+    color: var(--color-primary-500);
 }
 
 .search-bar {
     display: flex;
     width: 100%;
-    border: 1px solid var(--color-gray-300);
     border-radius: 25px;
     padding: 10px 10px;
+    background:var(--color-primary-100);
 }
 
 .search-bar input {
@@ -159,7 +168,7 @@ a.logo {
 }
 
 .selected-tab {
-    border-color: var(--color-gray-600);
+    border-color: var(--color-primary-400);
     border-width: 0 0 3px;
     border-style: solid;
 }
@@ -229,7 +238,7 @@ a.logo {
 
 .next-page {
     display: inline-block;
-    color: var(--color-gray-800);
+    color: var(--color-gray-100);
     font-weight: 450;
     letter-spacing: 0.3px;
     padding: 12px 0px;
@@ -238,11 +247,12 @@ a.logo {
     font-weight: 550;
 
     border-radius: 25px;
-    background: var(--color-gray-200);
+    background: var(--color-primary-500);
 }
 
 .next-page:hover {
-    background: var(--color-gray-300);
+    color: var(--color-gray-100);
+    background: var(--color-primary-400);
 }
 
 @media screen and (min-width: 768px) {
@@ -251,12 +261,12 @@ a.logo {
     }
 
     .next-page {
-        padding: 10px 15px;
+        padding: 10px 20px;
         font-size: 14px;
         width: auto;
-        font-weight: unset;
+        /* font-weight: unset; */
         border-radius: 5px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
     }
 }
 
