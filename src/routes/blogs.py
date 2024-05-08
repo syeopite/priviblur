@@ -12,14 +12,7 @@ blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-
 
 async def render_blog_post(request, blog, post):
     """Handles the logic for rendering viewing a single blog post"""
-    login_required = False
-
-    try:
-        # Fetches blog info and some posts from before this post
-        blog_info = await get_blog_posts(request.app.ctx, blog, before_id=post.id)
-    except priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError:
-        blog_info = priviblur_extractor.models.blog.Blog(post.blog, (), None, None)
-        login_required = True
+    blog_info = priviblur_extractor.models.blog.Blog(post.blog, (), None, None)
 
     if request.args.get("fetch_polls") in ("1", "true"):
         fetch_poll_results = True
@@ -33,7 +26,6 @@ async def render_blog_post(request, blog, post):
             "blog": blog_info,
             "element": post,
             "request_poll_data" : fetch_poll_results,
-            "login_required": login_required
         }
     )
 
