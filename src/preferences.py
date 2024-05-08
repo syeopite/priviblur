@@ -2,10 +2,16 @@ import datetime
 import dataclasses
 import urllib.parse
 
+VERSION = 1
+
 @dataclasses.dataclass
 class UserPreferences:
     # See DefaultUserPreferences in config/user_preferences.py
     language: str
+
+    # Tracks major revisions of the settings cookie
+    # Only bump in case of breaking changes.
+    version: int = 1
 
     def update_from_request(self, request):
         raw_new_prefs = request.form

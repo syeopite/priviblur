@@ -31,4 +31,6 @@ async def settings_post(request):
         **request.ctx.preferences.to_cookie(request)
     )
 
+    request.ctx.invalid_settings_cookie = False
+
     return response

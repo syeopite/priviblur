@@ -186,11 +186,20 @@ async def before_all_routes(request):
             **config.default_user_preferences._asdict()
         )
 
-    if request.cookies.get("settings"):
-        request.ctx.preferences = preferences.dataclasses.replace(
-            request.ctx.preferences,
-            **dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
-        )
+    request.ctx.invalid_settings_cookie = False
+
+    try:
+        if request.cookies.get("settings"):
+            settings_from_cookie = dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+            if int(settings_from_cookie.get("version")) == preferences.VERSION:
+                request.ctx.preferences = preferences.dataclasses.replace(
+                    request.ctx.preferences,
+                    **dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+                )
+            else:
+                request.ctx.invalid_settings_cookie = True
+    except (TypeError, KeyError, ValueError):
+        request.ctx.invalid_settings_cookie = True
 
     request.ctx.language = request.ctx.preferences.language
 
