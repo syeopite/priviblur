@@ -110,6 +110,11 @@ div.left-section {
     gap: 25px;
 }
 
+div.center-section {
+    display: grid;
+    grid-auto-flow: column;
+}
+
 a.logo {
     font-size: 16px;
     font-weight: bold;
