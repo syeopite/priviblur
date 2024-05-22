@@ -24,18 +24,19 @@
 }
 
 :root {
-    --color-gray-900: var(--light, hsl(255, 0%, 10%));
-    --color-gray-800: var(--light, hsl(255, 0%, 16%));
-    --color-gray-700: var(--light, hsl(255, 0%, 25%));
-    --color-gray-600: var(--light, hsl(255, 0%, 40%));
-    --color-gray-500: var(--light, hsl(255, 0%, 54%));
-    --color-gray-400: var(--light, hsl(255, 0%, 65%));
-    --color-gray-300: var(--light, hsl(255, 0%, 80%));
-    --color-gray-250: var(--light, hsl(255, 0%, 85%));
-    --color-gray-200: var(--light, hsl(255, 0%, 90%));
-    --color-gray-175: var(--light, hsl(255, 0%, 92%));
-    --color-gray-150: var(--light, hsl(255, 0%, 96%));
-    --color-gray-100: var(--light, hsl(255, 0%, 98%));
+    --color-gray-900: var(--light, hsl(41, 15%, 15%));
+    --color-gray-800: var(--light, hsl(36, 10%, 25%));
+    --color-gray-700: var(--light, hsl(36, 5%, 35%));
+    --color-gray-600: var(--light, hsl(36, 3%, 45%));
+    --color-gray-500: var(--light, hsl(36, 3%, 55%));
+    --color-gray-400: var(--light, hsl(36, 4%, 68%) );
+    --color-gray-300: var(--light, hsl(36, 5%, 80%));
+    --color-gray-250: var(--light, hsl(38, 6%, 86%));
+    --color-gray-200: var(--light, hsl(41, 8%, 91%));
+    --color-gray-175: var(--light, hsl(41, 8%, 92%));
+    --color-gray-150: var(--light, hsl(42, 10%, 95%));
+    --color-gray-125: var(--light, hsl(43, 10%, 97%));
+    --color-gray-100: var(--light, hsl(45, 10%, 98%));
     --color-gray-0: var(--light, #ffffff);
 
     --color-primary-900: var(--light, hsl(25, 100%, 15%));
@@ -136,7 +137,7 @@ a.logo {
     width: 100%;
     border-radius: 25px;
     padding: 10px 10px;
-    background:var(--color-primary-100);
+    background:var(--color-gray-150);
 }
 
 .search-bar input {
@@ -179,7 +180,7 @@ a.logo {
 }
 
 .nav-tab path, .right-section path, .icon path {
-    fill: var(--color-gray-600);
+    fill: var(--color-gray-700);
 }
 
 .right-section {
@@ -238,21 +239,22 @@ a.logo {
 
 .next-page {
     display: inline-block;
-    color: var(--color-gray-100);
     font-weight: 450;
     letter-spacing: 0.3px;
     padding: 12px 0px;
     font-size: 16px;
     width: 100%;
-    font-weight: 550;
 
     border-radius: 25px;
-    background: var(--color-primary-500);
+    background: var(--color-primary-400);
+}
+
+a.next-page {
+    color: var(--color-gray-100); 
 }
 
 .next-page:hover {
-    color: var(--color-gray-100);
-    background: var(--color-primary-400);
+    background: var(--color-primary-500);
 }
 
 @media screen and (min-width: 768px) {
@@ -328,11 +330,11 @@ li.control-bar-action:hover {
 }
 
 .control-bar-dropdown-menu li:hover {
-    background: var(--color-gray-250);
+    background: var(--color-gray-175);
 }
 
 .control-bar-dropdown-menu .selected {
-    background: var(--color-gray-300);
+    background: var(--color-gray-250);
 }
 
 .active-dropdown-menu {

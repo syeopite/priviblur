@@ -40,7 +40,7 @@
 
 #blog-header .blog-name {
     font-size: 16px;
-    color: var(--color-gray-600);
+    color: var(--color-gray-500);
     text-decoration: underline;
 }
 
