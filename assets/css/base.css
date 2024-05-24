@@ -237,10 +237,18 @@ a.logo {
     padding: 0 25px;
 }
 
-.next-page {
+.button {
     display: inline-block;
-    font-weight: 450;
+    padding: 10px 15px;
     letter-spacing: 0.3px;
+    font-weight: 450;
+    font-size: 14px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.next-page {
     padding: 12px 0px;
     font-size: 16px;
     width: 100%;
