@@ -248,6 +248,24 @@ a.logo {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.primary.button, a.primary.button {
+    color: var(--color-primary-100);
+    background: var(--color-primary-500);
+}
+
+.primary.button:hover {
+    background: var(--color-primary-600);
+}
+
+.secondary.button {
+    color: var(--color-gray-800);
+    background: var(--color-gray-200);
+}
+
+.secondary.button:hover {
+    background-color: var(--color-gray-250);
+}
+
 .next-page {
     padding: 12px 0px;
     font-size: 16px;
@@ -255,14 +273,6 @@ a.logo {
 
     border-radius: 25px;
     background: var(--color-primary-400);
-}
-
-a.next-page {
-    color: var(--color-gray-100); 
-}
-
-.next-page:hover {
-    background: var(--color-primary-500);
 }
 
 @media screen and (min-width: 768px) {

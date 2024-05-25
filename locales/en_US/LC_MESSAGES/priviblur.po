@@ -156,3 +156,12 @@ msgstr "Language"
 
 msgid "settings_language_selector_desc"
 msgstr "Select display language"
+
+msgid "settings_save_changes"
+msgstr "Save Changes"
+
+msgid "settings_cancel_changes"
+msgstr "Cancel"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "Copy as bookmarklet"

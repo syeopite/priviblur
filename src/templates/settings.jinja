@@ -30,7 +30,11 @@
         </div>
         <div class="buffer"></div>
         <div id="settings-footer">
-            <input type="submit" class="button" value="Apply"/>
+            <a href="/settings/restore">{{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}</a>
+            <div>
+            <a href="/settings" class="secondary button">{{translate(request.ctx.language, "settings_cancel_changes")}}</a>
+            <input type="submit" class="primary button" value="{{translate(request.ctx.language, "settings_save_changes")}}"/>
+            </div>
         </div>
      </form>
 {% endblock %}

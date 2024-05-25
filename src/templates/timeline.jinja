@@ -17,7 +17,7 @@
     {%- if timeline.next %}
         <div class="paging">
             {%- block paging -%}
-                <a class="next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate(request.ctx.language, "pagination_next_page")}}</a>
+                <a class="primary next-page button" href="{{request.path}}?continuation={{timeline.next.cursor | urlencode}}#m">{{translate(request.ctx.language, "pagination_next_page")}}</a>
             {%- endblock -%}
         </div>
     {% endif %}

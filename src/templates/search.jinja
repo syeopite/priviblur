@@ -53,7 +53,7 @@
 {% endblock %}
 
 {% block paging %}
-    <a class="next-page button" href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}#m">
+    <a class="primary next-page button" href="{{request.path}}{{add_query(query_args | update_query_params("continuation", timeline.next.cursor))}}#m">
         {{translate(request.ctx.language, "pagination_next_page")}}
     </a>
 {% endblock %}

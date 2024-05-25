@@ -38,22 +38,21 @@
 
 #settings-footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
+    font-size: 12px;
 }
 
-#save-settings-button {
-    background: var(--color-gray-200);
-    color: var(--color-gray-800);
-    font-weight: 450;
-    letter-spacing: 0.3px;
-    padding: 10px 15px;
-    font-size: 14px;
+#settings-footer > a {
+    font-weight: 550;
+    color: var(--color-primary-900);
+}
 
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+#settings-footer .button {
+    box-shadow: none;
+    font-weight: 700;
+    font-size: 12px;
 }
 
 #save-settings-button:hover {
