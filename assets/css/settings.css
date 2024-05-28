@@ -44,7 +44,7 @@
     font-size: 12px;
 }
 
-#settings-footer > a {
+#copy-as-bookmarklet {
     font-weight: 550;
     color: var(--color-primary-900);
 }

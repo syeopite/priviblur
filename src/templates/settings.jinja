@@ -1,10 +1,11 @@
 {% extends "base.jinja" %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="/assets/css/settings.css?v={{app.ctx.CURRENT_COMMIT}}">
+<script src="/assets/js/settings.js?v={{app.ctx.CURRENT_COMMIT}}" defer></script>
 {% endblock %}
 {% block title %}{{translate(request.ctx.language, "settings_header")}}{% endblock %}
 {% block center %}
-    <form class="settings" method="post">
+    <form class="settings" method="post" action="/settings">
         <div id="setting-heading">
             <h2>{{translate(request.ctx.language, "settings_header")}}</h2>
         </div>
@@ -30,10 +31,12 @@
         </div>
         <div class="buffer"></div>
         <div id="settings-footer">
-            <a href="/settings/restore">{{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}</a>
+            <a id="copy-as-bookmarklet" href="/settings/restore?{{request.ctx.preferences.to_url_encoded()}}">
+                {{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}
+            </a>
             <div>
-            <a href="/settings" class="secondary button">{{translate(request.ctx.language, "settings_cancel_changes")}}</a>
-            <input type="submit" class="primary button" value="{{translate(request.ctx.language, "settings_save_changes")}}"/>
+                <a href="/settings" class="secondary button">{{translate(request.ctx.language, "settings_cancel_changes")}}</a>
+                <input type="submit" class="primary button" value="{{translate(request.ctx.language, "settings_save_changes")}}"/>
             </div>
         </div>
      </form>

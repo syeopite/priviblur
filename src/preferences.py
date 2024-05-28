@@ -13,9 +13,13 @@ class UserPreferences:
     # Only bump in case of breaking changes.
     version: int = 1
 
-    def update_from_request(self, request):
-        raw_new_prefs = request.form
+    def update_from_forms(self, request):
+        return self._update(request, request.form)
 
+    def update_from_query(self, request):
+        return self._update(request, request.args)
+
+    def _update(self, request, raw_new_prefs):
         language = raw_new_prefs.get("language", request.app.ctx.PRIVIBLUR_CONFIG.default_user_preferences.language)
         if language not in request.app.ctx.SUPPORTED_LANGUAGES:
             language = request.app.ctx.PRIVIBLUR_CONFIG.default_user_preferences.language
@@ -23,13 +27,13 @@ class UserPreferences:
         self.language = language
         request.ctx.language = self.language
 
-    def to_forms(self):
+    def to_url_encoded(self):
         return urllib.parse.urlencode(dataclasses.asdict(self))
 
     def to_cookie(self, request):
         cookie = {
             "key": "settings",
-            "value": self.to_forms(),
+            "value": self.to_url_encoded(),
             "secure": request.app.ctx.PRIVIBLUR_CONFIG.deployment.https,
             "max_age": 31540000
         }
