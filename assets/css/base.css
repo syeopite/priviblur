@@ -5,25 +5,25 @@
     --OFF: ;
 }
 
-.light-theme {
+.default-theme, .light-theme {
     --light: var(--ON);
-    /* --dark: var(--OFF); */
+    --dark: var(--OFF);
 }
 
 .dark-theme {
     --light: var(--OFF);
-    /* --dark: var(--ON); */
+    --dark: var(--ON);
 }
 
 /* If user prefers dark, then that's what they'll get */
 @media (prefers-color-scheme: dark) {
-    .theme-default {
+    .default-theme {
       --light: var(--OFF);
       /* --dark: var(--ON); */
     }
 }
 
-:root {
+body {
     --color-gray-900: var(--light, hsl(41, 15%, 15%));
     --color-gray-800: var(--light, hsl(36, 10%, 25%));
     --color-gray-700: var(--light, hsl(36, 5%, 35%));
