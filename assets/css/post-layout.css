@@ -2,7 +2,7 @@
     line-height: 1.7;
     letter-spacing: -0.2px;
     margin-bottom: 15px;
-    color: var(--color-gray-900);
+    color: var(--color-text);
 }
 
 .post-body > .text-block:last-child,
@@ -92,7 +92,7 @@ a.inline-link, a.inline-mention {
 }
 
 .link-block-subtitles {
-  color: var(--color-gray-600);
+  color: var(--color-post-link-block-subtitle);
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -114,8 +114,8 @@ a.inline-link, a.inline-mention {
 .poll-choice {
   border: 0;
   border-radius: 10px;
-  color: var(--color-gray-800);
-  background: var(--color-gray-150);
+  color: var(--color-poll-text-color);
+  background: var(--color-poll-choice-bg);
   padding: 8px 18px;
   overflow: hidden;
 }
@@ -125,12 +125,12 @@ a.inline-link, a.inline-mention {
 }
 
 .vote-proportion {
-  background: var(--color-primary-200);
+  background: var(--color-poll-proportion-bar-bg);
   border-radius: 10px 0px 0px 10px;
 }
 
 .poll-winner {
-  color: var(--color-gray-900);
+  color: var(--color-text);
 }
 
 .poll-winner, .poll-winner > .answer {
@@ -138,13 +138,13 @@ a.inline-link, a.inline-mention {
 }
 
 .poll-winner >.vote-proportion {
-  background: var(--color-primary-300);
+  background: var(--color-poll-winner-bg);
 }
 
 .poll-block footer {
   font-size: 15px;
   margin-top: 0;
-  color: var(--color-gray-800);
+  color: var(--color-poll-text-color);
 }
 
 a.toggle-poll-results {
@@ -159,7 +159,7 @@ a.toggle-poll-results {
 }
 
 .toggle-poll-results:hover {
-  color: var(--color-gray-900);
+  color: var(--color-text);
 }
 
 .separator {

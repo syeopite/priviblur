@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 25px 25px;
-  background: var(--color-gray-0);
+  background: var(--color-top-level-card-bg);
   border-radius: 10px;
   width: 100%;
 }
@@ -25,7 +25,7 @@
 
 .ask-body {
   padding: 15px 15px 0;
-  background: var(--color-gray-200);
+  background: var(--color-ask-bg);
   border-radius: 5px;
   width: 100%;
 }
@@ -38,11 +38,11 @@
 }
 
 .reblog-attribution .blog-name {
-  color: var(--color-gray-500);
+  color: var(--color-reblog-attribution);
 }
 
 .reblog-attribution .icon path {
-  fill: var(--color-gray-500)
+  fill: var(--color-reblog-attribution)
 }
 
 .post-author {
@@ -68,11 +68,11 @@
 .primary-post-author {
   display: flex;
   gap: 5px;
-  color: var(--color-gray-600);
+  color: var(--color-post-header-date-separator);
 }
 
 a.blog-name {
-  color: var(--color-gray-800);
+  color: var(--color-post-blog-name);
   font-weight: bold;
   align-self: center;
 }
@@ -82,7 +82,7 @@ a.blog-name:hover {
 }
 
 .broken-blog, .deactivated-blog {
-  color: var(--color-gray-900);
+  color: var(--color-text);
   font-weight: 500;
 }
 
@@ -110,7 +110,7 @@ a.blog-name:hover {
   flex-direction: column;
   gap: 15px;
 
-  border-top: 1px solid var(--color-gray-300);
+  border-top: 1px solid var(--color-trail-post-separator);
   padding: 25px 0px;
 }
 
@@ -133,7 +133,7 @@ a.hidden-reblog {
 
 .post-footer {
   display: flex;
-  color: var(--color-gray-500);
+  color: var(--color-post-footer);
   justify-content: space-around;
   flex-direction: column;
   align-self: end;
@@ -150,14 +150,14 @@ a.hidden-reblog {
 
 .post-tag {
   display: inline-block;
-  background: var(--color-gray-125);
+  background: var(--color-post-tag-bg);
   border-radius: 6px;
   padding: 1px 5px;
   font-weight: 500;
 }
 
 .post-tag:hover {
-  background: var(--color-gray-175);
+  background: var(--color-post-tag-hover);
 }
 
 .post-interaction {
@@ -173,7 +173,7 @@ a.hidden-reblog {
 }
 
 .interaction-buttons path {
-  fill: var(--color-gray-500);
+  fill: var(--color-post-footer);
 }
 
 .note-count {
@@ -205,7 +205,7 @@ a.hidden-reblog {
 
   background: linear-gradient(0deg, rgba(255, 255, 255) 0%, rgba(255,255,255,0.8) 100%);
 
-  color: var(--color-gray-700);
+  color: var(--color-community-label-text);
   z-index: 2;
 }
 
@@ -224,17 +224,17 @@ a.hidden-reblog {
 .no-js-view-community-post-instruction {
   margin-top: 20px;
   font-size: 12px;
-  color: var(--color-gray-700);
+  color: var(--color-community-label-text);
 }
 
 .unblur-post-button {
   background: none;
   padding: 5px 15px;
-  border: 1px solid var(--color-gray-600);
+  border: 1px solid var(--color-community-label-button);
   border-radius: 25px;
   margin-top: 25px;
 }
 
 .unblur-post-button:hover {
-  background: var(--color-gray-200);
+  background: var(--color-community-label-button-hover);
 }
