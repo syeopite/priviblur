@@ -29,7 +29,12 @@
 }
 
 .settings label {
+    color: var(--color-setting-option);
     font-weight: 600;
+}
+
+#setting-heading {
+    color: var(--color-setting-top-heading);
 }
 
 #setting-heading > h2 {

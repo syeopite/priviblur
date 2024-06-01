@@ -117,6 +117,8 @@ body {
     --color-dropdown-menu-item-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-800));
 
     --color-blog-header-blog-name: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-0));
+    --color-setting-top-heading: var(--light, var(--color-gray-900)) var(--dark, var(--color-gray-250));
+    --color-setting-option: var(--light, var(--color-gray-900)) var(--dark, var(--color-gray-250));
     --color-setting-option-desc: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-200));
 }
 
@@ -213,6 +215,7 @@ a.logo {
     width: 100%;
     text-indent: 10px;
     border: 0;
+    color: var(--color-text);
     background: none;
 }
 

@@ -30,6 +30,10 @@ a.inline-link, a.inline-mention {
   margin-top: 0;
 }
 
+.post-attribution {
+  color: var(--color-text);
+}
+
 .link-block {
   border-radius: 20px;
   margin-bottom: 15px;
@@ -89,6 +93,7 @@ a.inline-link, a.inline-mention {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
+  color: var(--color-text);
 }
 
 .link-block-subtitles {
@@ -139,6 +144,10 @@ a.inline-link, a.inline-mention {
 
 .poll-winner >.vote-proportion {
   background: var(--color-poll-winner-bg);
+}
+
+.poll-block header {
+  color: var(--color-poll-text-color);
 }
 
 .poll-block footer {

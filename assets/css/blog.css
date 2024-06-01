@@ -35,6 +35,7 @@
 }
 
 #blog-header #blog-title {
+    color: var(--color-text);
     margin: 0;
 }
 
