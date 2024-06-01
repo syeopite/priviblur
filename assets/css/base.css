@@ -50,57 +50,60 @@ body {
     --color-primary-200: hsl(36, 100%, 85%);
     --color-primary-100: hsl(36, 100%, 95%);
 
-    --color-dt-gray-900: hsl(41, 5%, 5%);
-    --color-dt-gray-800: hsl(41, 5%, 9%);
-    --color-dt-gray-700: hsl(41, 3%, 12%);
-    --color-dt-gray-650: hsl(41, 3%, 14%);
-    --color-dt-gray-600: hsl(41, 3%, 18%);
-    --color-dt-gray-500: hsl(41, 3%, 20%);
-    --color-dt-gray-400: hsl(41, 5%, 23%);
-    --color-dt-gray-300: hsl(41, 5%, 25%);
-    --color-dt-gray-200: hsl(41, 5%, 27%);
-    --color-dt-gray-100: hsl(41, 5%, 30%);
-    --color-dt-gray-0: hsl(41, 5%, 50%);
+    --color-dt-gray-900: hsl(41, 10%, 4%);
+    --color-dt-gray-800: hsl(41, 6%, 5%);
+    --color-dt-gray-700: hsl(41, 4%, 7%);
+    --color-dt-gray-600: hsl(41, 4%, 9%);
+    --color-dt-gray-525: hsl(41, 4%, 10.5%);
+    --color-dt-gray-550: hsl(41, 4%, 11%);
+    --color-dt-gray-500: hsl(41, 5%, 13%);
+    --color-dt-gray-475: hsl(41, 8%, 14%);
+    --color-dt-gray-450: hsl(41, 8%, 16%);
+    --color-dt-gray-400: hsl(41, 7%, 19%);
+    --color-dt-gray-300: hsl(41, 8%, 25%);
+    --color-dt-gray-250: hsl(41, 5%, 40%);
+    --color-dt-gray-200: hsl(41, 9%, 60%);
+    --color-dt-gray-100: hsl(41, 15%, 80%);
 }
 
 /* Color definitions */
 body {
     --color-background: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-800));
-    --color-top-level-card-bg: var(--light, var(--color-gray-0)) var(--dark, var(--color-dt-gray-700));
-    --color-text: var(--light, var(--color-gray-900)) var(--dark, var(--color-gray-100));
+    --color-top-level-card-bg: var(--light, var(--color-gray-0)) var(--dark, var(--color-dt-gray-600));
+    --color-text: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
 
-    --color-nav-bar-icon: var(--light, var(--color-gray-700)) var(--dark, var(--color-gray-400));
+    --color-nav-bar-icon: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-200));
     --color-nav-bar-icon-hover: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-500));;
-    --color-search-icon-fill: var(--light, var(--color-gray-500)) var(--dark, var(--color-gray-600));
-    --color-search-bar-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-650));
-    --color-logo: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-500));
     --color-nav-bar-selected-tab-highlight: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-600));
+    --color-search-icon-fill: var(--light, var(--color-gray-500)) var(--dark, var(--color-gray-600));
+    --color-search-bar-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-550));
+    --color-logo: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-500));
 
-    --color-footer-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-100));
+    --color-footer-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
 
     --color-community-label-text: var(--light, var(--color-gray-700));
     --color-community-label-button: var(--light, var(--color-gray-600));
     --color-community-label-button-hover: var(--light, var(--color-gray-200));
 
-    --color-post-blog-name: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
-    --color-reblog-attribution: var(--light, var(--color-gray-500)) var(--dark, var(--color-gray-400));
+    --color-post-blog-name: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-100));
+    --color-reblog-attribution: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
     --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-100));
-    --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-gray-400));
+    --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
 
     --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-600));
 
     --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
-    --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-500));
-    --color-poll-proportion-bar-bg: var(--light, var(--color-primary-200)) var(--dark, var(--color-primary-300));
-    --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-400));
+    --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-600));
+    --color-poll-proportion-bar-bg: var(--light, var(--color-primary-200)) var(--dark, var(--color-primary-700));
+    --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-500));
 
-    --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-gray-500));
-    --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-650));
-    --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-600));
+    --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
+    --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-525));
+    --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-500));
 
     --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-100));
 
-    --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-500));
+    --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-600));
     --color-primary-button-hover: var(--light, var(--color-primary-600)) var(--dark, var(--color-primary-700));
     --color-primary-button-text: var(--light, var(--color-primary-100)) var(--dark, var(--color-primary-100));
 
@@ -108,18 +111,19 @@ body {
     --color-secondary-button-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-600));
     --color-button-secondary-text: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
 
-    --color-tertiary-button-color: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-0));
+    --color-tertiary-button-color: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-250));
     
-    --color-dropdown-menu-bg: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-650));
-    --color-selected-dropdown-menu: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-900));
-    --color-dropdown-action-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-900));
+    --color-dropdown-menu-bg: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-550));
+    --color-dropdown-action-select: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
+    --color-dropdown-action-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
     --color-control-bar-action-text: var(--light, var(--color-gray-600)) var(--dark, var(--color-gray-500));
-    --color-dropdown-menu-item-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-800));
+    --color-dropdown-menu-item-selected: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-475));
+    --color-dropdown-menu-item-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-400));
 
-    --color-blog-header-blog-name: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-0));
-    --color-setting-top-heading: var(--light, var(--color-gray-900)) var(--dark, var(--color-gray-250));
-    --color-setting-option: var(--light, var(--color-gray-900)) var(--dark, var(--color-gray-250));
-    --color-setting-option-desc: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-200));
+    --color-blog-header-blog-name: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-200));
+    --color-setting-top-heading: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
+    --color-setting-option: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
+    --color-setting-option-desc: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
 }
 
 html, body, .container {
@@ -418,16 +422,16 @@ li.control-bar-action:hover {
     white-space: nowrap;
 }
 
-.control-bar-dropdown-menu li:hover {
+.control-bar-dropdown-menu li > a:hover {
     background: var(--color-dropdown-menu-item-hover);
 }
 
 .control-bar-dropdown-menu .selected {
-    background: var(--color-selected-dropdown-menu);
+    background: var(--color-dropdown-menu-item-selected);
 }
 
 .active-dropdown-menu {
-    background: var(--color-selected-dropdown-menu);
+    background: var(--color-dropdown-action-select);
 }
 
 .active-dropdown-menu .control-bar-dropdown-menu{
