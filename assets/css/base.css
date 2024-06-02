@@ -62,6 +62,7 @@ body {
     --color-dt-gray-400: hsl(41, 7%, 19%);
     --color-dt-gray-300: hsl(41, 8%, 25%);
     --color-dt-gray-250: hsl(41, 5%, 40%);
+    --color-dt-gray-225: hsl(41, 5%, 50%);
     --color-dt-gray-200: hsl(41, 9%, 60%);
     --color-dt-gray-100: hsl(41, 15%, 80%);
 }
@@ -98,6 +99,7 @@ body {
     --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-500));
 
     --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
+    --color-post-footer-post-interaction: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-225));
     --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-525));
     --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-500));
 

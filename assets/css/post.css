@@ -164,6 +164,7 @@ a.hidden-reblog {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  color: var(--color-post-footer-post-interaction);
 }
 
 .interaction-buttons {
@@ -173,7 +174,7 @@ a.hidden-reblog {
 }
 
 .interaction-buttons path {
-  fill: var(--color-post-footer);
+  fill: var(--color-post-footer-post-interaction);
 }
 
 .note-count {
