@@ -99,6 +99,9 @@ fieldset#theme-selector {
 #copy-as-bookmarklet {
     font-weight: 550;
     color: var(--color-tertiary-button-color);
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 #settings-footer .button {

@@ -180,3 +180,9 @@ msgstr "Cancel"
 
 msgid "settings_copy_as_bookmarklet"
 msgstr "Copy as bookmarklet"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "Copied"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "Unable to copy"

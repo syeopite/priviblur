@@ -2,6 +2,14 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="/assets/css/settings.css?v={{app.ctx.CURRENT_COMMIT}}">
 <script src="/assets/js/settings.js?v={{app.ctx.CURRENT_COMMIT}}" defer></script>
+
+<script id="setting_locale_strings" type="application/json">
+{
+    "copy_as_bookmarklet_text": "{{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}",
+    "copy_as_bookmarklet_copy_confirmed": "{{translate(request.ctx.language, "settings_copy_as_bookmarklet_confirmed")}}",
+    "copy_as_bookmarklet_copy_failed": "{{translate(request.ctx.language, "settings_copy_as_bookmarklet_failed")}}"
+}
+</script>
 {% endblock %}
 {% block title %}{{translate(request.ctx.language, "settings_header")}}{% endblock %}
 {% block center %}
@@ -53,7 +61,10 @@
         </div>
         <div id="settings-footer">
             <a id="copy-as-bookmarklet" href="/settings/restore?{{request.ctx.preferences.to_url_encoded()}}">
-                {{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}
+                <svg height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="currentColor" d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg>
+                <svg style="display: none;" height="12" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                <svg style="display: none;" height="12" width="12" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                <span>{{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}</span>
             </a>
             <div>
                 <a href="/settings" class="secondary button">{{translate(request.ctx.language, "settings_cancel_changes")}}</a>
