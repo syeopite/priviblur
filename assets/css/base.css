@@ -121,7 +121,7 @@ body {
     --color-dropdown-action-select: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
     --color-dropdown-action-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
     --color-control-bar-action-text: var(--light, var(--color-gray-600)) var(--dark, var(--color-gray-500));
-    --color-dropdown-menu-item-selected: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-475));
+    --color-dropdown-menu-item-selected: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-475));
     --color-dropdown-menu-item-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-400));
 
     --color-blog-header-blog-name: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-200));
