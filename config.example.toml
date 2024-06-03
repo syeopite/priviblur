@@ -3,7 +3,11 @@
     host = "0.0.0.0" # Set to 127.0.0.1 if you use a reverse proxy, or access it locally
     port = 8000
 
-    # Amount of worker Priviblur instances to spawn. Increases speed significantly.
+    # # Domain which the instance is hosted. By default it is unset.
+    # # This is primary used to generate links to the instance
+    # domain =
+
+    # # Amount of worker Priviblur instances to spawn. Increases speed significantly.
     # workers = 1
 
 

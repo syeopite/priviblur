@@ -34,10 +34,15 @@ class UserPreferences:
         return urllib.parse.urlencode(dataclasses.asdict(self))
 
     def to_cookie(self, request):
+        if request.scheme == "http":
+            secure = False
+        else:
+            secure = True
+
         cookie = {
             "key": "settings",
             "value": self.to_url_encoded(),
-            "secure": request.app.ctx.PRIVIBLUR_CONFIG.deployment.https,
+            "secure": secure,
             "max_age": 31540000
         }
 
