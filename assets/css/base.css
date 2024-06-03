@@ -100,8 +100,8 @@ body {
     --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-525));
 
     --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
-    --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-600));
-    --color-poll-proportion-bar-bg: var(--light, var(--color-primary-200)) var(--dark, var(--color-primary-700));
+    --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-700));
+    --color-poll-proportion-bar-bg: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-300));
     --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-500));
 
     --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
