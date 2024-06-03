@@ -23,6 +23,10 @@
   text-decoration: none;
 }
 
+.asker {
+  color: var(--color-ask-header)
+}
+
 .ask-body {
   padding: 15px 15px 0;
   background: var(--color-ask-bg);

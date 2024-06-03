@@ -54,8 +54,9 @@ body {
     --color-dt-gray-800: hsl(41, 6%, 5%);
     --color-dt-gray-700: hsl(41, 4%, 7%);
     --color-dt-gray-600: hsl(41, 4%, 9%);
-    --color-dt-gray-525: hsl(41, 4%, 10.5%);
+    --color-dt-gray-575: hsl(41, 4%, 10.5%);
     --color-dt-gray-550: hsl(41, 4%, 11%);
+    --color-dt-gray-525: hsl(41, 4%, 12%);
     --color-dt-gray-500: hsl(41, 5%, 13%);
     --color-dt-gray-475: hsl(41, 8%, 14%);
     --color-dt-gray-450: hsl(41, 8%, 16%);
@@ -91,7 +92,8 @@ body {
     --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-100));
     --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
 
-    --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-600));
+    --color-ask-header: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-225));
+    --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-525));
 
     --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
     --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-600));
@@ -100,10 +102,10 @@ body {
 
     --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
     --color-post-footer-post-interaction: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-225));
-    --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-525));
+    --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-575));
     --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-500));
 
-    --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-100));
+    --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-400));
 
     --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-600));
     --color-primary-button-hover: var(--light, var(--color-primary-600)) var(--dark, var(--color-primary-700));
@@ -143,6 +145,10 @@ body {
 
 p {
     margin: 0;
+}
+
+img {
+    color: var(--color-text)
 }
 
 a, a:visited, a:hover, a:active {
