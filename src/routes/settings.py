@@ -18,7 +18,7 @@ async def settings_page(request):
 
 @settings.post("/")
 async def settings_post(request):
-    request.ctx.preferences.update_from_forms(request)
+    request.ctx.preferences = request.ctx.preferences.replace_from_forms(request)
 
     response = await sanic_ext.render(
         "settings.jinja",
@@ -28,7 +28,7 @@ async def settings_post(request):
     )
 
     response.add_cookie(
-        **request.ctx.preferences.to_cookie(request)
+        **request.ctx.preferences.construct_cookie(request)
     )
 
     request.ctx.invalid_settings_cookie = False
@@ -37,7 +37,7 @@ async def settings_post(request):
 
 @settings.get("/restore")
 async def settings_restore(request):
-    request.ctx.preferences.update_from_query(request)
+    request.ctx.preferences = request.ctx.preferences.replace_from_query(request)
 
     response = await sanic_ext.render(
         "settings.jinja",
@@ -47,7 +47,7 @@ async def settings_restore(request):
     )
 
     response.add_cookie(
-        **request.ctx.preferences.to_cookie(request)
+        **request.ctx.preferences.construct_cookie(request)
     )
 
     request.ctx.invalid_settings_cookie = False
