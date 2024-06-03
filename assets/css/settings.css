@@ -87,6 +87,11 @@ fieldset#theme-selector {
     padding: 25px 0 0 0;
 }
 
+#theme-selector label[for="auto-theme-selector"] {
+    text-align: center;
+    width: 100%;
+}
+
 #settings-footer {
     display: flex;
     justify-content: space-between;
