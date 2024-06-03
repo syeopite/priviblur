@@ -5,7 +5,7 @@
 {% endblock %}
 {% block title %}{{translate(request.ctx.language, "settings_header")}}{% endblock %}
 {% block center %}
-    <form class="settings" method="post" action="/settings">
+    <form class="settings" method="post" action="/settings" aria-label="{{translate(request.ctx.language, "settings_header")}}">
         <div id="setting-heading">
             <h2>{{translate(request.ctx.language, "settings_header")}}</h2>
         </div>
@@ -13,30 +13,29 @@
         <!-- Once more options are added, the various settings below
         will be sorted into separate tabs -->
         <div class="main-tab">
-            <div id="theme-option">
-                <fieldset>
-                    <legend class="option-info-box">
-                        <h1 class="setting-option-label">{{translate(request.ctx.language, "settings_theme_selector")}}</h1>
-                        <p>{{translate(request.ctx.language, "settings_theme_selector_desc")}}</p>
-                    </legend>
-                    <input type="radio" id="auto-theme-selector" name="theme" value="auto" {% if request.ctx.preferences.theme =="auto"%}checked{%endif%}/>
-                    <label for="auto-theme-selector">
-                        <img src="/assets/images/priviblur-auto.svg"/>
-                        <p>{{translate(request.ctx.language, "settings_theme_selector_option_auto")}}</p>
-                    </label>
-                    <input type="radio" id="light-theme-selector" name="theme" value="light" {% if request.ctx.preferences.theme =="light"%}checked{%endif%}/>
-                    <label for="light-theme-selector">
-                        <img src="/assets/images/priviblur-light.svg"/>
-                        <p>{{translate(request.ctx.language, "settings_theme_selector_option_light")}}</p>
-                    </label>
-                    <input type="radio" id="dark-theme-selector" name="theme" value="dark" {% if request.ctx.preferences.theme =="dark"%}checked{%endif%}/>
-                    <label for="dark-theme-selector">
-                        <img src="/assets/images/priviblur-dark.svg"/>
-                        <p>{{translate(request.ctx.language, "settings_theme_selector_option_dark")}}</p>
-                    </label>
-                </fieldset>
-            </div>
-            <div id="language-option">
+            <fieldset id="theme-selector" aria-describedby="theme-selector-info-box" role="radiogroup">
+                <legend class="option-info-box">
+                    <label for="theme-selector">{{translate(request.ctx.language, "settings_theme_selector")}}</h1>
+                    <p id="theme-selector-info-box">{{translate(request.ctx.language, "settings_theme_selector_desc")}}</p>
+                </legend>
+                <input type="radio" id="auto-theme-selector" name="theme" value="auto" {% if request.ctx.preferences.theme =="auto"%}checked{%endif%}/>
+                <label for="auto-theme-selector">
+                    <img src="/assets/images/priviblur-auto.svg"/>
+                    <p>{{translate(request.ctx.language, "settings_theme_selector_option_auto")}}</p>
+                </label>
+                <input type="radio" id="light-theme-selector" name="theme" value="light" {% if request.ctx.preferences.theme =="light"%}checked{%endif%}/>
+                <label for="light-theme-selector">
+                    <img src="/assets/images/priviblur-light.svg"/>
+                    <p>{{translate(request.ctx.language, "settings_theme_selector_option_light")}}</p>
+                </label>
+                <input type="radio" id="dark-theme-selector" name="theme" value="dark" {% if request.ctx.preferences.theme =="dark"%}checked{%endif%}/>
+                <label for="dark-theme-selector">
+                    <img src="/assets/images/priviblur-dark.svg"/>
+                    <p>{{translate(request.ctx.language, "settings_theme_selector_option_dark")}}</p>
+                </label>
+            </fieldset>
+            <hr>
+            <div id="language-option" aria-describedby="language-selector-info-box">
                 <div class="option-info-box">
                     <label for="language-selector">{{translate(request.ctx.language, "settings_language_selector")}}</label>
                     <p id="language-selector-info-box">{{translate(request.ctx.language, "settings_language_selector_desc")}}</p>
@@ -52,7 +51,6 @@
                 </select>
             </div>
         </div>
-        <div class="buffer"></div>
         <div id="settings-footer">
             <a id="copy-as-bookmarklet" href="/settings/restore?{{request.ctx.preferences.to_url_encoded()}}">
                 {{translate(request.ctx.language, "settings_copy_as_bookmarklet")}}
