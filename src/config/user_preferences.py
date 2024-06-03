@@ -8,3 +8,4 @@ class DefaultUserPreferences(NamedTuple):
     """
 
     language: str = "en_US"
+    theme: str = "auto"

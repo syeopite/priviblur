@@ -4,7 +4,6 @@
     width: 100vw;
     border-radius: 10px;
     background: var(--color-top-level-card-bg);
-    height: 300px;
     padding: 25px;
     box-sizing: border-box;
 }
@@ -28,9 +27,11 @@
     margin-right: 0;
 }
 
-.settings label {
+.settings label, .setting-option-label {
     color: var(--color-setting-option);
     font-weight: 600;
+    font-size: 14px;
+    margin: 0;
 }
 
 #setting-heading {
@@ -47,6 +48,7 @@
     align-items: center;
     width: 100%;
     font-size: 12px;
+    margin-top: 100px;
 }
 
 #copy-as-bookmarklet {
@@ -64,4 +66,41 @@
     margin-top: 5px;
     color: var(--color-setting-option-desc);
     font-weight: 500;
+}
+
+.main-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#theme-option input {
+    margin: 0;
+    padding: 0;
+    appearance: none
+}
+
+#theme-option input:checked + label img {
+    outline: solid 3px var(--color-settings-theme-select-outline);
+
+}
+#theme-option img {
+    height: 125px;
+    border-radius: 15px;
+}
+
+#theme-option fieldset {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 3px;
+    flex-wrap: wrap;
+
+    border: 0;
+    margin: 0;
+    padding: 25px 0 0 0;
+}
+
+#theme-option legend {
+    padding: 0;
 }

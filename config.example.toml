@@ -42,6 +42,11 @@
 
 # # Controls default user preferences
 # [default_user_preferences]
+#
+#     # User interface theme
+#     # Acceptable values: [auto, light, dark]
+#     theme = "auto"
+#
 #     # User interface language
 #     # For available options see locales dir
 #     language = "en_US"

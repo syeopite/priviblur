@@ -157,6 +157,21 @@ msgstr "Language"
 msgid "settings_language_selector_desc"
 msgstr "Select display language"
 
+msgid "settings_theme_selector"
+msgstr "Theme"
+
+msgid "settings_theme_selector_desc"
+msgstr "Select your display theme"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "Auto"
+
+msgid "settings_theme_selector_option_light"
+msgstr "Light"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "Dark"
+
 msgid "settings_save_changes"
 msgstr "Save Changes"
 

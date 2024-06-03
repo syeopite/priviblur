@@ -126,6 +126,7 @@ body {
     --color-setting-top-heading: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
     --color-setting-option: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
     --color-setting-option-desc: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
+    --color-settings-theme-select-outline: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-400));
 }
 
 html, body, .container {

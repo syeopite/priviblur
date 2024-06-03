@@ -8,6 +8,7 @@ VERSION = 1
 class UserPreferences:
     # See DefaultUserPreferences in config/user_preferences.py
     language: str
+    theme: str
 
     # Tracks major revisions of the settings cookie
     # Only bump in case of breaking changes.
@@ -26,6 +27,8 @@ class UserPreferences:
 
         self.language = language
         request.ctx.language = self.language
+
+        self.theme = raw_new_prefs.get("theme", request.app.ctx.PRIVIBLUR_CONFIG.default_user_preferences.theme)
 
     def to_url_encoded(self):
         return urllib.parse.urlencode(dataclasses.asdict(self))
