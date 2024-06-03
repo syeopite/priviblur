@@ -50,22 +50,22 @@ body {
     --color-primary-200: hsl(36, 100%, 85%);
     --color-primary-100: hsl(36, 100%, 95%);
 
-    --color-dt-gray-900: hsl(41, 10%, 4%);
-    --color-dt-gray-800: hsl(41, 6%, 5%);
-    --color-dt-gray-700: hsl(41, 4%, 7%);
-    --color-dt-gray-600: hsl(41, 4%, 9%);
-    --color-dt-gray-575: hsl(41, 4%, 10.5%);
-    --color-dt-gray-550: hsl(41, 4%, 11%);
-    --color-dt-gray-525: hsl(41, 4%, 12%);
-    --color-dt-gray-500: hsl(41, 5%, 13%);
-    --color-dt-gray-475: hsl(41, 8%, 14%);
-    --color-dt-gray-450: hsl(41, 8%, 16%);
-    --color-dt-gray-400: hsl(41, 7%, 19%);
-    --color-dt-gray-300: hsl(41, 8%, 25%);
-    --color-dt-gray-250: hsl(41, 5%, 40%);
-    --color-dt-gray-225: hsl(41, 5%, 50%);
-    --color-dt-gray-200: hsl(41, 9%, 60%);
-    --color-dt-gray-100: hsl(41, 15%, 80%);
+    --color-dt-gray-900: hsl(41, 5%, 4%);
+    --color-dt-gray-800: hsl(41, 3%, 5%);
+    --color-dt-gray-700: hsl(41, 2%, 7%);
+    --color-dt-gray-600: hsl(41, 2%, 9%);
+    --color-dt-gray-575: hsl(41, 2%, 10.5%);
+    --color-dt-gray-550: hsl(41, 2%, 11%);
+    --color-dt-gray-525: hsl(41, 2%, 12%);
+    --color-dt-gray-500: hsl(41, 3%, 13%);
+    --color-dt-gray-475: hsl(41, 4%, 14%);
+    --color-dt-gray-450: hsl(41, 4%, 16%);
+    --color-dt-gray-400: hsl(41, 3%, 19%);
+    --color-dt-gray-300: hsl(41, 4%, 25%);
+    --color-dt-gray-250: hsl(41, 3%, 40%);
+    --color-dt-gray-225: hsl(41, 3%, 50%);
+    --color-dt-gray-200: hsl(41, 5%, 60%);
+    --color-dt-gray-100: hsl(41, 7%, 80%);
 }
 
 /* Color definitions */
