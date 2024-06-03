@@ -114,3 +114,11 @@ fieldset#theme-selector {
     font-weight: 700;
     font-size: 12px;
 }
+
+select {
+    background-color: var(--color-settings-dropdown-option-bg);
+    color: var(--color-setting-option);
+    border-radius: 10px;
+    border: 0;
+    padding: 0 10px;
+}
