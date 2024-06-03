@@ -83,9 +83,13 @@ body {
 
     --color-footer-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
 
-    --color-community-label-text: var(--light, var(--color-gray-700));
-    --color-community-label-button: var(--light, var(--color-gray-600));
-    --color-community-label-button-hover: var(--light, var(--color-gray-200));
+    --color-community-label-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-100));
+    --color-community-label-button-text: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-200));
+    --color-community-label-button-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-400));
+    --color-community-label-button-highlight: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-300));
+    --color-community-label-button-hover: var(--light, rgba(0,0,0,0.03)) var(--dark, rgba(255,255,255,0.05));
+    --color-community-label-gradient-1: var(--light, var(--color-gray-0)) var(--dark, hsl(41, 4%, 9%));
+    --color-community-label-gradient-2: var(--light, rgba(255,255,255,0.7)) var(--dark, hsla(0,0%,0%,0.7));
 
     --color-post-blog-name: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-100));
     --color-reblog-attribution: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
@@ -332,7 +336,6 @@ a.logo {
     font-size: 14px;
     border: 0;
     border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .primary.button, a.primary.button {

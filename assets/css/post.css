@@ -208,7 +208,7 @@ a.hidden-reblog {
   padding: 0 30px;
   text-wrap: balance;
 
-  background: linear-gradient(0deg, rgba(255, 255, 255) 0%, rgba(255,255,255,0.8) 100%);
+  background: linear-gradient(0deg, var(--color-community-label-gradient-1) 0%, var(--color-community-label-gradient-2) 100%);
 
   color: var(--color-community-label-text);
   z-index: 2;
@@ -232,14 +232,17 @@ a.hidden-reblog {
   color: var(--color-community-label-text);
 }
 
-.unblur-post-button {
+.unblur-post-button.button, .no-js-view-community-post-instruction {
   background: none;
   padding: 5px 15px;
-  border: 1px solid var(--color-community-label-button);
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--color-community-label-button-text);
+  border: solid 2px var(--color-community-label-button-highlight);
   margin-top: 25px;
 }
 
-.unblur-post-button:hover {
+.unblur-post-button.button:hover {
   background: var(--color-community-label-button-hover);
 }
