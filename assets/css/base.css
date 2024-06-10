@@ -93,7 +93,7 @@ body {
 
     --color-post-blog-name: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-100));
     --color-reblog-attribution: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
-    --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-100));
+    --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
     --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
 
     --color-ask-header: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-225));
