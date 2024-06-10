@@ -7,9 +7,9 @@
         <div class="paging">
             {%- block paging -%}
                 {% if page %}
-                    <a class="next-page button" href="{{-request.path}}?page={{page + 1}}">{{-translate(request.ctx.language, "pagination_next_page")}}</a>
+                    <a class="primary next-page button" href="{{-request.path}}?page={{page + 1}}">{{-translate(request.ctx.language, "pagination_next_page")}}</a>
                 {% else %}
-                    <a class="next-page button" href="{{-request.path}}?page=2">{{-translate(request.ctx.language, "pagination_next_page")}}</a>
+                    <a class="primary next-page button" href="{{-request.path}}?page=2">{{-translate(request.ctx.language, "pagination_next_page")}}</a>
                 {% endif %}
             {%- endblock -%}
         </div>

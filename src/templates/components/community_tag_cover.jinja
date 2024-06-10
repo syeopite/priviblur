@@ -1,3 +1,5 @@
+{#- TODO redesign -
++#}
 <div class="community-label-cover">
     <h3>{{translate(request.ctx.language, "post_community_label_mature_heading")}}</h3>
     {%- if element.community_labels[0].value == 0 -%}
@@ -9,6 +11,6 @@
         {% endfor %}
         <p> {{labels | format_list(locale=request.ctx.language)}} </p>
     {%- endif -%}
-    <button class="with-js button unblur-post-button">{{translate(request.ctx.language, "post_community_label_show_post_button")}}</button>
-    <noscript><p class="no-js-view-community-post-instruction">{{translate(request.ctx.language, "post_community_label_no_js_show_post_instructions")}}</p></noscript>
+    <button class="with-js button secondary unblur-post-button">{{translate(request.ctx.language, "post_community_label_show_post_button")}}</button>
+    <noscript><p class="no-js-view-community-post-instruction ">{{translate(request.ctx.language, "post_community_label_no_js_show_post_instructions")}}</p></noscript>
 </div>

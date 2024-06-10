@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 25px 25px;
-  background: white;
+  background: var(--color-top-level-card-bg);
   border-radius: 10px;
   width: 100%;
 }
@@ -20,13 +20,16 @@
 
 .post-header {
   display: flex;
-  font-weight: bold;
   text-decoration: none;
+}
+
+.asker {
+  color: var(--color-ask-header)
 }
 
 .ask-body {
   padding: 15px 15px 0;
-  background: #eeeeef;
+  background: var(--color-ask-bg);
   border-radius: 5px;
   width: 100%;
 }
@@ -39,7 +42,11 @@
 }
 
 .reblog-attribution .blog-name {
-  color: #6b7280;
+  color: var(--color-reblog-attribution);
+}
+
+.reblog-attribution .icon path {
+  fill: var(--color-reblog-attribution)
 }
 
 .post-author {
@@ -65,11 +72,12 @@
 .primary-post-author {
   display: flex;
   gap: 5px;
-  color: #6b7280;
+  color: var(--color-post-header-date-separator);
 }
 
 a.blog-name {
-  color: black;
+  color: var(--color-post-blog-name);
+  font-weight: bold;
   align-self: center;
 }
 
@@ -78,12 +86,12 @@ a.blog-name:hover {
 }
 
 .broken-blog, .deactivated-blog {
-  color: black;
+  color: var(--color-text);
   font-weight: 500;
 }
 
 .primary-post-author .separator {
-  font-size: 8px;
+  font-size: 10px;
   align-self: center;
 }
 
@@ -106,7 +114,7 @@ a.blog-name:hover {
   flex-direction: column;
   gap: 15px;
 
-  border-top: 1px solid #d1d1d1;
+  border-top: 1px solid var(--color-trail-post-separator);
   padding: 25px 0px;
 }
 
@@ -119,8 +127,8 @@ a.blog-name:hover {
   padding-bottom: 0px;
 }
 
-.hidden-reblog {
-  font-weight: normal;
+a.hidden-reblog {
+  font-weight: 500;
 }
 
 .post-body > * {
@@ -129,7 +137,7 @@ a.blog-name:hover {
 
 .post-footer {
   display: flex;
-  color: #ACACAC;
+  color: var(--color-post-footer);
   justify-content: space-around;
   flex-direction: column;
   align-self: end;
@@ -146,17 +154,21 @@ a.blog-name:hover {
 
 .post-tag {
   display: inline-block;
-  background: #f5f5f5;
-  color: #ACACAC;
+  background: var(--color-post-tag-bg);
   border-radius: 6px;
   padding: 1px 5px;
   font-weight: 500;
+}
+
+.post-tag:hover {
+  background: var(--color-post-tag-hover);
 }
 
 .post-interaction {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  color: var(--color-post-footer-post-interaction);
 }
 
 .interaction-buttons {
@@ -165,10 +177,11 @@ a.blog-name:hover {
   align-items: center;
 }
 
+.interaction-buttons path {
+  fill: var(--color-post-footer-post-interaction);
+}
+
 .note-count {
-  /* background: #f5f5f5;
-  border-radius: 5px;
-  padding: 5px 10px; */
   font-weight: bold;
 }
 
@@ -195,9 +208,9 @@ a.blog-name:hover {
   padding: 0 30px;
   text-wrap: balance;
 
-  background: linear-gradient(0deg, rgba(255, 255, 255) 0%, rgba(255,255,255,0.8) 100%);
+  background: linear-gradient(0deg, var(--color-community-label-gradient-1) 0%, var(--color-community-label-gradient-2) 100%);
 
-  color: #4f4f4f;
+  color: var(--color-community-label-text);
   z-index: 2;
 }
 
@@ -216,17 +229,20 @@ a.blog-name:hover {
 .no-js-view-community-post-instruction {
   margin-top: 20px;
   font-size: 12px;
-  color: #acacac;
+  color: var(--color-community-label-text);
 }
 
-.unblur-post-button {
+.unblur-post-button.button, .no-js-view-community-post-instruction {
   background: none;
   padding: 5px 15px;
-  border: 1px solid #cdcdcd;
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--color-community-label-button-text);
+  border: solid 2px var(--color-community-label-button-highlight);
   margin-top: 25px;
 }
 
-.unblur-post-button:hover {
-  background: #e1e1e1;
+.unblur-post-button.button:hover {
+  background: var(--color-community-label-button-hover);
 }

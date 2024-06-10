@@ -14,8 +14,7 @@ import babel.lists
 import redis.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, priviblur_extractor
-from . import priviblur_extractor
+from . import routes, priviblur_extractor, preferences
 from .config import load_config
 from .helpers import setup_logging, helpers, i18n, error_handlers, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
@@ -42,6 +41,8 @@ if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
 
 
 app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
+app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
+app.ctx.LANGUAGE_NAMES = i18n.LANGUAGE_NAMES
 
 # Constants
 
@@ -181,7 +182,26 @@ async def route(request):
 
 @app.middleware("request")
 async def before_all_routes(request):
-    request.ctx.language = "en_US"
+    request.ctx.preferences = preferences.UserPreferences(
+            **config.default_user_preferences._asdict()
+        )
+
+    request.ctx.invalid_settings_cookie = False
+
+    try:
+        if request.cookies.get("settings"):
+            settings_from_cookie = dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+            if int(settings_from_cookie.get("version")) == preferences.VERSION:
+                request.ctx.preferences = preferences.dataclasses.replace(
+                    request.ctx.preferences,
+                    **dict(urllib.parse.parse_qsl(request.cookies.get("settings")))
+                )
+            else:
+                request.ctx.invalid_settings_cookie = True
+    except (TypeError, KeyError, ValueError):
+        request.ctx.invalid_settings_cookie = True
+
+    request.ctx.language = request.ctx.preferences.language
 
 
 @app.middleware("response")

@@ -6,8 +6,6 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  Priviblur\n"
-"POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2023-11-16 00:31-0800\n"
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
@@ -145,7 +143,46 @@ msgid "post_community_label_show_post_button"
 msgstr "Show post"
 
 msgid "post_community_label_no_js_show_post_instructions"
-msgstr "Hover over me to view the post"
+msgstr "Reveals on hover"
 
 msgid "blog_search_placeholder_text"
 msgstr "Search posts"
+
+msgid "settings_header"
+msgstr "Settings"
+
+msgid "settings_language_selector"
+msgstr "Language"
+
+msgid "settings_language_selector_desc"
+msgstr "Select which language you'd like Priviblur to use"
+
+msgid "settings_theme_selector"
+msgstr "Theme"
+
+msgid "settings_theme_selector_desc"
+msgstr "Select your display theme"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "Auto"
+
+msgid "settings_theme_selector_option_light"
+msgstr "Light"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "Dark"
+
+msgid "settings_save_changes"
+msgstr "Save Changes"
+
+msgid "settings_cancel_changes"
+msgstr "Cancel"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "Copy as bookmarklet"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "Copied"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "Unable to copy"

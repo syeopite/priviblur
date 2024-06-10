@@ -37,5 +37,5 @@ document.addEventListener("click", function(event) {
     if (current_dropdown && current_dropdown != event.target && !current_dropdown.contains(event.target)) {
         current_dropdown.classList.remove("active-dropdown-menu")
         current_dropdown = null;
-    };
+    }
 });
