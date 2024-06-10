@@ -155,7 +155,7 @@ msgid "settings_language_selector"
 msgstr "Language"
 
 msgid "settings_language_selector_desc"
-msgstr "Select display language"
+msgstr "Select which language you'd like Priviblur to use"
 
 msgid "settings_theme_selector"
 msgstr "Theme"
