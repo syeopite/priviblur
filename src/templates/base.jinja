@@ -17,7 +17,7 @@
     {%- block head -%}
     {%- endblock -%}
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} {{translate(request.ctx.language, "page_title_suffix")}} </title>
 </head>
 <body class="
 {%- if request.ctx.preferences.theme =="light"-%}
