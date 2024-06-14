@@ -94,6 +94,12 @@ msgstr "Top"
 msgid "timeline_tagged_sort_by_filter_recent"
 msgstr "Latest"
 
+msgid "explore_trending_page_title"
+msgstr "Trending topics"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "Today on Tumblr"
+
 msgid "pagination_next_page"
 msgstr "Next page"
 

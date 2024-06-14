@@ -26,6 +26,8 @@ async def _handle_explore(request, endpoint, post_type = None):
                 "trending",
                 continuation,
             )
+
+            title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
         case "explore._today":
             timeline = await get_explore_results(
                 request.app.ctx,
@@ -33,6 +35,7 @@ async def _handle_explore(request, endpoint, post_type = None):
                 "today",
                 continuation,
             )
+            title = request.app.ctx.translate(request.ctx.language, "explore_today_on_tumblr_page_title")
         case _:
             timeline = await get_explore_results(
                 request.app.ctx,
@@ -41,12 +44,13 @@ async def _handle_explore(request, endpoint, post_type = None):
                 continuation,
                 post_type=post_type
             )
+            title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
 
     return await sanic_ext.render(
         "timeline.jinja",
         context={
             "app": app,
-            "title": "Trending Topics - Priviblur",
+            "title": title,
             "timeline": timeline,
         }
     )
