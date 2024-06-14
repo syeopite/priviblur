@@ -3,7 +3,7 @@ import sanic_ext
 
 async def tumblr_error_login_walled(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -16,7 +16,7 @@ async def tumblr_error_login_walled(request, exception):
 
 async def tumblr_error_restricted_tag(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -29,7 +29,7 @@ async def tumblr_error_restricted_tag(request, exception):
 
 async def tumblr_error_unknown_blog(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -42,7 +42,7 @@ async def tumblr_error_unknown_blog(request, exception):
 
 async def request_timeout(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -55,7 +55,7 @@ async def request_timeout(request, exception):
 
 async def error_404(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -68,7 +68,7 @@ async def error_404(request, exception):
 
 async def invalid_redirect(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
