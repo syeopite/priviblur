@@ -96,7 +96,7 @@ body {
     --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
     --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
 
-    --color-ask-header: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-225));
+    --color-ask-header: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-225));
     --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-525));
 
     --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
