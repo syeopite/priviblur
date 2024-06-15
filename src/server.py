@@ -14,9 +14,9 @@ import babel.lists
 import redis.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
-from . import routes, priviblur_extractor, preferences
+from . import routes, priviblur_extractor, preferences, error_handlers
 from .config import load_config
-from .helpers import setup_logging, helpers, i18n, error_handlers, exceptions, ext_npf_renderer
+from .helpers import setup_logging, helpers, i18n, exceptions, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
 
 
@@ -220,25 +220,12 @@ async def after_all_routes(request, response):
         ]
     )
 
-
-# TODO Extract
-
-app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrLoginRequiredError, error_handlers.tumblr_error_login_walled)
-app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrRestrictedTagError, error_handlers.tumblr_error_restricted_tag)
-app.error_handler.add(priviblur_extractor.priviblur_exceptions.TumblrBlogNotFoundError, error_handlers.tumblr_error_unknown_blog)
-
-for request_timeouts in {
-    asyncio.TimeoutError
-}:
-    app.error_handler.add(request_timeouts, error_handlers.request_timeout)
-
-app.error_handler.add(sanic.exceptions.NotFound, error_handlers.error_404)
-app.error_handler.add(exceptions.TumblrInvalidRedirect, error_handlers.invalid_redirect)
-
 # Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
 
+# Register error handlers into Priviblur
+error_handlers.register(app)
 
 if __name__ == "__main__":
     app.run(
