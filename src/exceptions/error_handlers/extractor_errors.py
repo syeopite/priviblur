@@ -1,6 +1,6 @@
 import sanic_ext
 
-from src.error_handlers import _base
+from src.exceptions.error_handlers import _base
 from src.priviblur_extractor import priviblur_exceptions
 
 extractor_errors = _base.ErrorHandlerGroup()

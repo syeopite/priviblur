@@ -4,8 +4,8 @@ import sanic
 import sanic.exceptions
 import sanic_ext
 
-from src.helpers import exceptions
-from src.error_handlers import _base
+from src.exceptions import exceptions
+from src.exceptions.error_handlers import _base
 
 miscellaneous_errors = _base.ErrorHandlerGroup()
 
