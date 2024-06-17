@@ -1,9 +1,7 @@
 import os
-import asyncio
 import logging
 import urllib.parse
 import functools
-import copy
 
 import sanic
 import aiohttp
@@ -60,6 +58,9 @@ app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", 
 
 app.ctx.PRIVIBLUR_CONFIG = config
 app.ctx.translate = i18n.translate
+
+app.ctx.PRIVIBLUR_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
 
 @app.listener("before_server_start")
 async def initialize(app):

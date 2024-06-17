@@ -49,3 +49,20 @@ async def invalid_redirect(request, exception):
         },
     status=502
     )
+
+
+@miscellaneous_errors.register(Exception)
+async def generic_error(request, exception):
+    name, message, context = _base.create_user_friendly_error_message(request, exception)
+
+    return await sanic_ext.render(
+        "misc/generic_error.jinja",
+        context={
+            "app": request.app,
+            "exception": exception,
+            "exception_name": name,
+            "exception_message": message,
+            "exception_context": context,
+        },
+    status=500
+    )

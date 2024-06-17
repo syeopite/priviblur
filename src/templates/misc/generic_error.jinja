@@ -1,0 +1,80 @@
+{# Displays information about some generic exception to the user #}
+
+{% extends "base.jinja" %}
+{% block head %}
+<style>
+#priviblur-error > div {
+    background-color: var(--color-top-level-card-bg);
+    border-radius: 25px;
+    padding: 25px;
+    max-width: 100%;
+}
+
+#priviblur-error h2 {
+    margin: 0;
+}
+
+#priviblur-error {
+    color: var(--color-text);
+}
+
+#priviblur-error details {
+    margin-top: 20px;
+}
+
+#priviblur-error pre {
+    text-wrap: wrap;
+}
+
+#priviblur-error a {
+    text-decoration: underline;
+}
+
+#error-header {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    #priviblur-error pre {
+        text-wrap: nowrap;
+    }
+
+    #priviblur-error > div {
+        max-width: unset;
+        width: fit-content;
+    }
+}
+
+}
+</style>
+
+{% endblock %}
+{% block title %}Error{% endblock %}
+
+{% block center %}
+<section id="priviblur-error">
+    <div class="card">
+        <div id="error-header">
+            <h2>{{translate(request.ctx.language, "priviblur_error_generic")}}</h2>
+            <p>{{translate(request.ctx.language, "priviblur_error_generic_description")}}</p>
+            <a href="https://github.com/syeopite/priviblur/issues/new">{{translate(request.ctx.language, "priviblur_error_generic_description_2")}}</a>
+        </div>
+
+        <div>
+            <details open="">
+            <summary>Technical details</summary>
+                <pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_name", substitution=exception_name)}}</pre>
+                {% if exception_message %}<pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_message", substitution='"' + exception_message + '"')}}</pre>{% endif %}
+                <pre>{{-translate(request.ctx.language, "priviblur_error_generic_technical_details_error_context")}}</pre>
+                <pre>{{exception_context}}</pre>
+            </details>
+        </div>
+
+    </div>
+</section>
+{%- endblock %}
