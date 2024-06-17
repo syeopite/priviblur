@@ -1,7 +1,7 @@
 import sanic
 import aiohttp
 
-from ..helpers import exceptions
+from src.exceptions import exceptions
 
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 

@@ -1,9 +1,15 @@
-import sanic
 import sanic_ext
 
+from src.exceptions.error_handlers import _base
+from src.priviblur_extractor import priviblur_exceptions
+
+extractor_errors = _base.ErrorHandlerGroup()
+
+
+@extractor_errors.register(priviblur_exceptions.TumblrLoginRequiredError)
 async def tumblr_error_login_walled(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -14,9 +20,10 @@ async def tumblr_error_login_walled(request, exception):
     )
 
 
+@extractor_errors.register(priviblur_exceptions.TumblrRestrictedTagError)
 async def tumblr_error_restricted_tag(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -27,9 +34,10 @@ async def tumblr_error_restricted_tag(request, exception):
     )
 
 
+@extractor_errors.register(priviblur_exceptions.TumblrBlogNotFoundError)
 async def tumblr_error_unknown_blog(request, exception):
     return await sanic_ext.render(
-        "misc/generic_error.jinja",
+        "misc/msg_error.jinja",
         context={
             "app": request.app,
             "exception": exception,
@@ -37,42 +45,4 @@ async def tumblr_error_unknown_blog(request, exception):
             "error_description": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_not_found_error_description"),
         },
         status=404
-    )
-
-
-async def request_timeout(request, exception):
-    return await sanic_ext.render(
-        "misc/generic_error.jinja",
-        context={
-            "app": request.app,
-            "exception": exception,
-            "error_heading": request.app.ctx.translate(request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_heading"),
-            "error_description": request.app.ctx.translate(request.ctx.language, "priviblur_error_request_to_tumblr_timed_out_description")
-        },
-        status=504
-    )
-
-
-async def error_404(request, exception):
-    return await sanic_ext.render(
-        "misc/generic_error.jinja",
-        context={
-            "app": request.app,
-            "exception": exception,
-            "error_heading": "404: Not Found",
-            "error_description": f"The requested URL \"{request.path}\" was not found",
-        },
-    status=404
-    )
-
-
-async def invalid_redirect(request, exception):
-    return await sanic_ext.render(
-        "misc/generic_error.jinja",
-        context={
-            "app": request.app,
-            "exception": exception,
-            "error_heading": request.app.ctx.translate(request.ctx.language, "priviblur_error_invalid_internal_tumblr_redirect"),
-        },
-    status=502
     )
