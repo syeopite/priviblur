@@ -6,7 +6,7 @@ import babel
 import sanic
 
 SUPPORTED_LANGUAGES = [
-    "en_US"
+    "en_US", "cs_CZ"
 ]
 
 LANGUAGE_NAMES = {
