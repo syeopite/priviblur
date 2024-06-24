@@ -1,0 +1,222 @@
+# Czech translations for Priviblur.
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Priviblur project.
+# syeopite <syeopite@syeopite.dev>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Priviblur\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Fjuro <fjuro@alius.cz>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+msgid "project_title"
+msgstr "Priviblur"
+
+msgid "page_title_suffix"
+msgstr "- Priviblur"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "{0} poznámka"
+msgstr[1] "{0} poznámky"
+msgstr[2] "{0} poznámek"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "Seřadit podle"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "Populární"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "Nejnovější"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "Filtrovat podle data"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "Za celou dobu"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "Dnes"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "Poslední týden"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "Poslední měsíc"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "Posledních 6 měsíců"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "Poslední rok"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "Všechny typy"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "Filtrovat podle typu příspěvku"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "Text"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "Fotka"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "Gify"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "Citace"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "Odkaz"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "Chat"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "Zvuk"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "Video"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "Otázky"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "Anketa"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "Seřadit podle"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "Nejlepší"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "Nejnovější"
+
+msgid "explore_trending_page_title"
+msgstr "Trendy"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "Dnes na Tumblr"
+
+msgid "pagination_next_page"
+msgstr "Další stránka"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "Tento blog vyžaduje účet k jeho zobrazení"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "Zkuste místo toho najít reblogy!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "Tato značka byla na Tumblr omezena"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "Zkuste místo toho použít vyhledávání"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "Nepodařilo se najít požadovaný blog"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "Blog byl možná smazán, nebo nikdy neexistoval"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "Chyba: čas žádosti na Tumblr vypršel"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr "Priviblur nedokázal dokončit požadavek na Tumblr před vypršením času"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "Chyba: přesměrování Tumblr HTTP 301 míří na cizí adresu URL"
+
+msgid "priviblur_error_generic"
+msgstr "Došlo k neznámé chybě!"
+
+msgid "priviblur_error_generic_description"
+msgstr "Vypadá to, že jste našli chybu ve službě Priviblur."
+
+msgid "priviblur_error_generic_description_2"
+msgstr "Nahlaste ji prosím zde na GitHubu"
+
+msgid "priviblur_error_generic_technical_details_error_name"
+msgstr "Chyba: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_message"
+msgstr "Zpráva: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_context"
+msgstr "Kontext:"
+
+msgid "post_community_label_mature_heading"
+msgstr "Komunitní značka: pro dospělé"
+
+msgid "post_community_label_generic_explanation"
+msgstr "Tento příspěvek může obsahovat obsah, který není vhodný pro všechny věkové kategorie."
+
+msgid "post_community_label_sexual_themes"
+msgstr "Sexuální témata"
+
+msgid "post_community_label_drug_use"
+msgstr "Závislost na drogách a alkoholu"
+
+msgid "post_community_label_violence"
+msgstr "Násilí"
+
+msgid "post_community_label_show_post_button"
+msgstr "Zobrazit příspěvek"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "Zobrazí se po najetí myší"
+
+msgid "blog_search_placeholder_text"
+msgstr "Hledat příspěvky"
+
+msgid "settings_header"
+msgstr "Nastavení"
+
+msgid "settings_language_selector"
+msgstr "Jazyk"
+
+msgid "settings_language_selector_desc"
+msgstr "Vyberte jazyk, který má Priviblur používat"
+
+msgid "settings_theme_selector"
+msgstr "Motiv"
+
+msgid "settings_theme_selector_desc"
+msgstr "Zvolte váš preferovaný motiv"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "Automatický"
+
+msgid "settings_theme_selector_option_light"
+msgstr "Světlý"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "Tmavý"
+
+msgid "settings_save_changes"
+msgstr "Uložit změny"
+
+msgid "settings_cancel_changes"
+msgstr "Zrušit"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "Kopírovat jako záložku"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "Zkopírováno"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "Nepodařilo se zkopírovat"
