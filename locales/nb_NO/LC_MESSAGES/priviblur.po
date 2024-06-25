@@ -6,11 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Priviblur\n"
+"PO-Revision-Date: 2024-06-26 04:09+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"priviblur/translations/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 msgid "project_title"
 msgstr ""
@@ -24,10 +29,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "timeline_search_sort_by_filter_title"
-msgstr ""
+msgstr "Sorter etter"
 
 msgid "timeline_search_sort_by_filter_popular"
-msgstr ""
+msgstr "Popularitet"
 
 msgid "timeline_search_sort_by_filter_recent"
 msgstr ""
@@ -39,58 +44,60 @@ msgid "timeline_search_filter_by_date_filter_0"
 msgstr ""
 
 msgid "timeline_search_filter_by_date_filter_1"
-msgstr ""
+msgstr "I dag"
 
 msgid "timeline_search_filter_by_date_filter_7"
-msgstr ""
+msgstr "Siste uke"
 
 msgid "timeline_search_filter_by_date_filter_30"
-msgstr ""
+msgstr "Site måned"
 
 msgid "timeline_search_filter_by_date_filter_180"
-msgstr ""
+msgstr "Siste 6 måneder"
 
 msgid "timeline_search_filter_by_date_filter_365"
-msgstr ""
+msgstr "Siste år"
 
 msgid "timeline_search_post_type_filter_none"
-msgstr ""
+msgstr "Alle typer"
 
+#, fuzzy
 msgid "timeline_search_post_type_filter_title"
-msgstr ""
+msgstr "Etter innleggstype"
 
 msgid "timeline_search_post_type_filter_text"
-msgstr ""
+msgstr "Tekst"
 
 msgid "timeline_search_post_type_filter_photo"
-msgstr ""
+msgstr "Bilde"
 
+#, fuzzy
 msgid "timeline_search_post_type_filter_gif"
-msgstr ""
+msgstr "GIF-er"
 
 msgid "timeline_search_post_type_filter_quote"
-msgstr ""
+msgstr "Sitat"
 
 msgid "timeline_search_post_type_filter_link"
-msgstr ""
+msgstr "Lenke"
 
 msgid "timeline_search_post_type_filter_chat"
-msgstr ""
+msgstr "Sludring"
 
 msgid "timeline_search_post_type_filter_audio"
-msgstr ""
+msgstr "Lyd"
 
 msgid "timeline_search_post_type_filter_video"
-msgstr ""
+msgstr "Video"
 
 msgid "timeline_search_post_type_filter_ask"
-msgstr ""
+msgstr "Spør"
 
 msgid "timeline_search_post_type_filter_poll"
-msgstr ""
+msgstr "Avstemming"
 
 msgid "timeline_tagged_sort_by_filter_title"
-msgstr ""
+msgstr "Sorter etter"
 
 msgid "timeline_tagged_sort_by_filter_top"
 msgstr ""
