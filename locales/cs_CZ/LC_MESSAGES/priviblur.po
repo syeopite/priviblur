@@ -163,7 +163,9 @@ msgid "post_community_label_mature_heading"
 msgstr "Komunitní značka: pro dospělé"
 
 msgid "post_community_label_generic_explanation"
-msgstr "Tento příspěvek může obsahovat obsah, který není vhodný pro všechny věkové kategorie."
+msgstr ""
+"Tento příspěvek může obsahovat obsah, který není vhodný pro všechny věkové "
+"kategorie."
 
 msgid "post_community_label_sexual_themes"
 msgstr "Sexuální témata"
