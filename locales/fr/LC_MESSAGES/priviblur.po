@@ -6,215 +6,221 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Priviblur\n"
-"PO-Revision-Date: 2024-06-26 04:09+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-06-27 13:09+0000\n"
+"Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/priviblur/"
+"translations/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "project_title"
-msgstr ""
+msgstr "Priviblur"
 
 msgid "page_title_suffix"
-msgstr ""
+msgstr "- Priviblur"
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} note"
+msgstr[1] "{0} notes"
 
 msgid "timeline_search_sort_by_filter_title"
-msgstr ""
+msgstr "Trier par"
 
 msgid "timeline_search_sort_by_filter_popular"
-msgstr ""
+msgstr "Populaire"
 
 msgid "timeline_search_sort_by_filter_recent"
-msgstr ""
+msgstr "Récent"
 
 msgid "timeline_search_filter_by_date_filter_title"
-msgstr ""
+msgstr "Filtrer par date"
 
 msgid "timeline_search_filter_by_date_filter_0"
-msgstr ""
+msgstr "Depuis toujours"
 
 msgid "timeline_search_filter_by_date_filter_1"
-msgstr ""
+msgstr "Aujourd'hui"
 
 msgid "timeline_search_filter_by_date_filter_7"
-msgstr ""
+msgstr "La semaine dernière"
 
 msgid "timeline_search_filter_by_date_filter_30"
-msgstr ""
+msgstr "Le mois dernier"
 
 msgid "timeline_search_filter_by_date_filter_180"
-msgstr ""
+msgstr "Les 6 derniers mois"
 
 msgid "timeline_search_filter_by_date_filter_365"
-msgstr ""
+msgstr "L'année dernière"
 
 msgid "timeline_search_post_type_filter_none"
-msgstr ""
+msgstr "Tous types"
 
 msgid "timeline_search_post_type_filter_title"
-msgstr ""
+msgstr "Filtrer par type de publication"
 
 msgid "timeline_search_post_type_filter_text"
-msgstr ""
+msgstr "Texte"
 
 msgid "timeline_search_post_type_filter_photo"
-msgstr ""
+msgstr "Photo"
 
 msgid "timeline_search_post_type_filter_gif"
-msgstr ""
+msgstr "GIF"
 
 msgid "timeline_search_post_type_filter_quote"
-msgstr ""
+msgstr "Citation"
 
 msgid "timeline_search_post_type_filter_link"
-msgstr ""
+msgstr "Lien"
 
 msgid "timeline_search_post_type_filter_chat"
-msgstr ""
+msgstr "Discussion"
 
 msgid "timeline_search_post_type_filter_audio"
-msgstr ""
+msgstr "Audio"
 
 msgid "timeline_search_post_type_filter_video"
-msgstr ""
+msgstr "Vidéo"
 
 msgid "timeline_search_post_type_filter_ask"
-msgstr ""
+msgstr "Demande"
 
 msgid "timeline_search_post_type_filter_poll"
-msgstr ""
+msgstr "Sondage"
 
 msgid "timeline_tagged_sort_by_filter_title"
-msgstr ""
+msgstr "Trier par"
 
 msgid "timeline_tagged_sort_by_filter_top"
-msgstr ""
+msgstr "Haut"
 
 msgid "timeline_tagged_sort_by_filter_recent"
-msgstr ""
+msgstr "Le plus récent"
 
 msgid "explore_trending_page_title"
-msgstr ""
+msgstr "Sujets tendances"
 
 msgid "explore_today_on_tumblr_page_title"
-msgstr ""
+msgstr "Aujourd'hui sur Tumblr"
 
 msgid "pagination_next_page"
-msgstr ""
+msgstr "Page suivante"
 
 msgid "tumblr_error_blog_login_required_error_heading"
-msgstr ""
+msgstr "Ce blog nécessite un compte pour être visualisé"
 
 msgid "tumblr_error_blog_login_required_error_description"
-msgstr ""
+msgstr "Essayez de trouver des reblogs à la place"
 
 msgid "tumblr_error_restricted_tag_error_heading"
-msgstr ""
+msgstr "Cette étiquette a été restreinte sur Tumblr"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr ""
+msgstr "Essayez de lancer une recherche à la place"
 
 msgid "tumblr_error_blog_not_found_error_heading"
-msgstr ""
+msgstr "Impossible de trouver le blog demandé"
 
 msgid "tumblr_error_blog_not_found_error_description"
 msgstr ""
+"Le blog peut avoir été supprimé ou n'avoir jamais existé en premier lieu"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
-msgstr ""
+msgstr "Erreur : Délai de la demande à Tumblr dépassé"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
 msgstr ""
+"Priviblur n'a pas été en mesure d'effectuer la demande à Tumblr avant le "
+"dépassement du délai"
 
 msgid "priviblur_error_invalid_internal_tumblr_redirect"
-msgstr ""
+msgstr "Erreur : Tumblr HTTP 301 redirige vers une URL étrangère"
 
 msgid "priviblur_error_generic"
-msgstr ""
+msgstr "Une exception inconnue s'est produite !"
 
 msgid "priviblur_error_generic_description"
-msgstr ""
+msgstr "On dirait que vous avez trouvé une erreur sur Priviblur."
 
 msgid "priviblur_error_generic_description_2"
-msgstr ""
+msgstr "Veuillez la signaler ici sur GitHub"
 
 msgid "priviblur_error_generic_technical_details_error_name"
-msgstr ""
+msgstr "Erreur : {0}"
 
 msgid "priviblur_error_generic_technical_details_error_message"
-msgstr ""
+msgstr "Message : {0}"
 
 msgid "priviblur_error_generic_technical_details_error_context"
-msgstr ""
+msgstr "Contexte :"
 
 msgid "post_community_label_mature_heading"
-msgstr ""
+msgstr "Label communautaire : Mature"
 
 msgid "post_community_label_generic_explanation"
 msgstr ""
+"Ce message peut contenir des contenus qui ne conviennent pas à tous les "
+"publics."
 
 msgid "post_community_label_sexual_themes"
-msgstr ""
+msgstr "Thèmes sexuels"
 
 msgid "post_community_label_drug_use"
-msgstr ""
+msgstr "Drogues ou alcoolisme"
 
 msgid "post_community_label_violence"
-msgstr ""
+msgstr "Violence"
 
 msgid "post_community_label_show_post_button"
-msgstr ""
+msgstr "Afficher la publication"
 
 msgid "post_community_label_no_js_show_post_instructions"
-msgstr ""
+msgstr "Se révèle en passant dessus"
 
 msgid "blog_search_placeholder_text"
-msgstr ""
+msgstr "Rechercher dans les publications"
 
 msgid "settings_header"
-msgstr ""
+msgstr "Paramètres"
 
 msgid "settings_language_selector"
-msgstr ""
+msgstr "Langue"
 
 msgid "settings_language_selector_desc"
-msgstr ""
+msgstr "Sélectionnez la langue que vous souhaitez utiliser pour Priviblur"
 
 msgid "settings_theme_selector"
-msgstr ""
+msgstr "Thème"
 
 msgid "settings_theme_selector_desc"
-msgstr ""
+msgstr "Sélectionnez votre thème d'affichage"
 
 msgid "settings_theme_selector_option_auto"
-msgstr ""
+msgstr "Automatique"
 
 msgid "settings_theme_selector_option_light"
-msgstr ""
+msgstr "Clair"
 
 msgid "settings_theme_selector_option_dark"
-msgstr ""
+msgstr "Sombre"
 
 msgid "settings_save_changes"
-msgstr ""
+msgstr "Enregistrer les changements"
 
 msgid "settings_cancel_changes"
-msgstr ""
+msgstr "Annuler"
 
 msgid "settings_copy_as_bookmarklet"
-msgstr ""
+msgstr "Copier comme marque-page"
 
 msgid "settings_copy_as_bookmarklet_confirmed"
-msgstr ""
+msgstr "Copié"
 
 msgid "settings_copy_as_bookmarklet_failed"
-msgstr ""
+msgstr "Impossible de copier"
