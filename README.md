@@ -1,5 +1,16 @@
 <div align="center"> 
   <h1> Priviblur </h1>
+  <div>
+  <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
+    <img alt="License: AGPLv3" src="https://shields.io/badge/License-AGPL%20v3-blue.svg">
+  </a>
+  <a href="https://hosted.weblate.org/engage/priviblur/">
+    <img src="https://hosted.weblate.org/widget/priviblur/svg-badge.svg" alt="Translation status" />
+  </a>
+  <a href="https://github.com/syeopite/priviblur/commits/master">
+    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/syeopite/priviblur?color=e69419&label=commits">
+  </a>
+  </div>
   <blockquote> <h4> Inspired by projects like <a href="https://github.com/iv-org/invidious"> Invidious</a></h4> </blockquote>
   <h3> Priviblur is an alternative frontend to Tumblr with a touch of modern design </h3>
 </div>
@@ -51,6 +62,15 @@ sanic src.server.app  --host 0.0.0.0  --worker <WORKERS>
 ## Configuration
 
 [Example config provided here](./config.example.toml)
+
+## Translations
+
+You can help translate Priviblur over at [Weblate!](https://hosted.weblate.org/engage/priviblur/)
+
+<a href="https://hosted.weblate.org/engage/priviblur/">
+  <img src="https://hosted.weblate.org/widget/priviblur/translations/287x66-grey.png" alt="Translation status" />
+  </a>
+</a>
 
 ## Donate 
 
