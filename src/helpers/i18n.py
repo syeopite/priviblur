@@ -9,6 +9,8 @@ SUPPORTED_LANGUAGES = [
     "en_US", "cs_CZ"
 ]
 
+SUPPORTED_LANGUAGES.sort()
+
 LANGUAGE_NAMES = {
     locale : babel.Locale.parse(locale).get_language_name().capitalize() for locale in SUPPORTED_LANGUAGES
 }
