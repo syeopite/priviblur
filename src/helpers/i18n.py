@@ -6,8 +6,10 @@ import babel
 import sanic
 
 SUPPORTED_LANGUAGES = [
-    "en_US", "cs_CZ"
+    "en_US", "cs_CZ", "fr"
 ]
+
+SUPPORTED_LANGUAGES.sort()
 
 LANGUAGE_NAMES = {
     locale : babel.Locale.parse(locale).get_language_name().capitalize() for locale in SUPPORTED_LANGUAGES
