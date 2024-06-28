@@ -22,7 +22,8 @@ msgstr ""
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "timeline_sort_by_filter_title"
 msgstr ""
