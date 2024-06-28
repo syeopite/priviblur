@@ -1,15 +1,21 @@
 # English (United States) translations for Priviblur.
 # Copyright (C) 2023 Syeopite
 # This file is distributed under the same license as the Priviblur project.
-# syeopite <syeopite@syeopite.dev>, 2023.
+# syeopite <syeopite@syeopite.dev>, 2023
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  Priviblur\n"
+"Project-Id-Version: Priviblur v0.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "project_title"
 msgstr "Priviblur"
