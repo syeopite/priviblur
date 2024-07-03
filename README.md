@@ -37,6 +37,19 @@ Priviblur has no official instance
 
 ## Installation
 
+### Docker
+
+You can install Priviblur through the official docker images here: https://quay.io/repository/syeopite/priviblur
+
+A compose file to use this image is provided in the repository.
+
+Configuration is then done by creating/editing a `config.toml` based off the example config. See configuration section below.
+
+> [!TIP]
+> Priviblur **officially** only provide images of each stable release. For an image built off of master you can use the image provided by PussTheCat.org here: https://github.com/PussTheCat-org/docker-priviblur-quay
+
+### Manual
+
 ```bash
 
 git clone "https://github.com/syeopite/priviblur"
