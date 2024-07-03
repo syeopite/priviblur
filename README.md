@@ -55,7 +55,7 @@ Configuration is then done by creating/editing a `config.toml` based off the exa
 git clone "https://github.com/syeopite/priviblur"
 cd priviblur 
 
-git checkout "v0.1.0"
+git checkout "v0.2.0"
 
 python -m venv venv 
 source venv/bin/activate
