@@ -4,8 +4,9 @@ env:
   platforms: linux/amd64,linux/arm64,linux/armv8
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*"
 
 jobs:
   build-and-push-image:
