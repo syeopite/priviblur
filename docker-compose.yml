@@ -1,8 +1,7 @@
 services:
   priviblur:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
+    image: quay.io/syeopite/priviblur:latest
+    container_name: priviblur
     restart: unless-stopped
     ports:
       - "127.0.0.1:8000:8000" # Replace with "8000:8000" if you don't use a reverse proxy
