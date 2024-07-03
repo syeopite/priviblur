@@ -19,7 +19,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          platforms: {{ env.platforms }}
+          platforms: ${{ env.platforms }}
 
       - name: Login to Quay.io
         uses: docker/login-action@v3
@@ -33,10 +33,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: quay.io/syeopite/priviblur
-        tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+          tags: |
+              type=ref,event=branch
+              type=semver,pattern={{version}}
+              type=semver,pattern={{major}}.{{minor}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
