@@ -8,7 +8,7 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "npf-renderer"
-        update-types: [version-update:semver-major", version-update:semver-minor"]
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
