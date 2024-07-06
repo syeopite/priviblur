@@ -6,10 +6,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-    groups:
-      all:
-        patterns:
-          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
