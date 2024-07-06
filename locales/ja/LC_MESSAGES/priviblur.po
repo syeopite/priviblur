@@ -8,22 +8,23 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-07-07 05:09+0000\n"
+"Last-Translator: SoulBlade17 <SoulBlade17@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/priviblur/"
+"translations/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "project_title"
 msgstr ""
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0}枚のメモ"
 
 msgid "timeline_sort_by_filter_title"
 msgstr ""
@@ -56,7 +57,7 @@ msgid "timeline_filter_by_date_filter_365"
 msgstr ""
 
 msgid "timeline_search_post_type_filter_none"
-msgstr ""
+msgstr "全種類"
 
 msgid "timeline_post_type_filter_title"
 msgstr ""
@@ -90,3 +91,91 @@ msgstr ""
 
 msgid "timeline_post_type_filter_poll"
 msgstr ""
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "結果の整理"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "人気"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "今日"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "先週"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "先月"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "過去6ヶ月"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "去年"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "投稿の種類でフィルター"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "テキスト"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "写真"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "ＧＩＦ"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "クオート"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "全時期"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "リンク"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "チャット"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "オーディオ"
+
+#, fuzzy
+msgid "timeline_search_post_type_filter_ask"
+msgstr "質問"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "アンケート"
+
+#, fuzzy
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "で並べ替える"
+
+#, fuzzy
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "トップ"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "最新"
+
+msgid "explore_trending_page_title"
+msgstr "急上昇の話題"
+
+#, fuzzy
+msgid "explore_today_on_tumblr_page_title"
+msgstr "今日のTumblr"
+
+msgid "pagination_next_page"
+msgstr "次のページ"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "投稿の日でフィルター"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "最新"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "動画"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "このブログを見るにはアカウントは必要です"
