@@ -12,7 +12,7 @@ intervaltree==3.1.0
 Jinja2==3.1.4
 MarkupSafe==2.1.5
 multidict==6.0.5
-npf_renderer==0.12.1
+npf_renderer==0.12.2
 orjson==3.10.6
 PyYAML==6.0.1
 redis==5.0.7
