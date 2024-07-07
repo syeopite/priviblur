@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-07-07 05:09+0000\n"
+"PO-Revision-Date: 2024-07-08 08:09+0000\n"
 "Last-Translator: SoulBlade17 <SoulBlade17@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/priviblur/"
 "translations/ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.7-dev\n"
 
 msgid "project_title"
-msgstr ""
+msgstr "Priviblur"
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
@@ -140,7 +140,6 @@ msgstr "チャット"
 msgid "timeline_search_post_type_filter_audio"
 msgstr "オーディオ"
 
-#, fuzzy
 msgid "timeline_search_post_type_filter_ask"
 msgstr "質問"
 
@@ -151,7 +150,6 @@ msgstr "アンケート"
 msgid "timeline_tagged_sort_by_filter_title"
 msgstr "で並べ替える"
 
-#, fuzzy
 msgid "timeline_tagged_sort_by_filter_top"
 msgstr "トップ"
 
@@ -179,3 +177,114 @@ msgstr "動画"
 
 msgid "tumblr_error_blog_login_required_error_heading"
 msgstr "このブログを見るにはアカウントは必要です"
+
+msgid "page_title_suffix"
+msgstr "- Priviblur"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "このタグはTumblrに制限されました"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "その代わりに検索してみて下さい"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "その代わりにリブログを検索してみて下さい！"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "リクエストしたブログが見つけられませんでした"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "ブログは削除されたか、存在しなかったかもしれません"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "エラー：Tumblrへのリクエストはタイムアウトしました"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr "タイムアウトする前に、PriviblurはTumblrへのリクエストを完了できませんでした"
+
+msgid "priviblur_error_generic_description"
+msgstr "Priviblurにはバグを見つけたようです。"
+
+msgid "priviblur_error_generic_description_2"
+msgstr "GitHubで報告して下さい"
+
+#, fuzzy
+msgid "priviblur_error_generic_technical_details_error_context"
+msgstr "背景："
+
+msgid "post_community_label_mature_heading"
+msgstr "コミュニティのラベル：成人"
+
+msgid "post_community_label_generic_explanation"
+msgstr "この投稿には、すべての読者に適していない内容が含まれている可能性があります。"
+
+msgid "post_community_label_sexual_themes"
+msgstr "性的のテーマ"
+
+#, fuzzy
+msgid "post_community_label_drug_use"
+msgstr "ドラッグとお酒の中毒"
+
+#, fuzzy
+msgid "post_community_label_violence"
+msgstr "暴力"
+
+msgid "blog_search_placeholder_text"
+msgstr "投稿の検索"
+
+msgid "settings_header"
+msgstr "設定"
+
+msgid "post_community_label_show_post_button"
+msgstr "投稿を表示"
+
+msgid "settings_language_selector"
+msgstr "言語"
+
+msgid "settings_theme_selector"
+msgstr "テーマ"
+
+msgid "settings_theme_selector_desc"
+msgstr "表示テーマを選択して下さい"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "自動"
+
+msgid "settings_theme_selector_option_light"
+msgstr "ライト"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "ダーク"
+
+msgid "settings_cancel_changes"
+msgstr "キャンセル"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "ブックマークとしてコピー"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "コピーされました"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "コピーできませんでした"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "カーソルのホバーすると表示されます"
+
+msgid "settings_language_selector_desc"
+msgstr "Priviblurの使用言語を選択して下さい"
+
+msgid "settings_save_changes"
+msgstr "変更を保存"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "エラー：Tumblr HTTP 301のリダイレクトは外部のURLに指定しています"
+
+msgid "priviblur_error_generic"
+msgstr "未知の例外が発生しました！"
+
+msgid "priviblur_error_generic_technical_details_error_message"
+msgstr "メッセージ：{0}"
+
+msgid "priviblur_error_generic_technical_details_error_name"
+msgstr "エラー：{0}"
