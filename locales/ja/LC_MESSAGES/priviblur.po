@@ -26,71 +26,8 @@ msgid "post_note_count"
 msgid_plural "post_note_count_plural"
 msgstr[0] "{0}枚のメモ"
 
-msgid "timeline_sort_by_filter_title"
-msgstr ""
-
-msgid "timeline_sort_by_filter_popular"
-msgstr ""
-
-msgid "timeline_sort_by_filter_recent"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_title"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_0"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_1"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_7"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_30"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_180"
-msgstr ""
-
-msgid "timeline_filter_by_date_filter_365"
-msgstr ""
-
 msgid "timeline_search_post_type_filter_none"
 msgstr "全種類"
-
-msgid "timeline_post_type_filter_title"
-msgstr ""
-
-msgid "timeline_post_type_filter_text"
-msgstr ""
-
-msgid "timeline_post_type_filter_photo"
-msgstr ""
-
-msgid "timeline_post_type_filter_gif"
-msgstr ""
-
-msgid "timeline_post_type_filter_quote"
-msgstr ""
-
-msgid "timeline_post_type_filter_link"
-msgstr ""
-
-msgid "timeline_post_type_filter_chat"
-msgstr ""
-
-msgid "timeline_post_type_filter_audio"
-msgstr ""
-
-msgid "timeline_post_type_filter_video"
-msgstr ""
-
-msgid "timeline_post_type_filter_answer"
-msgstr ""
-
-msgid "timeline_post_type_filter_poll"
-msgstr ""
 
 msgid "timeline_search_sort_by_filter_title"
 msgstr "結果の整理"
