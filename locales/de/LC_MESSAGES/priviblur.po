@@ -1,4 +1,3 @@
-# Translations template for Priviblur.
 # Copyright (C) 2023 Syeopite
 # This file is distributed under the same license as the Priviblur project.
 # syeopite <syeopite@syeopite.dev>, 2023.

@@ -1,11 +1,10 @@
-# Translations template for Priviblur.
 # Copyright (C) 2023 Syeopite
 # This file is distributed under the same license as the Priviblur project.
 # syeopite <syeopite@syeopite.dev>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Priviblur v0.2.0\n"
+"Project-Id-Version: Priviblur v0.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
 "PO-Revision-Date: 2024-07-08 08:09+0000\n"
