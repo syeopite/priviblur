@@ -179,7 +179,6 @@ a.toggle-poll-results {
   font-size: 12px;
 }
 
-
 @media (max-width: 590px) {
   .poll-metadata {
     flex-direction: column;
@@ -187,4 +186,32 @@ a.toggle-poll-results {
   .poll-metadata .separator {
     display: none;
   }
+}
+
+/* Priviblur extensions */
+.img-alt-text {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  margin: 10px;
+  opacity: 25%;
+  max-height: 100%;
+  overflow: scroll;
+}
+
+.image-block:hover .img-alt-text, .img-alt-text:has(details[open=""]) {
+  opacity: 100%;
+}
+
+.img-alt-text details {
+  color: var(--color-post-img-alt-text-widget-text);
+  background: var(--color-post-img-alt-text-widget-bg);
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.img-alt-text summary {
+  border-radius: 10px;
+  font-weight: bold;
+  list-style: none;
 }

@@ -99,6 +99,9 @@ body {
     --color-ask-header: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-225));
     --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-525));
 
+    --color-post-img-alt-text-widget-bg: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-600));
+    --color-post-img-alt-text-widget-text: var(--light, var(--color-gray-100)) var(--dark, var(--color-text));
+
     --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
     --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-700));
     --color-poll-proportion-bar-bg: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-300));

@@ -110,22 +110,6 @@ class NPFFormatter(npf_renderer.format.Formatter):
         self.blog_name = blog_name
         self.post_id = post_id
 
-    def _linkify_images(self, element):
-        try:
-            image_element = element.getElementsByTagName("img")
-            image_container = element.get(cls="image-container")
-
-            if image_container and image_element:
-                image_container = image_container[0]
-                image_element = image_element[0]
-
-                index_of_image = image_container.children.index(image_element)
-                image_container[index_of_image] = dominate.tags.a(image_element, href=image_element.src)
-        except (ValueError, IndexError):
-            pass
-
-        return element
-
     def _format_poll(self, block):
         poll_html = super()._format_poll(block)
         poll_html["data-poll-id"] = block.poll_id
@@ -150,7 +134,41 @@ class NPFFormatter(npf_renderer.format.Formatter):
 
     def _format_image(self, block, row_length=1, override_padding=None):
         image_html = super()._format_image(block, row_length, override_padding)
-        return self._linkify_images(image_html)
+
+        try:
+            image_element = image_html.getElementsByTagName("img")
+            image_container = image_html.get(cls="image-container")
+
+            if not (image_container and image_element):
+                return image_html
+
+            image_container = image_container[0]
+            image_element = image_element[0]
+
+            self._add_alt_text_element(block, image_container)
+            self._linkify_images(image_container, image_element)
+        except (ValueError, IndexError):
+            pass
+
+        return image_html
+
+    def _linkify_images(self, image_container, image_element):
+        """Wraps the given image element in a link"""
+        index_of_image = image_container.children.index(image_element)
+        image_container[index_of_image] = dominate.tags.a(image_element, href=image_element.src)
+
+    def _add_alt_text_element(self, block, image_container):
+        """Adds widget to show image alt text on image blocks"""
+        if block.alt_text and block.alt_text != "image":
+            image_container.add(
+                dominate.tags.div(
+                    dominate.tags.details(
+                        dominate.tags.summary("ALT", title=f"{block.alt_text}"),
+                        dominate.tags.p(block.alt_text)
+                    ),
+                    cls="img-alt-text"
+                )
+            )
 
 
 async def format_npf(contents, layouts=None, blog_name=None, post_id=None,*, poll_callback=None):
