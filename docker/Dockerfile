@@ -1,4 +1,7 @@
-FROM alpine:3.18
+FROM alpine:3.18 AS base
+
+FROM base AS build
+
 WORKDIR /priviblur
 
 COPY ./.git/ ./.git/
@@ -7,15 +10,20 @@ COPY ./src/ ./src/
 COPY ./assets/ ./assets/
 COPY ./locales/ ./locales/
 
-# Rust is needed for orjson
-RUN apk add --no-cache git python3 py3-pip rust cargo tini && \
+RUN apk add --no-cache py3-pip && \
+    pip3 install --break-system-packages -r requirements.txt && \
+    pybabel compile -d locales -D priviblur
+
+FROM build
+
+COPY --from=build /priviblur /priviblur
+WORKDIR /priviblur
+
+RUN apk add --no-cache python3 git tini && \
     addgroup -g 1000 -S priviblur && \
     adduser -u 1000 -S priviblur -G priviblur && \
-    pip3 install --break-system-packages -r requirements.txt && \
-    pybabel compile -d locales -D priviblur && \
     # chown is needed otherwise git will error out with "fatal: detected dubious ownership in repository at '/priviblur'"
-    chown -R priviblur:priviblur /priviblur && \ 
-    git config --global --add safe.directory /priviblur
+    chown -R priviblur:priviblur /priviblur
 
 EXPOSE 8000
 USER priviblur
