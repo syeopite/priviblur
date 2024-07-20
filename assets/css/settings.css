@@ -154,3 +154,8 @@ select {
         display: unset;
     }
 }
+
+div#copy-as-bookmarklet-container {
+    display: flex;
+    align-items: center;
+}
