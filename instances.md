@@ -4,7 +4,6 @@
 |-|-|-|-|-|
 |[pb.bloat.cat](https://pb.bloat.cat)|https|Romania|No|No|
 |[tb.opnxng.com](https://tb.opnxng.com)|https|Singapore|No|No|
-|[priviblur.ducks.party](https://priviblur.ducks.party)|https|Germany|No|No|
 |[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|https|Germany|No|No|
 
 ### Rules
