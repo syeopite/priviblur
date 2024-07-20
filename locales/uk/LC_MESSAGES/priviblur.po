@@ -1,0 +1,225 @@
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Priviblur project.
+# syeopite <syeopite@syeopite.dev>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Priviblur v0.3.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: 2024-07-20 08:09+0000\n"
+"Last-Translator: Fqwe1 <Fqwe1@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/priviblur/"
+"translations/uk/>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
+
+msgid "project_title"
+msgstr "Priviblur"
+
+msgid "page_title_suffix"
+msgstr "- Priviblur"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "{0} нотатка"
+msgstr[1] "{0} нотатки"
+msgstr[2] "{0} нотаток"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "Сортувати"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "Популярні"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "Останні"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "Фільтрувати за датою"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "За весь час"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "Сьогодні"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "За минулий тиждень"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "За минулий місяць"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "За минулі 6 місяців"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "За минулий рік"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "Усі типи"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "Фільтрувати за типом допису"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "Текст"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "Фото"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "GIF"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "Цитата"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "Посилання"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "Чат"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "Аудіо"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "Відео"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "Запитання"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "Опитування"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "Сортувати"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "Найкращі"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "Останні"
+
+msgid "explore_trending_page_title"
+msgstr "Популярними темами"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "Сьогодні в Tumblr"
+
+msgid "pagination_next_page"
+msgstr "Наступна сторінка"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "Для перегляду цього блогу потрібен обліковий запис"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "Спробуйте знайти реблоги замість цього!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "Цей тег був обмежений в Tumblr"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "Спробуйте здійснити пошук замість цього"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "Не вдалося знайти запитаний блог"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "Блог може бути видалений або ніколи не існував з початку"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "Помилка: час очікування запиту до Tumblr вийшов"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr ""
+"Priviblur не зміг завершити запит до Tumblr до закінчення часу очікування"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "Помилка: HTTP 301, перенаправлення Tumblr вказує на зовнішню URL адресу"
+
+msgid "priviblur_error_generic"
+msgstr "Виникла невідома помилка!"
+
+msgid "priviblur_error_generic_description"
+msgstr "Здається, ви знайшли помилку в Priviblur."
+
+msgid "priviblur_error_generic_description_2"
+msgstr "Будь ласка, повідомте про неї на GitHub"
+
+msgid "priviblur_error_generic_technical_details_error_name"
+msgstr "Помилка: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_message"
+msgstr "Повідомлення: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_context"
+msgstr "Контекст:"
+
+msgid "post_community_label_mature_heading"
+msgstr "Мітка спільноти: дорослий контент"
+
+msgid "post_community_label_generic_explanation"
+msgstr "Цей допис може містити контент, який не підходить для всіх аудиторій."
+
+msgid "post_community_label_sexual_themes"
+msgstr "Сексуальні теми"
+
+msgid "post_community_label_drug_use"
+msgstr "Залежність від наркотиків та алкоголю"
+
+msgid "post_community_label_violence"
+msgstr "Насильство"
+
+msgid "post_community_label_show_post_button"
+msgstr "Показати допис"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "Розкривається при наведенні"
+
+msgid "blog_search_placeholder_text"
+msgstr "Пошук дописів"
+
+msgid "settings_header"
+msgstr "Налаштування"
+
+msgid "settings_language_selector"
+msgstr "Мова"
+
+msgid "settings_language_selector_desc"
+msgstr "Оберіть мову, яку ви хочете використовувати в Priviblur"
+
+msgid "settings_theme_selector"
+msgstr "Тема"
+
+msgid "settings_theme_selector_desc"
+msgstr "Оберіть тему для відображення"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "Автоматично"
+
+msgid "settings_theme_selector_option_light"
+msgstr "Світла"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "Темна"
+
+msgid "settings_save_changes"
+msgstr "Зберегти зміни"
+
+msgid "settings_cancel_changes"
+msgstr "Скасувати"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "Скопіювати як закладку"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "Скопійовано"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "Не вдалося скопіювати"
