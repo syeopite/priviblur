@@ -29,6 +29,36 @@ msgid_plural "post_note_count_plural"
 msgstr[0] "{0} note"
 msgstr[1] "{0} notes"
 
+msgid "search_bar_placeholder_text"
+msgstr "Search"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "Today on Tumblr"
+
+msgid "navbar_trending_icon_title"
+msgstr "Trending"
+
+msgid "navbar_right_view_page_on_tumblr_link_title"
+msgstr "View page on Tumblr"
+
+msgid "navbar_right_settings_page_title"
+msgstr "Settings"
+
+msgid "navbar_trending_icon_title"
+msgstr "Trending"
+
+msgid "footer_version_text"
+msgstr "Version {0}"
+
+msgid "footer_source_link_text"
+msgstr "Source"
+
+msgid "footer_donate_link_text"
+msgstr "Donate"
+
+msgid "footer_licences_link_text"
+msgstr "Licences"
+
 msgid "timeline_search_sort_by_filter_title"
 msgstr "Sort by"
 
@@ -132,6 +162,9 @@ msgid "tumblr_error_blog_not_found_error_description"
 msgstr ""
 "The blog may have been deleted or just never existed in the first place"
 
+msgid "priviblur_error_page_title"
+msgstr "Error"
+
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
 msgstr "Error: Request to Tumblr timed out"
 
@@ -181,8 +214,20 @@ msgstr "Show post"
 msgid "post_community_label_no_js_show_post_instructions"
 msgstr "Reveals on hover"
 
+msgid "post_footer_permalink_icon_title"
+msgstr "Permalink"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "View on Tumblr"
+
 msgid "blog_search_placeholder_text"
 msgstr "Search posts"
+
+msgid "blog_banner_alt"
+msgstr "Blog banner"
+
+msgid "blog_avatar_alt"
+msgstr "Blog avatar"
 
 msgid "settings_header"
 msgstr "Settings"
@@ -222,3 +267,6 @@ msgstr "Copied"
 
 msgid "settings_copy_as_bookmarklet_failed"
 msgstr "Unable to copy"
+
+msgid "priviblur_licences_page_title"
+msgstr "Licences"
