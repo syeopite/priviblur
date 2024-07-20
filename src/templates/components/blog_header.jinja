@@ -5,8 +5,8 @@
 {% endif -%}
 
 <header id="blog-header">
-    <img id="banner" title="Blog banner" src="{{url_handler(blog.blog_info.theme.header_info.focused_header_image)}}"/>
-    <a href="/{{blog.blog_info.name}}"><img class="avatar" title="Blog Avatar" src="{{url_handler(blog.blog_info.avatar[-2].url)}}"/></a>
+    <img id="banner" alt="{{translate(request.ctx.language, "blog_banner_alt")}}" src="{{url_handler(blog.blog_info.theme.header_info.focused_header_image)}}"/>
+    <a href="/{{blog.blog_info.name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" src="{{url_handler(blog.blog_info.avatar[-2].url)}}"/></a>
     <div class="blog-header-textual-content">
         {%- if blog.blog_info.title -%} <h1 id="blog-title">{{blog.blog_info.title | e}}</h1> {%- endif -%}
         <p class="blog-name"><a href="/{{blog.blog_info.name | e}}">@{{blog.blog_info.name | e}}</a></p>

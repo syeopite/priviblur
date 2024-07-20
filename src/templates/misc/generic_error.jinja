@@ -54,7 +54,7 @@
 </style>
 
 {% endblock %}
-{% block title %}Error{% endblock %}
+{% block title %}{{translate(request.ctx.language, "priviblur_error_page_title")}}{% endblock %}
 
 {% block center %}
 <section id="priviblur-error">
