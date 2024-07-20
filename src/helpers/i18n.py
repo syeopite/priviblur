@@ -6,7 +6,7 @@ import babel
 import sanic
 
 SUPPORTED_LANGUAGES = [
-    "en_US", "cs_CZ", "fr", "ja"
+    "en_US", "cs_CZ", "fr", "ja", "uk"
 ]
 
 SUPPORTED_LANGUAGES.sort()
