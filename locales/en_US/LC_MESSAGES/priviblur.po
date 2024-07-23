@@ -44,9 +44,6 @@ msgstr "View page on Tumblr"
 msgid "navbar_right_settings_page_title"
 msgstr "Settings"
 
-msgid "navbar_trending_icon_title"
-msgstr "Trending"
-
 msgid "footer_version_text"
 msgstr "Version {0}"
 
