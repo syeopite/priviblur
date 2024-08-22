@@ -14,7 +14,7 @@ MarkupSafe==2.1.5
 multidict==6.0.5
 npf_renderer==0.12.2
 orjson==3.10.7
-PyYAML==6.0.1
+PyYAML==6.0.2
 redis==5.0.8
 sanic==24.6.0
 sanic-ext==23.12.0
