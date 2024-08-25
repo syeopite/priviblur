@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-06-29 04:09+0000\n"
-"Last-Translator: syeopite <syeopite@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-08-25 12:09+0000\n"
+"Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/priviblur/"
 "translations/cs/>\n"
 "Language: cs_CZ\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -117,7 +117,6 @@ msgstr "Další stránka"
 msgid "tumblr_error_blog_login_required_error_heading"
 msgstr "Tento blog vyžaduje účet k jeho zobrazení"
 
-#, fuzzy
 msgid "tumblr_error_blog_login_required_error_description"
 msgstr "Zkuste místo toho najít reblogy!"
 
@@ -224,3 +223,48 @@ msgstr "Zkopírováno"
 
 msgid "settings_copy_as_bookmarklet_failed"
 msgstr "Nepodařilo se zkopírovat"
+
+msgid "search_bar_placeholder_text"
+msgstr "Hledat"
+
+msgid "navbar_trending_icon_title"
+msgstr "Trendy"
+
+msgid "navbar_right_view_page_on_tumblr_link_title"
+msgstr "Zobrazit stránku na Tumblr"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "Dnes na Tumblr"
+
+msgid "navbar_right_settings_page_title"
+msgstr "Nastavení"
+
+msgid "footer_version_text"
+msgstr "Verze {0}"
+
+msgid "footer_source_link_text"
+msgstr "Zdroj"
+
+msgid "footer_donate_link_text"
+msgstr "Přispět"
+
+msgid "footer_licences_link_text"
+msgstr "Licence"
+
+msgid "priviblur_error_page_title"
+msgstr "Chyba"
+
+msgid "post_footer_permalink_icon_title"
+msgstr "Permanentní odkaz"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "Zobrazit na Tumblr"
+
+msgid "blog_banner_alt"
+msgstr "Banner blogu"
+
+msgid "blog_avatar_alt"
+msgstr "Avatar blogu"
+
+msgid "priviblur_licences_page_title"
+msgstr "Licence"

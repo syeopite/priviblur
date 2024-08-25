@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-07-28 22:09+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/priviblur/"
+"translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "project_title"
 msgstr ""
@@ -23,3 +25,96 @@ msgid "post_note_count"
 msgid_plural "post_note_count_plural"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "Sortieren nach"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "Beliebt"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "Neueste"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "Nach Datum filtern"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "Alle Arten"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "Text"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "Foto"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "GIFs"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "Zitat"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "Link"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "Chat"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "Audio"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "Video"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "Fragen"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "Sortieren nach"
+
+msgid "explore_trending_page_title"
+msgstr "Angesagte Themen"
+
+msgid "pagination_next_page"
+msgstr "Nächste Seite"
+
+msgid "search_bar_placeholder_text"
+msgstr "Suchen"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "Heute auf Tumblr"
+
+msgid "navbar_trending_icon_title"
+msgstr "Angesagt"
+
+msgid "navbar_right_settings_page_title"
+msgstr "Einstellungen"
+
+msgid "footer_version_text"
+msgstr "Version {0}"
+
+msgid "footer_source_link_text"
+msgstr "Quelle"
+
+msgid "footer_donate_link_text"
+msgstr "Spenden"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "Letzte Woche"
+
+msgid "footer_licences_link_text"
+msgstr "Lizenzen"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "Letzter Monat"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "Heute"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "Letzte 6 Monate"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "Letztes Jahr"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "Heute auf Tumblr"
