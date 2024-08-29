@@ -1,10 +1,18 @@
-#  Instances: 
+#  Instances:
 
-|URL|Protocol|Location|Modified|Cloudflare|
-|-|-|-|-|-|
-|[pb.bloat.cat](https://pb.bloat.cat)|https|Romania|No|No|
-|[tb.opnxng.com](https://tb.opnxng.com)|https|Singapore|No|No|
-|[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|https|Germany|No|No|
+|URL|Location|Modified|Cloudflare|
+|-|-|-|-|
+|[pb.bloat.cat](https://pb.bloat.cat)|Romania|No|No|
+|[tb.opnxng.com](https://tb.opnxng.com)|Singapore|No|No|
+|[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|Germany|No|No|
+|[priviblur.thebunny.zone](https://priviblur.thebunny.zone/)|Croatia|No|No|
+
+
+### Tor Onion Services
+
+|URL|Location|Modified|
+|-|-|-|
+|[priviblur.bunny5exbgbp4sqe2h2rfq2brgrx3dhohdweonepzwfgumfyygb35wyd.onion](http://priviblur.bunny5exbgbp4sqe2h2rfq2brgrx3dhohdweonepzwfgumfyygb35wyd.onion/)|Croatia|No|
 
 ### Rules
   - Your instance must not be more than a month out of date compared with either the latest commit or latest release. 
