@@ -5,6 +5,8 @@
 |[pb.bloat.cat](https://pb.bloat.cat)|https|Romania|No|No|
 |[tb.opnxng.com](https://tb.opnxng.com)|https|Singapore|No|No|
 |[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|https|Germany|No|No|
+|[priviblur.thebunny.zone](https://priviblur.thebunny.zone/)|https|Croatia|No|No|
+|[priviblur.bunny5exbgbp4sqe2h2rfq2brgrx3dhohdweonepzwfgumfyygb35wyd.onion](http://priviblur.bunny5exbgbp4sqe2h2rfq2brgrx3dhohdweonepzwfgumfyygb35wyd.onion/)|onion|Croatia|No|No|
 
 ### Rules
   - Your instance must not be more than a month out of date compared with either the latest commit or latest release. 
