@@ -7,139 +7,140 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-06-29 04:09+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-09-01 16:09+0000\n"
+"Last-Translator: hugoalh <hugoalh@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/priviblur/translations/zh_Hant/>\n"
 "Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 msgid "project_title"
-msgstr ""
+msgstr "Priviblur"
 
 msgid "page_title_suffix"
-msgstr ""
+msgstr "—Priviblur"
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
 msgstr[0] ""
 
 msgid "search_bar_placeholder_text"
-msgstr ""
+msgstr "搜尋"
 
 msgid "navbar_today_on_tumblr_icon_title"
-msgstr ""
+msgstr "今天在 Tumblr 上"
 
 msgid "navbar_trending_icon_title"
-msgstr ""
+msgstr "流行趨勢"
 
 msgid "navbar_right_view_page_on_tumblr_link_title"
-msgstr ""
+msgstr "在 Tumblr 上檢視頁面"
 
 msgid "navbar_right_settings_page_title"
-msgstr ""
+msgstr "設定"
 
 msgid "footer_version_text"
-msgstr ""
+msgstr "版本 {0}"
 
 msgid "footer_source_link_text"
-msgstr ""
+msgstr "來源"
 
 msgid "footer_donate_link_text"
-msgstr ""
+msgstr "捐款"
 
 msgid "footer_licences_link_text"
-msgstr ""
+msgstr "許可證"
 
 msgid "timeline_search_sort_by_filter_title"
-msgstr ""
+msgstr "排序方式"
 
 msgid "timeline_search_sort_by_filter_popular"
-msgstr ""
+msgstr "熱門"
 
 msgid "timeline_search_sort_by_filter_recent"
-msgstr ""
+msgstr "最新"
 
 msgid "timeline_search_filter_by_date_filter_title"
-msgstr ""
+msgstr "按日期過濾"
 
 msgid "timeline_search_filter_by_date_filter_0"
-msgstr ""
+msgstr "所有時間"
 
 msgid "timeline_search_filter_by_date_filter_1"
-msgstr ""
+msgstr "今天"
 
 msgid "timeline_search_filter_by_date_filter_7"
-msgstr ""
+msgstr "上週"
 
 msgid "timeline_search_filter_by_date_filter_30"
-msgstr ""
+msgstr "上個月"
 
 msgid "timeline_search_filter_by_date_filter_180"
-msgstr ""
+msgstr "上 6 個月"
 
 msgid "timeline_search_filter_by_date_filter_365"
-msgstr ""
+msgstr "去年"
 
 msgid "timeline_search_post_type_filter_none"
-msgstr ""
+msgstr "所有類型"
 
 msgid "timeline_search_post_type_filter_title"
-msgstr ""
+msgstr "按帖文類型過濾"
 
 msgid "timeline_search_post_type_filter_text"
-msgstr ""
+msgstr "文字"
 
 msgid "timeline_search_post_type_filter_photo"
-msgstr ""
+msgstr "圖片"
 
 msgid "timeline_search_post_type_filter_gif"
-msgstr ""
+msgstr "GIF"
 
 msgid "timeline_search_post_type_filter_quote"
-msgstr ""
+msgstr "引用"
 
 msgid "timeline_search_post_type_filter_link"
-msgstr ""
+msgstr "連結"
 
 msgid "timeline_search_post_type_filter_chat"
-msgstr ""
+msgstr "聊天"
 
 msgid "timeline_search_post_type_filter_audio"
-msgstr ""
+msgstr "音訊"
 
 msgid "timeline_search_post_type_filter_video"
-msgstr ""
+msgstr "影片"
 
 msgid "timeline_search_post_type_filter_ask"
-msgstr ""
+msgstr "問問題"
 
 msgid "timeline_search_post_type_filter_poll"
-msgstr ""
+msgstr "投票"
 
 msgid "timeline_tagged_sort_by_filter_title"
-msgstr ""
+msgstr "排序方式"
 
 msgid "timeline_tagged_sort_by_filter_top"
 msgstr ""
 
 msgid "timeline_tagged_sort_by_filter_recent"
-msgstr ""
+msgstr "最新"
 
 msgid "explore_trending_page_title"
-msgstr ""
+msgstr "熱門話題"
 
 msgid "explore_today_on_tumblr_page_title"
-msgstr ""
+msgstr "今天在 Tumblr 上"
 
 msgid "pagination_next_page"
-msgstr ""
+msgstr "下一頁"
 
 msgid "tumblr_error_blog_login_required_error_heading"
-msgstr ""
+msgstr "此部落格需要帳號才能查看"
 
 msgid "tumblr_error_blog_login_required_error_description"
 msgstr ""
@@ -157,7 +158,7 @@ msgid "tumblr_error_blog_not_found_error_description"
 msgstr ""
 
 msgid "priviblur_error_page_title"
-msgstr ""
+msgstr "錯誤"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
 msgstr ""
@@ -178,43 +179,43 @@ msgid "priviblur_error_generic_description_2"
 msgstr ""
 
 msgid "priviblur_error_generic_technical_details_error_name"
-msgstr ""
+msgstr "錯誤：{0}"
 
 msgid "priviblur_error_generic_technical_details_error_message"
-msgstr ""
+msgstr "訊息：{0}"
 
 msgid "priviblur_error_generic_technical_details_error_context"
 msgstr ""
 
 msgid "post_community_label_mature_heading"
-msgstr ""
+msgstr "社群標籤：成熟"
 
 msgid "post_community_label_generic_explanation"
 msgstr ""
 
 msgid "post_community_label_sexual_themes"
-msgstr ""
+msgstr "性主題"
 
 msgid "post_community_label_drug_use"
-msgstr ""
+msgstr "吸毒和酗酒"
 
 msgid "post_community_label_violence"
-msgstr ""
+msgstr "暴力"
 
 msgid "post_community_label_show_post_button"
-msgstr ""
+msgstr "顯示帖文"
 
 msgid "post_community_label_no_js_show_post_instructions"
-msgstr ""
+msgstr "懸停時顯示"
 
 msgid "post_footer_permalink_icon_title"
-msgstr ""
+msgstr "永久連結"
 
 msgid "post_footer_view_on_tumblr_icon_title"
-msgstr ""
+msgstr "在 Tumblr 上檢視"
 
 msgid "blog_search_placeholder_text"
-msgstr ""
+msgstr "搜尋帖文"
 
 msgid "blog_banner_alt"
 msgstr ""
@@ -223,43 +224,43 @@ msgid "blog_avatar_alt"
 msgstr ""
 
 msgid "settings_header"
-msgstr ""
+msgstr "設定"
 
 msgid "settings_language_selector"
-msgstr ""
+msgstr "語言"
 
 msgid "settings_language_selector_desc"
 msgstr ""
 
 msgid "settings_theme_selector"
-msgstr ""
+msgstr "主題"
 
 msgid "settings_theme_selector_desc"
 msgstr ""
 
 msgid "settings_theme_selector_option_auto"
-msgstr ""
+msgstr "自動"
 
 msgid "settings_theme_selector_option_light"
-msgstr ""
+msgstr "淺色"
 
 msgid "settings_theme_selector_option_dark"
-msgstr ""
+msgstr "深色"
 
 msgid "settings_save_changes"
-msgstr ""
+msgstr "儲存變更"
 
 msgid "settings_cancel_changes"
-msgstr ""
+msgstr "取消"
 
 msgid "settings_copy_as_bookmarklet"
-msgstr ""
+msgstr "複製為小書籤"
 
 msgid "settings_copy_as_bookmarklet_confirmed"
-msgstr ""
+msgstr "已複製"
 
 msgid "settings_copy_as_bookmarklet_failed"
-msgstr ""
+msgstr "無法複製"
 
 msgid "priviblur_licences_page_title"
-msgstr ""
+msgstr "許可證"
