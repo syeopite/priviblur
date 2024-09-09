@@ -25,4 +25,4 @@ typing_extensions==4.12.2
 ujson==5.10.0
 uvloop==0.20.0
 websockets==13.0
-yarl==1.9.4
+yarl==1.11.0
