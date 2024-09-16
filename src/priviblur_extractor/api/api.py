@@ -322,6 +322,30 @@ class TumblrAPI:
         )
 
 
+    async def blog_post_notes_timeline(self, blog_id, post_id, mode : rconf.ReblogNoteTypes, latest: bool = True):
+        """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
+
+        This endpoint is used to return reblogs.
+        
+        Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
+        post note information. However, both the blog ID and the blog name can be used interchangeably here.
+        """
+        url_parameters = {
+         "mode": mode.name.lower(),
+         "sort": "asc" if latest else "desc",
+         "pin_preview_note": "false",
+         "fields[blogs]": "avatar,theme,name"
+        }
+
+        # TODO sort is not present when before_timestamp is used... for some reason.
+
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/notes/timeline",
+            url_params=url_parameters
+        )
+
+
+
     async def poll_results(self, blog_name, post_id, poll_id):
         """Requests the /polls/<blog name>/<post id>/<poll_id>/results endpoint
 
