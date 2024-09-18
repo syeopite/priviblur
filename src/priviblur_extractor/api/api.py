@@ -48,7 +48,7 @@ class TumblrAPI:
         self.client = client
         self.json_loader = json_loads
 
-    async def _get_json(self, endpoint, url_params=""):
+    async def _get_json(self, endpoint, url_params=None):
         """Internal method that does the actual request to Tumblr"""
         if url_params:
             url = f"{endpoint}?{urllib.parse.urlencode(url_params)}"
@@ -61,8 +61,6 @@ class TumblrAPI:
             _format = prettyprinter.pformat
         except ImportError:
             def _format(obj): return obj
-
-        log_params = _format(url_params)
 
         logger.info(f"Requesting endpoint: /api/v2/{url}")
 
@@ -85,6 +83,7 @@ class TumblrAPI:
 
             logger.error(f"Error response received")
             logger.error(f"HTTP Status code: {code}")
+            logger.debug(f"Response headers: {_format(response.headers)}")
 
             if error := result.get("errors"):
                 details = error[0].get('detail')
@@ -104,10 +103,6 @@ class TumblrAPI:
                     raise exceptions.TumblrBlogNotFoundError(message, code, details, internal_code)
                 case _:
                     raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
-
-            logger.debug(f"Response headers: {_format(response.headers)}")
-
-            raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
 
         return result
 
