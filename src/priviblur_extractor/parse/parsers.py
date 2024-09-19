@@ -9,48 +9,50 @@ logger = helpers.LOGGER.getChild("parse")
 
 
 class _CursorParser:
-    @staticmethod
-    def process(initial_data):
+    def __init__(self, raw_cursor) -> None:
+        self.target = raw_cursor
+
+    @classmethod
+    def process(cls, initial_data):
         if target := helpers.dig_dict(initial_data, ("links", "next")):
-            return _CursorParser.__parse(target)
+            return cls(target["queryParams"]).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
-        target = target["queryParams"]
+    def parse(self):
         return models.base.Cursor(
-            cursor=target.get("cursor") or target.get("pageNumber"),
-            limit=target.get("days"),
-            days=target.get("query"),
-            query=target.get("mode"),
-            mode=target.get("timelineType"),
-            skip_components=target.get("skipComponent"),
-            reblog_info=target.get("reblogInfo"),
-            post_type_filter=target.get("postTypeFilter")
+            cursor=self.target.get("cursor") or self.target.get("pageNumber"),
+            limit=self.target.get("days"),
+            days=self.target.get("query"),
+            query=self.target.get("mode"),
+            mode=self.target.get("timelineType"),
+            skip_components=self.target.get("skipComponent"),
+            reblog_info=self.target.get("reblogInfo"),
+            post_type_filter=self.target.get("postTypeFilter")
         )
 
 
 class _TimelineParser:
     """Parses Tumblr's API response into a Timeline object"""
+    def __init__(self, target) -> None:
+        self.target = target
 
-    @staticmethod
-    def process(initial_data):
+    @classmethod
+    def process(cls, initial_data):
         if target := initial_data.get("timeline"):
             logger.debug("_TimelineParser: Parser found! Beginning parsing...")
-            return _TimelineParser.__parse(target)
+            return _TimelineParser(target).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
+    def parse(self):
         # First let's begin with the cursor object
-        cursor = _CursorParser.process(target)
+        cursor = _CursorParser.process(self.target)
 
         # Now the elements contained within
         elements = []
-        total_raw_elements = len(target["elements"])
-        for element_index, element in enumerate(target["elements"]):
+        total_raw_elements = len(self.target["elements"])
+        for element_index, element in enumerate(self.target["elements"]):
             if result := parse_item(element, element_index, total_raw_elements):
                 elements.append(result)
 
@@ -62,138 +64,138 @@ class _TimelineParser:
 
 class _BlogParser:
     """Parses Tumblr's API response into a Blog object"""
-    @staticmethod
-    def process(initial_data):
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
         if initial_data.get("blog"):
             logger.debug("_BlogParser: Parser found! Beginning parsing...")
-            return _BlogParser.__parse(initial_data)
+            return _BlogParser(initial_data).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
+    def parse(self):
         # First let's begin with the cursor object
-        cursor = _CursorParser.process(target)
+        cursor = _CursorParser.process(self.target)
 
         # Then the blog info
-        blog = _TimelineBlogParser.process(target["blog"], force_parse=True)
+        blog = _TimelineBlogParser.process(self.target["blog"], force_parse=True)
 
         # Now the posts contained within
         posts = []
-        total_raw_posts = len(target["posts"])
-        for post_index, post in enumerate(target["posts"]):
+        total_raw_posts = len(self.target["posts"])
+        for post_index, post in enumerate(self.target["posts"]):
             if result := parse_item(post, post_index, total_raw_posts):
+                
                 posts.append(result)
 
         return models.blog.Blog(
             blog_info=blog,
             posts=posts,
-            total_posts = target.get("totalPosts"),
+            total_posts = self.target.get("totalPosts"),
             next = cursor,
         )
 
 
 class _BlogThemeParser:
-    @staticmethod
-    def process(initial_data):
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
         if theme := initial_data.get("theme"):
             logger.debug("_BlogThemeParser: Parser found! Beginning parsing...")
-            return _BlogThemeParser.__parse(theme)
+            return _BlogThemeParser(theme).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
+    def parse(self):
         # TODO more theme data
         header_info = models.misc.HeaderInfo(
-            target["headerImage"],
-            target["headerImageFocused"],
-            target["headerImageScaled"],
+            self.target["headerImage"],
+            self.target["headerImageFocused"],
+            self.target["headerImageScaled"],
         )
 
         return models.misc.BlogTheme(
-            avatar_shape = target["avatarShape"],
-            background_color = target["backgroundColor"],
-            body_font = target["bodyFont"],
+            avatar_shape = self.target["avatarShape"],
+            background_color = self.target["backgroundColor"],
+            body_font = self.target["bodyFont"],
             header_info=header_info
         )
 
 
 class _TimelineBlogParser:
-    @staticmethod
-    def process(initial_data, force_parse=False):
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data, force_parse=False):
         if initial_data.get("objectType") == "blog":
-            return _TimelineBlogParser.__parse(initial_data["resources"][0])
+            return _TimelineBlogParser(initial_data["resources"][0]).parse()
         elif force_parse:
-            # Assume packaged as {"blog": <blog data>}
-            return _TimelineBlogParser.__parse(initial_data)
+            return _TimelineBlogParser(initial_data).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
-        theme = _BlogThemeParser.process(target)
+    def parse(self):
+        theme = _BlogThemeParser.process(self.target)
 
         return models.timeline.TimelineBlog(
-            name=target["name"],
-            avatar=target["avatar"],
-            title=target["title"],
-            url=target["url"],
-            is_adult=target["isAdult"],
-            description_npf=target["descriptionNpf"],
-            uuid=target["uuid"],
+            name=self.target["name"],
+            avatar=self.target["avatar"],
+            title=self.target["title"],
+            url=self.target["url"],
+            is_adult=self.target["isAdult"],
+            description_npf=self.target["descriptionNpf"],
+            uuid=self.target["uuid"],
             theme=theme,
-            is_paywall_on=target["isPaywallOn"],
-            active=target.get("active", True)
-        )
-
-
-class _TimelineBrokenBlogParser:
-    def parse(target):
-        return models.timeline.BrokenBlog(
-            name=target["name"],
-            avatar=target["avatar"],
+            is_paywall_on=self.target["isPaywallOn"],
+            active=self.target.get("active", True)
         )
 
 
 class _TimelinePostParser:
-    @staticmethod
-    def process(initial_data):
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
         if initial_data.get("objectType") == "post":
             logger.debug("_TimelinePostParser: Parser found! Beginning parsing...")
-            return _TimelinePostParser.__parse(initial_data)
+            return _TimelinePostParser(initial_data).parse()
         else:
             return None
 
-    @staticmethod
-    def __parse(target):
-        blog = _TimelineBlogParser.process(target["blog"], force_parse=True)
+    def parse(self):
+        blog = _TimelineBlogParser.process(self.target["blog"], force_parse=True)
 
         assert blog is not None
 
-        id = target["id"]
+        id = self.target["id"]
 
-        note_count = target.get("noteCount")
+        note_count = self.target.get("noteCount")
         like_count = None
         reblog_count = None
         reply_count = None
 
-        if can_like := target["canReply"]:
-            reply_count = target["replyCount"]
-        if can_reblog := target["canReblog"]:
-            reblog_count = target["reblogCount"]
-        if can_reply := target["canLike"]:
-            like_count = target["likeCount"]
+        if can_like := self.target["canReply"]:
+            reply_count = self.target["replyCount"]
+        if can_reblog := self.target["canReblog"]:
+            reblog_count = self.target["reblogCount"]
+        if can_reply := self.target["canLike"]:
+            like_count = self.target["likeCount"]
 
         # We check multiple keys as a precautionary measure.
-        if target.get("advertiserId") or target.get("adId") or target.get("adProviderId"):
+        if self.target.get("advertiserId") or self.target.get("adId") or self.target.get("adProviderId"):
             is_advertisement = True
         else:
             is_advertisement = False
 
-        content = target["content"]
-        layout = target["layout"]
-        trail = target["trail"]
+        content = self.target["content"]
+        layout = self.target["layout"]
+        trail = self.target["trail"]
 
         trails = []
         for trail_post in trail:
@@ -209,8 +211,11 @@ class _TimelinePostParser:
                 if raw_trail_blog := trail_post.get("blog"):
                     trail_blog = _TimelineBlogParser.process(raw_trail_blog, force_parse=True)
                 else:
-                    trail_blog = _TimelineBrokenBlogParser.parse(trail_post["brokenBlog"])
-
+                    trail_blog = models.timeline.BrokenBlog(
+                        name=trail_post["brokenBlog"]["name"],
+                        avatar=trail_post["brokenBlog"]["avatar"],
+                    )
+                    
                 trail_content = trail_post["content"]
                 trail_layout = trail_post["layout"]
 
@@ -252,25 +257,25 @@ class _TimelinePostParser:
         reblog_from_information = None
         reblog_root_information = None
 
-        if reblogged_from_id := target.get("rebloggedFromId"):
+        if reblogged_from_id := self.target.get("rebloggedFromId"):
             reblog_from_information = models.misc.ReblogAttribution(
                 post_id=reblogged_from_id,
-                post_url=target["rebloggedFromUrl"],
-                blog_name=target["rebloggedFromName"],
-                blog_title=target["rebloggedFromTitle"],
+                post_url=self.target["rebloggedFromUrl"],
+                blog_name=self.target["rebloggedFromName"],
+                blog_title=self.target["rebloggedFromTitle"],
             )
 
-            if root_reblogged_from_id := target.get("rebloggedRootId"):
+            if root_reblogged_from_id := self.target.get("rebloggedRootId"):
                 reblog_root_information = models.misc.ReblogAttribution(
                     post_id=root_reblogged_from_id,
-                    post_url=target["rebloggedRootUrl"],
-                    blog_name=target["rebloggedRootName"],
-                    blog_title=target["rebloggedRootTitle"],
+                    post_url=self.target["rebloggedRootUrl"],
+                    blog_name=self.target["rebloggedRootName"],
+                    blog_title=self.target["rebloggedRootTitle"],
                 )
 
         # Community label
         community_labels = []
-        if raw_labels := target.get("communityLabels"):
+        if raw_labels := self.target.get("communityLabels"):
             if raw_labels["hasCommunityLabel"]:
                 for category in raw_labels["categories"]:
                     label = getattr(models.timeline.CommunityLabel, category.upper(), None)
@@ -283,13 +288,13 @@ class _TimelinePostParser:
         return models.timeline.TimelinePost(
             blog=blog,
             id=id,
-            is_nsfw=target["isNsfw"],
+            is_nsfw=self.target["isNsfw"],
             is_advertisement=is_advertisement,
-            post_url=target["postUrl"],
-            slug=target["slug"],
-            date=datetime.datetime.fromtimestamp(target["timestamp"]),
-            tags=target["tags"],
-            summary=target["summary"],
+            post_url=self.target["postUrl"],
+            slug=self.target["slug"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),
+            tags=self.target["tags"],
+            summary=self.target["summary"],
 
             content=content,
             layout=layout,
@@ -298,7 +303,7 @@ class _TimelinePostParser:
             can_like=can_like,
             can_reblog=can_reblog,
             can_reply=can_reply,
-            display_avatar=target["displayAvatar"],
+            display_avatar=self.target["displayAvatar"],
 
             reply_count=reply_count,
             reblog_count=reblog_count,
