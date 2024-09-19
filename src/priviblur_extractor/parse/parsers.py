@@ -1,6 +1,6 @@
 import datetime
 
-from . import helpers, models
+from .. import helpers, models
 
 logger = helpers.LOGGER.getChild("parse")
 
