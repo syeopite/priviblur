@@ -2,7 +2,7 @@ from .. import helpers
 
 from . import collection_parsers
 
-from .parsers import PostParser, parse_item
+from .items import PostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 

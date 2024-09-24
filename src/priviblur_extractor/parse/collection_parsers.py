@@ -4,8 +4,8 @@ Eg a regular timeline, or posts on a blog.
 
 """
 
+from . import items
 from .. import helpers, models
-from .parsers import BlogInfoParser, PostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 
@@ -54,8 +54,8 @@ class TimelineParser:
         elements = []
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
-            if result := parse_item(element, element_index, total_raw_elements, [
-                PostParser
+            if result := items.parse_item(element, element_index, total_raw_elements, [
+                items.PostParser
             ]):
                 elements.append(result)
 
@@ -83,13 +83,13 @@ class BlogParser:
         cursor = CursorParser.process(self.target)
 
         # Then the blog info
-        blog = BlogInfoParser.process(self.target["blog"], force_parse=True)
+        blog = items.BlogInfoParser.process(self.target["blog"], force_parse=True)
 
         # Now the posts contained within
         posts = []
         total_raw_posts = len(self.target["posts"])
         for post_index, post in enumerate(self.target["posts"]):
-            if result := parse_item(post, post_index, total_raw_posts, [PostParser]):
+            if result := items.parse_item(post, post_index, total_raw_posts, [items.PostParser]):
                 posts.append(result)
 
         return models.blog.Blog(

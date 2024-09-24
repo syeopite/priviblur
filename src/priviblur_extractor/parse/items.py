@@ -1,11 +1,11 @@
+"""Parses individual items from Tumblr's JSON API into an object"""
+
+
 import datetime
 
 from .. import helpers, models
 
 logger = helpers.LOGGER.getChild("parse")
-
-
-# TODO refactor module
 
 
 class BlogInfoParser:
