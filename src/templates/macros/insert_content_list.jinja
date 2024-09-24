@@ -1,0 +1,9 @@
+{%- macro insert_content_list(content_list_cls, raw_content_list) -%}
+<div class="{{content_list_cls}}" id="m">
+{%- for element in raw_content_list -%}
+    {%- if not element.is_advertisement -%}
+        {%- include 'components/post.jinja' -%}
+    {%- endif -%}
+{%- endfor -%}
+</div>
+{%-endmacro-%}
