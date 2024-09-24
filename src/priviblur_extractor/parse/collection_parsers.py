@@ -9,7 +9,7 @@ from .. import helpers, models
 
 logger = helpers.LOGGER.getChild("parse")
 
-class CursorParser:
+class _CursorParser:
     def __init__(self, raw_cursor) -> None:
         self.target = raw_cursor
 
@@ -48,7 +48,7 @@ class TimelineParser:
 
     def parse(self):
         # First let's begin with the cursor object
-        cursor = CursorParser.process(self.target)
+        cursor = _CursorParser.process(self.target)
 
         # Now the elements contained within
         elements = []
@@ -80,7 +80,7 @@ class BlogTimelineParser:
 
     def parse(self):
         # First let's begin with the cursor object
-        cursor = CursorParser.process(self.target)
+        cursor = _CursorParser.process(self.target)
 
         # Then the blog info
         blog = items.BlogParser.process(self.target["blog"], force_parse=True)
@@ -102,7 +102,7 @@ class BlogTimelineParser:
 
 def process_post_list(target):
     """Extracts a simple list of posts, with an attached cursor object"""
-    cursor = CursorParser.process(target)
+    cursor = _CursorParser.process(target)
 
     # Now the posts contained within
     posts = []
