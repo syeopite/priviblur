@@ -1,23 +1,25 @@
 from .. import helpers
 
-from .parsers import _TimelineParser, _BlogParser, _CursorParser, _TimelinePostParser, parse_item
+from . import collection_parsers
+
+from .parsers import _TimelinePostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 
 def parse_timeline(initial_data):
     initial_data = initial_data["response"]
-    return _TimelineParser.process(initial_data)
+    return collection_parsers._TimelineParser.process(initial_data)
 
 
 def parse_blog_timeline(initial_data):
     initial_data = initial_data["response"]
-    return _BlogParser.process(initial_data)
+    return collection_parsers._BlogParser.process(initial_data)
 
 
 def parse_post_list(initial_data):
     initial_data = initial_data["response"]
 
-    cursor = _CursorParser.process(initial_data)
+    cursor = collection_parsers._CursorParser.process(initial_data)
 
     # Now the posts contained within
     posts = []
