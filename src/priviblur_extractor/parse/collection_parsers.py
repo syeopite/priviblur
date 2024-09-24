@@ -5,11 +5,11 @@ Eg a regular timeline, or posts on a blog.
 """
 
 from .. import helpers, models
-from .parsers import _TimelineBlogParser, _TimelinePostParser, parse_item
+from .parsers import TimelineBlogParser, TimelinePostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 
-class _CursorParser:
+class CursorParser:
     def __init__(self, raw_cursor) -> None:
         self.target = raw_cursor
 
@@ -33,7 +33,7 @@ class _CursorParser:
         )
 
 
-class _TimelineParser:
+class TimelineParser:
     """Parses Tumblr's API response into a Timeline object"""
     def __init__(self, target) -> None:
         self.target = target
@@ -41,21 +41,21 @@ class _TimelineParser:
     @classmethod
     def process(cls, initial_data):
         if target := initial_data.get("timeline"):
-            logger.debug("_TimelineParser: Parser found! Beginning parsing...")
+            logger.debug("TimelineParser: Parser found! Beginning parsing...")
             return cls(target).parse()
         else:
             return None
 
     def parse(self):
         # First let's begin with the cursor object
-        cursor = _CursorParser.process(self.target)
+        cursor = CursorParser.process(self.target)
 
         # Now the elements contained within
         elements = []
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
             if result := parse_item(element, element_index, total_raw_elements, [
-                _TimelinePostParser
+                TimelinePostParser
             ]):
                 elements.append(result)
 
@@ -65,7 +65,7 @@ class _TimelineParser:
         )
 
 
-class _BlogParser:
+class BlogParser:
     """Parses Tumblr's API response into a Blog object"""
     def __init__(self, target) -> None:
         self.target = target
@@ -73,23 +73,23 @@ class _BlogParser:
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("blog"):
-            logger.debug("_BlogParser: Parser found! Beginning parsing...")
+            logger.debug("BlogParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
 
     def parse(self):
         # First let's begin with the cursor object
-        cursor = _CursorParser.process(self.target)
+        cursor = CursorParser.process(self.target)
 
         # Then the blog info
-        blog = _TimelineBlogParser.process(self.target["blog"], force_parse=True)
+        blog = TimelineBlogParser.process(self.target["blog"], force_parse=True)
 
         # Now the posts contained within
         posts = []
         total_raw_posts = len(self.target["posts"])
         for post_index, post in enumerate(self.target["posts"]):
-            if result := parse_item(post, post_index, total_raw_posts, [_TimelinePostParser]):
+            if result := parse_item(post, post_index, total_raw_posts, [TimelinePostParser]):
                 posts.append(result)
 
         return models.blog.Blog(

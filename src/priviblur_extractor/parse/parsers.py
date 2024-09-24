@@ -8,14 +8,14 @@ logger = helpers.LOGGER.getChild("parse")
 # TODO refactor module
 
 
-class _BlogThemeParser:
+class BlogThemeParser:
     def __init__(self, target) -> None:
         self.target = target
 
     @classmethod
     def process(cls, initial_data):
         if theme := initial_data.get("theme"):
-            logger.debug("_BlogThemeParser: Parser found! Beginning parsing...")
+            logger.debug("BlogThemeParser: Parser found! Beginning parsing...")
             return cls(theme).parse()
         else:
             return None
@@ -36,7 +36,7 @@ class _BlogThemeParser:
         )
 
 
-class _TimelineBlogParser:
+class TimelineBlogParser:
     def __init__(self, target) -> None:
         self.target = target
 
@@ -50,7 +50,7 @@ class _TimelineBlogParser:
             return None
 
     def parse(self):
-        theme = _BlogThemeParser.process(self.target)
+        theme = BlogThemeParser.process(self.target)
 
         return models.timeline.TimelineBlog(
             name=self.target["name"],
@@ -66,20 +66,20 @@ class _TimelineBlogParser:
         )
 
 
-class _TimelinePostParser:
+class TimelinePostParser:
     def __init__(self, target) -> None:
         self.target = target
 
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("objectType") == "post":
-            logger.debug("_TimelinePostParser: Parser found! Beginning parsing...")
+            logger.debug("TimelinePostParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
 
     def parse(self):
-        blog = _TimelineBlogParser.process(self.target["blog"], force_parse=True)
+        blog = TimelineBlogParser.process(self.target["blog"], force_parse=True)
 
         assert blog is not None
 
@@ -119,7 +119,7 @@ class _TimelinePostParser:
 
             try:
                 if raw_trail_blog := trail_post.get("blog"):
-                    trail_blog = _TimelineBlogParser.process(raw_trail_blog, force_parse=True)
+                    trail_blog = TimelineBlogParser.process(raw_trail_blog, force_parse=True)
                 else:
                     trail_blog = models.timeline.BrokenBlog(
                         name=trail_post["brokenBlog"]["name"],
