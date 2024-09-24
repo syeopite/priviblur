@@ -5,7 +5,7 @@ Eg a regular timeline, or posts on a blog.
 """
 
 from .. import helpers, models
-from .parsers import BlogInfoParser, TimelinePostParser, parse_item
+from .parsers import BlogInfoParser, PostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 
@@ -55,7 +55,7 @@ class TimelineParser:
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
             if result := parse_item(element, element_index, total_raw_elements, [
-                TimelinePostParser
+                PostParser
             ]):
                 elements.append(result)
 
@@ -89,7 +89,7 @@ class BlogParser:
         posts = []
         total_raw_posts = len(self.target["posts"])
         for post_index, post in enumerate(self.target["posts"]):
-            if result := parse_item(post, post_index, total_raw_posts, [TimelinePostParser]):
+            if result := parse_item(post, post_index, total_raw_posts, [PostParser]):
                 posts.append(result)
 
         return models.blog.Blog(

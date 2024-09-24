@@ -54,14 +54,14 @@ class BlogInfoParser:
         )
 
 
-class TimelinePostParser:
+class PostParser:
     def __init__(self, target) -> None:
         self.target = target
 
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("objectType") == "post":
-            logger.debug("TimelinePostParser: Parser found! Beginning parsing...")
+            logger.debug("PostParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
