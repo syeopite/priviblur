@@ -53,7 +53,9 @@ class _TimelineParser:
         elements = []
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
-            if result := parse_item(element, element_index, total_raw_elements):
+            if result := parse_item(element, element_index, total_raw_elements, [
+                _TimelinePostParser
+            ]):
                 elements.append(result)
 
         return models.timeline.Timeline(
@@ -86,8 +88,7 @@ class _BlogParser:
         posts = []
         total_raw_posts = len(self.target["posts"])
         for post_index, post in enumerate(self.target["posts"]):
-            if result := parse_item(post, post_index, total_raw_posts):
-                
+            if result := parse_item(post, post_index, total_raw_posts, [_TimelinePostParser]):
                 posts.append(result)
 
         return models.blog.Blog(
@@ -224,7 +225,7 @@ class _TimelinePostParser:
                     trail_post_creation_date = datetime.datetime.fromtimestamp(trail_post_data["timestamp"])
 
             except KeyError as e:
-                logger.warning(f"KeyError: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
+                logger.warning(f"*: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
 
                 if trail_blog is None:
                     trail_blog = get_placeholder_blog()
@@ -335,14 +336,14 @@ ELEMENT_PARSERS = (_TimelinePostParser, _TimelineBlogParser)
 CONTAINER_PARSERS = (_TimelineParser, _BlogParser)
 
 
-def parse_item(element, element_index=0, total_elements=1):
+def parse_item(element, element_index=0, total_elements=1, use_parsers=[]):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
     logger.debug(f"parse_item: Parsing item {item_number}")
 
-    for parser_index, parser in enumerate(ELEMENT_PARSERS):
+    for parser_index, parser in enumerate(use_parsers):
         logger.debug(f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
-                     f"({parser_index + 1}/{len(ELEMENT_PARSERS)})...")
+                     f"({parser_index + 1}/{len(use_parsers)})...")
 
         if parsed_element := parser.process(element):
             return parsed_element
@@ -369,7 +370,7 @@ def parse_post_list(initial_data):
     posts = []
     total_raw_posts = len(initial_data["posts"])
     for post_index, post in enumerate(initial_data["posts"]):
-        if result := parse_item(post, post_index, total_raw_posts):
+        if result := parse_item(post, post_index, total_raw_posts, use_parsers=[_TimelinePostParser]):
             posts.append(result)
 
     return posts, cursor
