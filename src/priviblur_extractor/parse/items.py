@@ -221,11 +221,15 @@ class PostParser:
         )
 
 
-def parse_item(element, element_index=0, total_elements=1, use_parsers=[]):
+def parse_item(element, element_index=0, total_elements=1, use_parsers=None):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
     logger.debug(f"parse_item: Parsing item {item_number}")
 
+    if not use_parsers:
+        return PostParser.process(element)
+
+    # use_parsers must be a iterable object
     for parser_index, parser in enumerate(use_parsers):
         logger.debug(f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
                      f"({parser_index + 1}/{len(use_parsers)})...")

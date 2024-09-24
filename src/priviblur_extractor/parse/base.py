@@ -1,8 +1,6 @@
 from .. import helpers
 
-from . import collection_parsers
-
-from .items import PostParser, parse_item
+from . import collection_parsers, items
 
 logger = helpers.LOGGER.getChild("parse")
 
@@ -25,7 +23,7 @@ def parse_post_list(initial_data):
     posts = []
     total_raw_posts = len(initial_data["posts"])
     for post_index, post in enumerate(initial_data["posts"]):
-        if result := parse_item(post, post_index, total_raw_posts, use_parsers=[PostParser]):
+        if result := items.parse_item(post, post_index, total_raw_posts):
             posts.append(result)
 
     return posts, cursor

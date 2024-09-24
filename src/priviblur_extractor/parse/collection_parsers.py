@@ -54,9 +54,9 @@ class TimelineParser:
         elements = []
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
-            if result := items.parse_item(element, element_index, total_raw_elements, [
-                items.PostParser
-            ]):
+            if result := items.parse_item(element, element_index, total_raw_elements, (
+                items.PostParser,
+            )):
                 elements.append(result)
 
         return models.timeline.Timeline(
@@ -89,7 +89,7 @@ class BlogParser:
         posts = []
         total_raw_posts = len(self.target["posts"])
         for post_index, post in enumerate(self.target["posts"]):
-            if result := items.parse_item(post, post_index, total_raw_posts, [items.PostParser]):
+            if result := items.parse_item(post, post_index, total_raw_posts):
                 posts.append(result)
 
         return models.blog.Blog(
