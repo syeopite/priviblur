@@ -332,10 +332,6 @@ def get_placeholder_content():
     )
 
 
-ELEMENT_PARSERS = (_TimelinePostParser, _TimelineBlogParser)
-CONTAINER_PARSERS = (_TimelineParser, _BlogParser)
-
-
 def parse_item(element, element_index=0, total_elements=1, use_parsers=[]):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
