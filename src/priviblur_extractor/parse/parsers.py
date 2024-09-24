@@ -36,7 +36,7 @@ class BlogThemeParser:
         )
 
 
-class TimelineBlogParser:
+class BlogInfoParser:
     def __init__(self, target) -> None:
         self.target = target
 
@@ -79,7 +79,7 @@ class TimelinePostParser:
             return None
 
     def parse(self):
-        blog = TimelineBlogParser.process(self.target["blog"], force_parse=True)
+        blog = BlogInfoParser.process(self.target["blog"], force_parse=True)
 
         assert blog is not None
 
@@ -119,7 +119,7 @@ class TimelinePostParser:
 
             try:
                 if raw_trail_blog := trail_post.get("blog"):
-                    trail_blog = TimelineBlogParser.process(raw_trail_blog, force_parse=True)
+                    trail_blog = BlogInfoParser.process(raw_trail_blog, force_parse=True)
                 else:
                     trail_blog = models.timeline.BrokenBlog(
                         name=trail_post["brokenBlog"]["name"],

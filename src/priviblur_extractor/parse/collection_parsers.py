@@ -5,7 +5,7 @@ Eg a regular timeline, or posts on a blog.
 """
 
 from .. import helpers, models
-from .parsers import TimelineBlogParser, TimelinePostParser, parse_item
+from .parsers import BlogInfoParser, TimelinePostParser, parse_item
 
 logger = helpers.LOGGER.getChild("parse")
 
@@ -83,7 +83,7 @@ class BlogParser:
         cursor = CursorParser.process(self.target)
 
         # Then the blog info
-        blog = TimelineBlogParser.process(self.target["blog"], force_parse=True)
+        blog = BlogInfoParser.process(self.target["blog"], force_parse=True)
 
         # Now the posts contained within
         posts = []
