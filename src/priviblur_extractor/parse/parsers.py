@@ -137,10 +137,16 @@ class TimelinePostParser:
                 logger.warning(f"*: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
 
                 if trail_blog is None:
-                    trail_blog = get_placeholder_blog()
+                    trail_blog = models.timeline.BrokenBlog("PriviblurErrorBlog", [
+                        {"width": 40, "height": 40, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_40-3af33dc0.png"},
+                        {"width": 96, "height": 96, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_96-223fabe0.png"}
+                    ])
 
                 if trail_content is None:
-                    trail_content = get_placeholder_content()
+                    trail_content = (
+                        {"type": "text", "text": "Priviblur Parse error", "subtype": "heading1"},
+                        {"type": "text", "text": "Error: Priviblur has failed to parse this post"}
+                    )
 
                     # When the contents failed to parse it doesn't make sense to use successfully parsed layouts
                     # thus we'll set it to an empty list. This has also the added benefit of handling when the layouts also
@@ -225,20 +231,6 @@ class TimelinePostParser:
 
             community_labels=community_labels
         )
-
-
-def get_placeholder_blog():
-    return models.timeline.BrokenBlog("PriviblurErrorBlog", (
-        {"width": 40, "height": 40, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_40-3af33dc0.png"},
-        {"width": 96, "height": 96, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_96-223fabe0.png"}
-    ))
-
-
-def get_placeholder_content():
-    return (
-        {"type": "text", "text": "Priviblur Parse error", "subtype": "heading1"},
-        {"type": "text", "text": "Error: Priviblur has failed to parse this post"}
-    )
 
 
 def parse_item(element, element_index=0, total_elements=1, use_parsers=[]):
