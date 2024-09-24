@@ -98,3 +98,17 @@ class BlogParser:
             total_posts = self.target.get("totalPosts"),
             next = cursor,
         )
+
+
+def process_post_list(target):
+    """Extracts a simple list of posts, with an attached cursor object"""
+    cursor = CursorParser.process(target)
+
+    # Now the posts contained within
+    posts = []
+    total_raw_posts = len(target["posts"])
+    for post_index, post in enumerate(target["posts"]):
+        if result := items.parse_item(post, post_index, total_raw_posts):
+            posts.append(result)
+
+    return posts, cursor

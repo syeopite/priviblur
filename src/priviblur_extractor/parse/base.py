@@ -1,8 +1,4 @@
-from .. import helpers
-
-from . import collection_parsers, items
-
-logger = helpers.LOGGER.getChild("parse")
+from . import collection_parsers
 
 def parse_timeline(initial_data):
     initial_data = initial_data["response"]
@@ -16,14 +12,5 @@ def parse_blog_timeline(initial_data):
 
 def parse_post_list(initial_data):
     initial_data = initial_data["response"]
+    return collection_parsers.process_post_list(initial_data)
 
-    cursor = collection_parsers.CursorParser.process(initial_data)
-
-    # Now the posts contained within
-    posts = []
-    total_raw_posts = len(initial_data["posts"])
-    for post_index, post in enumerate(initial_data["posts"]):
-        if result := items.parse_item(post, post_index, total_raw_posts):
-            posts.append(result)
-
-    return posts, cursor
