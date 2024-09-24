@@ -8,34 +8,6 @@ logger = helpers.LOGGER.getChild("parse")
 # TODO refactor module
 
 
-class BlogThemeParser:
-    def __init__(self, target) -> None:
-        self.target = target
-
-    @classmethod
-    def process(cls, initial_data):
-        if theme := initial_data.get("theme"):
-            logger.debug("BlogThemeParser: Parser found! Beginning parsing...")
-            return cls(theme).parse()
-        else:
-            return None
-
-    def parse(self):
-        # TODO more theme data
-        header_info = models.misc.HeaderInfo(
-            self.target["headerImage"],
-            self.target["headerImageFocused"],
-            self.target["headerImageScaled"],
-        )
-
-        return models.misc.BlogTheme(
-            avatar_shape = self.target["avatarShape"],
-            background_color = self.target["backgroundColor"],
-            body_font = self.target["bodyFont"],
-            header_info=header_info
-        )
-
-
 class BlogInfoParser:
     def __init__(self, target) -> None:
         self.target = target
@@ -49,9 +21,25 @@ class BlogInfoParser:
         else:
             return None
 
-    def parse(self):
-        theme = BlogThemeParser.process(self.target)
+    def parse_theme(self):
+        """Parses theming information for the blog into a BlogTheme object"""
+        if not (target := self.target.get("theme")):
+            return None
 
+        header_info = models.misc.HeaderInfo(
+            target["headerImage"],
+            target["headerImageFocused"],
+            target["headerImageScaled"],
+        )
+
+        return models.misc.BlogTheme(
+            avatar_shape = target["avatarShape"],
+            background_color = target["backgroundColor"],
+            body_font = target["bodyFont"],
+            header_info=header_info
+        )
+
+    def parse(self):
         return models.timeline.TimelineBlog(
             name=self.target["name"],
             avatar=self.target["avatar"],
@@ -60,7 +48,7 @@ class BlogInfoParser:
             is_adult=self.target["isAdult"],
             description_npf=self.target["descriptionNpf"],
             uuid=self.target["uuid"],
-            theme=theme,
+            theme=self.parse_theme(),
             is_paywall_on=self.target["isPaywallOn"],
             active=self.target.get("active", True)
         )
