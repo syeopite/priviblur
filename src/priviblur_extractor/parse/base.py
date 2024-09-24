@@ -5,7 +5,7 @@ def parse_timeline(initial_data):
 
 
 def parse_blog_timeline(initial_data):
-    return collection_parsers.BlogParser.process(initial_data["response"])
+    return collection_parsers.BlogTimelineParser.process(initial_data["response"])
 
 
 def parse_post_list(initial_data):

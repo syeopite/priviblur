@@ -65,7 +65,7 @@ class TimelineParser:
         )
 
 
-class BlogParser:
+class BlogTimelineParser:
     """Parses Tumblr's API response into a Blog object"""
     def __init__(self, target) -> None:
         self.target = target
@@ -73,7 +73,7 @@ class BlogParser:
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("blog"):
-            logger.debug("BlogParser: Parser found! Beginning parsing...")
+            logger.debug("BlogTimelineParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
@@ -83,7 +83,7 @@ class BlogParser:
         cursor = CursorParser.process(self.target)
 
         # Then the blog info
-        blog = items.BlogInfoParser.process(self.target["blog"], force_parse=True)
+        blog = items.BlogParser.process(self.target["blog"], force_parse=True)
 
         # Now the posts contained within
         posts = []
