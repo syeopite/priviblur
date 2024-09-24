@@ -41,7 +41,7 @@ class _TimelineParser:
     def process(cls, initial_data):
         if target := initial_data.get("timeline"):
             logger.debug("_TimelineParser: Parser found! Beginning parsing...")
-            return _TimelineParser(target).parse()
+            return cls(target).parse()
         else:
             return None
 
@@ -73,7 +73,7 @@ class _BlogParser:
     def process(cls, initial_data):
         if initial_data.get("blog"):
             logger.debug("_BlogParser: Parser found! Beginning parsing...")
-            return _BlogParser(initial_data).parse()
+            return cls(initial_data).parse()
         else:
             return None
 
@@ -107,7 +107,7 @@ class _BlogThemeParser:
     def process(cls, initial_data):
         if theme := initial_data.get("theme"):
             logger.debug("_BlogThemeParser: Parser found! Beginning parsing...")
-            return _BlogThemeParser(theme).parse()
+            return cls(theme).parse()
         else:
             return None
 
@@ -134,9 +134,9 @@ class _TimelineBlogParser:
     @classmethod
     def process(cls, initial_data, force_parse=False):
         if initial_data.get("objectType") == "blog":
-            return _TimelineBlogParser(initial_data["resources"][0]).parse()
+            return cls(initial_data["resources"][0]).parse()
         elif force_parse:
-            return _TimelineBlogParser(initial_data).parse()
+            return cls(initial_data).parse()
         else:
             return None
 
@@ -165,7 +165,7 @@ class _TimelinePostParser:
     def process(cls, initial_data):
         if initial_data.get("objectType") == "post":
             logger.debug("_TimelinePostParser: Parser found! Beginning parsing...")
-            return _TimelinePostParser(initial_data).parse()
+            return cls(initial_data).parse()
         else:
             return None
 
