@@ -1,3 +1,4 @@
+
 """Parses individual items from Tumblr's JSON API into an object"""
 
 
@@ -23,8 +24,7 @@ class BlogParser:
 
     def parse_theme(self):
         """Parses theming information for the blog into a BlogTheme object"""
-        if not (target := self.target.get("theme")):
-            return None
+        target = self.target.get("theme")
 
         header_info = models.misc.HeaderInfo(
             target["headerImage"],
