@@ -83,7 +83,7 @@ class BlogTimelineParser:
         cursor = _CursorParser.process(self.target)
 
         # Then the blog info
-        blog = items.BlogParser.process(self.target["blog"], force_parse=True)
+        blog = items.BlogParser(self.target["blog"]).parse()
 
         # Now the posts contained within
         posts = []

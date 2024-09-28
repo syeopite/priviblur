@@ -14,11 +14,9 @@ class BlogParser:
         self.target = target
 
     @classmethod
-    def process(cls, initial_data, force_parse=False):
+    def process(cls, initial_data):
         if initial_data.get("objectType") == "blog":
             return cls(initial_data["resources"][0]).parse()
-        elif force_parse:
-            return cls(initial_data).parse()
         else:
             return None
 
@@ -67,9 +65,9 @@ class PostParser:
             return None
 
     def parse(self):
-        blog = BlogParser.process(self.target["blog"], force_parse=True)
-
-        assert blog is not None
+        # When we know that the target is a blog object there is no need to
+        # pass it to .process to identify it
+        blog = BlogParser(self.target["blog"]).parse()
 
         id = self.target["id"]
 
@@ -107,7 +105,7 @@ class PostParser:
 
             try:
                 if raw_trail_blog := trail_post.get("blog"):
-                    trail_blog = BlogParser.process(raw_trail_blog, force_parse=True)
+                    trail_blog = BlogParser(raw_trail_blog).parse()
                 else:
                     trail_blog = models.timeline.BrokenBlog(
                         name=trail_post["brokenBlog"]["name"],
