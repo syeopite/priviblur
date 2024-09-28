@@ -3,7 +3,7 @@ from typing import Sequence, Optional, NamedTuple
 from . import base, timeline
 
 
-class Blog(NamedTuple):
+class BlogTimeline(NamedTuple):
     """Object representing a blog page
 
     TODO better documentation

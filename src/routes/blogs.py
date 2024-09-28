@@ -12,7 +12,7 @@ blogs = sanic.Blueprint("blogs", url_prefix="/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-
 
 async def render_blog_post(request, blog, post):
     """Handles the logic for rendering viewing a single blog post"""
-    blog_info = priviblur_extractor.models.blog.Blog(post.blog, (), None, None)
+    blog_info = priviblur_extractor.models.blog.BlogTimeline(post.blog, (), None, None)
 
     if request.args.get("fetch_polls") in ("1", "true"):
         fetch_poll_results = True
@@ -89,7 +89,7 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     post_list = (await get_blog_search_results(request.app.ctx, blog, query, page=page))
     blog_info = (await get_blog_posts(request.app.ctx, blog)).blog_info
 
-    blog = priviblur_extractor.models.blog.Blog(
+    blog = priviblur_extractor.models.blog.BlogTimeline(
         blog_info=blog_info,
         posts = post_list,
         total_posts=None,

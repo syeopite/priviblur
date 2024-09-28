@@ -92,7 +92,7 @@ class BlogTimelineParser:
             if result := items.parse_item(post, post_index, total_raw_posts):
                 posts.append(result)
 
-        return models.blog.Blog(
+        return models.blog.BlogTimeline(
             blog_info=blog,
             posts=posts,
             total_posts = self.target.get("totalPosts"),
