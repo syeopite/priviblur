@@ -38,7 +38,7 @@ class BlogParser:
         )
 
     def parse(self):
-        return models.timeline.TimelineBlog(
+        return models.timeline.Blog(
             name=self.target["name"],
             avatar=self.target["avatar"],
             title=self.target["title"],

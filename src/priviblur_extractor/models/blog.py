@@ -8,7 +8,7 @@ class BlogTimeline(NamedTuple):
 
     TODO better documentation
     """
-    blog_info: timeline.TimelineBlog
+    blog_info: timeline.Blog
     posts: Sequence[timeline.TimelinePost]
     total_posts: int | None
     next: Optional[base.Cursor] = None
@@ -30,7 +30,7 @@ class BlogTimeline(NamedTuple):
 
     @classmethod
     def from_json(cls, json):
-        json["blog_info"] = timeline.TimelineBlog.from_json(json["blog_info"])
+        json["blog_info"] = timeline.Blog.from_json(json["blog_info"])
 
         posts = []
         for post in json["posts"]:

@@ -8,7 +8,7 @@ from . import base, misc
 # Avatars = namedtuple("avatars", "")
 
 
-class TimelineBlog(NamedTuple):
+class Blog(NamedTuple):
     name: str
     # [{"width": 512, "height": 512, url: "..."}, {"width": ...}...]
     avatar: list[dict]
@@ -52,7 +52,7 @@ class BrokenBlog(NamedTuple):
 
 class TimelinePostTrail(NamedTuple):
     id: Optional[str]
-    blog : Union[TimelineBlog, BrokenBlog]
+    blog : Union[Blog, BrokenBlog]
     date: Optional[datetime.datetime]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
@@ -72,7 +72,7 @@ class TimelinePostTrail(NamedTuple):
     def from_json(cls, json):
         # Broken blogs contains only two attributes
         if len(json["blog"]) > 2:
-            json["blog"] = TimelineBlog.from_json(json["blog"])
+            json["blog"] = Blog.from_json(json["blog"])
         else:
             json["blog"] = BrokenBlog.from_json(json["blog"])
 
@@ -90,7 +90,7 @@ class CommunityLabel(enum.Enum):
 
 
 class TimelinePost(NamedTuple):
-    blog: TimelineBlog
+    blog: Blog
 
     id: str
     post_url: str
@@ -146,7 +146,7 @@ class TimelinePost(NamedTuple):
             trails.append(TimelinePostTrail.from_json(trail))
         json["trail"] = trails
 
-        for key, object_ in (("blog", TimelineBlog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
+        for key, object_ in (("blog", Blog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
             if json[key]:
                 json[key] = object_.from_json(json[key])
 
@@ -158,7 +158,7 @@ class TimelinePost(NamedTuple):
         return cls(**json)
 
 
-TimelineObjects = Union[TimelineBlog, TimelinePost]
+TimelineObjects = Union[Blog, TimelinePost]
 
 
 class Timeline(NamedTuple):
@@ -172,7 +172,7 @@ class Timeline(NamedTuple):
     def to_json_serialisable(self):
         elements = []
         for element in self.elements:
-            if isinstance(element, TimelineBlog):
+            if isinstance(element, Blog):
                 elements.append({"blog": element.to_json_serialisable()})
             else:
                 elements.append({"post": element.to_json_serialisable()})
@@ -192,7 +192,7 @@ class Timeline(NamedTuple):
         elements = []
         for element in json["elements"]:
             if blog := element.get("blog"):
-                elements.append(TimelineBlog.from_json(blog))
+                elements.append(Blog.from_json(blog))
             else:
                 elements.append(TimelinePost.from_json(element["post"]))
 
