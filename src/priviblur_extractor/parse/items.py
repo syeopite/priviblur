@@ -95,55 +95,27 @@ class PostParser:
 
         trails = []
         for trail_post in trail:
-            trail_post_id = None
-            trail_post_creation_date = None
-            trail_blog = None
-            trail_content = None
-            trail_layout = None
+            is_broken_trail = False
 
-            has_error = False
+            if raw_trail_blog := trail_post.get("blog"):
+                trail_blog = BlogParser(raw_trail_blog).parse()
+            else:
+                trail_blog = models.timeline.BrokenBlog(
+                    name=trail_post["brokenBlog"]["name"],
+                    avatar=trail_post["brokenBlog"]["avatar"],
+                )
 
-            try:
-                if raw_trail_blog := trail_post.get("blog"):
-                    trail_blog = BlogParser(raw_trail_blog).parse()
-                else:
-                    trail_blog = models.timeline.BrokenBlog(
-                        name=trail_post["brokenBlog"]["name"],
-                        avatar=trail_post["brokenBlog"]["avatar"],
-                    )
-                    
-                trail_content = trail_post["content"]
-                trail_layout = trail_post["layout"]
+                is_broken_trail = True
 
-                if trail_post_data := trail_post.get("post"):
-                    trail_post_id = trail_post_data["id"]
-                    trail_post_creation_date = datetime.datetime.fromtimestamp(trail_post_data["timestamp"])
+            trail_content = trail_post["content"]
+            trail_layout = trail_post["layout"]
 
-            except KeyError as e:
-                logger.warning(f"*: '{e.args[0]}' while parsing post trail for post '{id}' from blog '{blog.name}'")
-
-                if trail_blog is None:
-                    trail_blog = models.timeline.BrokenBlog("PriviblurErrorBlog", [
-                        {"width": 40, "height": 40, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_40-3af33dc0.png"},
-                        {"width": 96, "height": 96, "url": "https://assets.tumblr.com/pop/src/assets/images/avatar/anonymous_avatar_96-223fabe0.png"}
-                    ])
-
-                if trail_content is None:
-                    trail_content = (
-                        {"type": "text", "text": "Priviblur Parse error", "subtype": "heading1"},
-                        {"type": "text", "text": "Error: Priviblur has failed to parse this post"}
-                    )
-
-                    # When the contents failed to parse it doesn't make sense to use successfully parsed layouts
-                    # thus we'll set it to an empty list. This has also the added benefit of handling when the layouts also
-                    # failed to parse
-                    trail_layout = []
-
-                # If its just the trail layout that failed to parse then we should also reset it to an empty list
-                if trail_layout is None:
-                    trail_layout = []
-
-                has_error = True
+            if (trail_post_data := trail_post.get("post")) and not is_broken_trail:
+                trail_post_id = trail_post_data["id"]
+                trail_post_creation_date = datetime.datetime.fromtimestamp(trail_post_data["timestamp"])
+            else:
+                trail_post_id = None
+                trail_post_creation_date = None
 
             trails.append(models.timeline.TimelinePostTrail(
                 id=trail_post_id,
@@ -151,7 +123,6 @@ class PostParser:
                 date=trail_post_creation_date,
                 content=trail_content,
                 layout=trail_layout,
-                has_error=has_error
             ))
 
 

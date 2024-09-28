@@ -51,13 +51,11 @@ class BrokenBlog(NamedTuple):
 
 
 class TimelinePostTrail(NamedTuple):
-    id: str
+    id: Optional[str]
     blog : Union[TimelineBlog, BrokenBlog]
     date: Optional[datetime.datetime]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-
-    has_error : bool = False
 
     def to_json_serialisable(self):
         json_serializable = self._asdict()
