@@ -148,7 +148,7 @@ class TumblrAPI:
 
     async def timeline_search(self, query: str, timeline_type: rconf.TimelineType, *,
                               continuation: Optional[str] = None,
-                              latest: bool = False, limit: int = 20, days: int = 0,
+                              latest: bool = False, days: int = 0,
                               post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None):
         """Requests the /timeline/search endpoint
 
@@ -158,12 +158,11 @@ class TumblrAPI:
 
             timeline_type: Specific timeline type to return. Can be TAG, BLOG or POST
             latest: Whether to filter results by "latest" or most popular
-            limit: Amount of posts to return. In practice, the amount returned is half this value (or 1 if <= 2)
             days:  Only return content that are posted X days prior. 0 to disable this filter.
             post_type_filter: If set, only return posts of the given type.
         """
         url_parameters = {
-            "limit": limit,
+            "limit": 20,
             "days": days,
             "query": query,
 
@@ -190,7 +189,7 @@ class TumblrAPI:
 
         return await self._get_json(f"timeline/search", url_parameters)
 
-    async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False, limit: int = 14):
+    async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False):
         """Requests the /hubs/<tag>/timeline endpoint
 
         Parameters:
@@ -198,13 +197,12 @@ class TumblrAPI:
 
             continuation: Continuation token for fetching the next batch of content
             latest: Whether to filter results by "latest" or most popular
-            limit: Amount of posts to return. In practice, the amount returned is half this value (or 1 if <= 2)
         """
 
         url_parameters = {
             "fields[blogs]": rconf.TUMBLR_TAG_BLOG_INFO_FIELDS,
             "sort": "top" if not latest else "recent",
-            "limit": limit,
+            "limit": 14,
         }
 
         if continuation:
