@@ -222,7 +222,6 @@ class TumblrAPI:
         Parameters:
             blog_name: the blog the post is from
 
-        Optional:
             continuation: Continuation token for fetching the next batch of content
             tag: Search posts tagged with a tag within the blog
             post_type: Filter by post type when browsing tags or searching
@@ -258,7 +257,6 @@ class TumblrAPI:
                 blog_name: name of the blog to search
                 query: search query
 
-            Optional Parameters:
                 continuation: Continuation token for fetching the next batch of content
                 top: Whether or not to sort by popularity
                 original_posts: Whether or not the search should only return original posts by the blog
