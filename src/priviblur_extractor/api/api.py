@@ -110,8 +110,7 @@ class TumblrAPI:
         """Access the /explore endpoint"""
         return await self._get_json("explore")
 
-    async def explore_trending(self, *, continuation: Optional[str] = None, reblog_info: bool = True,
-                               fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS):
+    async def explore_trending(self, *, continuation: Optional[str] = None, reblog_info: bool = True):
         """Requests the /explore/trending endpoint
 
          reblog_info:
@@ -131,11 +130,6 @@ class TumblrAPI:
             "reblogCount": 6015,
             ...
             }
-
-        fields:
-            What information regarding a blog gets sent back. By default, everything is sent (and description
-            won't be neue post format). Tumblr seem to always send this parameter, so we'll do the same.
-            For more information see the documentation for `BlogInfoFieldRequestOptions`
         """
 
         url_parameters = {}
@@ -145,20 +139,15 @@ class TumblrAPI:
         if continuation:
             url_parameters["cursor"] = continuation
 
-        url_parameters["fields[blogs]"] = fields
+        url_parameters["fields[blogs]"] = rconf.EXPLORE_BLOG_INFO_FIELDS
 
         return await self._get_json("explore/trending", url_parameters)
 
-    async def explore_today(self, *, continuation: Optional[str] = None, fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS):
-        """Requests the /explore/home/today endpoint
-
-        fields:
-            What information regarding a blog gets sent back. By default, everything is sent (and description
-            won't be neue post format)
-        """
+    async def explore_today(self, *, continuation: Optional[str] = None):
+        """Requests the /explore/home/today endpoint"""
 
         url_parameters = {
-            "fields[blogs]": fields,
+            "fields[blogs]": rconf.EXPLORE_BLOG_INFO_FIELDS,
             "reblog_info": True,
         }
 
@@ -168,8 +157,7 @@ class TumblrAPI:
         return await self._get_json("explore/home/today", url_parameters)
     
     async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
-                           reblog_info: bool = True,
-                           fields: str = rconf.EXPLORE_BLOG_INFO_FIELDS,):
+                           reblog_info: bool = True):
         """Requests the /explore/posts/<post-type> endpoint with a post type, to get a trending posts of said type"""
         url_parameters = {}
 
@@ -178,15 +166,14 @@ class TumblrAPI:
         if continuation:
             url_parameters["cursor"] = continuation
 
-        url_parameters["fields[blogs]"] = fields
+        url_parameters["fields[blogs]"] = rconf.EXPLORE_BLOG_INFO_FIELDS
 
         return await self._get_json(f"explore/posts/{post_type.name.lower()}", url_parameters)
 
     async def timeline_search(self, query: str, timeline_type: rconf.TimelineType, *,
                               continuation: Optional[str] = None,
                               latest: bool = False, limit: int = 20, days: int = 0,
-                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None, reblog_info: bool = True,
-                              fields: str = rconf.TUMBLR_SEARCH_BLOG_INFO_FIELDS):
+                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None, reblog_info: bool = True):
         """Requests the /timeline/search endpoint
 
         Parameters:
@@ -200,7 +187,6 @@ class TumblrAPI:
             post_type_filter: If set, only return posts of the given type.
 
             reblog_info: See `explore_trending`
-            fields: See `explore_trending`
         """
         url_parameters = {
             "limit": limit,
@@ -222,7 +208,7 @@ class TumblrAPI:
         if post_type_filter:
             url_parameters["post_type_filter"] = post_type_filter.name.lower()
 
-        url_parameters["fields[blogs]"] = fields
+        url_parameters["fields[blogs]"] = rconf.TUMBLR_SEARCH_BLOG_INFO_FIELDS
 
         # Cursor goes after "blog[fields]"
         if continuation:
@@ -230,8 +216,7 @@ class TumblrAPI:
 
         return await self._get_json(f"timeline/search", url_parameters)
 
-    async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False, 
-                            limit: int = 14, fields: str = rconf.TUMBLR_TAG_BLOG_INFO_FIELDS):
+    async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False, limit: int = 14):
         """Requests the /hubs/<tag>/timeline endpoint
 
         Parameters:
@@ -240,12 +225,10 @@ class TumblrAPI:
             continuation: Continuation token for fetching the next batch of content
             latest: Whether to filter results by "latest" or most popular
             limit: Amount of posts to return. In practice, the amount returned is half this value (or 1 if <= 2)
-
-            fields: See `explore_trending`
         """
 
         url_parameters = {
-            "fields[blogs]": fields,
+            "fields[blogs]": rconf.TUMBLR_TAG_BLOG_INFO_FIELDS,
             "sort": "top" if not latest else "recent",
             "limit": limit,
         }
