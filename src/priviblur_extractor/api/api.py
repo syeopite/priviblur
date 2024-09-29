@@ -241,8 +241,6 @@ class TumblrAPI:
 
             if post_type:
                 url_parameters["post_type"] = post_type
-        else:
-            url_parameters["url_parameters"] = "true"
 
         if before_id:
             url_parameters["before_id"] = before_id
