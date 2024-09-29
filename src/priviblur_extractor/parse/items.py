@@ -117,7 +117,7 @@ class PostParser:
                 trail_post_id = None
                 trail_post_creation_date = None
 
-            trails.append(models.timeline.TimelinePostTrail(
+            trails.append(models.timeline.PostTrail(
                 id=trail_post_id,
                 blog=trail_blog,
                 date=trail_post_creation_date,
@@ -158,7 +158,7 @@ class PostParser:
                 if not community_labels:
                     community_labels.append(models.timeline.CommunityLabel.MATURE)
 
-        return models.timeline.TimelinePost(
+        return models.timeline.Post(
             blog=blog,
             id=id,
             is_nsfw=self.target["isNsfw"],

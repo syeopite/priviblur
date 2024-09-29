@@ -50,7 +50,7 @@ class BrokenBlog(NamedTuple):
         return cls(**json)
 
 
-class TimelinePostTrail(NamedTuple):
+class PostTrail(NamedTuple):
     id: Optional[str]
     blog : Union[Blog, BrokenBlog]
     date: Optional[datetime.datetime]
@@ -89,7 +89,7 @@ class CommunityLabel(enum.Enum):
     SEXUAL_THEMES = 3
 
 
-class TimelinePost(NamedTuple):
+class Post(NamedTuple):
     blog: Blog
 
     id: str
@@ -110,7 +110,7 @@ class TimelinePost(NamedTuple):
 
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-    trail: List[TimelinePostTrail]
+    trail: List[PostTrail]
 
     note_count: Optional[int] = None
     like_count: Optional[int] = None
@@ -143,7 +143,7 @@ class TimelinePost(NamedTuple):
 
         trails = []
         for trail in json["trail"]:
-            trails.append(TimelinePostTrail.from_json(trail))
+            trails.append(PostTrail.from_json(trail))
         json["trail"] = trails
 
         for key, object_ in (("blog", Blog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
@@ -158,7 +158,7 @@ class TimelinePost(NamedTuple):
         return cls(**json)
 
 
-TimelineObjects = Union[Blog, TimelinePost]
+TimelineObjects = Union[Blog, Post]
 
 
 class Timeline(NamedTuple):
@@ -194,7 +194,7 @@ class Timeline(NamedTuple):
             if blog := element.get("blog"):
                 elements.append(Blog.from_json(blog))
             else:
-                elements.append(TimelinePost.from_json(element["post"]))
+                elements.append(Post.from_json(element["post"]))
 
         json["elements"] = elements
 

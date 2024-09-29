@@ -9,7 +9,7 @@ class BlogTimeline(NamedTuple):
     TODO better documentation
     """
     blog_info: timeline.Blog
-    posts: Sequence[timeline.TimelinePost]
+    posts: Sequence[timeline.Post]
     total_posts: int | None
     next: Optional[base.Cursor] = None
 
@@ -34,7 +34,7 @@ class BlogTimeline(NamedTuple):
 
         posts = []
         for post in json["posts"]:
-            posts.append(timeline.TimelinePost.from_json(post))
+            posts.append(timeline.Post.from_json(post))
         json["posts"] = posts
 
         if json["next"]:

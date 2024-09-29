@@ -89,7 +89,7 @@ class BlogSearchCache(AccessCache):
         """Parses the cached JSON data into Priviblur objects"""
         posts = []
         for post in json["posts"]:
-            posts.append(priviblur_extractor.models.timeline.TimelinePost.from_json(post))
+            posts.append(priviblur_extractor.models.timeline.Post.from_json(post))
 
         return posts
 
