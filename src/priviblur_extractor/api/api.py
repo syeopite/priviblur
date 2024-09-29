@@ -81,15 +81,14 @@ class TumblrAPI:
             message = result["meta"]["msg"]
             code = result["meta"]["status"]
 
-            logger.error(f"Error response received")
-            logger.error(f"HTTP Status code: {code}")
+            logger.info(f"Error response received with HTTP status code: {code}")
             logger.debug(f"Response headers: {_format(response.headers)}")
 
             if error := result.get("errors"):
                 details = error[0].get('detail')
                 internal_code = error[0].get("code")
-                logger.error(f"Reason: {details}")
-                logger.error(f"Tumblr internal error code: {internal_code}")
+                logger.info(f"Reason: {details}")
+                logger.info(f"Tumblr internal error code: {internal_code}")
             else:
                 internal_code = None
                 details = ""
