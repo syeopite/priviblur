@@ -110,32 +110,11 @@ class TumblrAPI:
         """Access the /explore endpoint"""
         return await self._get_json("explore")
 
-    async def explore_trending(self, *, continuation: Optional[str] = None, reblog_info: bool = True):
-        """Requests the /explore/trending endpoint
+    async def explore_trending(self, *, continuation: Optional[str] = None):
+        """Requests the /explore/trending endpoint"""
 
-         reblog_info:
-            Adds the reblog_info = true URL parameter to the request. This makes it so that information regarding
-            reblogs gets sent back in the response.
+        url_parameters : dict = {"reblog_info": "true"}
 
-            With: {
-            "reblogKey": "d9b3aCtK",
-            "reblogCount": 6015,
-            "rebloggedfromId": "12345678",
-            "rebloggedfromUrl": "..."
-            ...
-            }
-
-            Without: { // Only basic information
-            "reblogKey": "d9b3aCtK",
-            "reblogCount": 6015,
-            ...
-            }
-        """
-
-        url_parameters = {}
-
-        if reblog_info:
-            url_parameters["reblogInfo"] = True
         if continuation:
             url_parameters["cursor"] = continuation
 
@@ -148,7 +127,7 @@ class TumblrAPI:
 
         url_parameters = {
             "fields[blogs]": rconf.EXPLORE_BLOG_INFO_FIELDS,
-            "reblog_info": True,
+            "reblog_info": "true",
         }
 
         if continuation:
@@ -156,13 +135,10 @@ class TumblrAPI:
 
         return await self._get_json("explore/home/today", url_parameters)
     
-    async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None,
-                           reblog_info: bool = True):
+    async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None):
         """Requests the /explore/posts/<post-type> endpoint with a post type, to get a trending posts of said type"""
-        url_parameters = {}
+        url_parameters : dict = {"reblog_info": "true"}
 
-        if reblog_info:
-            url_parameters["reblog_info"] = True
         if continuation:
             url_parameters["cursor"] = continuation
 
@@ -173,7 +149,7 @@ class TumblrAPI:
     async def timeline_search(self, query: str, timeline_type: rconf.TimelineType, *,
                               continuation: Optional[str] = None,
                               latest: bool = False, limit: int = 20, days: int = 0,
-                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None, reblog_info: bool = True):
+                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None):
         """Requests the /timeline/search endpoint
 
         Parameters:
@@ -185,8 +161,6 @@ class TumblrAPI:
             limit: Amount of posts to return. In practice, the amount returned is half this value (or 1 if <= 2)
             days:  Only return content that are posted X days prior. 0 to disable this filter.
             post_type_filter: If set, only return posts of the given type.
-
-            reblog_info: See `explore_trending`
         """
         url_parameters = {
             "limit": limit,
@@ -203,8 +177,8 @@ class TumblrAPI:
         else:
             url_parameters["timeline_type"] = timeline_type.name.lower()
 
-        if reblog_info:
-            url_parameters["reblog_info"] = "true"
+        url_parameters["reblog_info"] = "true"
+
         if post_type_filter:
             url_parameters["post_type_filter"] = post_type_filter.name.lower()
 
@@ -258,7 +232,7 @@ class TumblrAPI:
         url_parameters = {
          "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
          "npf": True,
-         "reblog_info": True,
+         "reblog_info": "true",
          "include_pinned_posts": True
         }
 
@@ -334,7 +308,7 @@ class TumblrAPI:
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_name, safe='')}/posts/{post_id}/permalink",
-            url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": True}
+            url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"}
         )
 
     async def poll_results(self, blog_name, post_id, poll_id):
