@@ -1,46 +1,24 @@
 import datetime
 import enum
-from typing import Union, NamedTuple, List, Optional, Union
 
-from . import misc
+from typing import Optional, Union, NamedTuple, Sequence
 
-
-# Avatars = namedtuple("avatars", "")
+from . import blog
 
 
-class Blog(NamedTuple):
-    name: str
-    # [{"width": 512, "height": 512, url: "..."}, {"width": ...}...]
-    avatar: list[dict]
-    title: str
-    url: str
-    is_adult: bool
-
-    description_npf: list[dict]
-    uuid: str
-    theme: misc.BlogTheme
-    is_paywall_on: bool
-
-    # If blog is deactivated or not
-    active: bool = False
-
-    def to_json_serialisable(self):
-        json_serializable = self._asdict()
-
-        if json_serializable["theme"]:
-            json_serializable["theme"] = json_serializable["theme"].to_json_serialisable()
-
-        return json_serializable
-
-    @classmethod
-    def from_json(cls, json):
-        json["theme"] = misc.BlogTheme.from_json(json["theme"])
-        return cls(**json)
+class CommunityLabel(enum.Enum):
+    MATURE = 0  # Generic catch all
+    DRUG_USE = 1
+    VIOLENCE = 2
+    SEXUAL_THEMES = 3
 
 
-class BrokenBlog(NamedTuple):
-    name: str
-    avatar: list[dict]
+class ReblogAttribution(NamedTuple):
+    """Object representing reblog author information from individual posts"""
+    post_id: str
+    post_url: str
+    blog_name: str
+    blog_title: str
 
     def to_json_serialisable(self):
         return self._asdict()
@@ -52,7 +30,7 @@ class BrokenBlog(NamedTuple):
 
 class PostTrail(NamedTuple):
     id: Optional[str]
-    blog : Union[Blog, BrokenBlog]
+    blog : Union[blog.Blog, blog.BrokenBlog]
     date: Optional[datetime.datetime]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
@@ -72,25 +50,17 @@ class PostTrail(NamedTuple):
     def from_json(cls, json):
         # Broken blogs contains only two attributes
         if len(json["blog"]) > 2:
-            json["blog"] = Blog.from_json(json["blog"])
+            json["blog"] = blog.Blog.from_json(json["blog"])
         else:
-            json["blog"] = BrokenBlog.from_json(json["blog"])
+            json["blog"] = blog.BrokenBlog.from_json(json["blog"])
 
         if json["date"] is not None:
             json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
 
         return cls(**json)
 
-
-class CommunityLabel(enum.Enum):
-    MATURE = 0  # Generic catch all
-    DRUG_USE = 1
-    VIOLENCE = 2
-    SEXUAL_THEMES = 3
-
-
 class Post(NamedTuple):
-    blog: Blog
+    blog: blog.Blog
 
     id: str
     post_url: str
@@ -110,15 +80,15 @@ class Post(NamedTuple):
 
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
-    trail: List[PostTrail]
+    trail: Sequence[PostTrail]
 
     note_count: Optional[int] = None
     like_count: Optional[int] = None
     reblog_count: Optional[int] = None
     reply_count: Optional[int] = None
 
-    reblog_from: Optional[misc.ReblogAttribution] = None
-    reblog_root: Optional[misc.ReblogAttribution] = None
+    reblog_from: Optional[ReblogAttribution] = None
+    reblog_root: Optional[ReblogAttribution] = None
 
     community_labels: list[CommunityLabel] = []
 
@@ -146,7 +116,7 @@ class Post(NamedTuple):
             trails.append(PostTrail.from_json(trail))
         json["trail"] = trails
 
-        for key, object_ in (("blog", Blog), ("reblog_from", misc.ReblogAttribution), ("reblog_root", misc.ReblogAttribution)):
+        for key, object_ in (("blog", blog.Blog), ("reblog_from", ReblogAttribution), ("reblog_root", ReblogAttribution)):
             if json[key]:
                 json[key] = object_.from_json(json[key])
 

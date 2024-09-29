@@ -1,6 +1,8 @@
 from typing import Sequence, Optional, NamedTuple
 
-from . import base, timeline
+from . import base
+from .post import Post
+from. blog import Blog
 
 
 class BlogTimeline(NamedTuple):
@@ -8,8 +10,8 @@ class BlogTimeline(NamedTuple):
 
     TODO better documentation
     """
-    blog_info: timeline.Blog
-    posts: Sequence[timeline.Post]
+    blog_info: Blog
+    posts: Sequence[Post]
     total_posts: int | None
     next: Optional[base.Cursor] = None
 
@@ -30,11 +32,11 @@ class BlogTimeline(NamedTuple):
 
     @classmethod
     def from_json(cls, json):
-        json["blog_info"] = timeline.Blog.from_json(json["blog_info"])
+        json["blog_info"] = Blog.from_json(json["blog_info"])
 
         posts = []
         for post in json["posts"]:
-            posts.append(timeline.Post.from_json(post))
+            posts.append(Post.from_json(post))
         json["posts"] = posts
 
         if json["next"]:
@@ -50,13 +52,13 @@ class Timeline(NamedTuple):
 
     Refers to data on a certain page. IE Search or explore
     """
-    elements: Sequence[timeline.Post | timeline.Blog]
+    elements: Sequence[Post | Blog]
     next: Optional[base.Cursor] = None
 
     def to_json_serialisable(self):
         elements = []
         for element in self.elements:
-            if isinstance(element, timeline.Blog):
+            if isinstance(element, Blog):
                 elements.append({"blog": element.to_json_serialisable()})
             else:
                 elements.append({"post": element.to_json_serialisable()})
@@ -76,9 +78,9 @@ class Timeline(NamedTuple):
         elements = []
         for element in json["elements"]:
             if blog := element.get("blog"):
-                elements.append(timeline.Blog.from_json(blog))
+                elements.append(Blog.from_json(blog))
             else:
-                elements.append(timeline.Post.from_json(element["post"]))
+                elements.append(Post.from_json(element["post"]))
 
         json["elements"] = elements
 

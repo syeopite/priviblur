@@ -24,13 +24,13 @@ class BlogParser:
         """Parses theming information for the blog into a BlogTheme object"""
         target = self.target.get("theme")
 
-        header_info = models.misc.HeaderInfo(
+        header_info = models.blog.HeaderInfo(
             target["headerImage"],
             target["headerImageFocused"],
             target["headerImageScaled"],
         )
 
-        return models.misc.BlogTheme(
+        return models.blog.BlogTheme(
             avatar_shape = target["avatarShape"],
             background_color = target["backgroundColor"],
             body_font = target["bodyFont"],
@@ -38,7 +38,7 @@ class BlogParser:
         )
 
     def parse(self):
-        return models.timeline.Blog(
+        return models.blog.Blog(
             name=self.target["name"],
             avatar=self.target["avatar"],
             title=self.target["title"],
@@ -100,7 +100,7 @@ class PostParser:
             if raw_trail_blog := trail_post.get("blog"):
                 trail_blog = BlogParser(raw_trail_blog).parse()
             else:
-                trail_blog = models.timeline.BrokenBlog(
+                trail_blog = models.blog.BrokenBlog(
                     name=trail_post["brokenBlog"]["name"],
                     avatar=trail_post["brokenBlog"]["avatar"],
                 )
@@ -117,7 +117,7 @@ class PostParser:
                 trail_post_id = None
                 trail_post_creation_date = None
 
-            trails.append(models.timeline.PostTrail(
+            trails.append(models.post.PostTrail(
                 id=trail_post_id,
                 blog=trail_blog,
                 date=trail_post_creation_date,
@@ -131,7 +131,7 @@ class PostParser:
         reblog_root_information = None
 
         if reblogged_from_id := self.target.get("rebloggedFromId"):
-            reblog_from_information = models.misc.ReblogAttribution(
+            reblog_from_information = models.post.ReblogAttribution(
                 post_id=reblogged_from_id,
                 post_url=self.target["rebloggedFromUrl"],
                 blog_name=self.target["rebloggedFromName"],
@@ -139,7 +139,7 @@ class PostParser:
             )
 
             if root_reblogged_from_id := self.target.get("rebloggedRootId"):
-                reblog_root_information = models.misc.ReblogAttribution(
+                reblog_root_information = models.post.ReblogAttribution(
                     post_id=root_reblogged_from_id,
                     post_url=self.target["rebloggedRootUrl"],
                     blog_name=self.target["rebloggedRootName"],
@@ -151,14 +151,14 @@ class PostParser:
         if raw_labels := self.target.get("communityLabels"):
             if raw_labels["hasCommunityLabel"]:
                 for category in raw_labels["categories"]:
-                    label = getattr(models.timeline.CommunityLabel, category.upper(), None)
+                    label = getattr(models.post.CommunityLabel, category.upper(), None)
                     if label:
                         community_labels.append(label)
 
                 if not community_labels:
-                    community_labels.append(models.timeline.CommunityLabel.MATURE)
+                    community_labels.append(models.post.CommunityLabel.MATURE)
 
-        return models.timeline.Post(
+        return models.post.Post(
             blog=blog,
             id=id,
             is_nsfw=self.target["isNsfw"],
