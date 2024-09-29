@@ -101,6 +101,7 @@ class TumblrAPI:
                 case 0:
                     raise exceptions.TumblrBlogNotFoundError(message, code, details, internal_code)
                 case _:
+                    logger.error(f"Unknown tumblr internal error code: {internal_code}")
                     raise exceptions.TumblrErrorResponse(message, code, details, internal_code)
 
         return result
