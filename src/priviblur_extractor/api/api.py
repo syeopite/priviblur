@@ -231,9 +231,9 @@ class TumblrAPI:
 
         url_parameters = {
          "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
-         "npf": True,
+         "npf": "true",
          "reblog_info": "true",
-         "include_pinned_posts": True
+         "include_pinned_posts": "true"
         }
 
         if tag:
@@ -242,7 +242,7 @@ class TumblrAPI:
             if post_type:
                 url_parameters["post_type"] = post_type
         else:
-            url_parameters["url_parameters"] = True
+            url_parameters["url_parameters"] = "true"
 
         if before_id:
             url_parameters["before_id"] = before_id
