@@ -24,7 +24,7 @@ class BlogPostsCache(AccessCache):
         return priviblur_extractor.parse_blog_timeline(initial_results)
 
     def parse_cached_json(self, json):
-        return priviblur_extractor.models.blog.BlogTimeline.from_json(json)
+        return priviblur_extractor.models.timelines.BlogTimeline.from_json(json)
 
     def build_key(self):
         # blog:<blog_name>:<kwargs>

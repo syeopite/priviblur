@@ -1,8 +1,8 @@
 import datetime
 import enum
-from typing import Union, NamedTuple, List, Tuple, Optional, Union
+from typing import Union, NamedTuple, List, Optional, Union
 
-from . import base, misc
+from . import misc
 
 
 # Avatars = namedtuple("avatars", "")
@@ -157,50 +157,3 @@ class Post(NamedTuple):
 
         return cls(**json)
 
-
-TimelineObjects = Union[Blog, Post]
-
-
-class Timeline(NamedTuple):
-    """Object representing Tumblr API's Timeline object.
-
-    Refers to data on a certain page. IE Search or explore
-    """
-    elements: List[TimelineObjects | None]
-    next: Optional[base.Cursor] = None
-
-    def to_json_serialisable(self):
-        elements = []
-        for element in self.elements:
-            if isinstance(element, Blog):
-                elements.append({"blog": element.to_json_serialisable()})
-            else:
-                elements.append({"post": element.to_json_serialisable()})
-
-        next_ = self.next
-        if next_:
-            next_ = next_.to_json_serialisable()
-
-        return {
-            "version": base.VERSION,
-            "elements": elements,
-            "next": next_
-        }
-
-    @classmethod
-    def from_json(cls, json):
-        elements = []
-        for element in json["elements"]:
-            if blog := element.get("blog"):
-                elements.append(Blog.from_json(blog))
-            else:
-                elements.append(Post.from_json(element["post"]))
-
-        json["elements"] = elements
-
-        if json["next"]:
-            json["next"] = base.Cursor.from_json(json["next"])
-
-        del json["version"]
-
-        return cls(**json)

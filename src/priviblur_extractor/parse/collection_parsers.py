@@ -59,7 +59,7 @@ class TimelineParser:
             )):
                 elements.append(result)
 
-        return models.timeline.Timeline(
+        return models.timelines.Timeline(
             elements=elements,
             next = cursor,
         )
@@ -92,7 +92,7 @@ class BlogTimelineParser:
             if result := items.parse_item(post, post_index, total_raw_posts):
                 posts.append(result)
 
-        return models.blog.BlogTimeline(
+        return models.timelines.BlogTimeline(
             blog_info=blog,
             posts=posts,
             total_posts = self.target.get("totalPosts"),
