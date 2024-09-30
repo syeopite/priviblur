@@ -41,7 +41,6 @@ class TimelineParser:
     @classmethod
     def process(cls, initial_data):
         if target := initial_data.get("timeline"):
-            logger.debug("TimelineParser: Parser found! Beginning parsing...")
             return cls(target).parse()
         else:
             return None
@@ -73,7 +72,6 @@ class BlogTimelineParser:
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("blog"):
-            logger.debug("BlogTimelineParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
