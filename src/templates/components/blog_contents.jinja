@@ -1,7 +1,2 @@
-<div class="blog-posts" id="m">
-{%- for element in blog.posts -%}
-    {%- if not element.is_advertisement -%}
-        {%- include 'components/post.jinja' -%}
-    {%- endif -%}
-{%- endfor -%}
-</div>
+{% from 'macros/insert_content_list.jinja' import insert_content_list with context  %}
+{{-insert_content_list("blog-posts", blog.posts)}}

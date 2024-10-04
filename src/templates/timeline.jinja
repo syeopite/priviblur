@@ -1,4 +1,5 @@
 {% extends "base.jinja" %}
+{% from 'macros/insert_content_list.jinja' import insert_content_list with context %}
 {% block title %}{{title}}{% endblock%}
 
 {% block center %}
@@ -7,13 +8,7 @@
         {% endblock %}
     </ul>
 
-    <div class="timeline" id="m">
-        {%- for element in timeline.elements -%}
-            {%- if not element.is_advertisement -%}
-                {%- include 'components/post.jinja' -%}
-            {%- endif -%}
-        {%- endfor -%}
-    </div>
+    {{insert_content_list("timeline", timeline.elements)}}
 
     {%- if timeline.next %}
         <div class="paging">

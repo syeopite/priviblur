@@ -160,6 +160,8 @@ async def initialize(app):
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
 
+    app.ext.environment.tests["a_post"] = lambda element : isinstance(element, priviblur_extractor.models.timeline.TimelinePost)
+
 
 @app.listener("main_process_start")
 async def main_startup_listener(app):
