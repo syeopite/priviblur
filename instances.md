@@ -2,7 +2,7 @@
 
 |URL|Location|Modified|Cloudflare|
 |-|-|-|-|
-|[pb.bloat.cat](https://pb.bloat.cat)|Romania|No|No|
+|[pb.bloat.cat](https://pb.bloat.cat)|Germany|No|No|
 |[tb.opnxng.com](https://tb.opnxng.com)|Singapore|No|No|
 |[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|Germany|No|No|
 |[priviblur.thebunny.zone](https://priviblur.thebunny.zone)|Croatia|No|No|
