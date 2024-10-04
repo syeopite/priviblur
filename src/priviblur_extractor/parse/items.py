@@ -59,7 +59,6 @@ class PostParser:
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("objectType") == "post":
-            logger.debug("PostParser: Parser found! Beginning parsing...")
             return cls(initial_data).parse()
         else:
             return None
