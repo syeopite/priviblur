@@ -6,6 +6,7 @@
 |[tb.opnxng.com](https://tb.opnxng.com)|Singapore|No|No|
 |[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|Germany|No|No|
 |[priviblur.thebunny.zone](https://priviblur.thebunny.zone)|Croatia|No|No|
+|[priviblur.gitro.xyz](https://priviblur.gitro.xyz)|Germany|No|Yes|
 
 
 ### Tor Onion Services
