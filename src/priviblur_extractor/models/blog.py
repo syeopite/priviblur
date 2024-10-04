@@ -1,45 +1,80 @@
-from typing import Sequence, Optional, NamedTuple
-
-from . import base, timeline
+from typing import NamedTuple
 
 
-class Blog(NamedTuple):
-    """Object representing a blog page
-
-    TODO better documentation
-    """
-    blog_info: timeline.TimelineBlog
-    posts: Sequence[timeline.TimelinePost]
-    total_posts: int | None
-    next: Optional[base.Cursor] = None
+class HeaderInfo(NamedTuple):
+    header_image: str
+    focused_header_image: str
+    scaled_header_image: str
 
     def to_json_serialisable(self):
-        json_serializable = {
-            "version": base.VERSION,
-            "blog_info": self.blog_info.to_json_serialisable()
-        }
-        json_serializable["posts"] = [post.to_json_serialisable() for post in self.posts]
-        json_serializable["total_posts"] = self.total_posts
+        return self._asdict()
 
-        if self.next:
-            json_serializable["next"] = self.next.to_json_serialisable()
-        else:
-            json_serializable["next"] = None
+    @classmethod
+    def from_json(cls, json):
+        return cls(**json)
+
+
+class BlogTheme(NamedTuple):
+    avatar_shape: str
+    background_color: str
+    body_font: str
+    header_info : HeaderInfo
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+        json_serializable["header_info"] = self.header_info.to_json_serialisable()
 
         return json_serializable
 
     @classmethod
     def from_json(cls, json):
-        json["blog_info"] = timeline.TimelineBlog.from_json(json["blog_info"])
-
-        posts = []
-        for post in json["posts"]:
-            posts.append(timeline.TimelinePost.from_json(post))
-        json["posts"] = posts
-
-        if json["next"]:
-            json["next"] = base.Cursor.from_json(json["next"])
-
-        del json["version"]
-
+        json["header_info"] = HeaderInfo.from_json(json["header_info"])
         return cls(**json)
+
+
+class BrokenBlog(NamedTuple):
+    name: str
+    avatar: list[dict]
+
+    def to_json_serialisable(self):
+        return self._asdict()
+
+    @classmethod
+    def from_json(cls, json):
+        return cls(**json)
+
+
+class Blog(NamedTuple):
+    name: str
+    # [{"width": 512, "height": 512, url: "..."}, {"width": ...}...]
+    avatar: list[dict]
+    title: str
+    url: str
+    is_adult: bool
+
+    description_npf: list[dict]
+    uuid: str
+    theme: BlogTheme
+    is_paywall_on: bool
+
+    # If blog is deactivated or not
+    active: bool = False
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        if json_serializable["theme"]:
+            json_serializable["theme"] = json_serializable["theme"].to_json_serialisable()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        import orjson
+        x = orjson.dumps(json)
+
+        with open('test.json', "wb") as f:
+            f.write(x)
+        json["theme"] = BlogTheme.from_json(json["theme"])
+        return cls(**json)
+

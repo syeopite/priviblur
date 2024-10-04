@@ -30,7 +30,7 @@ class AccessCache(abc.ABC):
         pass
 
     def parse_cached_json(self, json):
-        return priviblur_extractor.models.timeline.Timeline.from_json(json)
+        return priviblur_extractor.models.timelines.Timeline.from_json(json)
 
     def to_json(self, parsed_results):
         return orjson.dumps(parsed_results.to_json_serialisable())

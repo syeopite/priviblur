@@ -1,3 +1,3 @@
-from . import base, timeline, blog, misc
+from . import base, blog, post, timelines
 
 from .base import VERSION
