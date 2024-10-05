@@ -323,7 +323,6 @@ class TumblrAPI:
             url_params=url_parameters
         )
 
-
     async def blog_post_notes_timeline(self, blog_id, post_id, mode : rconf.ReblogNoteTypes, latest: bool = True):
         """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
 
@@ -346,7 +345,6 @@ class TumblrAPI:
             url_params=url_parameters
         )
 
-
     async def blog_notes(self, blog_id, post_id, latest: bool = True):
         """Requests the /blog/<blog name>/post/<post id>/notes
 
@@ -367,7 +365,6 @@ class TumblrAPI:
             f"blog/{urllib.parse.quote(blog_id, safe='')}/notes",
             url_params=url_parameters
         )
-
 
     async def poll_results(self, blog_name, post_id, poll_id):
         """Requests the /polls/<blog name>/<post id>/<poll_id>/results endpoint
