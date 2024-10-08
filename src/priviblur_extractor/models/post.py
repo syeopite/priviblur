@@ -16,7 +16,7 @@ class CommunityLabel(enum.Enum):
 class ReplyNote(NamedTuple):
     uuid: str
     reply_id: str
-    timestamp: int
+    date: Optional[datetime.datetime]
 
     content: Optional[Sequence[dict]]
     layout: Optional[Sequence[dict]]
@@ -36,7 +36,7 @@ class ReblogNote(NamedTuple):
 
     reblogged_from: str
 
-    timestamp: int
+    date: Optional[datetime.datetime]
 
     community_labels: Sequence[CommunityLabel]
 
@@ -44,7 +44,7 @@ class ReblogNote(NamedTuple):
 class LikeNote(NamedTuple):
     blog_name: str
     blog_title: str
-    timestamp: int
+    date: Optional[datetime.datetime]
 
     # TODO
     # avatar_url
