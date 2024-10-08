@@ -37,10 +37,10 @@ class ReblogNoteTypes(enum.Enum):
     REBLOGS_WITH_COMMENTS = 0
 
     # Comments only
-    REBLOGS_WITH_CONTENT_COMMENTS = 0
+    REBLOGS_WITH_CONTENT_COMMENTS = 1
 
     # Other reblogs
-    REBLOGS_ONLY = 0
+    REBLOGS_ONLY = 2
 
 
 # Attributes for the fields[blog] request query
