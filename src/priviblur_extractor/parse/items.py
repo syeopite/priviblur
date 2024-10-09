@@ -218,6 +218,28 @@ class PostParser:
         )
 
 
+class ReplyNoteParser:
+    def __init__(self, target) -> None:
+            self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("type") == "reply":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.post.ReplyNote(
+            uuid=self.target["id"],
+            reply_id=self.target["replyId"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),
+
+            content=self.target["content"],
+            layout=self.target["layout"],
+
+            blog=BlogParser(self.target["blog"]).parse_limited()
+        )
+
+
 def parse_item(element, element_index=0, total_elements=1, use_parsers=None):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
