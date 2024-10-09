@@ -51,6 +51,35 @@ class BlogParser:
             active=self.target.get("active", True)
         )
 
+    def parse_limited(self):
+        """Parses a blog with only limited information
+
+        This method is used when the field[blogs] parameter is set to only a couple attributes
+        meaning that the resulting JSON is lacking many of the fields we use to parse.
+
+        This is most noticeably seen in the blog attributes of various note types whom due to the
+        set field[blogs] lacks many of the information we use to parse a Blog object.
+
+        For now as this method will only be used to parse the blog information from notes
+        we will assume that the blog name, avatar, and theming information is always present.
+
+        TODO: Make models.blog.Blog and all related logic handle None instead of using default values here.
+        TODO: Add tests for when field[blogs] lack attributes
+        TODO: Discuss and figure out how to handle arbitrary values for (or don't) field[blogs]
+        """
+        return models.blog.Blog(
+            name=self.target["name"],
+            avatar=self.target["avatar"],
+            title=self.target.get("title", ""),
+            url=self.target.get("url", ""),
+            is_adult=self.target.get("isAdult", False),
+            description_npf=self.target.get("descriptionNpf", ""),
+            uuid=self.target.get("uuid"),
+            theme=self.parse_theme(),
+            is_paywall_on=self.target.get("isPaywallOn", False),
+            active=self.target.get("active", True)
+        )
+
 
 class PostParser:
     def __init__(self, target) -> None:
