@@ -112,3 +112,39 @@ class BlogTimelineParser:
             next = cursor,
         )
 
+
+class NoteTimelineParser:
+    """Parses a sequence of various note types"""
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("timeline"):
+            return cls(initial_data).parse()
+        else:
+            return None
+
+    def parse(self):
+        timeline = self.target["timeline"]
+
+        total_raw_notes = len(timeline["elements"])
+
+        notes = []
+        for index, note in enumerate(timeline["elements"]):
+            notes.append(
+                items.parse_item(
+                    note,
+                    index,
+                    total_raw_notes,
+                    use_parsers=(items.ReplyNoteParser,)
+                )
+            )
+
+        return models.post.PostNotes(
+            notes = notes,
+            total_notes=self.target["totalNotes"],
+            total_likes=self.target["totalLikes"],
+            total_reblogs=self.target["totalReblogs"],
+            total_replies=self.target["totalReplies"],
+        )
