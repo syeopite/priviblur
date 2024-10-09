@@ -1,0 +1,39 @@
+<div class="note reply">
+    {%- if note.blog.active -%}
+        <a href="/{{note.blog.name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="{{url_handler(note.blog.avatar[-1].url)}}"></a>
+    {%- else -%}
+        <img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="/assets/images/anon_96px.png?v=1">
+    {% endif %}
+    {# Reply body#}
+    <div>
+        <div class="author-information">
+            <div class="primary-post-author">
+                {%- if note.blog.active is false -%}
+                    <span class="link blog-name deactivated-blog">{{note.blog.name}}</span>
+                {%- elif note.blog.url is defined -%}
+                    <a class="link blog-name" href="/{{note.blog.name}}">{{note.blog.name}}</a>
+                {%- else -%}
+                    <span class="link blog-name broken-blog" href="/{{note.blog.name}}">{{note.blog.name}}</span>
+                {%- endif -%}
+
+                {% if note.date %}
+                    <span class="separator">•</span>
+                    <span class="post-timestamp" title="{{note.date | format_datetime(locale=request.ctx.language)}}">
+                        <time datetime="{{note.date.strftime("%Y-%m-%dT%H:%M")}}">{{note.date | format_date(locale=request.ctx.language)}}</time>
+                    </span>
+                {%- endif -%}
+            </div>
+        </div>
+        <p>
+            {%- set contains_errors, content_tag = format_npf(
+                        note.content,
+                        note.layout,
+                        note.blog.name,
+                        note.id,
+                    )
+            -%}
+
+            {{content_tag}}
+        </p>
+    </div>
+</div>

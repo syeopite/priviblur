@@ -1,3 +1,4 @@
+import enum
 import urllib.parse
 
 import sanic
@@ -6,6 +7,11 @@ import sanic_ext
 from ... import cache, priviblur_extractor
 
 blog_post_bp = sanic.Blueprint("blog_post", url_prefix="/<post_id:int>")
+
+class PostNoteTypes(enum.Enum):
+    REPLIES = 0
+    REBLOGS = 1
+    LIKES = 2
 
 
 def get_blog_post_path(request):
@@ -60,6 +66,12 @@ async def before_blog_post_request(request):
 async def _blog_post(request: sanic.Request, **kwargs):
     blog_info = priviblur_extractor.models.timelines.BlogTimeline(request.ctx.parsed_post.blog, (), None, None)
 
+    if note_type := request.args.get("note_viewer"):
+        note_type = getattr(PostNoteTypes, note_type.upper())
+        match note_type:
+            case PostNoteTypes.REPLIES:
+                return await _blog_post_replies(request, **kwargs)
+
     if request.args.get("fetch_polls") in ("1", "true"):
         fetch_poll_results = True
     else:
@@ -72,5 +84,20 @@ async def _blog_post(request: sanic.Request, **kwargs):
             "blog": blog_info,
             "element": request.ctx.parsed_post,
             "request_poll_data" : fetch_poll_results,
+        }
+    )
+
+
+async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **kwargs):
+    blog = urllib.parse.unquote(blog)
+
+    notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id)
+    parsed_notes = priviblur_extractor.parse_note_timeline(notes)
+
+    return await sanic_ext.render(
+        "components/post_notes.jinja",
+        context={
+            "app": request.app,
+            "notes": parsed_notes
         }
     )
