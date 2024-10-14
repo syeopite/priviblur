@@ -1,7 +1,0 @@
-<div class="post-notes">
-    {%- for note in notes.notes -%}
-        {% if note is a_reply_note %}
-            {% include 'components/post_notes/post_reply_note.jinja' %}
-        {% endif %}
-    {%- endfor -%}
-</div>
