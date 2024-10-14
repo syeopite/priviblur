@@ -1,4 +1,4 @@
-<div class="note reply">
+<div class="note reply" data-id="{{note.reply_id}}">
     {%- if note.blog.active -%}
         <a href="/{{note.blog.name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="{{url_handler(note.blog.avatar[-1].url)}}"></a>
     {%- else -%}

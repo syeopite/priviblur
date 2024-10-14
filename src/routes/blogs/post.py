@@ -95,9 +95,10 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
-        "components/post_notes.jinja",
+        "blog/post/note_viewer.jinja",
         context={
             "app": request.app,
+            "note_type": priviblur_extractor.models.post.ReplyNote,
             "notes": parsed_notes
         }
     )
