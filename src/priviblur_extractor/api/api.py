@@ -303,18 +303,24 @@ class TumblrAPI:
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"}
         )
 
-    async def blog_post_replies(self, blog_id, post_id, latest: bool = True):
+    async def blog_post_replies(self, blog_id, post_id, latest: bool = True, after_id: Optional[str] = None):
         """Requests the /blog/<blog name>/post/<post id>/replies endpoint
         
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
-        url_parameters = {
-         "mode": "replies",
-         "sort": "asc" if latest else "desc",
-         "pin_preview_note": "false",
-         "fields[blogs]": "avatar,theme,name"
-        }
+
+        # When we are fetching a continuation batch
+        # the official tumblr client does not send some url parameters
+        if not after_id: 
+            url_parameters = {
+            "mode": "replies",
+            "sort": "asc" if latest else "desc",
+            "pin_preview_note": "false",
+            "fields[blogs]": "avatar,theme,name"
+            }
+        else:
+            url_parameters = {"after": after_id, "sort": "asc" if latest else "desc"}
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/replies",
