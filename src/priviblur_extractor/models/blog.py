@@ -1,4 +1,4 @@
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
 
 class HeaderInfo(NamedTuple):
@@ -16,9 +16,9 @@ class HeaderInfo(NamedTuple):
 
 class BlogTheme(NamedTuple):
     avatar_shape: str
-    background_color: str
-    body_font: str
-    header_info : HeaderInfo
+    background_color: Optional[str]
+    body_font: Optional[str]
+    header_info : Optional[HeaderInfo]
 
     def to_json_serialisable(self):
         json_serializable = self._asdict()

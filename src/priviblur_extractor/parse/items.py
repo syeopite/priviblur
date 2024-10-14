@@ -24,18 +24,31 @@ class BlogParser:
         """Parses theming information for the blog into a BlogTheme object"""
         target = self.target.get("theme")
 
-        header_info = models.blog.HeaderInfo(
-            target["headerImage"],
-            target["headerImageFocused"],
-            target["headerImageScaled"],
-        )
+        avatar_shape = target["avatarShape"]
 
-        return models.blog.BlogTheme(
-            avatar_shape = target["avatarShape"],
-            background_color = target["backgroundColor"],
-            body_font = target["bodyFont"],
-            header_info=header_info
-        )
+        # Try to find one additional info. If not present then
+        # `blog[fields]` was not passed, or did not include "theme" as a field.
+        if header_image := target.get("headerImage"):
+            header_info = models.blog.HeaderInfo(
+                header_image,
+                target["headerImageFocused"],
+                target["headerImageScaled"],
+            )
+
+            return models.blog.BlogTheme(
+                avatar_shape=avatar_shape,
+                background_color=target["backgroundColor"],
+                body_font=target["bodyFont"],
+                header_info=header_info
+            )
+        else:
+            # Return limited information otherwise
+            return models.blog.BlogTheme(
+                avatar_shape=avatar_shape,
+                background_color=None,
+                body_font=None,
+                header_info=None
+            )
 
     def parse(self):
         return models.blog.Blog(
