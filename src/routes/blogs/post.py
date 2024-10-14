@@ -90,8 +90,14 @@ async def _blog_post(request: sanic.Request, **kwargs):
 
 async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **kwargs):
     blog = urllib.parse.unquote(blog)
+    if slug := kwargs.get("slug"):
+        slug = urllib.parse.unquote(slug)
 
-    notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id)
+    if after_id := request.args.get("after"):
+        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, after_id=after_id)
+    else:
+        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id)
+
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
@@ -99,6 +105,9 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
         context={
             "app": request.app,
             "note_type": priviblur_extractor.models.post.ReplyNote,
+            "blog_name": blog,
+            "post_id": post_id,
+            "slug": slug,
             "notes": parsed_notes
         }
     )
