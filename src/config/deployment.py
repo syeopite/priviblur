@@ -9,15 +9,7 @@ class DeploymentConfig(NamedTuple):
         domain: Domain name under which this instance is hosted.
 
         workers: Amount of worker Priviblur instances to spawn.
-            Increases speed significantly
-
-        forwarded_secret:
-            https://sanic.dev/en/guide/advanced/proxy-headers.html#forwarded-header
-        real_ip_header:
-            https://sanic.dev/en/guide/advanced/proxy-headers.html#ip-headers
-        proxies_count:
-            https://sanic.dev/en/guide/advanced/proxy-headers.html#x-forwarded-for
-          
+            Increases speed significantly          
     """
 
     host: str = "127.0.0.1"
@@ -25,8 +17,3 @@ class DeploymentConfig(NamedTuple):
     domain: Optional[str] = None
 
     workers: int = 1
-
-    forwarded_secret: Optional[str] = None
-    real_ip_header: Optional[str] = None
-    proxies_count: Optional[int] = None
-    

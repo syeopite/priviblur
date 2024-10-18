@@ -27,18 +27,6 @@ LOG_CONFIG = setup_logging.setup_logging(config.logging)
 app = sanic.Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
 
 
-if config.deployment.forwarded_secret and not app.config.FORWARDED_SECRET:
-    app.config.FORWARDED_SECRET = config.deployment.forwarded_secret
-
-
-if config.deployment.real_ip_header and not app.config.REAL_IP_HEADER:
-    app.config.REAL_IP_HEADER = config.deployment.real_ip_header
-
-
-if config.deployment.proxies_count and not app.config.PROXIES_COUNT:
-    app.config.PROXIES_COUNT = config.deployment.proxies_count
-
-
 app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
 app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
 app.ctx.LANGUAGE_NAMES = i18n.LANGUAGE_NAMES
