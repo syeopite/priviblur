@@ -63,10 +63,10 @@ class UserPreferences:
 
     def construct_cookie(self, request):
         """Serializes user preferences into a cookie"""
-        if request.scheme == "http":
-            secure = False
-        else:
+        if request.app.ctx.PRIVIBLUR_CONFIG.deployment.https is True:
             secure = True
+        else:
+            secure = False
 
         cookie = {
             "key": "settings",

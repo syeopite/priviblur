@@ -7,6 +7,10 @@
     # # This is primary used to generate links to the instance
     # domain =
 
+    # Enables secure cookies and forces all links
+    # to priviblur to use the `https://` scheme
+    https = false
+
     # # Amount of worker Priviblur instances to spawn. Increases speed significantly.
     # workers = 1
 
