@@ -5,7 +5,7 @@ BLUEPRINTS = (
     media.media,
     search.search,
     tagged.tagged,
-    blogs.blogs,
+    blogs.blogs_group,
     assets.assets,
     priviblur.priviblur,
     miscellaneous.miscellaneous,

@@ -179,7 +179,7 @@ async def robotstxt_route(request):
     return await sanic.file("./assets/robots.txt")
 
 
-@app.middleware("request")
+@app.middleware("request", priority=1)
 async def before_all_routes(request):
     request.ctx.preferences = preferences.UserPreferences(
             **config.default_user_preferences._asdict()
