@@ -52,7 +52,7 @@
 #     theme = "auto"
 #
 #     # User interface language
-#     # For available options see locales dir
+#     # For available options see SUPPORTED_LANGUAGES constant in src/helpers/i18n.py
 #     language = "en_US"
 
 
