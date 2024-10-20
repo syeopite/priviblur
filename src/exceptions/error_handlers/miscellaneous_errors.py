@@ -24,7 +24,7 @@ async def request_timeout(request, exception):
     )
 
 
-@miscellaneous_errors.register(sanic.exceptions.NotFound)
+@miscellaneous_errors.register(sanic.exceptions.NotFound, IsADirectoryError)
 async def error_404(request, exception):
     return await sanic_ext.render(
         "misc/msg_error.jinja",
