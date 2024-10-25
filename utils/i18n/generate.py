@@ -10,6 +10,9 @@ for path in glob.glob("locales/*/*/*.po"):
     locale_name = segments[-3]
     locales_to_pofiles[locale_name] = polib.pofile(path)
 
+# Sort by alphabetical order
+locales_to_pofiles = dict(sorted(locales_to_pofiles.items()))
+
 total_english_strings = len(locales_to_pofiles["en_US"])
 
 lines = []
