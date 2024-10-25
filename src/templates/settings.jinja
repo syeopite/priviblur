@@ -51,9 +51,9 @@
                 <select name="language" id="language-selector" aria-describedby="language-selector-info-box">
                 {%- for lang in request.app.ctx.SUPPORTED_LANGUAGES %}
                     {% if lang == request.ctx.language %}
-                        <option value="{{lang}}" selected>{{-request.app.ctx.LANGUAGE_NAMES[lang]}}</option>
+                        <option value="{{lang}}" selected>{{-request.app.ctx.LANGUAGES[lang].name}}</option>
                     {% else %}
-                        <option value="{{lang}}">{{-request.app.ctx.LANGUAGE_NAMES[lang]}}</option>
+                        <option value="{{lang}}">{{-request.app.ctx.LANGUAGES[lang].name}}</option>
                     {% endif %}
                 {%- endfor %}
                 </select>

@@ -27,9 +27,8 @@ LOG_CONFIG = setup_logging.setup_logging(config.logging)
 app = sanic.Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
 
 
-app.ctx.GETTEXT_INSTANCES = i18n.initialize_locales()
+app.ctx.LANGUAGES = i18n.initialize_locales()
 app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
-app.ctx.LANGUAGE_NAMES = i18n.LANGUAGE_NAMES
 
 # Constants
 
