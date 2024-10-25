@@ -45,7 +45,7 @@ def initialize_locales() -> typing.Mapping[str, gettext.GNUTranslations]:
 
 
 def translate(language : str, id : str, number : int|float = None,
-              substitution : str = None) -> str:
+              substitution : str | dict | None = None) -> str:
     app = sanic.Sanic.get_app("Priviblur")
 
     gettext_instance = app.ctx.LANGUAGES[language].instance
@@ -55,7 +55,9 @@ def translate(language : str, id : str, number : int|float = None,
     else:
         translated = gettext_instance.gettext(id)
 
-    if substitution:
+    if isinstance(substitution, str):
         translated = translated.format(substitution)
+    elif isinstance(substitution, dict):
+        translated = translated.format(**substitution)
 
     return translated 
