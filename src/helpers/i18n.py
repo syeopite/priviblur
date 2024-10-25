@@ -22,13 +22,23 @@ SUPPORTED_LANGUAGES = [
 SUPPORTED_LANGUAGES.sort()
 
 
-def initialize_locales() -> typing.Mapping[str, gettext.GNUTranslations]:
+def initialize_locales() -> typing.Mapping[str, Language]:
     """Initializes locales into GNUTranslations instances"""
-    # Initialize locales
     try:
-        languages = {}
+        # Initialize english locale first so that we may use it as a fallback
+
+        english_instance = gettext.translation("priviblur", localedir="locales", languages=("en_US",))
+
+        languages = {
+            "en_US": Language("en_US", english_instance)
+        }
+
         for locale in SUPPORTED_LANGUAGES:
+            if locale == "en_US":
+                continue
+
             instance = gettext.translation("priviblur", localedir="locales", languages=(locale,))
+            instance.add_fallback(english_instance)
 
             languages[locale] = Language(locale, instance)
     except FileNotFoundError as e:
