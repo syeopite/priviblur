@@ -8,10 +8,12 @@ on:
     paths:
       - "locales/**"
       - "utils/i18n/*"
+      - .github/workflows/generate-static-locale-data.yml
   pull_request:
     paths:
       - "locales/**"
       - "utils/i18n/*"
+      - .github/workflows/generate-static-locale-data.yml
 
 jobs:
   generate-static-locale-data:
