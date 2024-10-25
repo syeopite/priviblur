@@ -27,6 +27,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .settings hr {
@@ -53,6 +54,7 @@
     margin-top: 5px;
     color: var(--color-setting-option-desc);
     font-weight: 500;
+    max-width: 350px;
 }
 
 #theme-selector input {
