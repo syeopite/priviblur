@@ -2,6 +2,12 @@ name: "Generate static data for locales"
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "locales/**"
+      - "utils/i18n/*"
   pull_request:
     paths:
       - "locales/**"
@@ -29,9 +35,7 @@ jobs:
         run: python ./utils/i18n/generate.py
 
       - name: Commit if applicable
-        if:
-          github.event.pull_request.merged == true ||
-          github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Regenerate static locale data"
