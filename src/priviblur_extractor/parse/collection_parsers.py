@@ -137,7 +137,7 @@ class NoteTimelineParser:
                     note,
                     index,
                     total_raw_notes,
-                    use_parsers=(items.ReplyNoteParser,)
+                    use_parsers=(items.ReplyNoteParser, items.ReblogNoteParser)
                 )
             )
 
