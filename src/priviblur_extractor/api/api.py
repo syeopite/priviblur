@@ -327,7 +327,7 @@ class TumblrAPI:
             url_params=url_parameters
         )
 
-    async def blog_post_notes_timeline(self, blog_id, post_id, mode : rconf.ReblogNoteTypes, latest: bool = True):
+    async def blog_post_notes_timeline(self, blog_id, post_id, mode : rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS, latest: bool = False):
         """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
 
         This endpoint is used to return reblogs.
