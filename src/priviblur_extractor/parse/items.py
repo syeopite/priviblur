@@ -105,6 +105,22 @@ class PostParser:
         else:
             return None
 
+
+    @staticmethod
+    def parse_community_label(initial_data):
+        community_labels = []
+        if raw_labels := initial_data.get("communityLabels"):
+            if raw_labels["hasCommunityLabel"]:
+                for category in raw_labels["categories"]:
+                    label = getattr(models.post.CommunityLabel, category.upper(), None)
+                    if label:
+                        community_labels.append(label)
+
+                if not community_labels:
+                    community_labels.append(models.post.CommunityLabel.MATURE)
+
+        return community_labels
+
     def parse(self):
         # When we know that the target is a blog object there is no need to
         # pass it to .process to identify it
@@ -188,16 +204,7 @@ class PostParser:
                 )
 
         # Community label
-        community_labels = []
-        if raw_labels := self.target.get("communityLabels"):
-            if raw_labels["hasCommunityLabel"]:
-                for category in raw_labels["categories"]:
-                    label = getattr(models.post.CommunityLabel, category.upper(), None)
-                    if label:
-                        community_labels.append(label)
-
-                if not community_labels:
-                    community_labels.append(models.post.CommunityLabel.MATURE)
+        community_labels = self.parse_community_label(self.target)
 
         return models.post.Post(
             blog=blog,
@@ -250,6 +257,31 @@ class ReplyNoteParser:
             layout=self.target["layout"],
 
             blog=BlogParser(self.target["blog"]).parse_limited()
+        )
+
+
+class ReblogNoteParser:
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("type") == "reblog":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.post.ReblogNote(
+            uuid=self.target["id"],
+            id=self.target["postId"],
+            blog=BlogParser(self.target["blog"]).parse_limited(),
+
+            content=self.target["content"],
+            layout=self.target["content"],
+            tags=self.target["tags"],
+
+            reblogged_from=self.target["reblogParentBlogName"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),   
+            community_labels=PostParser.parse_community_label(self.target),
         )
 
 

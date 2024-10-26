@@ -26,7 +26,7 @@ class ReplyNote(NamedTuple):
 
 class ReblogNote(NamedTuple):
     uuid: str
-    post_id: str
+    id: str
 
     blog: blog.Blog
 
