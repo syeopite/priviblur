@@ -73,6 +73,9 @@ async def _blog_post(request: sanic.Request, **kwargs):
                 return await _blog_post_replies(request, **kwargs)
             case PostNoteTypes.REBLOGS:
                 return await blog_post_reblog_notes(request, **kwargs)
+            case PostNoteTypes.LIKES:
+                return await blog_post_like_notes(request, **kwargs)
+
 
     if request.args.get("fetch_polls") in ("1", "true"):
         fetch_poll_results = True
@@ -128,6 +131,27 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
         context={
             "app": request.app,
             "note_type": priviblur_extractor.models.post.ReblogNote,
+            "blog_name": blog,
+            "post_id": post_id,
+            "slug": slug,
+            "notes": parsed_notes
+        }
+    )
+
+
+async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, **kwargs):
+    blog = urllib.parse.unquote(blog)
+    if slug := kwargs.get("slug"):
+        slug = urllib.parse.unquote(slug)
+
+    notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id)
+    parsed_notes = priviblur_extractor.parse_note_timeline(notes)
+
+    return await sanic_ext.render(
+        "blog/post/note_viewer.jinja",
+        context={
+            "app": request.app,
+            "note_type": priviblur_extractor.models.post.LikeNote,
             "blog_name": blog,
             "post_id": post_id,
             "slug": slug,

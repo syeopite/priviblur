@@ -5,6 +5,8 @@
         {% include "blog/post/reply_notes.jinja" %}
     {% elif note_type is reblog_notes %}
         {% include "blog/post/reblog_notes.jinja" %}
+    {% elif note_type is like_notes %}
+        {% include "blog/post/like_notes.jinja" %}
     {% endif %}
 </div>
 {% endblock %}
