@@ -105,6 +105,8 @@ class NoteTimelineParser:
     def process(cls, initial_data):
         if initial_data.get("timeline"):
             return cls(initial_data).parse()
+        elif initial_data.get("notes"):
+            return cls(initial_data).parse_note_sequence()
         else:
             return None
 
@@ -124,6 +126,32 @@ class NoteTimelineParser:
                 )
             )
 
+        return self.return_note_model(notes)
+
+    def parse_note_sequence(self):
+        """Parses a sequence of notes
+
+        An alternative structure sometimes returned by Tumblr.
+        This is used for pure reblog notes (no tags or content) and likes."""
+
+        sequence = self.target["notes"]
+        total_raw_notes = len(sequence)
+
+        notes = []
+        for index, note in enumerate(sequence):
+            result = items.parse_item(
+                    note,
+                    index,
+                    total_raw_notes,
+                    use_parsers=(items.LikeNoteParser,)
+                )
+
+            notes.append(result)
+
+        return self.return_note_model(notes)
+
+
+    def return_note_model(self, notes):
         return models.post.PostNotes(
             notes = notes,
             total_notes=self.target["totalNotes"],
@@ -131,6 +159,7 @@ class NoteTimelineParser:
             total_reblogs=self.target["totalReblogs"],
             total_replies=self.target["totalReplies"],
         )
+
 
 
 def process_post_list(target):
