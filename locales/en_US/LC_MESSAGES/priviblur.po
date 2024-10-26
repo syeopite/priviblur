@@ -267,3 +267,15 @@ msgstr "Unable to copy"
 
 msgid "priviblur_licences_page_title"
 msgstr "Licences"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "View on Tumblr"
+
+msgid "post_note_viewer_view_replies"
+msgstr "Replies"
+
+msgid "post_note_viewer_view_reblogs"
+msgstr "Reblogs"
+
+msgid "post_note_viewer_view_likes"
+msgstr "Likes"

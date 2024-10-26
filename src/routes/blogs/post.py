@@ -111,7 +111,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             "app": request.app,
             "note_type": priviblur_extractor.models.post.ReplyNote,
             "blog_name": blog,
-            "post_id": post_id,
+            "post_id": str(post_id),
             "slug": slug,
             "notes": parsed_notes
         }
@@ -132,7 +132,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             "app": request.app,
             "note_type": priviblur_extractor.models.post.ReblogNote,
             "blog_name": blog,
-            "post_id": post_id,
+            "post_id": str(post_id),
             "slug": slug,
             "notes": parsed_notes
         }
@@ -153,7 +153,7 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
             "app": request.app,
             "note_type": priviblur_extractor.models.post.LikeNote,
             "blog_name": blog,
-            "post_id": post_id,
+            "post_id": str(post_id),
             "slug": slug,
             "notes": parsed_notes
         }

@@ -1,12 +1,32 @@
 {%extends "base.jinja"%}
 {% block center %}
-<div class="post-notes">
-    {% if note_type is reply_notes %}
-        {% include "blog/post/reply_notes.jinja" %}
-    {% elif note_type is reblog_notes %}
-        {% include "blog/post/reblog_notes.jinja" %}
-    {% elif note_type is like_notes %}
-        {% include "blog/post/like_notes.jinja" %}
-    {% endif %}
+<section class="post-notes">
+    <header>
+        <ul class="post-notes-nav">
+            {% if slug %}
+                {% set post_link = "/" + blog_name + "/" + post_id + "/" + slug %}
+            {% else %}
+                {% set post_link = "/" + blog_name + "/" + post_id %}
+            {% endif%}
+            <li>
+                <a href="{{post_link}}?note_viewer=replies">{{translate(request.ctx.language, "post_note_viewer_view_replies")}} {{notes.total_replies}}</a>
+            </li>
+            <li>
+                <a href="{{post_link}}?note_viewer=reblogs">{{translate(request.ctx.language, "post_note_viewer_view_reblogs")}} {{notes.total_reblogs}}</a>
+            </li>
+            <li>
+                <a href="{{post_link}}?note_viewer=likes">{{translate(request.ctx.language, "post_note_viewer_view_likes")}} {{notes.total_likes}}</a>
+            </li>
+        </ul>
+    </header>
+    <section>
+        {% if note_type is reply_notes %}
+            {% include "blog/post/reply_notes.jinja" %}
+        {% elif note_type is reblog_notes %}
+            {% include "blog/post/reblog_notes.jinja" %}
+        {% elif note_type is like_notes %}
+            {% include "blog/post/like_notes.jinja" %}
+        {% endif %}
+    </section>
 </div>
 {% endblock %}
