@@ -123,7 +123,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
     if slug := kwargs.get("slug"):
         slug = urllib.parse.unquote(slug)
 
-    notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id, mode=request.app.ctx.TumblrAPI.config.ReblogNoteTypes.REBLOGS_WITH_CONTENT_COMMENTS)
+    notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id)
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
