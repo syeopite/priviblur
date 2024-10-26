@@ -3,6 +3,8 @@
 <div class="post-notes">
     {% if note_type is reply_notes %}
         {% include "blog/post/reply_notes.jinja" %}
+    {% elif note_type is reblog_notes %}
+        {% include "blog/post/reblog_notes.jinja" %}
     {% endif %}
 </div>
 {% endblock %}

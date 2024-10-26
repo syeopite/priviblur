@@ -89,9 +89,11 @@
         {%- endif -%}
 
         <div class="post-interaction">
-            <div class="note-count">
-                <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</span>
-            </div>
+            {% if element.note_count %}
+                <div class="note-count">
+                    <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</span>
+                </div>
+            {% endif %}
             <div class="interaction-buttons">
                 <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
