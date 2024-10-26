@@ -43,11 +43,13 @@ class ReblogNote(NamedTuple):
 
 class LikeNote(NamedTuple):
     blog_name: str
+    blog_uuid: str
     blog_title: str
     date: Optional[datetime.datetime]
 
+    avatar: list[dict]
+
     # TODO
-    # avatar_url
     # avatar_shape
 
 
