@@ -13,6 +13,62 @@ class CommunityLabel(enum.Enum):
     SEXUAL_THEMES = 3
 
 
+class ReplyNote(NamedTuple):
+    uuid: str
+    reply_id: str
+    date: Optional[datetime.datetime]
+
+    content: Optional[Sequence[dict]]
+    layout: Optional[Sequence[dict]]
+
+    blog: blog.Blog
+
+
+class ReblogNote(NamedTuple):
+    uuid: str
+    id: str
+
+    blog: blog.Blog
+
+    content: Optional[Sequence[dict]]
+    layout: Optional[Sequence[dict]]
+    tags: Sequence[str]
+
+    reblogged_from: str
+
+    date: Optional[datetime.datetime]
+
+    community_labels: Sequence[CommunityLabel]
+
+
+class LikeNote(NamedTuple):
+    blog_name: str
+    blog_uuid: str
+    blog_title: str
+    date: Optional[datetime.datetime]
+
+    avatar: list[dict]
+
+    # TODO
+    # avatar_shape
+
+
+class PostNotes(NamedTuple):
+    notes : Sequence[ReplyNote | ReblogNote | LikeNote]
+
+    total_notes: int
+    total_replies: int
+    total_reblogs: int
+    total_likes: int
+
+    # Used to fetch next batch of post notes
+    #
+    # Reblogs and likes both use before_timestamp
+    # but replies uses after_id
+    before_timestamp: Optional[str] = None
+    after_id: Optional[str] = None
+
+
 class ReblogAttribution(NamedTuple):
     """Object representing reblog author information from individual posts"""
     post_id: str
@@ -58,6 +114,7 @@ class PostTrail(NamedTuple):
             json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
 
         return cls(**json)
+
 
 class Post(NamedTuple):
     blog: blog.Blog
@@ -126,4 +183,3 @@ class Post(NamedTuple):
         json["community_labels"] = community_labels
 
         return cls(**json)
-

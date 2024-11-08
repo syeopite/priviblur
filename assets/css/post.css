@@ -6,6 +6,7 @@
   background: var(--color-top-level-card-bg);
   border-radius: 10px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 590px) {
@@ -245,4 +246,28 @@ a.hidden-reblog {
 
 .unblur-post-button.button:hover {
   background: var(--color-community-label-button-hover);
+}
+
+.post-notes {
+  background: var(--color-top-level-card-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border-radius: 25px;
+}
+
+.post-notes section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  max-width: 590px;
+}
+
+.post-notes-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
 }

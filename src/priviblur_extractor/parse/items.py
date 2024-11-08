@@ -24,18 +24,31 @@ class BlogParser:
         """Parses theming information for the blog into a BlogTheme object"""
         target = self.target.get("theme")
 
-        header_info = models.blog.HeaderInfo(
-            target["headerImage"],
-            target["headerImageFocused"],
-            target["headerImageScaled"],
-        )
+        avatar_shape = target["avatarShape"]
 
-        return models.blog.BlogTheme(
-            avatar_shape = target["avatarShape"],
-            background_color = target["backgroundColor"],
-            body_font = target["bodyFont"],
-            header_info=header_info
-        )
+        # Try to find one additional info. If not present then
+        # `blog[fields]` was not passed, or did not include "theme" as a field.
+        if header_image := target.get("headerImage"):
+            header_info = models.blog.HeaderInfo(
+                header_image,
+                target["headerImageFocused"],
+                target["headerImageScaled"],
+            )
+
+            return models.blog.BlogTheme(
+                avatar_shape=avatar_shape,
+                background_color=target["backgroundColor"],
+                body_font=target["bodyFont"],
+                header_info=header_info
+            )
+        else:
+            # Return limited information otherwise
+            return models.blog.BlogTheme(
+                avatar_shape=avatar_shape,
+                background_color=None,
+                body_font=None,
+                header_info=None
+            )
 
     def parse(self):
         return models.blog.Blog(
@@ -51,6 +64,35 @@ class BlogParser:
             active=self.target.get("active", True)
         )
 
+    def parse_limited(self):
+        """Parses a blog with only limited information
+
+        This method is used when the field[blogs] parameter is set to only a couple attributes
+        meaning that the resulting JSON is lacking many of the fields we use to parse.
+
+        This is most noticeably seen in the blog attributes of various note types whom due to the
+        set field[blogs] lacks many of the information we use to parse a Blog object.
+
+        For now as this method will only be used to parse the blog information from notes
+        we will assume that the blog name, avatar, and theming information is always present.
+
+        TODO: Make models.blog.Blog and all related logic handle None instead of using default values here.
+        TODO: Add tests for when field[blogs] lack attributes
+        TODO: Discuss and figure out how to handle arbitrary values for (or don't) field[blogs]
+        """
+        return models.blog.Blog(
+            name=self.target["name"],
+            avatar=self.target["avatar"],
+            title=self.target.get("title", ""),
+            url=self.target.get("url", ""),
+            is_adult=self.target.get("isAdult", False),
+            description_npf=self.target.get("descriptionNpf", ""),
+            uuid=self.target.get("uuid"),
+            theme=self.parse_theme(),
+            is_paywall_on=self.target.get("isPaywallOn", False),
+            active=self.target.get("active", True)
+        )
+
 
 class PostParser:
     def __init__(self, target) -> None:
@@ -62,6 +104,22 @@ class PostParser:
             return cls(initial_data).parse()
         else:
             return None
+
+
+    @staticmethod
+    def parse_community_label(initial_data):
+        community_labels = []
+        if raw_labels := initial_data.get("communityLabels"):
+            if raw_labels["hasCommunityLabel"]:
+                for category in raw_labels["categories"]:
+                    label = getattr(models.post.CommunityLabel, category.upper(), None)
+                    if label:
+                        community_labels.append(label)
+
+                if not community_labels:
+                    community_labels.append(models.post.CommunityLabel.MATURE)
+
+        return community_labels
 
     def parse(self):
         # When we know that the target is a blog object there is no need to
@@ -146,16 +204,7 @@ class PostParser:
                 )
 
         # Community label
-        community_labels = []
-        if raw_labels := self.target.get("communityLabels"):
-            if raw_labels["hasCommunityLabel"]:
-                for category in raw_labels["categories"]:
-                    label = getattr(models.post.CommunityLabel, category.upper(), None)
-                    if label:
-                        community_labels.append(label)
-
-                if not community_labels:
-                    community_labels.append(models.post.CommunityLabel.MATURE)
+        community_labels = self.parse_community_label(self.target)
 
         return models.post.Post(
             blog=blog,
@@ -186,6 +235,72 @@ class PostParser:
             reblog_root=reblog_root_information,
 
             community_labels=community_labels
+        )
+
+
+class ReplyNoteParser:
+    def __init__(self, target) -> None:
+            self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("type") == "reply":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.post.ReplyNote(
+            uuid=self.target["id"],
+            reply_id=self.target["replyId"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),
+
+            content=self.target["content"],
+            layout=self.target["layout"],
+
+            blog=BlogParser(self.target["blog"]).parse_limited()
+        )
+
+
+class ReblogNoteParser:
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("type") == "reblog":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.post.ReblogNote(
+            uuid=self.target["id"],
+            id=self.target["postId"],
+            blog=BlogParser(self.target["blog"]).parse_limited(),
+
+            content=self.target["content"],
+            layout=self.target["content"],
+            tags=self.target["tags"],
+
+            reblogged_from=self.target["reblogParentBlogName"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),   
+            community_labels=PostParser.parse_community_label(self.target),
+        )
+
+
+class LikeNoteParser:
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("type") == "like":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.post.LikeNote(
+            blog_name=self.target["blogName"],
+            blog_uuid=self.target["blogUuid"],
+            blog_title=self.target["blogTitle"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),
+            avatar=self.target["avatarUrl"],
         )
 
 
