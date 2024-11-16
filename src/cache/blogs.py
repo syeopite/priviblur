@@ -64,69 +64,37 @@ class BlogPostCache(AccessCache):
         return ':'.join(path_to_cached_results)
 
 
-class BlogSearchCache(AccessCache):
-    def __init__(self, ctx, blog, query, page, **kwargs):
-        super().__init__(
+class BlogSearchCache(BlogPostsCache):
+    def __init__(self, ctx, blog, query, continuation, **kwargs):
+        AccessCache.__init__(
+            self,
             ctx=ctx,
-            prefix=f"blog:{blog}:search",
+            prefix=f"blog:{blog}:search:{query}",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_blog_feed_for,
+            continuation=continuation,
             **kwargs
         )
 
         self.blog = blog
         self.query = query
-        self.page = page
 
     async def fetch(self):
-        return await self.ctx.TumblrAPI.blog_search(self.blog, self.query, page=self.page, **self.kwargs)
+        return await self.ctx.TumblrAPI.blog_search(self.blog, self.query, continuation=self.continuation, **self.kwargs)
 
     def parse(self, initial_results):
-        post_list, cursor = priviblur_extractor.parse_post_list(initial_results)
-        # The cursor returned is basically None.
-        return post_list
-
-    def parse_cached_json(self, json):
-        """Parses the cached JSON data into Priviblur objects"""
-        posts = []
-        for post in json["posts"]:
-            posts.append(priviblur_extractor.models.post.Post.from_json(post))
-
-        return posts
-
-    def to_json(self, post_sequence):
-        """Serializes a sequence of posts to JSON
-
-        Additionally injects a version to bust cache"""
-        posts = []
-        for parsed_post in post_sequence:
-            posts.append(parsed_post.to_json_serialisable())
-
-        return orjson.dumps({"version": priviblur_extractor.models.VERSION, "posts": posts})
-
-    def build_key(self):
-        # blog:<blog_name>:<kwargs>:<page>
-        path_to_cached_results = [self.prefix, self.query]
-        for k,v in self.kwargs.items():
-            if v:
-                path_to_cached_results.append(f"{k}:{v}")
-
-        if self.page:
-            path_to_cached_results.append(f"page:{self.page}")
-
-        return ':'.join(path_to_cached_results)
-
+        return priviblur_extractor.parse_blog_timeline(initial_results, is_search=True)
 
 async def get_blog_posts(ctx, blog, continuation=None, **kwargs):
     blog_posts_cache = BlogPostsCache(ctx, blog, continuation, **kwargs)
     return await blog_posts_cache.get()
 
 
-async def get_blog_search_results(ctx, blog, query, page=None, **kwargs):
+async def get_blog_search_results(ctx, blog, query, continuation=None, **kwargs):
     """Gets search results from a blog
 
     Returns a cached version when available, otherwise requests Tumblr.
     """
-    blog_posts_cache = BlogSearchCache(ctx, blog, query, page, **kwargs)
+    blog_posts_cache = BlogSearchCache(ctx, blog, query, continuation, **kwargs)
     return await blog_posts_cache.get()
 
 

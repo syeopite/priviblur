@@ -95,16 +95,20 @@ class BlogTimelineParser:
             next = cursor,
         )
 
+    def parse_blog_search_timeline(self):
+        cursor = _CursorParser.process(self.target)
 
-def process_post_list(target):
-    """Extracts a simple list of posts, with an attached cursor object"""
-    cursor = _CursorParser.process(target)
+        # Now the posts contained within
+        posts = []
+        total_raw_posts = len(self.target["posts"])
+        for post_index, post in enumerate(self.target["posts"]):
+            if result := items.parse_item(post, post_index, total_raw_posts):
+                posts.append(result)
 
-    # Now the posts contained within
-    posts = []
-    total_raw_posts = len(target["posts"])
-    for post_index, post in enumerate(target["posts"]):
-        if result := items.parse_item(post, post_index, total_raw_posts):
-            posts.append(result)
+        return models.timelines.BlogTimeline(
+            blog_info=posts[0].blog,
+            posts=posts,
+            total_posts = total_raw_posts,
+            next = cursor,
+        )
 
-    return posts, cursor
