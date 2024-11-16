@@ -1,4 +1,3 @@
-import datetime
 import dataclasses
 import urllib.parse
 
@@ -33,6 +32,24 @@ class UserPreferences:
     def replace_from_query(self, request):
         """Returns updated UserPreferences class from request query args"""
         return self._replace(request, request.args)
+
+    def replace_from_cookie(self, request):
+        """Returns updated UserPreferences class from the settings cookie"""
+        request.ctx.invalid_settings_cookie = False
+
+        try:
+
+            if raw_prefs := request.cookies.get("settings"):
+                version = urllib.parse.parse_qs(raw_prefs)["version"][0]
+
+                if version == VERSION:
+                    settings_from_cookie = urllib.parse.parse_qs(request.cookies.get("settings"))
+                    request.ctx.preferences = request.ctx.preferences._replace(settings_from_cookie)
+                else:
+                    request.ctx.invalid_settings_cookie = True
+
+        except (TypeError, KeyError, ValueError):
+            request.ctx.invalid_settings_cookie = True
 
     def _replace(self, request, raw_new_prefs):
         """Returns updated UserPreferences class from values in raw_new_prefs"""
