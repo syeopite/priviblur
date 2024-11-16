@@ -248,7 +248,7 @@ class TumblrAPI:
 
         return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/posts", url_params=url_parameters)
 
-    async def blog_search(self, blog_name, query, *, page = None,
+    async def blog_search(self, blog_name, query, *, continuation = None,
                           top = None, original_posts = None, post_type = None):
         """Requests the /blog/<blog name>/search/<query> endpoint
             Parameters:
@@ -260,6 +260,8 @@ class TumblrAPI:
                 original_posts: Whether or not the search should only return original posts by the blog
                 post_type: Filter by post type
         """
+        blog_name = urllib.parse.quote(blog_name, safe = '')
+
         url_parameters = {
          "reblog_info": "true",
          "fields[blogs]": rconf.BLOG_SEARCH_BLOG_INFO_FIELDS,
@@ -278,19 +280,15 @@ class TumblrAPI:
         else:
             url_parameters["sort"] = "CREATED_DESC"
 
-        # The following can vary on Tumblr. Some continuation requests won't have query or rawurldecode
-        # for example while next_offset can be incremented by something other than 10.
-        #
-        # Though for simplicities sake,  we'll just assume that everything is present and next_offset can
-        # only be incremented by 10.
-        #
-        # This allows us to just have a simple page attribute
-        if page:
-            url_parameters["query"] = query
-            url_parameters["rawurldecode"] = 1
-            url_parameters["next_offset"] = 10 * (page - 1)
+        if continuation:
+            url_parameters = url_parameters | {
+                "tumblelog": blog_name,
+                "query": query,
+                "rawurldecode": 1,
+                "cursor": continuation
+            }
 
-        return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/search/{urllib.parse.quote(query)}", url_params=url_parameters)
+        return await self._get_json(f"blog/{blog_name}/search/{urllib.parse.quote(query)}", url_params=url_parameters)
 
     async def blog_post(self, blog_name, post_id):
         """Requests the /blog/<blog name>/posts/<post id> endpoint

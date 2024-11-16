@@ -25,4 +25,14 @@
     
     {%- block blog_contents %}
     {%- endblock %}
+
+    {%- if blog.next %}
+        <div class="paging">
+            {% block paging %}
+                <a class="primary next-page button" href="{{request.path}}?continuation={{blog.next.cursor | urlencode}}#m">
+                    {{translate(request.ctx.language, "pagination_next_page")}}
+                </a>
+            {% endblock%}
+        </div>
+    {% endif %}
 {%- endblock %}

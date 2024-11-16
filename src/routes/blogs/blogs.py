@@ -59,21 +59,10 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     blog = urllib.parse.unquote(blog)
     query = urllib.parse.unquote(query)
 
-    try:
-        if page := request.args.get("page"):
-            page = int(urllib.parse.unquote(page))
-    except ValueError:
-        page = None
+    if continuation := request.args.get("continuation"):
+        continuation = urllib.parse.unquote(continuation)
 
-    post_list = (await get_blog_search_results(request.app.ctx, blog, query, page=page))
-    blog_info = (await get_blog_posts(request.app.ctx, blog)).blog_info
-
-    blog = priviblur_extractor.models.timelines.BlogTimeline(
-        blog_info=blog_info,
-        posts = post_list,
-        total_posts=None,
-        next=None
-    )
+    blog = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
 
     return await sanic_ext.render(
         "blog/blog_search.jinja",
@@ -81,7 +70,6 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
             "app": request.app,
             "blog": blog,
             "blog_search_query": query,
-            "page": page,
         }
     )
 
