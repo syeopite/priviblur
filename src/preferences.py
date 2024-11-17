@@ -43,7 +43,7 @@ class UserPreferences:
                 version = raw_prefs["version"][0]
 
                 if int(version) == VERSION:
-                    return request.ctx.preferences._replace(request, raw_prefs)
+                    return self._replace(request, raw_prefs)
                 else:
                     request.ctx.invalid_settings_cookie = True
         except (TypeError, KeyError, ValueError):
@@ -63,6 +63,8 @@ class UserPreferences:
             key: value[0] for key, value in raw_new_prefs.items() if key in fields
         }
 
+        self.convert_value_to_python(raw_new_prefs)
+
         # TODO provide an error message to the end user when an unknown field is set,
         # or when an value is invalid.
 
@@ -76,7 +78,32 @@ class UserPreferences:
 
         Used to restore settings at /settings/restore
         """
-        return urllib.parse.urlencode(dataclasses.asdict(self))
+        fields_dict = dataclasses.asdict(self)
+        self.convert_value_to_string(fields_dict)
+
+        return urllib.parse.urlencode(fields_dict)
+
+    def convert_value_to_string(self, fields_dict):
+        """Processes fields_dict attribute values to strings based on corresponding types
+
+        Examines PEP 526 __annotations__ to do so.
+
+        Example: Convert something with a Python bool value to on/off for HTML forms.
+        """
+        for attribute, type_ in self.__annotations__.items():
+            if type_ is bool:
+                fields_dict[attribute] = "on" if getattr(self, attribute) else "off"
+
+    def convert_value_to_python(self, fields_dict):
+        """Processes fields_dict attribute values to python datatypes based on corresponding types
+
+        Examines PEP 526 __annotations__ to do so.
+
+        Example: Convert "on"/"off" strings to Python bools
+        """
+        for attribute, type_ in self.__annotations__.items():
+            if type_ is bool:
+                fields_dict[attribute] = True if fields_dict[attribute] == "on" else False
 
     def construct_cookie(self, request):
         """Serializes user preferences into a cookie"""
