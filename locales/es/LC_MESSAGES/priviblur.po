@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-23 16:08+0000\n"
+"PO-Revision-Date: 2024-11-23 16:21+0000\n"
 "Last-Translator: wilwarindi <idril_isil@yahoo.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/priviblur/"
 "translations/es/>\n"
@@ -114,7 +114,7 @@ msgid "timeline_search_post_type_filter_audio"
 msgstr "Audio"
 
 msgid "timeline_search_post_type_filter_video"
-msgstr "Vídeo"
+msgstr "Video"
 
 msgid "timeline_search_post_type_filter_ask"
 msgstr "Pregunta"
@@ -138,73 +138,75 @@ msgid "explore_today_on_tumblr_page_title"
 msgstr ""
 
 msgid "pagination_next_page"
-msgstr ""
+msgstr "Siguiente página"
 
 msgid "tumblr_error_blog_login_required_error_heading"
-msgstr ""
+msgstr "Se necesita una cuenta para ver este blog"
 
 msgid "tumblr_error_blog_login_required_error_description"
-msgstr ""
+msgstr "En su lugar, ¡intenta buscar reblogueos!"
 
 msgid "tumblr_error_restricted_tag_error_heading"
-msgstr ""
+msgstr "Esta etiqueta ha sido restringida en Tumblr"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr ""
+msgstr "Intenta hacer una búsqueda"
 
 msgid "tumblr_error_blog_not_found_error_heading"
-msgstr ""
+msgstr "No se pudo encontrar el blog solicitado"
 
 msgid "tumblr_error_blog_not_found_error_description"
-msgstr ""
+msgstr "Este blog puede haber sido borrado o quizás nunca existió"
 
 msgid "priviblur_error_page_title"
-msgstr ""
+msgstr "Error"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
-msgstr ""
+msgstr "Error: Se agotó el tiempo de espera de la solicitud"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
 msgstr ""
+"Priviblur no pudo completar la solicitud a Tumblr antes de que se agotara el "
+"tiempo"
 
 msgid "priviblur_error_invalid_internal_tumblr_redirect"
-msgstr ""
+msgstr "Error: Redirección a Tumblr HTTP 301 lleva a un URL externo"
 
 msgid "priviblur_error_generic"
-msgstr ""
+msgstr "¡Una excepción desconocida ha ocurrido!"
 
 msgid "priviblur_error_generic_description"
-msgstr ""
+msgstr "Parece que has encontrado una falla en Priviblur."
 
 msgid "priviblur_error_generic_description_2"
-msgstr ""
+msgstr "Por favor, repórtala aquí en GitHub"
 
 msgid "priviblur_error_generic_technical_details_error_name"
-msgstr ""
+msgstr "Error: {0}"
 
 msgid "priviblur_error_generic_technical_details_error_message"
-msgstr ""
+msgstr "Mensaje: {0}"
 
 msgid "priviblur_error_generic_technical_details_error_context"
-msgstr ""
+msgstr "Contexto:"
 
 msgid "post_community_label_mature_heading"
-msgstr ""
+msgstr "Etiqueta de la comunidad: Contenido para adultos"
 
 msgid "post_community_label_generic_explanation"
-msgstr ""
+msgstr "Esta publicación puede tener contenido no apto para todo público."
 
 msgid "post_community_label_sexual_themes"
-msgstr ""
+msgstr "Temas sexuales"
 
 msgid "post_community_label_drug_use"
-msgstr ""
+msgstr "Adicción a alcohol y drogas"
 
 msgid "post_community_label_violence"
-msgstr ""
+msgstr "Violencia"
 
 msgid "post_community_label_show_post_button"
-msgstr ""
+msgstr "Mostrar publicación"
 
 msgid "post_community_label_no_js_show_post_instructions"
 msgstr ""
