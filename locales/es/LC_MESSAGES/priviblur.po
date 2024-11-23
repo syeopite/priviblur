@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-23 16:03+0000\n"
+"PO-Revision-Date: 2024-11-23 16:07+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/priviblur/"
 "translations/es/>\n"
@@ -81,34 +81,34 @@ msgid "timeline_search_filter_by_date_filter_30"
 msgstr "Último mes"
 
 msgid "timeline_search_filter_by_date_filter_180"
-msgstr ""
+msgstr "Últimos 6 meses"
 
 msgid "timeline_search_filter_by_date_filter_365"
-msgstr ""
+msgstr "Último año"
 
 msgid "timeline_search_post_type_filter_none"
-msgstr ""
+msgstr "Todas las clases"
 
 msgid "timeline_search_post_type_filter_title"
-msgstr ""
+msgstr "Filtrar por tipo de publicación"
 
 msgid "timeline_search_post_type_filter_text"
-msgstr ""
+msgstr "Texto"
 
 msgid "timeline_search_post_type_filter_photo"
-msgstr ""
+msgstr "Fotografía"
 
 msgid "timeline_search_post_type_filter_gif"
-msgstr ""
+msgstr "Gifs"
 
 msgid "timeline_search_post_type_filter_quote"
-msgstr ""
+msgstr "Cita"
 
 msgid "timeline_search_post_type_filter_link"
-msgstr ""
+msgstr "Enlace"
 
 msgid "timeline_search_post_type_filter_chat"
-msgstr ""
+msgstr "Chat"
 
 msgid "timeline_search_post_type_filter_audio"
 msgstr ""
