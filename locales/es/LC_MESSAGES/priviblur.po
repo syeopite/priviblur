@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-23 15:59+0000\n"
+"PO-Revision-Date: 2024-11-23 16:03+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/priviblur/"
 "translations/es/>\n"
@@ -39,46 +39,46 @@ msgid "navbar_trending_icon_title"
 msgstr "Tendencias"
 
 msgid "navbar_right_view_page_on_tumblr_link_title"
-msgstr ""
+msgstr "Ver la página en Tumblr"
 
 msgid "navbar_right_settings_page_title"
-msgstr ""
+msgstr "Ajustes"
 
 msgid "footer_version_text"
-msgstr ""
+msgstr "Versión {0}"
 
 msgid "footer_source_link_text"
-msgstr ""
+msgstr "Fuente"
 
 msgid "footer_donate_link_text"
-msgstr ""
+msgstr "Donar"
 
 msgid "footer_licences_link_text"
-msgstr ""
+msgstr "Licencias"
 
 msgid "timeline_search_sort_by_filter_title"
-msgstr ""
+msgstr "Ordenar por"
 
 msgid "timeline_search_sort_by_filter_popular"
-msgstr ""
+msgstr "Popular"
 
 msgid "timeline_search_sort_by_filter_recent"
-msgstr ""
+msgstr "Reciente"
 
 msgid "timeline_search_filter_by_date_filter_title"
-msgstr ""
+msgstr "Filtrar por fecha"
 
 msgid "timeline_search_filter_by_date_filter_0"
-msgstr ""
+msgstr "Siempre"
 
 msgid "timeline_search_filter_by_date_filter_1"
-msgstr ""
+msgstr "Hoy"
 
 msgid "timeline_search_filter_by_date_filter_7"
-msgstr ""
+msgstr "Última semana"
 
 msgid "timeline_search_filter_by_date_filter_30"
-msgstr ""
+msgstr "Último mes"
 
 msgid "timeline_search_filter_by_date_filter_180"
 msgstr ""
