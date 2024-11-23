@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
 "PO-Revision-Date: 2024-11-23 16:21+0000\n"
-"Last-Translator: wilwarindi <idril_isil@yahoo.es>\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/priviblur/"
 "translations/es/>\n"
 "Language: es\n"
@@ -123,19 +123,19 @@ msgid "timeline_search_post_type_filter_poll"
 msgstr "Encuesta"
 
 msgid "timeline_tagged_sort_by_filter_title"
-msgstr ""
+msgstr "Ordenar por"
 
 msgid "timeline_tagged_sort_by_filter_top"
-msgstr ""
+msgstr "Mejor"
 
 msgid "timeline_tagged_sort_by_filter_recent"
-msgstr ""
+msgstr "Último"
 
 msgid "explore_trending_page_title"
-msgstr ""
+msgstr "Populares"
 
 msgid "explore_today_on_tumblr_page_title"
-msgstr ""
+msgstr "Hoy en Tumblr"
 
 msgid "pagination_next_page"
 msgstr "Siguiente página"
@@ -236,34 +236,34 @@ msgid "settings_language_selector_desc"
 msgstr ""
 
 msgid "settings_theme_selector"
-msgstr ""
+msgstr "Tema"
 
 msgid "settings_theme_selector_desc"
-msgstr ""
+msgstr "Elegir el tema"
 
 msgid "settings_theme_selector_option_auto"
-msgstr ""
+msgstr "Automático"
 
 msgid "settings_theme_selector_option_light"
-msgstr ""
+msgstr "Claro"
 
 msgid "settings_theme_selector_option_dark"
-msgstr ""
+msgstr "Oscuro"
 
 msgid "settings_save_changes"
-msgstr ""
+msgstr "Guardar los cambios"
 
 msgid "settings_cancel_changes"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "settings_copy_as_bookmarklet"
-msgstr ""
+msgstr "Copiar como marcador"
 
 msgid "settings_copy_as_bookmarklet_confirmed"
-msgstr ""
+msgstr "Copiado"
 
 msgid "settings_copy_as_bookmarklet_failed"
-msgstr ""
+msgstr "No se puede copiar"
 
 msgid "priviblur_licences_page_title"
-msgstr ""
+msgstr "Licencias"
