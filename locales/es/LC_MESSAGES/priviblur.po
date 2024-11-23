@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-23 16:21+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-11-23 16:27+0000\n"
+"Last-Translator: wilwarindi <idril_isil@yahoo.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/priviblur/"
 "translations/es/>\n"
 "Language: es\n"
@@ -162,7 +162,7 @@ msgid "priviblur_error_page_title"
 msgstr "Error"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
-msgstr "Error: Se agotó el tiempo de espera de la solicitud"
+msgstr "Error: El tiempo de espera de la solicitud a Tumblr se agotó"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
 msgstr ""
@@ -209,31 +209,31 @@ msgid "post_community_label_show_post_button"
 msgstr "Mostrar publicación"
 
 msgid "post_community_label_no_js_show_post_instructions"
-msgstr ""
+msgstr "Se revela al pasar el ratón por encima"
 
 msgid "post_footer_permalink_icon_title"
-msgstr ""
+msgstr "Enlace permanente"
 
 msgid "post_footer_view_on_tumblr_icon_title"
-msgstr ""
+msgstr "Ver en Tumblr"
 
 msgid "blog_search_placeholder_text"
-msgstr ""
+msgstr "Buscar publicaciones"
 
 msgid "blog_banner_alt"
-msgstr ""
+msgstr "Banner del blog"
 
 msgid "blog_avatar_alt"
-msgstr ""
+msgstr "Avatar del blog"
 
 msgid "settings_header"
-msgstr ""
+msgstr "Ajustes"
 
 msgid "settings_language_selector"
-msgstr ""
+msgstr "Idioma"
 
 msgid "settings_language_selector_desc"
-msgstr ""
+msgstr "Selecciona el idioma en que quieres usar Priviblur"
 
 msgid "settings_theme_selector"
 msgstr "Tema"
