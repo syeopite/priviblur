@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-10 10:00+0000\n"
+"PO-Revision-Date: 2024-11-27 04:00+0000\n"
 "Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/priviblur/translations/zh_Hans/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -101,40 +101,40 @@ msgid "timeline_tagged_sort_by_filter_top"
 msgstr ""
 
 msgid "timeline_tagged_sort_by_filter_recent"
-msgstr ""
+msgstr "最新"
 
 msgid "explore_trending_page_title"
-msgstr ""
+msgstr "话题趋势"
 
 msgid "explore_today_on_tumblr_page_title"
-msgstr ""
+msgstr "今日Tumblr"
 
 msgid "pagination_next_page"
-msgstr ""
+msgstr "下一页"
 
 msgid "tumblr_error_blog_login_required_error_heading"
-msgstr ""
+msgstr "这篇博客需要一个帐号才能查看"
 
 msgid "tumblr_error_blog_login_required_error_description"
-msgstr ""
+msgstr "另尝试寻找转载博文！"
 
 msgid "tumblr_error_restricted_tag_error_heading"
-msgstr ""
+msgstr "这个标签在Tumblr上被限制了"
 
 msgid "tumblr_error_restricted_tag_description"
 msgstr ""
 
 msgid "tumblr_error_blog_not_found_error_heading"
-msgstr ""
+msgstr "不能找到要求的博客"
 
 msgid "tumblr_error_blog_not_found_error_description"
-msgstr ""
+msgstr "博客可能被删除了或者没有存在过"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
-msgstr ""
+msgstr "错误：对Tumblr的请求超时"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
-msgstr ""
+msgstr "Priviblur不能在超时前完成对Tumblr的请求"
 
 msgid "priviblur_error_invalid_internal_tumblr_redirect"
 msgstr ""
@@ -240,3 +240,13 @@ msgstr "捐助"
 
 msgid "footer_licences_link_text"
 msgstr "证书"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "今日Tumblr"
+
+#, fuzzy
+msgid "footer_version_text"
+msgstr "版本 {0}"
+
+msgid "priviblur_error_page_title"
+msgstr "错误"
