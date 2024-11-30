@@ -174,7 +174,7 @@ async def before_all_routes(request):
 
     request.ctx.language = request.ctx.preferences.language
 
-    request.ctx.preferences.replace_from_cookie(request)
+    request.ctx.preferences = request.ctx.preferences.replace_from_cookie(request)
 
 
 @app.middleware("response")
