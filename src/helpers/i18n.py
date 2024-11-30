@@ -16,7 +16,7 @@ class Language:
         self.name, self.translation_percentage = LOCALE_DATA[locale]
 
 SUPPORTED_LANGUAGES = [
-    "en_US", "cs_CZ", "fr", "ja", "uk"
+    "en_US", "cs_CZ", "fr", "ja", "uk", "zh_Hans", "zh_Hant", "es"
 ]
 
 SUPPORTED_LANGUAGES.sort()

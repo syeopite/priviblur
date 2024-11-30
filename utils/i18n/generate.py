@@ -18,7 +18,7 @@ total_english_strings = len(locales_to_pofiles["en_US"])
 lines = []
 
 for locale, pofile in locales_to_pofiles.items():
-    language_name = babel.Locale.parse(locale).get_language_name().capitalize()
+    language_name = babel.Locale.parse(locale).get_display_name().capitalize()
     translation_percentage = int((len(pofile.translated_entries())/total_english_strings) * 100)
 
     lines.append(f""""{locale}": ("{language_name}", {translation_percentage})""")
