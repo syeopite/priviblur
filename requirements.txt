@@ -15,7 +15,7 @@ multidict==6.1.0
 npf_renderer==0.12.2
 orjson==3.10.11
 PyYAML==6.0.2
-redis==5.2.0
+redis==5.2.1
 sanic==24.6.0
 sanic-ext==23.12.0
 sanic-routing==23.12.0
