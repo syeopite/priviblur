@@ -1,79 +1,8 @@
 {% from 'macros/post_header.jinja' import create_post_header  %}
 <div class="post" data-post-id="{{element.id}}">
-    {%- if element.content -%}
-        {%- if request_poll_data -%}
-            {%- set contains_errors, content_tag = format_npf(
-                        element.content,
-                        element.layout,
-                        poll_callback=create_poll_callback(request.app.ctx, element.blog.name, element.id),
-                    )
-            -%}
-        {%- else -%}
-            {%- set contains_errors, content_tag = format_npf(
-                        element.content,
-                        element.layout,
-                        element.blog.name,
-                        element.id,
-                    )
-            -%}
-        {% endif %}
-    {%- endif -%}
-
     {{- create_post_header(request, element) -}}
-
-    {%- if element.community_labels -%}
-        <div class="post-content mature-content no-js">
-        {% include 'components/community_tag_cover.jinja' %}
-    {%- else -%}
-        <div class="post-content">
-    {%- endif -%}
-
-    {%- if element.trail -%}
-        {# Start post trails div #}
-        <div class="post-trails">
-    {%- endif -%}
-
-    {%- if element.trail -%}
-        {%- for trail_element in element.trail -%}
-            <div class="trail-post">
-                {{create_post_header(request, trail_element)}}
-                {%- if request_poll_data -%}
-                    {%- set trail_contains_errors, trail_content_tag = format_npf(
-                                trail_element.content,
-                                trail_element.layout,
-                                poll_callback=create_poll_callback(request.app.ctx, element.blog.name, element.id),
-                            )
-                    -%}
-
-                {%- else -%}
-                    {%- set trail_contains_errors, trail_content_tag = format_npf(
-                                trail_element.content,
-                                trail_element.layout,
-                                element.blog.name,
-                                element.id,
-                            )
-                    -%}
-                {% endif %}
-                {{- trail_content_tag -}}
-            </div>
-        {%- endfor -%}
-    {%- endif -%}
-
-    {# If the post contains content in addition to the trail then it is the reblogger replying #}
-    {%- if element.trail and element.content -%}
-        <div class="trail-post">
-            {{create_post_header(request, element, skip_reblog=True)}}
-            {{- content_tag -}}
-        </div>
-    {%- else -%}
-        {{- content_tag -}}
-    {%- endif -%}
-
-    {%- if element.trail -%}
-        {# End post-trails div #}
-        </div>
-    {%- endif -%}
-    </div>
+    
+    {% include 'components/post_body.jinja'  %}
 
     <footer class="post-footer">
         {%- if element.tags -%}
