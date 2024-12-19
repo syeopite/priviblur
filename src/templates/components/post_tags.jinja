@@ -1,0 +1,11 @@
+{%- if element.tags -%}
+    <div class="post-tags">
+        {%- for tag in element.tags -%}
+            {% if blog is defined %}
+                <a class="post-tag" href="/{{blog.blog_info.name}}/tagged/{{tag | encodepathsegment}}"><span>#{{tag | e}}</span></a>
+            {% else%}
+                <a class="post-tag" href="/tagged/{{tag | encodepathsegment}}"><span>#{{tag | e}}</span></a>
+            {% endif %}
+        {%- endfor -%}
+    </div>
+{%- endif -%}
