@@ -27,6 +27,8 @@ async def before_blog_post_request(request):
 
     # Check if slug is passed
     if slug := request.match_info.get("slug"):
+        slug = urllib.parse.unquote(slug)
+
         # Redirect to the correct slug if the given slug does not match the post's slug
         if slug != post.slug:
             # Unless of course the post doesn't have a slug in the first place in which
