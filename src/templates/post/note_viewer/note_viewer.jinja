@@ -21,11 +21,11 @@
     </header>
     <section>
         {% if note_type is reply_notes %}
-            {% include "blog/post/reply_notes.jinja" %}
+            {% include "post/note_viewer/reply_notes.jinja" %}
         {% elif note_type is reblog_notes %}
-            {% include "blog/post/reblog_notes.jinja" %}
+            {% include "post/note_viewer/reblog_notes.jinja" %}
         {% elif note_type is like_notes %}
-            {% include "blog/post/like_notes.jinja" %}
+            {% include "post/note_viewer/like_notes.jinja" %}
         {% endif %}
     </section>
 </div>
