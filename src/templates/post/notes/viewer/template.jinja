@@ -36,7 +36,9 @@
         </ul>
     </header>
     <section>
-        {%- block notes -%}
-        {%- endblock -%}
+        {% if notes.notes %}
+            {%- block notes -%}
+            {%- endblock -%}
+        {% endif %}
     </section>
 </div>
