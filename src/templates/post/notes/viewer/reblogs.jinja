@@ -1,0 +1,7 @@
+{% extends "post/notes/viewer/template.jinja"%}
+
+{% block notes %}
+    {%- for note in notes.notes -%}
+        {%- include "post/notes/note/reblog.jinja" -%}
+    {%- endfor -%}
+{% endblock %}

@@ -148,9 +148,6 @@ async def initialize(app):
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
 
     app.ext.environment.tests["a_post"] = lambda element : isinstance(element, priviblur_extractor.models.post.Post)
-    app.ext.environment.tests["reply_notes"] = lambda element : element is priviblur_extractor.models.post.ReplyNote
-    app.ext.environment.tests["reblog_notes"] = lambda element : element is priviblur_extractor.models.post.ReblogNote
-    app.ext.environment.tests["like_notes"] = lambda element : element is priviblur_extractor.models.post.LikeNote
 
 
 @app.listener("main_process_start")

@@ -106,10 +106,10 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
-        "post/note_viewer/note_viewer.jinja",
+        "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "note_type": priviblur_extractor.models.post.ReplyNote,
+            "path_of_viewer_component_to_use": "post/notes/viewer/replies.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
             "slug": slug,
@@ -127,10 +127,10 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
-        "post/note_viewer/note_viewer.jinja",
+        "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "note_type": priviblur_extractor.models.post.ReblogNote,
+            "path_of_viewer_component_to_use": "post/notes/viewer/reblogs.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
             "slug": slug,
@@ -148,10 +148,10 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
-        "post/note_viewer/note_viewer.jinja",
+        "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "note_type": priviblur_extractor.models.post.LikeNote,
+            "path_of_viewer_component_to_use": "post/notes/viewer/likes.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
             "slug": slug,
