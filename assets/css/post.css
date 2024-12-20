@@ -266,7 +266,7 @@ a.hidden-reblog {
   padding: 0;
   background: var(--color-post-notes-viewer-nav-bar-bg);
   border-radius: 25px;
-  margin: 0;
+  margin: 0 15px;
 }
 
 .post-notes-nav li {
@@ -306,13 +306,18 @@ a.hidden-reblog {
   padding: 0 40px;
 }
 
-.note {
+.post-notes > section {
   width: 590px;
 }
 
 @media (max-width: 590px) {
-  .note {
+  .post-notes, .post-notes > section {
     width: auto;
+  }
+
+  .post-notes-nav {
+    gap: unset;
+    justify-content: space-around;
   }
 }
 
