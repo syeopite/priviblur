@@ -271,11 +271,11 @@ msgstr "Licences"
 msgid "post_footer_view_on_tumblr_icon_title"
 msgstr "View on Tumblr"
 
-msgid "post_note_viewer_view_replies"
+msgid "post_note_viewer_view_replies_tab_title"
 msgstr "Replies"
 
-msgid "post_note_viewer_view_reblogs"
+msgid "post_note_viewer_view_reblogs_tab_title"
 msgstr "Reblogs"
 
-msgid "post_note_viewer_view_likes"
+msgid "post_note_viewer_view_likes_tab_title"
 msgstr "Likes"
