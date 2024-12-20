@@ -1,11 +1,11 @@
 {%- if notes.notes -%}
-    {%- for note in notes.notes -%}
-        {%- include "blog/post/post_notes/reply.jinja" -%}
+    {%- for element in notes.notes -%}
+        {%- include "post/notes/reblog.jinja" -%}
     {%- endfor -%}
 
-    {% if slug %}
+    {# {% if slug %}
         <a href="/{{blog_name}}/{{post_id}}/{{slug}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">Next</a>
     {% else %}
         <a href="/{{blog_name}}/{{post_id}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">Next</a>
-    {% endif %}
+    {% endif %} #}
 {%- endif -%}

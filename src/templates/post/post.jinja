@@ -1,0 +1,6 @@
+{% from 'post/components/header.jinja' import create_post_header  %}
+<div class="post" data-post-id="{{element.id}}">
+    {{- create_post_header(request, element) -}}
+    {% include 'post/components/body.jinja'  %}
+    {% include 'post/components/footer.jinja'  %}
+</div>
