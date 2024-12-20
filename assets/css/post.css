@@ -252,17 +252,49 @@ a.hidden-reblog {
   background: var(--color-top-level-card-bg);
   display: flex;
   flex-direction: column;
-  padding: 25px 50px;
+  gap: 25px;
   border-radius: 25px;
+  padding: 15px 15px 25px;
 }
 
 .post-notes-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 25px;
+  gap: 50px;
   list-style: none;
   padding: 0;
+  background: var(--color-post-notes-viewer-nav-bar-bg);
+  border-radius: 25px;
+  margin: 0;
+}
+
+.post-notes-nav li {
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.post-notes-nav a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+  font-weight: 600;
+  border-radius: 25px;
+}
+
+.post-notes-nav a, .icon > path {
+  color: var(--color-post-notes-viewer-nav-bar-item);
+  fill: var(--color-post-notes-viewer-nav-bar-item);
+}
+
+.post-notes-nav a:hover {
+  background: var(--color-nav-bar-icon-hover);
+}
+
+.post-notes-nav svg {
+  align-items: center;
 }
 
 .post-notes section {
@@ -270,7 +302,20 @@ a.hidden-reblog {
   flex-direction: column;
   gap: 25px;
   max-width: 590px;
+
+  padding: 0 40px;
 }
+
+.note {
+  width: 590px;
+}
+
+@media (max-width: 590px) {
+  .note {
+    width: auto;
+  }
+}
+
 
 .post-notes > section > .note {
   padding: 0;
@@ -285,4 +330,3 @@ a.hidden-reblog {
   width: 100%;
   color: var(--color-reblog-note-separator);
 }
-

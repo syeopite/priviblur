@@ -1,3 +1,8 @@
+{% from 'components/icons/reblog.jinja' import reblog_icon  %}
+{% from 'components/icons/reply.jinja' import reply_icon  %}
+{% from 'components/icons/heart.jinja' import heart_icon  %}
+
+
 {#- A note viewer component by itself -#}
 <section class="post-notes">
     <header>
@@ -8,13 +13,25 @@
                 {% set post_link = "/" + blog_name + "/" + post_id %}
             {% endif%}
             <li>
-                <a href="{{post_link}}?note_viewer=replies">{{translate(request.ctx.language, "post_note_viewer_view_replies")}} {{notes.total_replies}}</a>
+                <a href="{{post_link}}?note_viewer=replies" title="{{translate(request.ctx.language, "post_note_viewer_view_replies_tab_title")}}">
+                    {{reply_icon(30, 30)}}
+                    {{notes.total_replies}}
+                </a>
+
+            </li>
+
+            <li>
+            <a href="{{post_link}}?note_viewer=reblogs" title="{{translate(request.ctx.language, "post_note_viewer_view_reblogs_tab_title")}}">
+                {{reblog_icon(30, 30)}}
+                {{notes.total_reblogs}}
+            </a>
+
             </li>
             <li>
-                <a href="{{post_link}}?note_viewer=reblogs">{{translate(request.ctx.language, "post_note_viewer_view_reblogs")}} {{notes.total_reblogs}}</a>
-            </li>
-            <li>
-                <a href="{{post_link}}?note_viewer=likes">{{translate(request.ctx.language, "post_note_viewer_view_likes")}} {{notes.total_likes}}</a>
+                <a href="{{post_link}}?note_viewer=likes" title="{{translate(request.ctx.language, "post_note_viewer_view_likes_tab_title")}}">
+                    {{heart_icon(30, 30)}}
+                    {{notes.total_likes}}
+                </a>
             </li>
         </ul>
     </header>
