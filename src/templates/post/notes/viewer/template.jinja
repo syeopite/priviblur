@@ -1,5 +1,4 @@
-{%extends "base.jinja"%}
-{% block center %}
+{#- A note viewer component by itself -#}
 <section class="post-notes">
     <header>
         <ul class="post-notes-nav">
@@ -20,13 +19,7 @@
         </ul>
     </header>
     <section>
-        {% if note_type is reply_notes %}
-            {% include "post/note_viewer/reply_notes.jinja" %}
-        {% elif note_type is reblog_notes %}
-            {% include "post/note_viewer/reblog_notes.jinja" %}
-        {% elif note_type is like_notes %}
-            {% include "post/note_viewer/like_notes.jinja" %}
-        {% endif %}
+        {%- block notes -%}
+        {%- endblock -%}
     </section>
 </div>
-{% endblock %}

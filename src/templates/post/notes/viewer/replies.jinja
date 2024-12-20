@@ -1,11 +1,13 @@
-{%- if notes.notes -%}
-    {%- for element in notes.notes -%}
-        {%- include "post/notes/reblog.jinja" -%}
+{% extends "post/notes/viewer/template.jinja"%}
+
+{% block notes %}
+    {%- for note in notes.notes -%}
+        {%- include "post/notes/note/reply.jinja" -%}
     {%- endfor -%}
 
-    {# {% if slug %}
+    {% if slug %}
         <a href="/{{blog_name}}/{{post_id}}/{{slug}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">Next</a>
     {% else %}
         <a href="/{{blog_name}}/{{post_id}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">Next</a>
-    {% endif %} #}
-{%- endif -%}
+    {% endif %}
+{% endblock %}
