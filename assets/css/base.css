@@ -113,6 +113,7 @@ body {
     --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-500));
 
     --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-400));
+    --color-reblog-note-separator: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-300));
 
     --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-600));
     --color-primary-button-hover: var(--light, var(--color-primary-600)) var(--dark, var(--color-primary-700));

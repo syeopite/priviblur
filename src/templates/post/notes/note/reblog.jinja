@@ -1,2 +1,9 @@
 {% set element = note %}
-{%- include 'post/post.jinja' -%}
+
+<div class="note reblog-note post" data-post-id="{{element.id}}">
+    {{- create_post_header(request, element) -}}
+    {% include 'post/components/body.jinja'  %}
+    {% if note.tags %}
+        <footer class="post-footer"> {%- include 'post/components/tags.jinja'  -%} </footer>
+    {% endif %}
+</div>

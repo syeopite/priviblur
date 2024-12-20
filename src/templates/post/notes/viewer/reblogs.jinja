@@ -1,7 +1,9 @@
 {% extends "post/notes/viewer/template.jinja"%}
+{% from 'post/components/header.jinja' import create_post_header  %}
 
 {% block notes %}
     {%- for note in notes.notes -%}
         {%- include "post/notes/note/reblog.jinja" -%}
+        <hr>
     {%- endfor -%}
 {% endblock %}

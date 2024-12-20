@@ -252,15 +252,8 @@ a.hidden-reblog {
   background: var(--color-top-level-card-bg);
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 25px 50px;
   border-radius: 25px;
-}
-
-.post-notes section {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  max-width: 590px;
 }
 
 .post-notes-nav {
@@ -271,3 +264,25 @@ a.hidden-reblog {
   list-style: none;
   padding: 0;
 }
+
+.post-notes section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 590px;
+}
+
+.post-notes > section > .note {
+  padding: 0;
+}
+
+.post-notes > section > .reblog-note.note {
+  gap: 0;
+  border-radius: 0;
+}
+
+.post-notes > section > hr {
+  width: 100%;
+  color: var(--color-reblog-note-separator);
+}
+
