@@ -316,7 +316,6 @@ a.hidden-reblog {
   }
 }
 
-
 .post-notes > section > .note {
   padding: 0;
 }
@@ -329,4 +328,8 @@ a.hidden-reblog {
 .post-notes > section > hr {
   width: 100%;
   color: var(--color-reblog-note-separator);
+}
+
+.blog-name-title-grouping > * {
+  display: block;
 }

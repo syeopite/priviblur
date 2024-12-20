@@ -1,14 +1,13 @@
 <div class="note like">
-<a href="/{{note.blog_name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="{{url_handler(note.avatar["128"])}}"></a>
-<a class="link blog-name" href="/{{note.blog_name}}">{{note.blog_name}}</a>
-
-{% if note.date %}
-    <span class="separator">•</span>
-    <span class="post-timestamp" title="{{note.date | format_datetime(locale=request.ctx.language)}}">
-        <time datetime="{{note.date.strftime("%Y-%m-%dT%H:%M")}}">{{note.date | format_date(locale=request.ctx.language)}}</time>
-    </span>
-{%- endif -%}
-
-{{note.blog_title}}
-
+    <div class="post-author">
+        <a href="/{{note.blog_name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="{{url_handler(note.avatar["128"])}}"></a>
+        <div class="author-information">
+            <div class="primary-post-author">
+                <div class="blog-name-title-grouping">
+                    <a class="link blog-name" href="/{{note.blog_name}}">{{note.blog_name}}</a>
+                    <span>{{note.blog_title}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
