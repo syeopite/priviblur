@@ -3,7 +3,7 @@
 {%- for element in raw_content_list -%}
     {% if element is a_post %}
         {%- if not element.is_advertisement -%}
-            {%- include 'components/post.jinja' -%}
+            {%- include 'post/post.jinja' -%}
         {%- endif -%}
     {% endif %}
 {%- endfor -%}
