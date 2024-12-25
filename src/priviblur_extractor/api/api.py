@@ -389,9 +389,9 @@ class TumblrAPI:
             }
         else:
             url_parameters = {
-            "id": post_id,
-            "mode": "likes" if return_likes else "reblogs_only",
-            "sort": "desc" if latest else "asc",
+                "id": post_id,
+                "mode": "likes" if return_likes else "reblogs_only",
+                "sort": "desc" if latest else "asc",
             }
 
         # TODO sort is not present when before_timestamp is used... for some reason.

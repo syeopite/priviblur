@@ -5,3 +5,9 @@
         {%- include "post/notes/note/like.jinja" -%}
     {%- endfor -%}
 {% endblock %}
+
+{% block paging %}
+    {% if notes.before_timestamp %}
+            <a class="secondary next-page button" href="/{{post_url | e}}?{{request.args | update_query_params("before_timestamp", notes.before_timestamp)}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
+    {% endif %}
+{% endblock %}

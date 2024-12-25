@@ -196,7 +196,11 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
 
     post_url = get_post_url(blog, post_id, slug)
 
-    notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id)
+    notes = await request.app.ctx.TumblrAPI.blog_notes(
+        blog,
+        post_id,
+        before_timestamp=request.args.get("before_timestamp")
+    )
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
