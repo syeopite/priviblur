@@ -1,5 +1,20 @@
 {% extends "post/notes/viewer/template.jinja"%}
 {% from 'post/components/header.jinja' import create_post_header  %}
+{% from 'components/icons/expand.jinja' import dropdown_icon  %}
+
+{% block control_bar %}
+    <li class="control-bar-action no-js" id="sort-by-filter" title="{{translate(request.ctx.language, "timeline_search_sort_by_filter_title")}}"><span>{{translate(request.ctx.language, "dropdown_filter_menu_text")}}{{dropdown_icon(16, 16)}}</span>
+        <ul class="control-bar-dropdown-menu">
+            {% if reblog_filter is none  %}
+                {% set reblog_filter = "reblogs_with_comments" %}
+            {% endif %}
+            <li {% if reblog_filter == "reblogs_with_comments"%} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | remove_query_params("reblog_filter")}}">{{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_with_comments")|e}}</a></li>
+            <li {% if reblog_filter == "reblogs_with_content_comments"%} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | update_query_params("reblog_filter", "reblogs_with_content_comments")}}">{{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments")|e}}</a></li>
+            <li {% if reblog_filter == "reblogs_only"%} class="selected"{% endif %}> <a href="/{{post_url}}?{{request.args | update_query_params("reblog_filter", "reblogs_only")}}"> {{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_only")|e}}</a></li>
+
+        </ul>
+    </li>
+{% endblock %}
 
 {% block notes %}
     {%- for note in notes.notes -%}

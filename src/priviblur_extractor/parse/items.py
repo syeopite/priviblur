@@ -267,9 +267,13 @@ class ReblogNoteParser:
     @classmethod
     def process(cls, initial_data):
         if initial_data.get("type") == "reblog":
+            # If blog data isn't given under a blog object then
+            # the note is likely a simple reblog note
+            if initial_data.get("blogName"):
+                return cls(initial_data).parse_simple()
             return cls(initial_data).parse()
 
-    def parse(self):
+    def parse(self) -> models.post.ReblogNote:
         return models.post.ReblogNote(
             uuid=self.target["id"],
             id=self.target["postId"],
@@ -282,6 +286,36 @@ class ReblogNoteParser:
             reblogged_from=self.target["reblogParentBlogName"],
             date=datetime.datetime.fromtimestamp(self.target["timestamp"]),   
             community_labels=PostParser.parse_community_label(self.target),
+        )
+
+    def parse_simple(self):
+        blog=models.blog.Blog(
+            name=self.target["blogName"],
+            avatar=[{"url": avatar_url} for avatar_url in list(self.target["avatarUrl"].values())],
+            title=self.target["blogTitle"],
+            url=None,
+
+            is_adult=False,
+            description_npf="",
+            uuid=None,
+
+            theme=None,
+            is_paywall_on =False,
+            active = True
+        )
+
+        return models.post.ReblogNote(
+            uuid=self.target["blogUuid"],
+            id=self.target["postId"],
+            blog=blog,
+
+            content=[],
+            layout=[],
+            tags=self.target["tags"],
+
+            reblogged_from=self.target["reblogParentBlogName"],
+            date=datetime.datetime.fromtimestamp(self.target["timestamp"]),
+            community_labels=[],
         )
 
 

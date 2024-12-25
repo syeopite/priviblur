@@ -56,6 +56,9 @@ msgstr "Donate"
 msgid "footer_licences_link_text"
 msgstr "Licences"
 
+msgid "dropdown_filter_menu_text"
+msgstr "Filter"
+
 msgid "timeline_search_sort_by_filter_title"
 msgstr "Sort by"
 
@@ -279,3 +282,12 @@ msgstr "Reblogs"
 
 msgid "post_note_viewer_view_likes_tab_title"
 msgstr "Likes"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "Comments and tags"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "Comments only"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "Other reblogs"

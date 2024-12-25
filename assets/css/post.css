@@ -346,3 +346,14 @@ a.hidden-reblog {
 .post-notes > footer > a {
   font-weight: 550;
 }
+
+.post-notes > header > #timeline-control-bar {
+  float: right;
+  margin: 15px 15px 0 15px;
+}
+
+.post-notes .control-bar-dropdown-menu {
+  right: 0;
+  left: unset;
+  transform: unset;
+}

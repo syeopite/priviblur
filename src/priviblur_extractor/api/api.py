@@ -349,17 +349,20 @@ class TumblrAPI:
             url_params=url_parameters
         )
 
-    async def blog_notes(self, blog_id, post_id, latest: bool = True):
-        """Requests the /blog/<blog name>/post/<post id>/notes
+    async def blog_notes(self, blog_id, post_id, latest: bool = True, return_likes : bool = True,):
+        """Requests the /blog/<blog name>/notes
 
-        This method is used to return likes
+        This method is used to return very basic notes such as a list of people who liked the post,
+        or a list of people who simply reblogged.
+
+        Pass return_likes as false to return reblogs
 
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
         url_parameters = {
          "id": post_id,
-         "mode": "likes",
+         "mode": "likes" if return_likes else "reblogs_only",
          "sort": "asc" if latest else "desc",
         }
 

@@ -135,7 +135,28 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
 
     post_url = get_post_url(blog, post_id, slug)
 
-    notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id)
+    reblog_note_types = request.app.ctx.TumblrAPI.config.ReblogNoteTypes
+
+    match reblog_filter := request.args.get("reblog_filter"):
+        case "reblogs_with_comments":
+            mode = reblog_note_types.REBLOGS_WITH_COMMENTS
+        case "reblogs_with_content_comments":
+            mode = reblog_note_types.REBLOGS_WITH_CONTENT_COMMENTS
+        case "reblogs_only":
+            mode = reblog_note_types.REBLOGS_ONLY
+        case _:
+            reblog_filter = None
+            mode = None
+
+    if mode:
+        # Reblogs only uses a different endpoint
+        if mode == reblog_note_types.REBLOGS_ONLY:
+            notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id, return_likes=False)
+        else:
+            notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id, mode=mode)
+    else:
+        notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id)
+
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
@@ -146,6 +167,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             "blog_name": blog,
             "post_id": str(post_id),
             "post_url": post_url,
+            "reblog_filter": reblog_filter,
             "notes": parsed_notes
         }
     )

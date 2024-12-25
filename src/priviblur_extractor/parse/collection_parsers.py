@@ -160,7 +160,7 @@ class NoteTimelineParser:
                     note,
                     index,
                     total_raw_notes,
-                    use_parsers=(items.LikeNoteParser,)
+                    use_parsers=(items.LikeNoteParser, items.ReblogNoteParser)
                 )
 
             notes.append(result)
