@@ -3,7 +3,7 @@ from typing import Optional, NamedTuple, Tuple
 # Used for cache busting
 # Applied when .to_json_serialisable() is called
 # Removed from serialized back with from_json()
-VERSION = 3
+VERSION = 4
 
 class Cursor(NamedTuple):
     """ Object representing Tumblr's API's "Next" object.

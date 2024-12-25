@@ -16,19 +16,22 @@ class HeaderInfo(NamedTuple):
 
 class BlogTheme(NamedTuple):
     avatar_shape: str
-    background_color: Optional[str]
-    body_font: Optional[str]
-    header_info : Optional[HeaderInfo]
+    background_color: Optional[str] = None
+    body_font: Optional[str] = None
+    header_info : Optional[HeaderInfo] = None
 
     def to_json_serialisable(self):
         json_serializable = self._asdict()
-        json_serializable["header_info"] = self.header_info.to_json_serialisable()
+
+        if self.header_info:
+            json_serializable["header_info"] = self.header_info.to_json_serialisable()
 
         return json_serializable
 
     @classmethod
     def from_json(cls, json):
-        json["header_info"] = HeaderInfo.from_json(json["header_info"])
+        if json["header_info"]:
+            json["header_info"] = HeaderInfo.from_json(json["header_info"])
         return cls(**json)
 
 

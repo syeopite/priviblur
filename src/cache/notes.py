@@ -50,10 +50,11 @@ class NotesTimelineCache(AccessCache):
 
         if mode := self.kwargs.get("mode"):
             path_to_cached_results.append(mode.name.lower())
+
         elif "return_likes" in self.kwargs:
             path_to_cached_results.append("reblogs_only")
 
-        if "latest" in self.kwargs:
+        if self.kwargs.get("latest"):
             path_to_cached_results.append("latest")
 
         return f"{':'.join(path_to_cached_results)}"

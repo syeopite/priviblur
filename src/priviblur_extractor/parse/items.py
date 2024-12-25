@@ -293,13 +293,13 @@ class ReblogNoteParser:
             name=self.target["blogName"],
             avatar=[{"url": avatar_url} for avatar_url in list(self.target["avatarUrl"].values())],
             title=self.target["blogTitle"],
-            url=None,
+            url="",
 
             is_adult=False,
             description_npf="",
-            uuid=None,
+            uuid=self.target["blogUuid"],
 
-            theme=None,
+            theme=models.blog.BlogTheme(self.target["avatarShape"]),
             is_paywall_on =False,
             active = True
         )

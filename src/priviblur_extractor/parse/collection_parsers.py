@@ -184,7 +184,7 @@ class NoteTimelineParser:
 
 
     def return_note_model(self, notes, before_timestamp = None, after_id = None):
-        return models.post.PostNotes(
+        return models.timelines.NoteTimeline(
             notes = notes,
             total_notes=self.target["totalNotes"],
             total_likes=self.target["totalLikes"],

@@ -23,6 +23,29 @@ class ReplyNote(NamedTuple):
 
     blog: blog.Blog
 
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["type"] = "reply"
+
+        json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.fromtimestamp(json["date"], tz=datetime.timezone.utc)
+
+        if json["blog"]:
+            json["blog"] = blog.Blog.from_json(json["blog"])
+
+        del json["type"]
+
+        return cls(**json)
+
 
 class ReblogNote(NamedTuple):
     uuid: str
@@ -40,6 +63,35 @@ class ReblogNote(NamedTuple):
 
     community_labels: Sequence[CommunityLabel]
 
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["type"] = "reblog"
+
+        json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
+
+        if json["blog"]:
+            json["blog"] = blog.Blog.from_json(json["blog"])
+
+        community_labels = []
+        for label_value in json["community_labels"]:
+            community_labels.append(CommunityLabel(label_value))
+
+        json["community_labels"] = community_labels
+
+        del json["type"]
+
+        return cls(**json)
+
 
 class LikeNote(NamedTuple):
     blog_name: str
@@ -52,21 +104,24 @@ class LikeNote(NamedTuple):
     # TODO
     # avatar_shape
 
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
 
-class PostNotes(NamedTuple):
-    notes : Sequence[ReplyNote | ReblogNote | LikeNote]
+        json_serializable["type"] = "like"
 
-    total_notes: int
-    total_replies: int
-    total_reblogs: int
-    total_likes: int
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
 
-    # Used to fetch next batch of post notes
-    #
-    # Reblogs and likes both use before_timestamp
-    # but replies uses after_id
-    before_timestamp: Optional[str] = None
-    after_id: Optional[str] = None
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.fromtimestamp(json["date"], tz=datetime.timezone.utc)
+
+        del json["type"]
+
+        return cls(**json)
 
 
 class ReblogAttribution(NamedTuple):
@@ -154,7 +209,7 @@ class Post(NamedTuple):
 
         if json_serializable["date"]:
             json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
-        json_serializable["trail"] = [trail.to_json_serialisable() for trail in  self.trail]
+        json_serializable["trail"] = [trail.to_json_serialisable() for trail in self.trail]
 
         # Serialize the attributes that are NamedTuples to JSON
         for key in ("blog", "reblog_from", "reblog_root"):

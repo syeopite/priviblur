@@ -114,11 +114,24 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
     latest = True if "latest" in args else False
 
     if after_id := args.get("after"):
-        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, after_id=after_id, latest=latest)
+        parsed_notes = await cache.get_post_notes(
+            request.app.ctx,
+            blog,
+            post_id,
+            "replies",
+            request.app.ctx.TumblrAPI.blog_post_replies,
+            after_id=after_id,
+            latest=latest
+        )
     else:
-        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, latest=latest)
-
-    parsed_notes = priviblur_extractor.parse_note_timeline(notes)
+        parsed_notes = await cache.get_post_notes(
+            request.app.ctx,
+            blog,
+            post_id,
+            "replies",
+            request.app.ctx.TumblrAPI.blog_post_replies,
+            latest=latest
+        )
 
     return await sanic_ext.render(
         "post/notes/viewer/viewer_page.jinja",
@@ -168,12 +181,24 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
         args_to_tumblr_api_wrapper["before_timestamp"] = before_timestamp
 
     if mode == reblog_note_types.REBLOGS_ONLY:
-        # The results for "reblogs only" filtering is fetched from a different endpoint
-        notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id, **args_to_tumblr_api_wrapper)
+        parsed_notes = await cache.get_post_notes(
+            request.app.ctx,
+            blog,
+            post_id,
+            "reblogs",
+            request.app.ctx.TumblrAPI.blog_notes,
+            **args_to_tumblr_api_wrapper,
+        )
     else:
-        notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id, **args_to_tumblr_api_wrapper)
+        parsed_notes = await cache.get_post_notes(
+            request.app.ctx,
+            blog,
+            post_id,
+            "reblogs",
+            request.app.ctx.TumblrAPI.blog_post_notes_timeline,
+            **args_to_tumblr_api_wrapper,
+        )
 
-    parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
         "post/notes/viewer/viewer_page.jinja",
@@ -196,12 +221,14 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
 
     post_url = get_post_url(blog, post_id, slug)
 
-    notes = await request.app.ctx.TumblrAPI.blog_notes(
+    parsed_notes = await cache.get_post_notes(
+        request.app.ctx,
         blog,
         post_id,
-        before_timestamp=request.args.get("before_timestamp")
+        "likes",
+        request.app.ctx.TumblrAPI.blog_notes,
+        before_timestamp=request.args.get("before_timestamp"),
     )
-    parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
     return await sanic_ext.render(
         "post/notes/viewer/viewer_page.jinja",
