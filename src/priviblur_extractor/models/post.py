@@ -181,9 +181,6 @@ class Post(NamedTuple):
     tags: list[str]
     summary: str
 
-    can_like: bool
-    can_reblog: bool
-    can_reply: bool
     display_avatar: bool
     # intractability: str TODO
 

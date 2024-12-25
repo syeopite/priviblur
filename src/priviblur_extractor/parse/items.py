@@ -129,16 +129,9 @@ class PostParser:
         id = self.target["id"]
 
         note_count = self.target.get("noteCount")
-        like_count = None
-        reblog_count = None
-        reply_count = None
-
-        if can_like := self.target["canReply"]:
-            reply_count = self.target["replyCount"]
-        if can_reblog := self.target["canReblog"]:
-            reblog_count = self.target["reblogCount"]
-        if can_reply := self.target["canLike"]:
-            like_count = self.target["likeCount"]
+        reply_count = self.target.get("replyCount")
+        reblog_count = self.target.get("reblogCount")
+        like_count = self.target.get("likeCount")
 
         # We check multiple keys as a precautionary measure.
         if self.target.get("advertiserId") or self.target.get("adId") or self.target.get("adProviderId"):
@@ -221,9 +214,6 @@ class PostParser:
             layout=layout,
             trail=trails,
 
-            can_like=can_like,
-            can_reblog=can_reblog,
-            can_reply=can_reply,
             display_avatar=self.target["displayAvatar"],
 
             reply_count=reply_count,
