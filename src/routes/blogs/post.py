@@ -137,7 +137,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
         "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "blog_name": blog,
+            "blog_info": request.ctx.parsed_post.blog,
             "post_id": str(post_id),
             "latest": latest,
             "post_url": post_url,
@@ -204,7 +204,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
         "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "blog_name": blog,
+            "blog_info": request.ctx.parsed_post.blog,
             "post_id": str(post_id),
             "post_url": post_url,
             "note_type": "reblogs",
@@ -234,7 +234,7 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
         "post/notes/viewer/viewer_page.jinja",
         context={
             "app": request.app,
-            "blog_name": blog,
+            "blog_info": request.ctx.parsed_post.blog,
             "post_id": str(post_id),
             "post_url": post_url,
             "note_type": "likes",
