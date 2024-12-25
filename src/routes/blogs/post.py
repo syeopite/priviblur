@@ -74,7 +74,7 @@ async def _blog_post(request: sanic.Request, **kwargs):
     blog_info = priviblur_extractor.models.timelines.BlogTimeline(request.ctx.parsed_post.blog, (), None, None)
 
     if note_type := request.args.get("note_viewer"):
-        note_type = getattr(PostNoteTypes, note_type.upper())
+        note_type = getattr(PostNoteTypes, note_type.upper(), None)
         match note_type:
             case PostNoteTypes.REPLIES:
                 return await _blog_post_replies(request, **kwargs)
