@@ -108,10 +108,14 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
 
     post_url = get_post_url(blog, post_id, slug)
 
-    if after_id := request.args.get("after"):
-        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, after_id=after_id)
+    args = request.get_args(keep_blank_values=True)
+
+    latest = True if "latest" in args else False
+
+    if after_id := args.get("after"):
+        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, after_id=after_id, latest=latest)
     else:
-        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id)
+        notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, latest=latest)
 
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 
@@ -122,6 +126,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             "path_of_viewer_component_to_use": "post/notes/viewer/replies.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
+            "latest": latest,
             "post_url": post_url,
             "notes": parsed_notes
         }

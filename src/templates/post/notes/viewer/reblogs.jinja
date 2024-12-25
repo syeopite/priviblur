@@ -11,7 +11,6 @@
             <li {% if reblog_filter == "reblogs_with_comments"%} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | remove_query_params("reblog_filter")}}">{{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_with_comments")|e}}</a></li>
             <li {% if reblog_filter == "reblogs_with_content_comments"%} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | update_query_params("reblog_filter", "reblogs_with_content_comments")}}">{{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments")|e}}</a></li>
             <li {% if reblog_filter == "reblogs_only"%} class="selected"{% endif %}> <a href="/{{post_url}}?{{request.args | update_query_params("reblog_filter", "reblogs_only")}}"> {{translate(request.ctx.language, "post_note_viewer_view_reblogs_filter_reblogs_only")|e}}</a></li>
-
         </ul>
     </li>
 {% endblock %}

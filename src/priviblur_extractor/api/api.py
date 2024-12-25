@@ -303,7 +303,7 @@ class TumblrAPI:
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"}
         )
 
-    async def blog_post_replies(self, blog_id, post_id, latest: bool = True, after_id: Optional[str] = None):
+    async def blog_post_replies(self, blog_id, post_id, latest: bool = False, after_id: Optional[str] = None):
         """Requests the /blog/<blog name>/post/<post id>/replies endpoint
         
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
@@ -315,7 +315,7 @@ class TumblrAPI:
         if not after_id: 
             url_parameters = {
             "mode": "replies",
-            "sort": "asc" if latest else "desc",
+            "sort": "desc" if latest else "asc",
             "pin_preview_note": "false",
             "fields[blogs]": "avatar,theme,name"
             }

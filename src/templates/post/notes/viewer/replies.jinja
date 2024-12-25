@@ -1,4 +1,15 @@
 {% extends "post/notes/viewer/template.jinja"%}
+{% from 'components/icons/expand.jinja' import dropdown_icon  %}
+
+{% block control_bar %}
+    <li class="control-bar-action no-js" id="sort-by-filter" title="{{translate(request.ctx.language, "timeline_search_sort_by_filter_title")}}"><span>{{translate(request.ctx.language, "dropdown_filter_menu_text")}}{{dropdown_icon(16, 16)}}</span>
+        <ul class="control-bar-dropdown-menu">
+            <li {% if latest is false %} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | remove_query_params("latest")}}">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_oldest")|e}}</a></li>
+            <li {% if latest %} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | update_query_params("latest", "")}}">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_newest")|e}}</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
 
 {% block notes %}
     {%- for note in notes.notes -%}
