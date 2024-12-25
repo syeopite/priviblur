@@ -338,3 +338,11 @@ a.hidden-reblog {
 .blog-name-title-grouping > * {
   display: block;
 }
+
+.post-notes > footer {
+  text-align: center;
+}
+
+.post-notes > footer > a {
+  font-weight: 550;
+}
