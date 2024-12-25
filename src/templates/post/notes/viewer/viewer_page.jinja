@@ -1,4 +1,4 @@
 {%extends "base.jinja"%}
 {% block center %}
-    {%- include path_of_viewer_component_to_use %}
+    {%- include "post/notes/viewer/" + note_type + ".jinja" %}
 {% endblock %}

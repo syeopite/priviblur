@@ -267,7 +267,7 @@ a.hidden-reblog {
   justify-content: center;
   gap: 50px;
   list-style: none;
-  padding: 0;
+  padding: 0 20px;
   background: var(--color-post-notes-viewer-nav-bar-bg);
   border-radius: 25px;
   margin: 0 15px;
@@ -276,14 +276,19 @@ a.hidden-reblog {
 .post-notes-nav li {
   display: flex;
   align-items: center;
-  border-radius: 25px;
+}
+
+.post-notes-nav li.selected {
+  border-width: 0 0 3px;
+  border-style: solid;
+  border-color: var(--color-nav-bar-selected-tab-highlight);
 }
 
 .post-notes-nav a {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 20px;
+  padding: 20px 10px;
   font-weight: 600;
   border-radius: 25px;
 }
@@ -315,6 +320,7 @@ a.hidden-reblog {
 }
 
 @media (max-width: 590px) {
+
   .post-notes, .post-notes > section {
     width: auto;
   }
