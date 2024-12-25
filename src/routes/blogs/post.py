@@ -18,6 +18,7 @@ def get_blog_post_path(request):
     """Returns the path to the user requested blog post endpoint"""
     return f"/{'/'.join(str(path_component) for path_component in request.match_info.values())}"
 
+
 def get_post_url(blog, post_id, slug):
     if slug:
         return urllib.parse.quote(f"{blog}/{post_id}/{slug}")
@@ -140,9 +141,13 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
 
     post_url = get_post_url(blog, post_id, slug)
 
+    args_to_tumblr_api_wrapper = {}
+
+    args = request.get_args(keep_blank_values=True)
+
     reblog_note_types = request.app.ctx.TumblrAPI.config.ReblogNoteTypes
 
-    match reblog_filter := request.args.get("reblog_filter"):
+    match reblog_filter := args.get("reblog_filter"):
         case "reblogs_with_comments":
             mode = reblog_note_types.REBLOGS_WITH_COMMENTS
         case "reblogs_with_content_comments":
@@ -153,14 +158,20 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             reblog_filter = None
             mode = None
 
-    if mode:
-        # Reblogs only uses a different endpoint
-        if mode == reblog_note_types.REBLOGS_ONLY:
-            notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id, return_likes=False)
-        else:
-            notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id, mode=mode)
+    if mode == reblog_note_types.REBLOGS_ONLY:
+        args_to_tumblr_api_wrapper["return_likes"] = False
     else:
-        notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id)
+        if mode:
+            args_to_tumblr_api_wrapper["mode"] = mode
+
+    if before_timestamp := args.get("before_timestamp"):
+        args_to_tumblr_api_wrapper["before_timestamp"] = before_timestamp
+
+    if mode == reblog_note_types.REBLOGS_ONLY:
+        # The results for "reblogs only" filtering is fetched from a different endpoint
+        notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id, **args_to_tumblr_api_wrapper)
+    else:
+        notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id, **args_to_tumblr_api_wrapper)
 
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
 

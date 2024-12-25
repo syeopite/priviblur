@@ -291,3 +291,9 @@ msgstr "Comments only"
 
 msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
 msgstr "Other reblogs"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "Oldest first"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "Newest first"

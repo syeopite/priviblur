@@ -327,7 +327,14 @@ class TumblrAPI:
             url_params=url_parameters
         )
 
-    async def blog_post_notes_timeline(self, blog_id, post_id, mode : rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS, latest: bool = False):
+    async def blog_post_notes_timeline(
+        self,
+        blog_id,
+        post_id,
+        mode : rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS,
+        latest: bool = False,
+        before_timestamp : Optional[str] = None,
+    ):
         """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
 
         This endpoint is used to return reblogs.
@@ -335,21 +342,34 @@ class TumblrAPI:
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
-        url_parameters = {
-         "mode": mode.name.lower(),
-         "sort": "asc" if latest else "desc",
-         "pin_preview_note": "false",
-         "fields[blogs]": "avatar,theme,name"
-        }
 
-        # TODO sort is not present when before_timestamp is used... for some reason.
+        if before_timestamp:
+            url_parameters = {
+                "id": post_id,
+                "mode": mode.name.lower(),
+                "before_timestamp": before_timestamp
+            }
+        else:
+            url_parameters = {
+                "mode": mode.name.lower(),
+                "sort": "asc" if latest else "desc",
+                "pin_preview_note": "false",
+                "fields[blogs]": "avatar,theme,name"
+            }
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/notes/timeline",
             url_params=url_parameters
         )
 
-    async def blog_notes(self, blog_id, post_id, latest: bool = True, return_likes : bool = True,):
+    async def blog_notes(
+        self,
+        blog_id,
+        post_id,
+        latest: bool = True,
+        return_likes : bool = True,
+        before_timestamp : Optional[str] = None
+    ):
         """Requests the /blog/<blog name>/notes
 
         This method is used to return very basic notes such as a list of people who liked the post,
@@ -360,11 +380,19 @@ class TumblrAPI:
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
-        url_parameters = {
-         "id": post_id,
-         "mode": "likes" if return_likes else "reblogs_only",
-         "sort": "asc" if latest else "desc",
-        }
+
+        if before_timestamp:
+            url_parameters = {
+                "mode": "likes" if return_likes else "reblogs_only",
+                "id": post_id,
+                "before_timestamp": before_timestamp
+            }
+        else:
+            url_parameters = {
+            "id": post_id,
+            "mode": "likes" if return_likes else "reblogs_only",
+            "sort": "desc" if latest else "asc",
+            }
 
         # TODO sort is not present when before_timestamp is used... for some reason.
 

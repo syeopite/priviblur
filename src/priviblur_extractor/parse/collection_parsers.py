@@ -143,7 +143,9 @@ class NoteTimelineParser:
                 )
             )
 
-        return self.return_note_model(notes)
+        before_timestamp = helpers.dig_dict(timeline, ("links", "next", "queryParams", "beforeTimestamp"))
+
+        return self.return_note_model(notes, before_timestamp=before_timestamp)
 
     def parse_note_sequence(self):
         """Parses a sequence of notes
@@ -165,14 +167,19 @@ class NoteTimelineParser:
 
             notes.append(result)
 
-        return self.return_note_model(notes)
+        before_timestamp = helpers.dig_dict(self.target, ("links", "next", "queryParams", "beforeTimestamp"))
+
+        return self.return_note_model(notes, before_timestamp=before_timestamp)
 
 
-    def return_note_model(self, notes):
+    def return_note_model(self, notes, before_timestamp = None, after_id = None):
         return models.post.PostNotes(
             notes = notes,
             total_notes=self.target["totalNotes"],
             total_likes=self.target["totalLikes"],
             total_reblogs=self.target["totalReblogs"],
             total_replies=self.target["totalReplies"],
+
+            before_timestamp=before_timestamp,
+            after_id=after_id
         )
