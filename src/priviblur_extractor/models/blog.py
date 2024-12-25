@@ -70,11 +70,6 @@ class Blog(NamedTuple):
 
     @classmethod
     def from_json(cls, json):
-        import orjson
-        x = orjson.dumps(json)
-
-        with open('test.json', "wb") as f:
-            f.write(x)
         json["theme"] = BlogTheme.from_json(json["theme"])
         return cls(**json)
 
