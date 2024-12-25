@@ -10,19 +10,19 @@
             <li>
                 <a href="/{{post_url}}?note_viewer=replies" title="{{translate(request.ctx.language, "post_note_viewer_view_replies_tab_title")}}">
                     {{reply_icon(30, 30)}}
-                    {{notes.total_replies}}
+                    {{notes.total_replies | format_decimal(locale=request.ctx.language)}}
                 </a>
             </li>
             <li>
                 <a href="/{{post_url}}?note_viewer=reblogs" title="{{translate(request.ctx.language, "post_note_viewer_view_reblogs_tab_title")}}">
                     {{reblog_icon(30, 30)}}
-                    {{notes.total_reblogs}}
+                    {{notes.total_reblogs | format_decimal(locale=request.ctx.language)}}
                 </a>
             </li>
             <li>
                 <a href="/{{post_url}}?note_viewer=likes" title="{{translate(request.ctx.language, "post_note_viewer_view_likes_tab_title")}}">
                     {{heart_icon(30, 30)}}
-                    {{notes.total_likes}}
+                    {{notes.total_likes | format_decimal(locale=request.ctx.language)}}
                 </a>
             </li>
         </ul>
