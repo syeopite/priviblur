@@ -19,7 +19,7 @@ def get_blog_post_path(request):
     return f"/{'/'.join(str(path_component) for path_component in request.match_info.values())}"
 
 
-def get_post_url(blog, post_id, slug):
+def get_post_url(blog, post_id, slug = None):
     if slug:
         return urllib.parse.quote(f"{blog}/{post_id}/{slug}")
     else:
