@@ -7,9 +7,5 @@
 {% endblock %}
 
 {% block paging %}
-    {% if slug %}
-        <a class="secondary next-page button" href="/{{blog_name}}/{{post_id}}/{{slug}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
-    {% else %}
-        <a class="secondary next-page button" href="/{{blog_name}}/{{post_id}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
-    {% endif %}
+    <a class="secondary next-page button" href="/{{post_url | e}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
 {% endblock %}

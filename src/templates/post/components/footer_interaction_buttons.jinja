@@ -5,14 +5,14 @@
         </div>
     {% endif %}
     <div class="interaction-buttons">
-        <a href="/{{element.blog.name}}/{{element.id}}/{{element.slug}}">
+        <a href="/{{post_url}}">
             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
                 <title>{{translate(request.ctx.language, "post_footer_permalink_icon_title")}}</title>
                 <path d="M695.967-78.477q-57.315 0-97.402-40.111-40.088-40.111-40.088-97.412 0-8.54 1-15.618 1-7.078 3-16.208L352.174-376.999q-16.695 18.261-39.788 26.391-23.094 8.131-48.386 8.131-57.301 0-97.412-40.121-40.111-40.12-40.111-97.435 0-57.315 40.111-97.402 40.111-40.088 97.412-40.088 25 0 48.239 8.631 23.24 8.63 39.935 25.891l210.303-129.173q-2-9.13-3-16.208-1-7.078-1-15.618 0-57.301 40.121-97.412 40.12-40.111 97.435-40.111 57.315 0 97.402 40.121 40.088 40.12 40.088 97.435 0 57.315-40.111 97.402-40.111 40.088-97.412 40.088-25.292 0-48.386-7.566-23.093-7.565-39.788-25.826L397.523-511.826q2 9.13 3 16.208 1 7.078 1 15.618t-1 15.618q-1 7.078-3 16.208l210.303 128.043q16.695-19.261 39.788-26.326 23.094-7.066 48.386-7.066 57.301 0 97.412 40.121 40.111 40.12 40.111 97.435 0 57.315-40.121 97.402-40.12 40.088-97.435 40.088Z"/>
             </svg>
         </a>
 
-        <a href="https://www.tumblr.com/{{element.blog.name}}/{{element.id}}" rel="noreferrer">
+        <a href="https://www.tumblr.com/{{post_url}}" rel="noreferrer">
             <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 320 512" role="img" aria-label="{{translate(request.ctx.language, "post_footer_view_on_tumblr_icon_title")}}">
                 <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                 <title>{{translate(request.ctx.language, "post_footer_view_on_tumblr_icon_title")}}</title>

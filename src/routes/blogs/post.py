@@ -18,6 +18,12 @@ def get_blog_post_path(request):
     """Returns the path to the user requested blog post endpoint"""
     return f"/{'/'.join(str(path_component) for path_component in request.match_info.values())}"
 
+def get_post_url(blog, post_id, slug):
+    if slug:
+        return urllib.parse.quote(f"{blog}/{post_id}/{slug}")
+    else:
+        return urllib.parse.quote(f"{blog}/{post_id}/")
+
 
 @blog_post_bp.on_request
 async def before_blog_post_request(request):
@@ -76,6 +82,7 @@ async def _blog_post(request: sanic.Request, **kwargs):
             case PostNoteTypes.LIKES:
                 return await blog_post_like_notes(request, **kwargs)
 
+    post_url = get_post_url(**kwargs)
 
     if request.args.get("fetch_polls") in ("1", "true"):
         fetch_poll_results = True
@@ -87,6 +94,7 @@ async def _blog_post(request: sanic.Request, **kwargs):
         context={
             "app": request.app,
             "blog": blog_info,
+            "post_url": post_url,
             "element": request.ctx.parsed_post,
             "request_poll_data" : fetch_poll_results,
         }
@@ -97,6 +105,8 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
     blog = urllib.parse.unquote(blog)
     if slug := kwargs.get("slug"):
         slug = urllib.parse.unquote(slug)
+
+    post_url = get_post_url(blog, post_id, slug)
 
     if after_id := request.args.get("after"):
         notes = await request.app.ctx.TumblrAPI.blog_post_replies(blog, post_id, after_id=after_id)
@@ -112,7 +122,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             "path_of_viewer_component_to_use": "post/notes/viewer/replies.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
-            "slug": slug,
+            "post_url": post_url,
             "notes": parsed_notes
         }
     )
@@ -122,6 +132,8 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
     blog = urllib.parse.unquote(blog)
     if slug := kwargs.get("slug"):
         slug = urllib.parse.unquote(slug)
+
+    post_url = get_post_url(blog, post_id, slug)
 
     notes = await request.app.ctx.TumblrAPI.blog_post_notes_timeline(blog, post_id)
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
@@ -133,7 +145,7 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             "path_of_viewer_component_to_use": "post/notes/viewer/reblogs.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
-            "slug": slug,
+            "post_url": post_url,
             "notes": parsed_notes
         }
     )
@@ -143,6 +155,8 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
     blog = urllib.parse.unquote(blog)
     if slug := kwargs.get("slug"):
         slug = urllib.parse.unquote(slug)
+
+    post_url = get_post_url(blog, post_id, slug)
 
     notes = await request.app.ctx.TumblrAPI.blog_notes(blog, post_id)
     parsed_notes = priviblur_extractor.parse_note_timeline(notes)
@@ -154,7 +168,7 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
             "path_of_viewer_component_to_use": "post/notes/viewer/likes.jinja",
             "blog_name": blog,
             "post_id": str(post_id),
-            "slug": slug,
+            "post_url": post_url,
             "notes": parsed_notes
         }
     )
