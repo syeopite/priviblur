@@ -4,8 +4,8 @@
 {% block control_bar %}
     <li class="control-bar-action no-js" id="sort-by-filter" title="{{translate(request.ctx.language, "timeline_search_sort_by_filter_title")}}"><span>{{translate(request.ctx.language, "dropdown_filter_menu_text")}}{{dropdown_icon(16, 16)}}</span>
         <ul class="control-bar-dropdown-menu">
-            <li {% if latest is false %} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | remove_query_params("latest")}}">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_oldest")|e}}</a></li>
-            <li {% if latest %} class="selected"{% endif %}><a href="/{{post_url}}?{{request.args | update_query_params("latest", "")}}">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_newest")|e}}</a></li>
+            <li {% if latest is false %} class="selected"{% endif %}><a href="/{{post_url}}?note_viewer=replies">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_oldest")|e}}</a></li>
+            <li {% if latest %} class="selected"{% endif %}><a href="/{{post_url}}?note_viewer=replies&latest">{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_newest")|e}}</a></li>
         </ul>
     </li>
 {% endblock %}
@@ -18,5 +18,7 @@
 {% endblock %}
 
 {% block paging %}
-    <a class="secondary next-page button" href="/{{post_url | e}}?note_viewer=replies&after={{(notes.notes | last).reply_id}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
+    {% if notes.after_id %}
+            <a class="secondary next-page button" href="/{{post_url | e}}?{{request.get_args(keep_blank_values=True) | update_query_params("after", notes.after_id)}}">{{translate(request.ctx.language, "pagination_next_page")}}</a>
+    {% endif %}
 {% endblock %}

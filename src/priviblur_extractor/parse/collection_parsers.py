@@ -143,9 +143,20 @@ class NoteTimelineParser:
                 )
             )
 
-        before_timestamp = helpers.dig_dict(timeline, ("links", "next", "queryParams", "beforeTimestamp"))
+        query_for_next_batch =  helpers.dig_dict(timeline, ("links", "next", "queryParams"))
 
-        return self.return_note_model(notes, before_timestamp=before_timestamp)
+        if query_for_next_batch:
+            before_timestamp = query_for_next_batch.get("beforeTimestamp")
+            after_id = query_for_next_batch.get("after")
+        else:
+            before_timestamp = None
+            after_id = None
+
+        return self.return_note_model(
+            notes,
+            before_timestamp=before_timestamp,
+            after_id=after_id
+        )
 
     def parse_note_sequence(self):
         """Parses a sequence of notes

@@ -320,7 +320,7 @@ class TumblrAPI:
             "fields[blogs]": "avatar,theme,name"
             }
         else:
-            url_parameters = {"after": after_id, "sort": "asc" if latest else "desc"}
+            url_parameters = {"after": after_id, "sort": "desc" if latest else "asc"}
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/replies",
