@@ -1,9 +1,7 @@
 <div class="post-interaction">
-    {% if element.note_count %}
-        <div class="note-count">
-            <span> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</span>
-        </div>
-    {% endif %}
+    <div class="note-count">
+        <a href="/{{post_url}}?note_viewer={{element.default_note_viewer_tab}}"> {{- translate(request.ctx.language, "post_note_count", element.note_count, element.note_count | format_decimal(locale=request.ctx.language)) }}</a>
+    </div>
     <div class="interaction-buttons">
         <a href="/{{post_url}}">
             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">

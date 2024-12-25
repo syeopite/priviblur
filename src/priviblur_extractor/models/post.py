@@ -196,6 +196,8 @@ class Post(NamedTuple):
     reblog_count: Optional[int] = None
     reply_count: Optional[int] = None
 
+    default_note_viewer_tab: str = "replies"
+
     reblog_from: Optional[ReblogAttribution] = None
     reblog_root: Optional[ReblogAttribution] = None
 

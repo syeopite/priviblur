@@ -133,6 +133,24 @@ class PostParser:
         reblog_count = self.target.get("reblogCount")
         like_count = self.target.get("likeCount")
 
+        note_type_counts = {
+            "replies": reply_count,
+            "reblogs": reblog_count,
+            "likes": like_count
+        }
+
+        note_viewer_tabs = ("replies", "reblogs", "likes")
+        default_note_viewer_tab = "replies"
+
+        # Calculate default tab
+        # If replies is empty fallback to the next tab and continue forth
+        # until we find an not empty tab. If everything is empty then we default to replies
+
+        for tab, counts in zip(("replies", "reblogs", "likes"), (reply_count, reblog_count, like_count)):
+            if counts > 0:
+                default_note_viewer_tab = tab
+                break
+
         # We check multiple keys as a precautionary measure.
         if self.target.get("advertiserId") or self.target.get("adId") or self.target.get("adProviderId"):
             is_advertisement = True
@@ -220,6 +238,8 @@ class PostParser:
             reblog_count=reblog_count,
             like_count=like_count,
             note_count=note_count,
+
+            default_note_viewer_tab=default_note_viewer_tab,
 
             reblog_from=reblog_from_information,
             reblog_root=reblog_root_information,

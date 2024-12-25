@@ -186,6 +186,10 @@ a.hidden-reblog {
   font-weight: bold;
 }
 
+.note-count > a:hover {
+  text-decoration: underline;
+}
+
 .mature-content {
   position: relative;
   height: 300px;
