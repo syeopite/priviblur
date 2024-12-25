@@ -25,7 +25,7 @@ class AccessCache(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def build_key(self) -> typing.Tuple[str, str]:
+    def build_key(self) -> str:
         """Creates a key to get/store an item within the cache"""
         pass
 
@@ -45,6 +45,14 @@ class AccessCache(abc.ABC):
 
         return base_key, full_key_with_continuation
 
+    def allocate_slot_for_continuation(self, base_key, pipeline, timeline):
+        if hasattr(timeline, "next") and timeline.next and timeline.next.cursor:
+            next_key = f"{base_key}:{timeline.next.cursor}"
+            pipeline.setnx(next_key, "0")
+            pipeline.expire(next_key, self.cache_ttl)
+
+            self.ctx.LOGGER.debug("Cache: Allocating a slot for continuation batch with key \"%s\"", next_key)
+
     async def parse_and_cache(self, base_key, full_key_with_continuation, initial_results):
         """Inserts the given results into the cache within the given key
         
@@ -62,14 +70,9 @@ class AccessCache(abc.ABC):
         # we need to add in an extra check here to ensure that a malicious user does not arbitrarily add
         # in data to the cache
         # 
-        # "0" is used as a placeholder 
+        # "0" is used as a placeholder
 
-        if hasattr(timeline, "next") and timeline.next and timeline.next.cursor:
-            next_key = f"{base_key}:{timeline.next.cursor}"
-            pipeline.setnx(next_key, "0")
-            pipeline.expire(next_key, self.cache_ttl)
-
-            self.ctx.LOGGER.debug("Cache: Allocating a slot for continuation batch with key \"%s\"", next_key)
+        self.allocate_slot_for_continuation(base_key, pipeline, timeline)
 
         await pipeline.execute()
 
