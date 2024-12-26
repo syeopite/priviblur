@@ -1,0 +1,45 @@
+/* This file contains the styling for various Tumblr timeline objects */
+
+.tumblr-signpost {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    width: 350px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    margin: 0 20px;
+    padding: 20px 25px;
+
+    background: var(--tumblr-signpost-bg);
+    color: var(--color-text);
+    border: 2px solid var(--tumblr-signpost-border);
+    border-radius: 10px;
+
+    box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+  }
+
+  .tumblr-signpost svg {
+    min-width: max-content;
+  }
+
+  .tumblr-signpost p {
+    line-height: 2;
+    font-size: 12px;
+  }
+
+  .tumblr-signpost h3 {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+
+  @media (max-width: 350px) {
+    .tumblr-signpost {
+      width: auto;
+    }
+  }

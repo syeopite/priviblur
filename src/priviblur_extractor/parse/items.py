@@ -348,6 +348,22 @@ class LikeNoteParser:
         )
 
 
+class SignpostParser:
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("objectType") == "signpost_cta":
+            return cls(initial_data).parse()
+
+    def parse(self):
+        return models.misc.Signpost(
+            title=self.target["display"]["title"],
+            description=helpers.dig_dict(self.target, ("resources", "description")),
+        )
+
+
 def parse_item(element, element_index=0, total_elements=1, use_parsers=None):
     """Parses an item from Tumblr API's JSON response into a more usable structure"""
     item_number = f"({element_index + 1}/{total_elements})"
