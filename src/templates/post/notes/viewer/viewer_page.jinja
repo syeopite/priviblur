@@ -1,0 +1,13 @@
+{%extends "base.jinja"%}
+
+{% block title -%}
+    {%- if blog_info.title -%}
+        {{blog_info.title | e}}
+    {%- else -%}
+        {{blog_info.name | e}}
+    {%- endif -%}
+{% endblock %}
+
+{% block center %}
+    {%- include "post/notes/viewer/" + note_type + ".jinja" %}
+{% endblock %}

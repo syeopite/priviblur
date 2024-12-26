@@ -32,6 +32,17 @@ class TimelineType(enum.Enum):
     POST = 2
 
 
+class ReblogNoteTypes(enum.Enum):
+    # Comments and tags
+    REBLOGS_WITH_COMMENTS = 0
+
+    # Comments only
+    REBLOGS_WITH_CONTENT_COMMENTS = 1
+
+    # Other reblogs
+    REBLOGS_ONLY = 2
+
+
 # Attributes for the fields[blog] request query
 
 EXPLORE_BLOG_INFO_FIELDS = "name,avatar,title,url,blog_view_url,is_adult,?is_member,description_npf,uuid,can_be_followed,?followed,?advertiser_name,theme,?primary,?is_paywall_on,?paywall_access,?subscription_plan,tumblrmart_accessories,can_show_badges,share_likes,share_following,can_subscribe,subscribed,ask,?can_submit,?is_blocked_from_primary,?is_blogless_advertiser,is_password_protected"

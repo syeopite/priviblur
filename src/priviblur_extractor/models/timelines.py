@@ -1,7 +1,8 @@
+import json
 from typing import Sequence, Optional, NamedTuple
 
 from . import base
-from .post import Post
+from .post import Post, ReplyNote, ReblogNote, LikeNote
 from. blog import Blog
 
 
@@ -41,6 +42,49 @@ class BlogTimeline(NamedTuple):
 
         if json["next"]:
             json["next"] = base.Cursor.from_json(json["next"])
+
+        del json["version"]
+
+        return cls(**json)
+
+
+class NoteTimeline(NamedTuple):
+    notes : Sequence[ReplyNote | ReblogNote | LikeNote]
+
+    total_notes: int
+    total_replies: int
+    total_reblogs: int
+    total_likes: int
+
+    # Used to fetch next batch of post notes
+    #
+    # Reblogs and likes both use before_timestamp
+    # but replies uses after_id
+    before_timestamp: Optional[str] = None
+    after_id: Optional[str] = None
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["version"] = base.VERSION
+
+        json_serializable["notes"] = [note.to_json_serialisable() for note in self.notes]
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        notes = []
+        for note in json["notes"]:
+            match note["type"]:
+                case "reply":
+                    notes.append(ReplyNote.from_json(note))
+                case "reblog":
+                    notes.append(ReblogNote.from_json(note))
+                case "like":
+                    notes.append(LikeNote.from_json(note))
+
+        json["notes"] = notes
 
         del json["version"]
 

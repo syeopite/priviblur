@@ -13,6 +13,117 @@ class CommunityLabel(enum.Enum):
     SEXUAL_THEMES = 3
 
 
+class ReplyNote(NamedTuple):
+    uuid: str
+    reply_id: str
+    date: Optional[datetime.datetime]
+
+    content: Optional[Sequence[dict]]
+    layout: Optional[Sequence[dict]]
+
+    blog: blog.Blog
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["type"] = "reply"
+
+        json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.fromtimestamp(json["date"], tz=datetime.timezone.utc)
+
+        if json["blog"]:
+            json["blog"] = blog.Blog.from_json(json["blog"])
+
+        del json["type"]
+
+        return cls(**json)
+
+
+class ReblogNote(NamedTuple):
+    uuid: str
+    id: str
+
+    blog: blog.Blog
+
+    content: Optional[Sequence[dict]]
+    layout: Optional[Sequence[dict]]
+    tags: Sequence[str]
+
+    reblogged_from: str
+
+    date: Optional[datetime.datetime]
+
+    community_labels: Sequence[CommunityLabel]
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["type"] = "reblog"
+
+        json_serializable["blog"] = json_serializable["blog"].to_json_serialisable()
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.utcfromtimestamp(json["date"])
+
+        if json["blog"]:
+            json["blog"] = blog.Blog.from_json(json["blog"])
+
+        community_labels = []
+        for label_value in json["community_labels"]:
+            community_labels.append(CommunityLabel(label_value))
+
+        json["community_labels"] = community_labels
+
+        del json["type"]
+
+        return cls(**json)
+
+
+class LikeNote(NamedTuple):
+    blog_name: str
+    blog_uuid: str
+    blog_title: str
+    date: Optional[datetime.datetime]
+
+    avatar: list[dict]
+
+    # TODO
+    # avatar_shape
+
+    def to_json_serialisable(self):
+        json_serializable = self._asdict()
+
+        json_serializable["type"] = "like"
+
+        if self.date:
+            json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
+
+        return json_serializable
+
+    @classmethod
+    def from_json(cls, json):
+        if json["date"] is not None:
+            json["date"] = datetime.datetime.fromtimestamp(json["date"], tz=datetime.timezone.utc)
+
+        del json["type"]
+
+        return cls(**json)
+
+
 class ReblogAttribution(NamedTuple):
     """Object representing reblog author information from individual posts"""
     post_id: str
@@ -59,6 +170,7 @@ class PostTrail(NamedTuple):
 
         return cls(**json)
 
+
 class Post(NamedTuple):
     blog: blog.Blog
 
@@ -69,9 +181,6 @@ class Post(NamedTuple):
     tags: list[str]
     summary: str
 
-    can_like: bool
-    can_reblog: bool
-    can_reply: bool
     display_avatar: bool
     # intractability: str TODO
 
@@ -87,6 +196,8 @@ class Post(NamedTuple):
     reblog_count: Optional[int] = None
     reply_count: Optional[int] = None
 
+    default_note_viewer_tab: str = "replies"
+
     reblog_from: Optional[ReblogAttribution] = None
     reblog_root: Optional[ReblogAttribution] = None
 
@@ -97,7 +208,7 @@ class Post(NamedTuple):
 
         if json_serializable["date"]:
             json_serializable["date"] = self.date.replace(tzinfo=datetime.timezone.utc).timestamp()
-        json_serializable["trail"] = [trail.to_json_serialisable() for trail in  self.trail]
+        json_serializable["trail"] = [trail.to_json_serialisable() for trail in self.trail]
 
         # Serialize the attributes that are NamedTuples to JSON
         for key in ("blog", "reblog_from", "reblog_root"):
@@ -126,4 +237,3 @@ class Post(NamedTuple):
         json["community_labels"] = community_labels
 
         return cls(**json)
-

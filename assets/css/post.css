@@ -6,6 +6,7 @@
   background: var(--color-top-level-card-bg);
   border-radius: 10px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 590px) {
@@ -185,6 +186,10 @@ a.hidden-reblog {
   font-weight: bold;
 }
 
+.note-count > a:hover {
+  text-decoration: underline;
+}
+
 .mature-content {
   position: relative;
   height: 300px;
@@ -245,4 +250,120 @@ a.hidden-reblog {
 
 .unblur-post-button.button:hover {
   background: var(--color-community-label-button-hover);
+}
+
+.post-notes {
+  background: var(--color-top-level-card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border-radius: 25px;
+  padding: 15px 15px 25px;
+}
+
+.post-notes-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  list-style: none;
+  padding: 0 20px;
+  background: var(--color-post-notes-viewer-nav-bar-bg);
+  border-radius: 25px;
+  margin: 0 15px;
+}
+
+.post-notes-nav li {
+  display: flex;
+  align-items: center;
+}
+
+.post-notes-nav li.selected {
+  border-width: 0 0 3px;
+  border-style: solid;
+  border-color: var(--color-nav-bar-selected-tab-highlight);
+}
+
+.post-notes-nav a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px 10px;
+  font-weight: 600;
+  border-radius: 25px;
+}
+
+.post-notes-nav a, .icon > path {
+  color: var(--color-post-notes-viewer-nav-bar-item);
+  fill: var(--color-post-notes-viewer-nav-bar-item);
+}
+
+.post-notes-nav a:hover {
+  background: var(--color-nav-bar-icon-hover);
+}
+
+.post-notes-nav svg {
+  align-items: center;
+}
+
+.post-notes section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 590px;
+
+  padding: 0 40px;
+}
+
+.post-notes > section {
+  width: 590px;
+}
+
+@media (max-width: 590px) {
+
+  .post-notes, .post-notes > section {
+    width: auto;
+  }
+
+  .post-notes-nav {
+    gap: unset;
+    justify-content: space-around;
+  }
+}
+
+.post-notes > section > .note {
+  padding: 0;
+}
+
+.post-notes > section > .reblog-note.note {
+  gap: 0;
+  border-radius: 0;
+}
+
+.post-notes > section > hr {
+  width: 100%;
+  color: var(--color-reblog-note-separator);
+}
+
+.blog-name-title-grouping > * {
+  display: block;
+}
+
+.post-notes > footer {
+  text-align: center;
+}
+
+.post-notes > footer > a {
+  font-weight: 550;
+}
+
+.post-notes > header > #timeline-control-bar {
+  float: right;
+  margin: 15px 15px 0 15px;
+}
+
+.post-notes .control-bar-dropdown-menu {
+  right: 0;
+  left: unset;
+  transform: unset;
 }

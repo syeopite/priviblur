@@ -303,6 +303,104 @@ class TumblrAPI:
             url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"}
         )
 
+    async def blog_post_replies(self, blog_id, post_id, latest: bool = False, after_id: Optional[str] = None):
+        """Requests the /blog/<blog name>/post/<post id>/replies endpoint
+        
+        Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
+        post note information. However, both the blog ID and the blog name can be used interchangeably here.
+        """
+
+        # When we are fetching a continuation batch
+        # the official tumblr client does not send some url parameters
+        if not after_id: 
+            url_parameters = {
+            "mode": "replies",
+            "sort": "desc" if latest else "asc",
+            "pin_preview_note": "false",
+            "fields[blogs]": "avatar,theme,name"
+            }
+        else:
+            url_parameters = {"after": after_id, "sort": "desc" if latest else "asc"}
+
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/replies",
+            url_params=url_parameters
+        )
+
+    async def blog_post_notes_timeline(
+        self,
+        blog_id,
+        post_id,
+        mode : rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS,
+        latest: bool = False,
+        before_timestamp : Optional[str] = None,
+    ):
+        """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
+
+        This endpoint is used to return reblogs.
+        
+        Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
+        post note information. However, both the blog ID and the blog name can be used interchangeably here.
+        """
+
+        if before_timestamp:
+            url_parameters = {
+                "id": post_id,
+                "mode": mode.name.lower(),
+                "before_timestamp": before_timestamp
+            }
+        else:
+            url_parameters = {
+                "mode": mode.name.lower(),
+                "sort": "asc" if latest else "desc",
+                "pin_preview_note": "false",
+                "fields[blogs]": "avatar,theme,name"
+            }
+
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/notes/timeline",
+            url_params=url_parameters
+        )
+
+    async def blog_notes(
+        self,
+        blog_id,
+        post_id,
+        latest: bool = True,
+        return_likes : bool = True,
+        before_timestamp : Optional[str] = None
+    ):
+        """Requests the /blog/<blog name>/notes
+
+        This method is used to return very basic notes such as a list of people who liked the post,
+        or a list of people who simply reblogged.
+
+        Pass return_likes as false to return reblogs
+
+        Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
+        post note information. However, both the blog ID and the blog name can be used interchangeably here.
+        """
+
+        if before_timestamp:
+            url_parameters = {
+                "mode": "likes" if return_likes else "reblogs_only",
+                "id": post_id,
+                "before_timestamp": before_timestamp
+            }
+        else:
+            url_parameters = {
+                "id": post_id,
+                "mode": "likes" if return_likes else "reblogs_only",
+                "sort": "desc" if latest else "asc",
+            }
+
+        # TODO sort is not present when before_timestamp is used... for some reason.
+
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_id, safe='')}/notes",
+            url_params=url_parameters
+        )
+
     async def poll_results(self, blog_name, post_id, poll_id):
         """Requests the /polls/<blog name>/<post id>/<poll_id>/results endpoint
 

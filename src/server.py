@@ -135,6 +135,7 @@ async def initialize(app):
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
+    app.ext.environment.filters["ensure_single_prefix_slash"] = helpers.prefix_slash_in_url_if_missing
 
     app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
     app.ext.environment.filters["format_date"] = babel.dates.format_date

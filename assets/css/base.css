@@ -114,6 +114,10 @@ body {
 
     --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-400));
 
+    --color-post-notes-viewer-nav-bar-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-550));
+    --color-post-notes-viewer-nav-bar-item: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
+    --color-reblog-note-separator: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-300));
+
     --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-600));
     --color-primary-button-hover: var(--light, var(--color-primary-600)) var(--dark, var(--color-primary-700));
     --color-primary-button-text: var(--light, var(--color-primary-100)) var(--dark, var(--color-primary-100));

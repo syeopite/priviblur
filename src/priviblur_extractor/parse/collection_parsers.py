@@ -112,3 +112,85 @@ class BlogTimelineParser:
             next = cursor,
         )
 
+
+class NoteTimelineParser:
+    """Parses a sequence of various note types"""
+    def __init__(self, target) -> None:
+        self.target = target
+
+    @classmethod
+    def process(cls, initial_data):
+        if initial_data.get("timeline"):
+            return cls(initial_data).parse()
+        elif initial_data.get("notes"):
+            return cls(initial_data).parse_note_sequence()
+        else:
+            return None
+
+    def parse(self):
+        timeline = self.target["timeline"]
+
+        total_raw_notes = len(timeline["elements"])
+
+        notes = []
+        for index, note in enumerate(timeline["elements"]):
+            notes.append(
+                items.parse_item(
+                    note,
+                    index,
+                    total_raw_notes,
+                    use_parsers=(items.ReplyNoteParser, items.ReblogNoteParser)
+                )
+            )
+
+        query_for_next_batch =  helpers.dig_dict(timeline, ("links", "next", "queryParams"))
+
+        if query_for_next_batch:
+            before_timestamp = query_for_next_batch.get("beforeTimestamp")
+            after_id = query_for_next_batch.get("after")
+        else:
+            before_timestamp = None
+            after_id = None
+
+        return self.return_note_model(
+            notes,
+            before_timestamp=before_timestamp,
+            after_id=after_id
+        )
+
+    def parse_note_sequence(self):
+        """Parses a sequence of notes
+
+        An alternative structure sometimes returned by Tumblr.
+        This is used for pure reblog notes (no tags or content) and likes."""
+
+        sequence = self.target["notes"]
+        total_raw_notes = len(sequence)
+
+        notes = []
+        for index, note in enumerate(sequence):
+            result = items.parse_item(
+                    note,
+                    index,
+                    total_raw_notes,
+                    use_parsers=(items.LikeNoteParser, items.ReblogNoteParser)
+                )
+
+            notes.append(result)
+
+        before_timestamp = helpers.dig_dict(self.target, ("links", "next", "queryParams", "beforeTimestamp"))
+
+        return self.return_note_model(notes, before_timestamp=before_timestamp)
+
+
+    def return_note_model(self, notes, before_timestamp = None, after_id = None):
+        return models.timelines.NoteTimeline(
+            notes = notes,
+            total_notes=self.target["totalNotes"],
+            total_likes=self.target["totalLikes"],
+            total_reblogs=self.target["totalReblogs"],
+            total_replies=self.target["totalReplies"],
+
+            before_timestamp=before_timestamp,
+            after_id=after_id
+        )

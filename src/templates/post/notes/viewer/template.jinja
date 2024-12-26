@@ -1,0 +1,44 @@
+{% from 'components/icons/reblog.jinja' import reblog_icon  %}
+{% from 'components/icons/reply.jinja' import reply_icon  %}
+{% from 'components/icons/heart.jinja' import heart_icon  %}
+
+{#- A note viewer component by itself -#}
+<section class="post-notes">
+    <header>
+        <ul class="post-notes-nav">
+            <li {%- if note_type == "replies"%} class="selected" {% endif -%} >
+                <a href="/{{post_url}}?note_viewer=replies" title="{{translate(request.ctx.language, "post_note_viewer_view_replies_tab_title")}}">
+                    {{reply_icon(24, 24)}}
+                    {{notes.total_replies | format_decimal(locale=request.ctx.language)}}
+                </a>
+            </li>
+            <li {%- if note_type == "reblogs"%} class="selected" {% endif -%} >
+                <a href="/{{post_url}}?note_viewer=reblogs" title="{{translate(request.ctx.language, "post_note_viewer_view_reblogs_tab_title")}}">
+                    {{reblog_icon(24, 24)}}
+                    {{notes.total_reblogs | format_decimal(locale=request.ctx.language)}}
+                </a>
+            </li>
+            <li {%- if note_type == "likes"%} class="selected" {% endif -%} >
+                <a href="/{{post_url}}?note_viewer=likes" title="{{translate(request.ctx.language, "post_note_viewer_view_likes_tab_title")}}">
+                    {{heart_icon(24, 24)}}
+                    {{notes.total_likes | format_decimal(locale=request.ctx.language)}}
+                </a>
+            </li>
+        </ul>
+
+        <ul id="timeline-control-bar">
+            {% block control_bar %}
+            {% endblock %}
+        </ul>
+    </header>
+    <section>
+        {% if notes.notes %}
+            {%- block notes -%}
+            {%- endblock -%}
+        {% endif %}
+    </section>
+    <footer>
+        {%- block paging -%}
+        {%- endblock -%}
+    </footer>
+</div>

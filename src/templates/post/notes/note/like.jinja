@@ -1,0 +1,13 @@
+<div class="note like">
+    <div class="post-author">
+        <a href="/{{note.blog_name}}"><img class="avatar" alt="{{translate(request.ctx.language, "blog_avatar_alt")}}" loading="lazy" src="{{url_handler(note.avatar["128"])}}"></a>
+        <div class="author-information">
+            <div class="primary-post-author">
+                <div class="blog-name-title-grouping">
+                    <a class="link blog-name" href="/{{note.blog_name}}">{{note.blog_name}}</a>
+                    <span>{{note.blog_title}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

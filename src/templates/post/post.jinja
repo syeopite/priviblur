@@ -1,0 +1,13 @@
+{% from 'post/components/header.jinja' import create_post_header  %}
+<div class="post" data-post-id="{{element.id}}">
+    {%- if post_url is not defined -%} 
+        {%- set post_url = element.blog.name|e + "/" + element.id | e -%}
+        {%- if element.slug -%}
+            {%- set post_url = post_url + "/" + element.slug | e -%}
+        {%- endif -%}
+    {%- endif -%}
+
+    {{- create_post_header(request, element, use_this_post_url=post_url) -}}
+    {% include 'post/components/body.jinja'  %}
+    {% include 'post/components/footer.jinja'  %}
+</div>
