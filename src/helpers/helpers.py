@@ -93,7 +93,7 @@ def prefix_slash_in_url_if_missing(url):
     if not url.startswith("/"):
         return f"/{url}"
     else:
-        return f"/{url.lstrip("/")}"
+        return f"/{url.lstrip('/')}"
 
 
 async def create_poll_callback(ctx, blog, post_id):
