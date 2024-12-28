@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.21
 WORKDIR /priviblur
 
 COPY ./.git/ ./.git/
