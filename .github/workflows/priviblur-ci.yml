@@ -39,6 +39,9 @@ jobs:
 
     - name: Setup config
       run: cp config.example.toml config.toml
+
+    - name: Compile locales
+      run: pybabel compile -d locales -D priviblur
       
     - name: Run 
       run : |
