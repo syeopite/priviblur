@@ -62,7 +62,12 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
     if continuation := request.args.get("continuation"):
         continuation = urllib.parse.unquote(continuation)
 
-    blog = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
+    try:
+        blog = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
+    except IndexError:
+        # When no search results are found blog information will also be missing
+        blog = await get_blog_posts(request.app.ctx, blog)
+        blog.posts.clear()
 
     return await sanic_ext.render(
         "blog/blog_search.jinja",
