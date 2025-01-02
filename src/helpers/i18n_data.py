@@ -1,5 +1,5 @@
 LOCALE_DATA = {
-    "cs_CZ": ("Čeština (česko)", 89),
+    "cs_CZ": ("Čeština (česko)", 98),
     "de": ("Deutsch", 33),
     "en_US": ("English (united states)", 100),
     "es": ("Español", 89),
