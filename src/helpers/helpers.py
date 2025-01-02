@@ -3,14 +3,35 @@ import copy
 import urllib.parse
 from typing import Sequence
 
-import sanic
+import dominate.tags
 
 from ..cache import get_poll_results
 
 
-def url_handler(raw_url):
+def is_tumblr_url(url : str | urllib.parse.ParseResult):
+    """Checks URL is a tumblr URL"""
+    if isinstance(url, str):
+        url = urllib.parse.urlparse(url)
+    elif isinstance(url, urllib.parse.ParseResult):
+        url = url
+    else:
+        raise False
+
+    hostname = url.hostname
+
+    if hostname and (hostname == "tumblr.com" or hostname.endswith(".tumblr.com")):
+        return True
+    return False
+
+
+def url_handler(url : str | urllib.parse.ParseResult):
     """Change URLs found in posts to privacy-friendly alternatives"""
-    url = urllib.parse.urlparse(raw_url)
+    if isinstance(url, str):
+        url = urllib.parse.urlparse(url)
+    elif isinstance(url, urllib.parse.ParseResult):
+        url = url
+    else:
+        raise ValueError
 
     hostname = url.hostname
 
@@ -60,7 +81,35 @@ def url_handler(raw_url):
             else:
                 return f"{url.path}"
 
-    return raw_url
+    return url.geturl()
+
+
+def create_reblog_attribution_link(post):
+    """Creates an attribution of who the author reblogged the post from"""
+    reblog_from_url = urllib.parse.urlparse(post.reblog_from.post_url)
+    reblog_attribution_element_classes = ["link", "blog-name"]
+
+    if post.reblog_from.blog_name:
+        reblogged_from_name = post.reblog_from.blog_name
+    else:
+        reblogged_from_name = "reblogged"
+        reblog_attribution_element_classes.append("hidden-reblog")
+
+    if not is_tumblr_url(reblog_from_url):
+        if (post.reblog_root.post_id == post.reblog_from.post_id) and post.reblog_root.blog_name:
+            reblog_from_url = f"/{post.reblog_root.blog_name}/{post.reblog_from.id}"
+        else:
+            # In case we are unable to find a tumblr URL to use
+            return dominate.tags.span(
+                reblogged_from_name,
+                cls="blog-name hidden-reblog"
+            )
+
+    return dominate.tags.a(
+        reblogged_from_name,
+        href=url_handler(reblog_from_url),
+        cls=' '.join(reblog_attribution_element_classes)
+    )
 
 
 def update_query_params(base_query_args, key, value):

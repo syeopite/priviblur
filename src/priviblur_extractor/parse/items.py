@@ -105,7 +105,6 @@ class PostParser:
         else:
             return None
 
-
     @staticmethod
     def parse_community_label(initial_data):
         community_labels = []
@@ -201,7 +200,9 @@ class PostParser:
         if reblogged_from_id := self.target.get("rebloggedFromId"):
             reblog_from_information = models.post.ReblogAttribution(
                 post_id=reblogged_from_id,
-                post_url=self.target["rebloggedFromUrl"],
+                # If a blog uses a custom domain then the rebloggedFromUrl will be that domain
+                # thus we'll try to extract the original tumblr URL from the parentPostUrl attr instead.
+                post_url=self.target["parentPostUrl"],
                 blog_name=self.target["rebloggedFromName"],
                 blog_title=self.target["rebloggedFromTitle"],
             )
