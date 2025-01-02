@@ -8,9 +8,14 @@ import sanic
 from ..cache import get_poll_results
 
 
-def url_handler(raw_url):
+def url_handler(url : str | urllib.parse.ParseResult):
     """Change URLs found in posts to privacy-friendly alternatives"""
-    url = urllib.parse.urlparse(raw_url)
+    if isinstance(url, str):
+        url = urllib.parse.urlparse(url)
+    elif isinstance(url, urllib.parse.ParseResult):
+        url = url
+    else:
+        raise ValueError
 
     hostname = url.hostname
 
