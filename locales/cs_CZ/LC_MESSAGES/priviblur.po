@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-08-25 12:09+0000\n"
+"PO-Revision-Date: 2024-12-28 11:00+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/priviblur/"
 "translations/cs/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -121,7 +121,7 @@ msgid "tumblr_error_blog_login_required_error_description"
 msgstr "Zkuste místo toho najít reblogy!"
 
 msgid "tumblr_error_restricted_tag_error_heading"
-msgstr "Tato značka byla na Tumblr omezena"
+msgstr "Tento štítek byl na Tumblr omezen"
 
 msgid "tumblr_error_restricted_tag_description"
 msgstr "Zkuste místo toho použít vyhledávání"
@@ -268,3 +268,30 @@ msgstr "Avatar blogu"
 
 msgid "priviblur_licences_page_title"
 msgstr "Licence"
+
+msgid "dropdown_filter_menu_text"
+msgstr "Filtr"
+
+msgid "post_note_viewer_view_likes_tab_title"
+msgstr "Líbí se"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "Komentáře a štítky"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "Další reblogy"
+
+msgid "post_note_viewer_view_reblogs_tab_title"
+msgstr "Reblogy"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "Od nejnovějších"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "Pouze komentáře"
+
+msgid "post_note_viewer_view_replies_tab_title"
+msgstr "Odpovědi"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "Od nejstarších"
