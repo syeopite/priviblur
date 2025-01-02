@@ -147,6 +147,7 @@ async def initialize(app):
     app.ext.environment.globals["url_handler"] = helpers.url_handler
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
+    app.ext.environment.globals["create_reblog_attribution"] = helpers.create_reblog_attribution_link
 
     app.ext.environment.tests["a_post"] = lambda element : isinstance(element, priviblur_extractor.models.post.Post)
 
