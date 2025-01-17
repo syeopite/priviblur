@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-11-27 04:00+0000\n"
-"Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
+"PO-Revision-Date: 2025-01-18 16:00+0000\n"
+"Last-Translator: Poesty Li <poesty7450@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/priviblur/translations/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -26,7 +26,7 @@ msgstr "- Priviblur"
 
 msgid "post_note_count"
 msgid_plural "post_note_count_plural"
-msgstr[0] ""
+msgstr[0] "{0} 条记录"
 
 msgid "timeline_search_sort_by_filter_title"
 msgstr "分类"
@@ -98,7 +98,7 @@ msgid "timeline_tagged_sort_by_filter_title"
 msgstr "分类方式"
 
 msgid "timeline_tagged_sort_by_filter_top"
-msgstr ""
+msgstr "顶部"
 
 msgid "timeline_tagged_sort_by_filter_recent"
 msgstr "最新"
@@ -107,118 +107,118 @@ msgid "explore_trending_page_title"
 msgstr "话题趋势"
 
 msgid "explore_today_on_tumblr_page_title"
-msgstr "今日Tumblr"
+msgstr "今日 Tumblr"
 
 msgid "pagination_next_page"
 msgstr "下一页"
 
 msgid "tumblr_error_blog_login_required_error_heading"
-msgstr "这篇博客需要一个帐号才能查看"
+msgstr "这篇博客需要一个账号才能查看"
 
 msgid "tumblr_error_blog_login_required_error_description"
 msgstr "另尝试寻找转载博文！"
 
 msgid "tumblr_error_restricted_tag_error_heading"
-msgstr "这个标签在Tumblr上被限制了"
+msgstr "这个标签在 Tumblr 上被限制了"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr ""
+msgstr "请尝试进行搜索"
 
 msgid "tumblr_error_blog_not_found_error_heading"
-msgstr "不能找到要求的博客"
+msgstr "无法找到请求的博客"
 
 msgid "tumblr_error_blog_not_found_error_description"
 msgstr "博客可能被删除了或者没有存在过"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_heading"
-msgstr "错误：对Tumblr的请求超时"
+msgstr "错误：对 Tumblr 的请求超时"
 
 msgid "priviblur_error_request_to_tumblr_timed_out_description"
-msgstr "Priviblur不能在超时前完成对Tumblr的请求"
+msgstr "Priviblur 在超时前无法完成对 Tumblr 的请求"
 
 msgid "priviblur_error_invalid_internal_tumblr_redirect"
-msgstr ""
+msgstr "错误：Tumblr HTTP 301 重定向指向外部 URL"
 
 msgid "priviblur_error_generic"
-msgstr ""
+msgstr "出现了未知错误!"
 
 msgid "priviblur_error_generic_description"
-msgstr ""
+msgstr "看来您发现了 Priviblur 中的一个错误。"
 
 msgid "priviblur_error_generic_description_2"
-msgstr ""
+msgstr "请在 GitHub 上报告"
 
 msgid "priviblur_error_generic_technical_details_error_name"
-msgstr ""
+msgstr "错误：{0}"
 
 msgid "priviblur_error_generic_technical_details_error_message"
-msgstr ""
+msgstr "消息：{0}"
 
 msgid "priviblur_error_generic_technical_details_error_context"
-msgstr ""
+msgstr "上下文："
 
 msgid "post_community_label_mature_heading"
-msgstr ""
+msgstr "社区标签：成人"
 
 msgid "post_community_label_generic_explanation"
-msgstr ""
+msgstr "这条帖子可能包含不适合所有人阅览的内容。"
 
 msgid "post_community_label_sexual_themes"
-msgstr ""
+msgstr "性主题"
 
 msgid "post_community_label_drug_use"
-msgstr ""
+msgstr "酗酒和吸毒"
 
 msgid "post_community_label_violence"
-msgstr ""
+msgstr "暴力"
 
 msgid "post_community_label_show_post_button"
-msgstr ""
+msgstr "显示帖子"
 
 msgid "post_community_label_no_js_show_post_instructions"
-msgstr ""
+msgstr "悬停时显示"
 
 msgid "blog_search_placeholder_text"
-msgstr ""
+msgstr "搜索帖子"
 
 msgid "settings_header"
-msgstr ""
+msgstr "设置"
 
 msgid "settings_language_selector"
-msgstr ""
+msgstr "语言"
 
 msgid "settings_language_selector_desc"
-msgstr ""
+msgstr "选择 Priviblur 应该使用的语言"
 
 msgid "settings_theme_selector"
-msgstr ""
+msgstr "主题"
 
 msgid "settings_theme_selector_desc"
-msgstr ""
+msgstr "选择要显示的主题"
 
 msgid "settings_theme_selector_option_auto"
-msgstr ""
+msgstr "自动选择"
 
 msgid "settings_theme_selector_option_light"
-msgstr ""
+msgstr "亮色"
 
 msgid "settings_theme_selector_option_dark"
-msgstr ""
+msgstr "暗色"
 
 msgid "settings_save_changes"
-msgstr ""
+msgstr "保存更改"
 
 msgid "settings_cancel_changes"
-msgstr ""
+msgstr "取消"
 
 msgid "settings_copy_as_bookmarklet"
-msgstr ""
+msgstr "复制为小书签"
 
 msgid "settings_copy_as_bookmarklet_confirmed"
-msgstr ""
+msgstr "已复制"
 
 msgid "settings_copy_as_bookmarklet_failed"
-msgstr ""
+msgstr "无法复制"
 
 msgid "search_bar_placeholder_text"
 msgstr "搜索"
@@ -227,26 +227,67 @@ msgid "navbar_trending_icon_title"
 msgstr "趋势"
 
 msgid "navbar_right_view_page_on_tumblr_link_title"
-msgstr "在Tumblr上浏览页面"
+msgstr "在 Tumblr 上浏览页面"
 
 msgid "navbar_right_settings_page_title"
 msgstr "设置"
 
 msgid "footer_source_link_text"
-msgstr "来源"
+msgstr "源代码"
 
 msgid "footer_donate_link_text"
-msgstr "捐助"
+msgstr "捐赠"
 
 msgid "footer_licences_link_text"
-msgstr "证书"
+msgstr "许可证"
 
 msgid "navbar_today_on_tumblr_icon_title"
 msgstr "今日Tumblr"
 
-#, fuzzy
 msgid "footer_version_text"
 msgstr "版本 {0}"
 
 msgid "priviblur_error_page_title"
 msgstr "错误"
+
+msgid "blog_banner_alt"
+msgstr "博客海报"
+
+msgid "post_footer_permalink_icon_title"
+msgstr "永久链接"
+
+msgid "dropdown_filter_menu_text"
+msgstr "过滤"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "在 Tumblr 上查看"
+
+msgid "blog_avatar_alt"
+msgstr "博客头像"
+
+msgid "priviblur_licences_page_title"
+msgstr "许可证"
+
+msgid "post_note_viewer_view_replies_tab_title"
+msgstr "回复"
+
+msgid "post_note_viewer_view_reblogs_tab_title"
+msgstr "转载"
+
+msgid "post_note_viewer_view_likes_tab_title"
+msgstr "点赞"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "评论和标签"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "只显示评论"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "其它转发"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "最旧优先"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "最新优先"
