@@ -154,8 +154,8 @@ class NPFFormatter(npf_renderer.format.Formatter):
 
         return poll_html
 
-    def _format_image(self, block, row_length=1, override_padding=None):
-        image_html = super()._format_image(block, row_length, override_padding)
+    def _format_image(self, block, row_length=1, override_aspect_ratio=None):
+        image_html = super()._format_image(block, row_length, override_aspect_ratio)
 
         try:
             image_element = image_html.getElementsByTagName("img")
