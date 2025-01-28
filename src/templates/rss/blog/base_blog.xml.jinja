@@ -1,6 +1,6 @@
+{% extends "rss/base.xml.jinja" %}
 {% from 'post/components/header.jinja' import create_post_header  %}
 {% from 'macros/add_query.jinja' import add_query  %}
-{% extends "rss/base.xml.jinja" %}
 {% block title %}{{blog.blog_info.title | e}}{% endblock %}
 {% block logo %}
     <image>
