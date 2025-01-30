@@ -4,7 +4,7 @@
 {%- endif -%}
 
 <item>
-    <title>{{post.summary | e}}</title>
+    <title>{% if post.summary%}{{post.summary|e}}{% elif post.blog.title %}{{post.blog.title | e}}{% else %}{{post.blog.name | e}}{% endif %}</title>
     <link>{{post_url}}</link>
     <atom:link rel="self" href="{{post_url}}?rss_feed=1" type="application/rss+xml"/>
     <atom:link rel="alternate" href="{{post_url}}"/>
