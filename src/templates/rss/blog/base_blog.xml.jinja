@@ -10,7 +10,7 @@
     </image>
     <atom:logo><atom:icon>{{url_handler(blog.blog_info.avatar[-2].url)}}</atom:icon></atom:logo>
 {% endblock %}
-{% block author %}<name>{{blog.blog_info.name}}</name>{% endblock %}
+{% block channel_fields %}<atom:author><name>{{blog.blog_info.name}}</name></atom:author>{% endblock %}
 
 {% block description %}
     {%- if blog.blog_info.description_npf -%}
