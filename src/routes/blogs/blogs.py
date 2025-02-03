@@ -64,17 +64,19 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
         continuation = urllib.parse.unquote(continuation)
 
     try:
-        blog = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
+        blog_timeline = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
     except IndexError:
-        # When no search results are found blog information will also be missing
-        blog = await get_blog_posts(request.app.ctx, blog)
-        blog.posts.clear()
+        blog_timeline = priviblur_extractor.models.timelines.BlogTimeline(
+            blog_info=(await get_blog_posts(request.app.ctx, blog)).blog_info,
+            posts=[],
+            total_posts=0
+        )
 
     return await request.app.ctx.render(
         "blog/blog_search",
         context={
             "app": request.app,
-            "blog": blog,
+            "blog": blog_timeline,
             "blog_search_query": query,
         },
     )
