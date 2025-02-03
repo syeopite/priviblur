@@ -1,0 +1,299 @@
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Priviblur project.
+# syeopite <syeopite@syeopite.dev>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Priviblur v0.3.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: 2025-01-28 20:01+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/priviblur/"
+"translations/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+
+msgid "project_title"
+msgstr "தனியுரிமை"
+
+msgid "page_title_suffix"
+msgstr "- தனியுரிமை"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "{0} குறிப்பு"
+msgstr[1] "{0} குறிப்புகள்"
+
+msgid "search_bar_placeholder_text"
+msgstr "தேடல்"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "இன்று Tumblr இல்"
+
+msgid "navbar_trending_icon_title"
+msgstr "டிரெண்டிங்"
+
+msgid "navbar_right_view_page_on_tumblr_link_title"
+msgstr "Tumblr இல் பக்கத்தைக் காண்க"
+
+msgid "navbar_right_settings_page_title"
+msgstr "அமைப்புகள்"
+
+msgid "footer_version_text"
+msgstr "பதிப்பு {0}"
+
+msgid "footer_source_link_text"
+msgstr "மூலம்"
+
+msgid "footer_donate_link_text"
+msgstr "நன்கொடை"
+
+msgid "footer_licences_link_text"
+msgstr "உரிமங்கள்"
+
+msgid "dropdown_filter_menu_text"
+msgstr "வடிப்பி"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "வரிசைப்படுத்தவும்"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "மக்கள்"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "அண்மைக் கால"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "தேதி மூலம் வடிகட்டவும்"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "எல்லா நேரமும்"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "இன்று"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "கடந்த வாரம்"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "கடந்த மாதம்"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "கடந்த 6 மாதங்கள்"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "கடந்த ஆண்டு"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "அனைத்து வகைகளும்"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "இடுகை வகை மூலம் வடிகட்டவும்"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "உரை"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "புகைப்படம்"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "Gifs"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "மேற்கோள்"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "இணைப்பு"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "அரட்டை"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "ஆடியோ"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "ஒளிதோற்றம்"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "கேளுங்கள்"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "வாக்கெடுப்பு"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "வரிசைப்படுத்தவும்"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "மேலே"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "அண்மைக் கால"
+
+msgid "explore_trending_page_title"
+msgstr "பிரபலமான தலைப்புகள்"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "இன்று Tumblr இல்"
+
+msgid "pagination_next_page"
+msgstr "அடுத்த பக்கம்"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "இந்த வலைப்பதிவைக் காண ஒரு கணக்கு தேவைப்படுகிறது"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "அதற்கு பதிலாக மறுபிரவேசங்களைக் கண்டுபிடிக்க முயற்சிக்கவும்!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "இந்த குறிச்சொல் Tumblr இல் கட்டுப்படுத்தப்பட்டுள்ளது"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "அதற்கு பதிலாக ஒரு தேடலை செய்ய முயற்சிக்கவும்"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "கோரப்பட்ட வலைப்பதிவைக் கண்டுபிடிக்க முடியவில்லை"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "வலைப்பதிவு நீக்கப்பட்டிருக்கலாம் அல்லது ஒருபோதும் இருந்ததில்லை"
+
+msgid "priviblur_error_page_title"
+msgstr "பிழை"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "பிழை: Tumblr க்கான கோரிக்கை நேரம் முடிந்தது"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr ""
+"தனியுரிமை நேரம் வெளியேறுவதற்கு முன்பு Tumblr க்கான கோரிக்கையை முடிக்க முடியவில்லை"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "பிழை: Tumblr http 301 முறுவாக்கும் புள்ளிகள் வெளிநாட்டு முகவரி"
+
+msgid "priviblur_error_generic"
+msgstr "அறியப்படாத விதிவிலக்கு ஏற்பட்டுள்ளது!"
+
+msgid "priviblur_error_generic_description"
+msgstr "நீங்கள் தனியுரிமையில் ஒரு பிழையைக் கண்டுபிடித்ததாகத் தெரிகிறது."
+
+msgid "priviblur_error_generic_description_2"
+msgstr "தயவுசெய்து அதை இங்கே கிதுபில் புகாரளிக்கவும்"
+
+msgid "priviblur_error_generic_technical_details_error_name"
+msgstr "பிழை: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_message"
+msgstr "செய்தி: {0}"
+
+msgid "priviblur_error_generic_technical_details_error_context"
+msgstr "சூழல்:"
+
+msgid "post_community_label_mature_heading"
+msgstr "சமூக லேபிள்: முதிர்ந்தது"
+
+msgid "post_community_label_generic_explanation"
+msgstr "இந்த இடுகையில் அனைத்து பார்வையாளர்களுக்கும் ஏற்ற உள்ளடக்கம் இருக்கலாம்."
+
+msgid "post_community_label_sexual_themes"
+msgstr "பாலியல் கருப்பொருள்கள்"
+
+msgid "post_community_label_drug_use"
+msgstr "போதைப்பொருள் மற்றும் ஆல்கஆல் மயக்கம்"
+
+msgid "post_community_label_violence"
+msgstr "வன்முறை"
+
+msgid "post_community_label_show_post_button"
+msgstr "இடுகையைக் காட்டு"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "ஓவர் மீது வெளிப்படுத்துகிறது"
+
+msgid "post_footer_permalink_icon_title"
+msgstr "பெர்மாலின்க்"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr ""
+
+msgid "blog_search_placeholder_text"
+msgstr "இடுகைகளைத் தேடுங்கள்"
+
+msgid "blog_banner_alt"
+msgstr "வலைப்பதிவு பேனர்"
+
+msgid "blog_avatar_alt"
+msgstr "வலைப்பதிவு அவதார்"
+
+msgid "settings_header"
+msgstr "அமைப்புகள்"
+
+msgid "settings_language_selector"
+msgstr "மொழி"
+
+msgid "settings_language_selector_desc"
+msgstr ""
+"எந்த மொழியை நீங்கள் பயன்படுத்த விரும்புகிறீர்கள் என்பதைத் தேர்ந்தெடுக்கவும்"
+
+msgid "settings_theme_selector"
+msgstr "கருப்பொருள்"
+
+msgid "settings_theme_selector_desc"
+msgstr "உங்கள் காட்சி கருப்பொருள் என்பதைத் தேர்ந்தெடுக்கவும்"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "தானி"
+
+msgid "settings_theme_selector_option_light"
+msgstr "ஒளி"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "இருண்ட"
+
+msgid "settings_save_changes"
+msgstr "மாற்றங்களைச் சேமிக்கவும்"
+
+msgid "settings_cancel_changes"
+msgstr "ரத்துசெய்"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "புக்மார்க்கெட்டாக நகலெடுக்கவும்"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "நகலெடுக்கப்பட்டது"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "நகலெடுக்க முடியவில்லை"
+
+msgid "priviblur_licences_page_title"
+msgstr "உரிமங்கள்"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "Tumblr இல் காண்க"
+
+msgid "post_note_viewer_view_replies_tab_title"
+msgstr "பதில்கள்"
+
+msgid "post_note_viewer_view_reblogs_tab_title"
+msgstr "மறுபதிப்பு"
+
+msgid "post_note_viewer_view_likes_tab_title"
+msgstr "பிடிக்கும்"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "கருத்துகள் மற்றும் குறிச்சொற்கள்"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "கருத்துகள் மட்டுமே"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "பிற மறுபிரவேசங்கள்"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "முதலில் பழமையானது"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "புதிய முதல்"
