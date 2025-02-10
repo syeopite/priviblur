@@ -72,13 +72,13 @@ msgid "poll_ended_on"
 msgstr "Ended on: {ended_date}"
 
 msgid "post_attribution"
-msgstr "From {0}"
+msgstr "From {author}"
 
 msgid "blog_attribution"
-msgstr "Created by {0}"
+msgstr "Created by {author}"
 
 msgid "app_attribution"
-msgstr "View on {0}"
+msgstr "View on {platform}"
 
 msgid "unsupported_attribution"
-msgstr "Attributed via an unsupported (\"{0}\") attribution type. Please report this over at https://github.com/syeopite/npf-renderer"
+msgstr "Attributed via an unsupported (\"{attributee}\") attribution type. Please report this over at https://github.com/syeopite/npf-renderer"

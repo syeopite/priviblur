@@ -1,45 +1,11 @@
 import sys
 import gettext
 import typing
-import functools
 
 import sanic
-import babel
-import babel.dates
-import npf_renderer
 
 from .i18n_data import LOCALE_DATA
-
-
-class NPFRendererGettextFallback(gettext.NullTranslations):
-    def gettext(self, message):
-        return npf_renderer.DEFAULT_LOCALIZATION[message]
-
-    def ngettext(self, msgid1: str, msgid2: str, n: int) -> str:
-        return npf_renderer.DEFAULT_LOCALIZATION[msgid1]
-
-
-class NPFRendererLocalizer:
-    def __init__(self, language, locale):
-        self.language = language
-        self.locale = locale
-
-        self.format_functions = {
-            "format_duration_func": functools.partial(babel.dates.format_timedelta, threshold=1.1, locale=language),
-            "format_datetime_func": functools.partial(babel.dates.format_datetime, format=f"short", locale=language),
-        }
-
-    def __getitem__(self, key : str):
-        # Starts with format_
-        if key[:7] == "format_":
-            return self.format_functions[key]
-        # Starts with plural_
-        elif key[:7] == "plural_":
-            return lambda number : translate(self.language, key[7:], number, priviblur_translations=False)
-
-        translate("en_US", "poll_remaining_time", priviblur_translations=False)
-
-        return translate(self.language, key, priviblur_translations=False)
+from .npf_renderer_localizer import NPFRendererGettextFallback, NPFRendererLocalizer
 
 
 class Language:
@@ -47,14 +13,13 @@ class Language:
     def __init__(self, locale, priviblur_gettext, npf_renderer_gettext) -> None:
         self.locale = locale
 
-        self.babel_locale = babel.Locale.parse(locale)
-
         self.priviblur_translations = priviblur_gettext
 
         self.npf_renderer_translations = npf_renderer_gettext
-        self.npf_renderer_localizer = NPFRendererLocalizer(locale, self.babel_locale)
+        self.npf_renderer_localizer = NPFRendererLocalizer(locale, translate)
 
         self.name, self.translation_percentage = LOCALE_DATA[locale]
+
 
 SUPPORTED_LANGUAGES = [
     "en_US", "cs_CZ", "fr", "ja", "uk", "zh_Hans", "zh_Hant", "es", "nb_NO", "de", "ta"
