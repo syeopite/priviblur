@@ -14,7 +14,7 @@
 
 {% block description %}
     {%- if blog.blog_info.description_npf -%}
-        {%- set _, description_html = format_npf(blog.blog_info.description_npf) -%}
+        {%- set _, description_html = format_npf(blog.blog_info.description_npf, request=request) -%}
     {%- else -%}
         {%- set description_html = "" %}
     {%- endif -%}
