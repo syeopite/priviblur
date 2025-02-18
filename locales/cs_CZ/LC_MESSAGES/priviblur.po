@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2024-12-28 11:00+0000\n"
-"Last-Translator: Fjuro <fjuro@alius.cz>\n"
+"PO-Revision-Date: 2025-02-19 00:06+0000\n"
+"Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/priviblur/"
 "translations/cs/>\n"
 "Language: cs_CZ\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.10.1-dev\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -295,3 +295,79 @@ msgstr "Odpovědi"
 
 msgid "post_note_viewer_view_replies_filter_sort_oldest"
 msgstr "Od nejstarších"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "Rozbalit příspěvky"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr "Automaticky rozbalí zkrácené příspěvky"
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "Anonym"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} se zeptal/a"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "Nepodporovaný blok NPF"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr ""
+"Placeholder pro nepodporovaný typ „{block}“ bloku NPF. Tuto chybu prosím "
+"nahlaste na https://github.com/syeopite/npf-renderer"
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "obrázek"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "Náhled obrázku pro „{site}“"
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr "Vložení jsou zakázána"
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr "Chyba: nepodařilo se vykreslit blok videa"
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "Klikněte sem pro zobrazení videa na původní stránce"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr "Obal alba"
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "Chyba: nepodařilo se vykreslit blok zvuku"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "Chyba: zdroj přehrávače videa není tumblr"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "Klikněte sem pro poslech na původní stránce"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "Chyba: zdroj přehrávače zvuku není tumblr"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} hlas"
+msgstr[1] "{votes} hlasy"
+msgstr[2] "{votes} hlasů"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "Zbývá {duration}"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "Skončilo: {ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "Autor: {author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "Vytvořil/a {author}"
+
+msgid "npf_renderer_app_attribution"
+msgstr "Zobrazit na platformě {platform}"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr ""
+"Připsáno prostřednictvím nepodporovaného typu atributu („{attributee}“). "
+"Nahlaste to prosím na https://github.com/syeopite/npf-renderer"
