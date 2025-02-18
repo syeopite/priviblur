@@ -10,12 +10,11 @@ from .npf_renderer_localizer import NPFRendererGettextFallback, NPFRendererLocal
 
 class Language:
     """Stores metadata about supported translations"""
-    def __init__(self, locale, priviblur_gettext, npf_renderer_gettext) -> None:
+    def __init__(self, locale, priviblur_gettext) -> None:
         self.locale = locale
 
         self.priviblur_translations = priviblur_gettext
 
-        self.npf_renderer_translations = npf_renderer_gettext
         self.npf_renderer_localizer = NPFRendererLocalizer(locale, translate)
 
         self.name, self.translation_percentage = LOCALE_DATA[locale]
@@ -35,11 +34,8 @@ def initialize_locales() -> typing.Mapping[str, Language]:
 
         priviblur_english_instance = gettext.translation("priviblur", localedir="locales", languages=("en_US",))
 
-        npf_renderer_english_instance = gettext.translation("npf_renderer", localedir="locales", languages=("en_US",))
-        npf_renderer_english_instance.add_fallback(NPFRendererGettextFallback())
-
         languages = {
-            "en_US": Language("en_US", priviblur_english_instance, npf_renderer_english_instance)
+            "en_US": Language("en_US", priviblur_english_instance)
         }
 
         for locale in SUPPORTED_LANGUAGES:
@@ -49,12 +45,7 @@ def initialize_locales() -> typing.Mapping[str, Language]:
             instance = gettext.translation("priviblur", localedir="locales", languages=(locale,))
             instance.add_fallback(priviblur_english_instance)
 
-            try:
-                npf_renderer_instance = gettext.translation("npf_renderer", localedir="locales", languages=(locale,))
-            except FileNotFoundError:
-                npf_renderer_instance = npf_renderer_english_instance
-
-            languages[locale] = Language(locale, instance, npf_renderer_instance)
+            languages[locale] = Language(locale, instance)
     except FileNotFoundError as e:
         print(
             'Error: Unable to find locale files. '
@@ -69,13 +60,10 @@ def initialize_locales() -> typing.Mapping[str, Language]:
 
 
 def translate(language : str, id : str, number : int | float | None = None,
-              substitution : str | dict | None = None, priviblur_translations : bool = True) -> str:
+              substitution : str | dict | None = None) -> str:
     app = sanic.Sanic.get_app("Priviblur")
 
-    if priviblur_translations:
-        gettext_instance = app.ctx.LANGUAGES[language].priviblur_translations
-    else:
-        gettext_instance = app.ctx.LANGUAGES[language].npf_renderer_translations
+    gettext_instance = app.ctx.LANGUAGES[language].priviblur_translations
 
     if number is not None:
         translated = gettext_instance.ngettext(id, f"{id}_plural", number)

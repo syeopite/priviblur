@@ -39,10 +39,14 @@ class NPFRendererStringsLocalizer:
     def __init__(self, language, translate_func):
         self.language = language
 
-        self.translate = translate_func
+        self.translate_func = translate_func
+
+    def translate(self, key, *args):
+        key = f"npf_renderer_{key}"
+        return self.translate_func(self.language, key, *args)
 
     def __getitem__(self, key : str):
         if key[:7] == "plural_":
-            return lambda number : self.translate(self.language, key[7:], number, priviblur_translations=False)
+            return lambda number : self.translate(key[7:], number)
         else:
-            return self.translate(self.language, key, priviblur_translations=False)
+            return self.translate(key)
