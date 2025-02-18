@@ -5,7 +5,7 @@ import sanic
 import sanic_ext
 
 # Wrapper around sanic_ext.render
-def render_template(
+async def render_template(
     template: str = "",
     context: Optional[Dict[str, Any]] = None,
     **kwargs
@@ -42,7 +42,7 @@ def render_template(
 
     template = f"{template}.jinja"
 
-    return sanic_ext.render(
+    return await sanic_ext.render(
         template,
         context=jinja_context,
         app=request.app,

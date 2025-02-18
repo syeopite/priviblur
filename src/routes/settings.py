@@ -8,8 +8,8 @@ settings = sanic.Blueprint("settings", url_prefix="/settings")
 
 @settings.get("/")
 async def settings_page(request):
-    return await sanic_ext.render(
-        "settings.jinja",
+    return await request.app.ctx.render(
+        "settings",
         context={
             "app": request.app,
         }
@@ -20,8 +20,8 @@ async def settings_page(request):
 async def settings_post(request):
     request.ctx.preferences = request.ctx.preferences.replace_from_forms(request)
 
-    response = await sanic_ext.render(
-        "settings.jinja",
+    response = await request.app.ctx.render(
+        "settings",
         context={
             "app": request.app,
         }
@@ -39,8 +39,8 @@ async def settings_post(request):
 async def settings_restore(request):
     request.ctx.preferences = request.ctx.preferences.replace_from_query(request)
 
-    response = await sanic_ext.render(
-        "settings.jinja",
+    response = await request.app.ctx.render(
+        "settings",
         context={
             "app": request.app,
         }

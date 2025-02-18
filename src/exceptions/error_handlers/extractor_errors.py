@@ -8,8 +8,8 @@ extractor_errors = _base.ErrorHandlerGroup()
 
 @extractor_errors.register(priviblur_exceptions.TumblrLoginRequiredError)
 async def tumblr_error_login_walled(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,
@@ -22,8 +22,8 @@ async def tumblr_error_login_walled(request, exception):
 
 @extractor_errors.register(priviblur_exceptions.TumblrRestrictedTagError)
 async def tumblr_error_restricted_tag(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,
@@ -36,8 +36,8 @@ async def tumblr_error_restricted_tag(request, exception):
 
 @extractor_errors.register(priviblur_exceptions.TumblrBlogNotFoundError)
 async def tumblr_error_unknown_blog(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,

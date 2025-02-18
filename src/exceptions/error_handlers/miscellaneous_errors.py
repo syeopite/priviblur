@@ -12,8 +12,8 @@ miscellaneous_errors = _base.ErrorHandlerGroup()
 
 @miscellaneous_errors.register(asyncio.TimeoutError)
 async def request_timeout(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,
@@ -26,8 +26,8 @@ async def request_timeout(request, exception):
 
 @miscellaneous_errors.register(sanic.exceptions.NotFound, IsADirectoryError)
 async def error_404(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,
@@ -40,8 +40,8 @@ async def error_404(request, exception):
 
 @miscellaneous_errors.register(exceptions.TumblrInvalidRedirect)
 async def invalid_redirect(request, exception):
-    return await sanic_ext.render(
-        "misc/msg_error.jinja",
+    return await request.app.ctx.render(
+        "misc/msg_error",
         context={
             "app": request.app,
             "exception": exception,
@@ -55,8 +55,8 @@ async def invalid_redirect(request, exception):
 async def generic_error(request, exception):
     name, message, context = _base.create_user_friendly_error_message(request, exception)
 
-    return await sanic_ext.render(
-        "misc/generic_error.jinja",
+    return await request.app.ctx.render(
+        "misc/generic_error",
         context={
             "app": request.app,
             "exception": exception,
