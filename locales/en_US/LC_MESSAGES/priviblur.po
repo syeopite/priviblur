@@ -297,3 +297,74 @@ msgstr "Oldest first"
 
 msgid "post_note_viewer_view_replies_filter_sort_newest"
 msgstr "Newest first"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "Expand posts"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr "Expands truncated posts automatically"
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "Anonymous"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} asked"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "Unsupported NPF block"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr "Placeholder for the unsupported \"{block}\" type NPF block Please report me over at https://github.com/syeopite/npf-renderer"
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "image"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "Preview image for \"{site}\""
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr "Embeds are disabled"
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr "Error: unable to render video block"
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "Please click me to watch on the original site"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "Error: non-tumblr source for video player"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr "Album art"
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "Error: unable to render audio block"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "Please click me to listen on the original site"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "Error: non-tumblr source for audio player"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} vote"
+msgstr[1] "{votes} votes"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "{duration} remaining"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "Ended on: {ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "From {author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "Created by {author}"
+
+msgid "npf_renderer_app_attribution"
+msgstr "View on {platform}"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr "Attributed via an unsupported (\"{attributee}\") attribution type. Please report this over at https://github.com/syeopite/npf-renderer"

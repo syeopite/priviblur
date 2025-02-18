@@ -43,6 +43,7 @@ body {
     --color-primary-900: hsl(25, 100%, 15%);
     --color-primary-800: hsl(27, 50%, 30%);
     --color-primary-700: hsl(30, 50%, 40%);
+    --color-primary-650: hsl(33, 70%, 42%);
     --color-primary-600: hsl(33, 70%, 45%);
     --color-primary-500: hsl(36, 80%, 50%);
     --color-primary-400: hsl(36, 90%, 60%);
@@ -106,6 +107,9 @@ body {
     --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-700));
     --color-poll-proportion-bar-bg: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-300));
     --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-500));
+
+    --color-post-reveal-truncated-content-button: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-650));
+    --color-post-reveal-truncated-content-button-hover: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-600));
 
     --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
     --color-post-footer-post-interaction: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-225));
