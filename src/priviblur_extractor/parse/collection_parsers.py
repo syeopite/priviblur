@@ -74,7 +74,7 @@ class BlogTimelineParser:
 
     @classmethod
     def process(cls, initial_data):
-        if initial_data.get("blog"):
+        if "blog" in initial_data:
             return cls(initial_data).parse()
         else:
             return None
@@ -125,9 +125,9 @@ class NoteTimelineParser:
 
     @classmethod
     def process(cls, initial_data):
-        if initial_data.get("timeline"):
+        if "timeline" in initial_data:
             return cls(initial_data).parse()
-        elif initial_data.get("notes"):
+        elif "notes" in initial_data:
             return cls(initial_data).parse_note_sequence()
         else:
             return None

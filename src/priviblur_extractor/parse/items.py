@@ -280,7 +280,7 @@ class ReblogNoteParser:
         if initial_data.get("type") == "reblog":
             # If blog data isn't given under a blog object then
             # the note is likely a simple reblog note
-            if initial_data.get("blogName"):
+            if "blogName" in initial_data:
                 return cls(initial_data).parse_simple()
             return cls(initial_data).parse()
 
