@@ -5,8 +5,6 @@
         {%- if not element.is_advertisement -%}
             {%- include 'post/post.jinja' -%}
         {%- endif -%}
-    {% else %}
-        {%- include 'components/signpost.jinja' -%}
     {% endif %}
 {%- endfor -%}
 </div>

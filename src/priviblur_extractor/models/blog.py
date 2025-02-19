@@ -63,6 +63,9 @@ class Blog(NamedTuple):
     # If blog is deactivated or not
     active: bool = False
 
+    # Whether or not the blog requires an account to access
+    requires_account_to_view: Optional[bool] = False
+
     def to_json_serialisable(self):
         json_serializable = self._asdict()
 
