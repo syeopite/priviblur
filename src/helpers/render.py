@@ -17,7 +17,7 @@ async def render_template(
 
     jinja_context.update(getattr(request.ctx, "breq_jinja_context", {}))
 
-    if hasattr(request.route.ctx, "rss") or hasattr(request.ctx, "rss"):
+    if request.route and hasattr(request.route.ctx, "rss") or hasattr(request.ctx, "rss"):
         template = getattr(request.route.ctx, "template", None) or template
         template = f"rss/{template}.xml"
         kwargs["content_type"] = "application/rss+xml"
