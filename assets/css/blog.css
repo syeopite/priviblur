@@ -64,3 +64,12 @@
     border-radius: 10px;
     background: var(--color-top-level-card-bg);
 }
+
+.alerts {
+    max-width: 590px;
+}
+
+.alert {
+    width: 100%;
+    margin-top: 20px;
+}
