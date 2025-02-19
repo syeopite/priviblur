@@ -4,6 +4,12 @@
 {% endblock %}
 
 {% block blog_contents %}
+    {% if blog.blog_info.requires_account_to_view %}
+        <div class="alerts">
+            {% include "components/alerts/warn_account_walled_blog_on_post_alert.jinja"%}
+        </div>
+    {% endif %}
+
     <div class="blog-posts">
         {%- include 'post/post.jinja' -%}
     </div>

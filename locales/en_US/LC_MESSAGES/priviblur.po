@@ -374,3 +374,9 @@ msgstr "Restricted search results"
 
 msgid "alert_restricted_results_message"
 msgstr "These search results have been blocked by Tumblr for violating their content guidelines."
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "This blog requires an account to view"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "Only individual posts like this one can be displayed"
