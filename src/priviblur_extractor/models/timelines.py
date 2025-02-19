@@ -98,6 +98,7 @@ class Timeline(NamedTuple):
     Refers to data on a certain page. IE Search or explore
     """
     elements: Sequence[Post | Blog]
+    signposts: Sequence[Signpost] = []
     next: Optional[base.Cursor] = None
 
     def to_json_serialisable(self):
@@ -105,10 +106,12 @@ class Timeline(NamedTuple):
         for element in self.elements:
             if isinstance(element, Post):
                 elements.append({"post": element.to_json_serialisable()})
-            elif isinstance(element, Blog):
-                elements.append({"blog": element.to_json_serialisable()})
             else:
-                elements.append({"signpost": element.to_json_serialisable()})
+                elements.append({"blog": element.to_json_serialisable()})
+
+        signposts = []
+        for signpost in self.signposts:
+            signposts.append(signpost.to_json_serialisable())
 
         next_ = self.next
         if next_:
@@ -126,12 +129,16 @@ class Timeline(NamedTuple):
         for element in json["elements"]:
             if post := element.get("post"):
                 elements.append(Post.from_json(post))
-            elif blog := element.get("blog"): 
-                elements.append(Blog.from_json(blog))
             else:
-                elements.append(Signpost.from_json(element["signpost"]))
+                elements.append(Blog.from_json(element.get("blog")))
 
         json["elements"] = elements
+
+        signposts = []
+        for signpost in json["signposts"]:
+            signposts.append(
+                Signpost.from_json(signpost)
+            )
 
         if json["next"]:
             json["next"] = base.Cursor.from_json(json["next"])

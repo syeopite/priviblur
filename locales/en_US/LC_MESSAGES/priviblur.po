@@ -362,3 +362,15 @@ msgstr "View on {platform}"
 
 msgid "npf_renderer_unsupported_attribution"
 msgstr "Attributed via an unsupported (\"{attributee}\") attribution type. Please report this over at https://github.com/syeopite/npf-renderer"
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "Quick Update on Your Search Results"
+
+msgid "alert_partial_restricted_results_message"
+msgstr "These search results have been partially restricted due to Tumblr's content guidelines. You can expect to see some empty results here sporadically."
+
+msgid "alert_restricted_results_heading"
+msgstr "Restricted search results"
+
+msgid "alert_restricted_results_message"
+msgstr "These search results have been blocked by Tumblr for violating their content guidelines."
