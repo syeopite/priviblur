@@ -507,3 +507,50 @@ li.no-js .control-bar-dropdown-menu {
 .page-footer a {
     text-decoration: underline;
 }
+
+.alerts {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.alert {
+    box-sizing: border-box;
+    overflow: hidden;
+
+    width: 500px;
+    margin: 0 20px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    border: 2px solid var(--color-gray-300);
+    background: var(--color-gray-150);
+}
+
+.alert>figcaption {
+    display: grid;
+    grid-template-areas:
+        "icon heading"
+        ". message";
+    grid-template-columns: max-content 1fr;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.alert svg {
+    height: 24px;
+    grid-area: icon;
+}
+
+.alert h4 {
+    grid-area: heading;
+    color: var(--color-gray-800);
+    margin: 0
+}
+
+.alert p {
+    grid-area: message;
+    color: var(--color-gray-700);
+    font-weight: 500;
+    line-height: 2;
+}
