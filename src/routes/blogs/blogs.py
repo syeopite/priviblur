@@ -2,6 +2,7 @@ import urllib.parse
 
 import sanic
 
+from ... import priviblur_extractor
 from ...cache import get_blog_posts, get_blog_search_results
 
 blogs = sanic.Blueprint("blogs", url_prefix="/")
