@@ -181,14 +181,8 @@ msgstr "It looks like you have found a bug in Priviblur."
 msgid "priviblur_error_generic_description_2"
 msgstr "Please report it here at GitHub"
 
-msgid "priviblur_error_generic_technical_details_error_name"
-msgstr "Error: {0}"
-
-msgid "priviblur_error_generic_technical_details_error_message"
-msgstr "Message: {0}"
-
-msgid "priviblur_error_generic_technical_details_error_context"
-msgstr "Context:"
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "See error log"
 
 msgid "post_community_label_mature_heading"
 msgstr "Community Label: Mature"
