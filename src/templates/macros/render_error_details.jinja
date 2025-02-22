@@ -1,0 +1,9 @@
+{% macro render_error_details(name, message, context) %}
+<details open="">
+<summary>Technical details</summary>
+    <pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_name", substitution=name)}}</pre>
+    {% if exception_message %}<pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_message", substitution='"' + message + '"')}}</pre>{% endif %}
+    <pre>{{-translate(request.ctx.language, "priviblur_error_generic_technical_details_error_context")}}</pre>
+    <pre>{{context}}</pre>
+</details>
+{% endmacro %}
