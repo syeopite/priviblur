@@ -5,9 +5,9 @@ import sanic.exceptions
 import sanic_ext
 
 from src.exceptions import exceptions
-from src.exceptions.error_handlers import _base
+from src.exceptions.error_handlers import base
 
-miscellaneous_errors = _base.ErrorHandlerGroup()
+miscellaneous_errors = base.ErrorHandlerGroup()
 
 
 @miscellaneous_errors.register(asyncio.TimeoutError)
@@ -53,7 +53,7 @@ async def invalid_redirect(request, exception):
 
 @miscellaneous_errors.register(Exception)
 async def generic_error(request, exception):
-    name, message, context = _base.create_user_friendly_error_message(request, exception)
+    name, message, context = base.create_user_friendly_error_message(request, exception)
 
     return await request.app.ctx.render(
         "misc/generic_error",

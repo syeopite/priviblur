@@ -47,6 +47,7 @@ app.ctx.PRIVIBLUR_CONFIG = config
 app.ctx.translate = i18n.translate
 
 app.ctx.PRIVIBLUR_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+app.ctx.create_user_friendly_error_message = error_handlers.create_user_friendly_error_message
 
 
 @app.listener("before_server_start")
