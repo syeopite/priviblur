@@ -374,3 +374,9 @@ msgstr "This blog requires an account to view"
 
 msgid "alert_view_post_on_account_restricted_blog_message"
 msgstr "Only individual posts like this one can be displayed"
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "Failed to render the contents of this post"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr "The contents of this post has failed to render due to an error. Check below for more information"

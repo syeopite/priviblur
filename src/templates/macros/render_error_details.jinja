@@ -1,5 +1,5 @@
-{% macro render_error_details(name, message, context) %}
-<details open="" class="error-technical-details">
+{% macro render_error_details(name, message, context, open=true) %}
+<details {%if open%}open=""{%endif%} class="error-technical-details">
 <summary>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_expansion_box_label")}}</summary>
     <pre>Error: {{name}}</pre>
     {% if exception_message %}<pre>Message: "{{message}}"</pre>{% endif %}

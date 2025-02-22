@@ -132,8 +132,43 @@ a.hidden-reblog {
   font-weight: 500;
 }
 
+.post-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .post-body > * {
   margin: unset;
+}
+
+.post .alert {
+  margin: 0;
+}
+
+.post .error-technical-details {
+  margin-top: 10px;
+}
+
+.error-technical-details > summary {
+  color: var(--color-post-reveal-truncated-content-button);
+  list-style: none;
+  font-weight: 650;
+  cursor: pointer;
+  display: inline-block;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.error-technical-details > summary:hover {
+  color: var(--color-post-reveal-truncated-content-button-hover);
+  cursor: pointer;
+}
+
+.error-technical-details > summary::marker {
+  content: ""
 }
 
 .post-footer {

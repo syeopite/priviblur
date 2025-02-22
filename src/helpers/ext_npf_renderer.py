@@ -220,7 +220,7 @@ async def format_npf(
         if layouts:
             layouts = npf_renderer.parse.LayoutParser(layouts).parse()
 
-        contains_render_errors = False
+        render_error = None
 
         formatted = NPFFormatter(
             contents, layouts,
@@ -231,12 +231,8 @@ async def format_npf(
             request=request
         ).format()
 
-    except npf_renderer.exceptions.RenderErrorDisclaimerError as e:
-        contains_render_errors = True
-        formatted = e.rendered_result
-        assert formatted is not None
     except Exception as e:
         formatted = dominate.tags.div(cls="post-body has-error")
-        contains_render_errors = True
+        render_error = request.app.ctx.create_user_friendly_error_message(request, e)
 
-    return contains_render_errors, formatted.render(pretty=False)
+    return render_error, formatted.render(pretty=False)

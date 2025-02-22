@@ -554,3 +554,7 @@ li.no-js .control-bar-dropdown-menu {
     font-weight: 500;
     line-height: 2;
 }
+
+.error-technical-details pre {
+    white-space: pre-wrap;
+}
