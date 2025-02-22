@@ -62,6 +62,17 @@ body {
     --color-accent-1-200: hsl(44, 95%, 92%);
     --color-accent-1-100: hsl(44, 100%, 98%);
 
+    --color-accent-2-900: hsl(12, 100%, 20%);
+    --color-accent-2-800: hsl(12, 95%, 28%);
+    --color-accent-2-700: hsl(12, 90%, 35%);
+    --color-accent-2-600: hsl(12, 80%, 40%);
+    --color-accent-2-500: hsl(12, 80%, 45%);
+    --color-accent-2-400: hsl(7, 70%, 60%);
+    --color-accent-2-300: hsl(7, 70%, 70%);
+    --color-accent-2-200: hsl(7, 100%, 80%);
+    --color-accent-2-150: hsl(7, 100%, 95%);
+    --color-accent-2-100: hsl(7, 100%, 98%) ;
+
     --color-dt-gray-900: hsl(41, 5%, 4%);
     --color-dt-gray-800: hsl(41, 3%, 5%);
     --color-dt-gray-700: hsl(41, 2%, 7%);
@@ -160,6 +171,9 @@ body {
 
     --tumblr-signpost-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-700));
     --tumblr-signpost-border: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-500));
+
+    --color-alert-show-error-details:  var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
+    --color-alert-show-error-details-hover:  var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-250));
 }
 
 html, body, .container {
@@ -585,4 +599,42 @@ li.no-js .control-bar-dropdown-menu {
 
 .warning.alert svg path {
     fill: var(--color-accent-1-800);
+}
+
+.error svg path {
+    fill: var(--color-accent-2-500);
+}
+
+.secondary.error.alert {
+    background: var(--color-gray-100);
+    border:none;
+    border-left: 4px solid var(--color-accent-2-300);
+    border-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.post .error-technical-details {
+  margin-top: 20px;
+}
+
+.secondary.error.alert > .error-technical-details > summary {
+  color: var(--color-alert-show-error-details);
+  list-style: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.secondary.error.alert > .error-technical-details > summary:hover {
+  color: var(--color-alert-show-error-details-hover);
+  cursor: pointer;
+}
+
+.secondary.error.alert > .error-technical-details > summary::marker {
+  content: ""
 }
