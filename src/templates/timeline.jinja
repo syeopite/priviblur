@@ -13,7 +13,7 @@
         {% endblock %}
     </ul>
 
-    {% if timeline.signposts is defined or alerts is defined %}
+    {% if timeline.signposts or alerts is defined %}
         {% include "components/alerts_array.jinja"%}
     {% endif %}
 
