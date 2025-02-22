@@ -51,6 +51,17 @@ body {
     --color-primary-200: hsl(36, 100%, 85%);
     --color-primary-100: hsl(36, 100%, 95%);
 
+    --color-accent-1-900: hsl(44, 70%, 25%);
+    --color-accent-1-850: hsl(44, 70%, 30%);
+    --color-accent-1-800: hsl(44, 55%, 40%);
+    --color-accent-1-700: hsl(44, 50%, 50%);
+    --color-accent-1-600: hsl(44, 60%, 65%);
+    --color-accent-1-500: hsl(44, 89%, 72%);
+    --color-accent-1-400: hsl(44, 90%, 77%);
+    --color-accent-1-300: hsl(44, 90%, 85%);
+    --color-accent-1-200: hsl(44, 95%, 92%);
+    --color-accent-1-100: hsl(44, 100%, 98%);
+
     --color-dt-gray-900: hsl(41, 5%, 4%);
     --color-dt-gray-800: hsl(41, 3%, 5%);
     --color-dt-gray-700: hsl(41, 2%, 7%);
@@ -508,6 +519,10 @@ li.no-js .control-bar-dropdown-menu {
     text-decoration: underline;
 }
 
+.error-technical-details pre {
+    white-space: pre-wrap;
+}
+
 .alerts {
     display: flex;
     justify-content: center;
@@ -555,6 +570,19 @@ li.no-js .control-bar-dropdown-menu {
     line-height: 2;
 }
 
-.error-technical-details pre {
-    white-space: pre-wrap;
+.warning.alert {
+    background: var(--color-accent-1-200);
+    border: 2px solid var(--color-accent-1-600);
+}
+
+.warning.alert p {
+    color: var(--color-accent-1-800);
+}
+
+.warning.alert h4 {
+    color: var(--color-accent-1-850)
+}
+
+.warning.alert svg path {
+    fill: var(--color-accent-1-800);
 }
