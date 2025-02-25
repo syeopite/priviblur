@@ -32,3 +32,7 @@ class TumblrRestrictedTagError(TumblrErrorResponse):
 
 class TumblrLoginRequiredError(TumblrErrorResponse):
     pass
+
+
+class TumblrPasswordRequiredBlogError(TumblrErrorResponse):
+    pass
