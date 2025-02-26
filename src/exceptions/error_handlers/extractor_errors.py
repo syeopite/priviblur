@@ -46,3 +46,18 @@ async def tumblr_error_unknown_blog(request, exception):
         },
         status=404
     )
+
+
+@extractor_errors.register(priviblur_exceptions.TumblrNon200NorJSONResponse)
+async def tumblr_error_unknown_blog(request, exception):
+    return await request.app.ctx.render(
+        "misc/msg_error",
+        context={
+            "app": request.app,
+            "exception": exception,
+            "error_heading": f"Non 200 status code. Tumblr returned {exception.status_code} ",
+            "error_description": "Priviblur might have been ratelimited by Tumblr. Please try again later.",
+        },
+        status=500
+    )
+
