@@ -34,7 +34,12 @@ class TumblrLoginRequiredError(TumblrErrorResponse):
     pass
 
 
+class TumblrPasswordRequiredBlogError(TumblrErrorResponse):
+    pass
+
+
 class TumblrNon200NorJSONResponse(Exception):
     def __init__(self, status_code):
         self.status_code = status_code
+
 

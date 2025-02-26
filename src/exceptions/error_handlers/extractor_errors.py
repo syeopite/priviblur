@@ -20,6 +20,20 @@ async def tumblr_error_login_walled(request, exception):
     )
 
 
+@extractor_errors.register(priviblur_exceptions.TumblrPasswordRequiredBlogError)
+async def tumblr_password_required_blog(request, exception):
+    return await request.app.ctx.render(
+        "misc/msg_error",
+        context={
+            "app": request.app,
+            "exception": exception,
+            "error_heading": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_requires_password_error_heading"),
+            "error_description": request.app.ctx.translate(request.ctx.language, "tumblr_error_blog_login_required_error_description"),
+        },
+        status=403
+    )
+
+
 @extractor_errors.register(priviblur_exceptions.TumblrRestrictedTagError)
 async def tumblr_error_restricted_tag(request, exception):
     return await request.app.ctx.render(

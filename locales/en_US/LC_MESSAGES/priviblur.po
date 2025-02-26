@@ -160,6 +160,9 @@ msgstr "Unable to find the requested blog"
 msgid "tumblr_error_blog_not_found_error_description"
 msgstr "The blog may have been deleted or just never existed in the first place"
 
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "This blog requires a password to access"
+
 msgid "priviblur_error_page_title"
 msgstr "Error"
 

@@ -101,6 +101,8 @@ class TumblrAPI:
                     raise exceptions.TumblrRestrictedTagError(message, code, details, internal_code)
                 case 4012:
                     raise exceptions.TumblrLoginRequiredError(message, code, details, internal_code)
+                case 4013:
+                    raise exceptions.TumblrPasswordRequiredBlogError(message, code, details, internal_code)
                 case 0:
                     raise exceptions.TumblrBlogNotFoundError(message, code, details, internal_code)
                 case _:
