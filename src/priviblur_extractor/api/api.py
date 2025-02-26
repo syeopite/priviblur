@@ -71,6 +71,9 @@ class TumblrAPI:
         try:
             result = await response.json(loads=self.json_loader)
         except Exception as e:
+            if response.status != 200:
+                raise exceptions.TumblrNon200NorJSONResponse(response.status)
+
             logger.error("Failed to parse JSON response from Tumblr!")
             logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
 
