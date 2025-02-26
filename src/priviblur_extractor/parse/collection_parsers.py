@@ -139,14 +139,13 @@ class NoteTimelineParser:
 
         notes = []
         for index, note in enumerate(timeline["elements"]):
-            notes.append(
-                items.parse_item(
-                    note,
-                    index,
-                    total_raw_notes,
-                    use_parsers=(items.ReplyNoteParser, items.ReblogNoteParser)
-                )
-            )
+            if result := items.parse_item(
+                note,
+                index,
+                total_raw_notes,
+                use_parsers=(items.ReplyNoteParser, items.ReblogNoteParser)
+            ):
+                notes.append(result)
 
         query_for_next_batch =  helpers.dig_dict(timeline, ("links", "next", "queryParams"))
 
@@ -174,14 +173,14 @@ class NoteTimelineParser:
 
         notes = []
         for index, note in enumerate(sequence):
-            result = items.parse_item(
+            if result := items.parse_item(
                     note,
                     index,
                     total_raw_notes,
                     use_parsers=(items.LikeNoteParser, items.ReblogNoteParser)
-                )
+                ):
 
-            notes.append(result)
+                notes.append(result)
 
         before_timestamp = helpers.dig_dict(self.target, ("links", "next", "queryParams", "beforeTimestamp"))
 
