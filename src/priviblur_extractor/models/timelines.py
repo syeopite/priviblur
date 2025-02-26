@@ -120,6 +120,7 @@ class Timeline(NamedTuple):
         return {
             "version": base.VERSION,
             "elements": elements,
+            "signposts": signposts,
             "next": next_
         }
 
