@@ -51,6 +51,28 @@ body {
     --color-primary-200: hsl(36, 100%, 85%);
     --color-primary-100: hsl(36, 100%, 95%);
 
+    --color-accent-1-900: hsl(44, 70%, 25%);
+    --color-accent-1-850: hsl(44, 70%, 30%);
+    --color-accent-1-800: hsl(44, 55%, 40%);
+    --color-accent-1-700: hsl(44, 50%, 50%);
+    --color-accent-1-600: hsl(44, 60%, 65%);
+    --color-accent-1-500: hsl(44, 89%, 72%);
+    --color-accent-1-400: hsl(44, 90%, 77%);
+    --color-accent-1-300: hsl(44, 90%, 85%);
+    --color-accent-1-200: hsl(44, 95%, 92%);
+    --color-accent-1-100: hsl(44, 100%, 98%);
+
+    --color-accent-2-900: hsl(12, 100%, 20%);
+    --color-accent-2-800: hsl(12, 95%, 28%);
+    --color-accent-2-700: hsl(12, 90%, 35%);
+    --color-accent-2-600: hsl(12, 80%, 40%);
+    --color-accent-2-500: hsl(12, 80%, 45%);
+    --color-accent-2-400: hsl(7, 70%, 60%);
+    --color-accent-2-300: hsl(7, 70%, 70%);
+    --color-accent-2-200: hsl(7, 100%, 80%);
+    --color-accent-2-150: hsl(7, 100%, 95%);
+    --color-accent-2-100: hsl(7, 100%, 98%) ;
+
     --color-dt-gray-900: hsl(41, 5%, 4%);
     --color-dt-gray-800: hsl(41, 3%, 5%);
     --color-dt-gray-700: hsl(41, 2%, 7%);
@@ -149,6 +171,9 @@ body {
 
     --tumblr-signpost-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-700));
     --tumblr-signpost-border: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-500));
+
+    --color-alert-show-error-details:  var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
+    --color-alert-show-error-details-hover:  var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-250));
 }
 
 html, body, .container {
@@ -506,4 +531,111 @@ li.no-js .control-bar-dropdown-menu {
 
 .page-footer a {
     text-decoration: underline;
+}
+
+.error-technical-details pre {
+    white-space: pre-wrap;
+}
+
+.alerts {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.alert {
+    box-sizing: border-box;
+    overflow: hidden;
+
+    width: 500px;
+    margin: 0 20px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    border: 2px solid var(--color-gray-300);
+    background: var(--color-gray-150);
+}
+
+.alert>figcaption {
+    display: grid;
+    grid-template-areas:
+        "icon heading"
+        ". message";
+    grid-template-columns: max-content 1fr;
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: center;
+}
+
+.alert svg {
+    height: 24px;
+    grid-area: icon;
+}
+
+.alert h4 {
+    grid-area: heading;
+    color: var(--color-gray-800);
+    margin: 0
+}
+
+.alert p {
+    grid-area: message;
+    color: var(--color-gray-700);
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.warning.alert {
+    background: var(--color-accent-1-200);
+    border: 2px solid var(--color-accent-1-600);
+}
+
+.warning.alert p {
+    color: var(--color-accent-1-800);
+}
+
+.warning.alert h4 {
+    color: var(--color-accent-1-850)
+}
+
+.warning.alert svg path {
+    fill: var(--color-accent-1-800);
+}
+
+.error svg path {
+    fill: var(--color-accent-2-500);
+}
+
+.secondary.error.alert {
+    background: var(--color-gray-100);
+    border:none;
+    border-left: 4px solid var(--color-accent-2-400);
+    border-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.post .error-technical-details {
+  margin-top: 20px;
+}
+
+.secondary.error.alert > .error-technical-details > summary {
+  color: var(--color-alert-show-error-details);
+  list-style: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.secondary.error.alert > .error-technical-details > summary:hover {
+  color: var(--color-alert-show-error-details-hover);
+  cursor: pointer;
+}
+
+.secondary.error.alert > .error-technical-details > summary::marker {
+  content: ""
 }

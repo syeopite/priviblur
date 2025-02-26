@@ -1,6 +1,7 @@
 {# Displays information about some generic exception to the user #}
 
 {% extends "base.jinja" %}
+{% from 'macros/render_error_details.jinja' import render_error_details with context  %}
 {% block head %}
 <style>
 #priviblur-error > div {
@@ -65,16 +66,7 @@
             <a href="https://github.com/syeopite/priviblur/issues/new">{{translate(request.ctx.language, "priviblur_error_generic_description_2")}}</a>
         </div>
 
-        <div>
-            <details open="">
-            <summary>Technical details</summary>
-                <pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_name", substitution=exception_name)}}</pre>
-                {% if exception_message %}<pre>{{translate(request.ctx.language, "priviblur_error_generic_technical_details_error_message", substitution='"' + exception_message + '"')}}</pre>{% endif %}
-                <pre>{{-translate(request.ctx.language, "priviblur_error_generic_technical_details_error_context")}}</pre>
-                <pre>{{exception_context}}</pre>
-            </details>
-        </div>
-
+        {{render_error_details(exception_name, exception_message, exception_context)}}
     </div>
 </section>
 {%- endblock %}

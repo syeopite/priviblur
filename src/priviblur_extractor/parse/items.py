@@ -61,7 +61,8 @@ class BlogParser:
             uuid=self.target["uuid"],
             theme=self.parse_theme(),
             is_paywall_on=self.target["isPaywallOn"],
-            active=self.target.get("active", True)
+            active=self.target.get("active", True),
+            requires_account_to_view=self.target.get("isHiddenFromBlogNetwork")
         )
 
     def parse_limited(self):

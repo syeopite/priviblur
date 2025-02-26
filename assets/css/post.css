@@ -132,8 +132,18 @@ a.hidden-reblog {
   font-weight: 500;
 }
 
+.post-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .post-body > * {
   margin: unset;
+}
+
+.post .alert {
+  margin: 0;
 }
 
 .post-footer {

@@ -13,6 +13,10 @@
         {% endblock %}
     </ul>
 
+    {% if timeline.signposts or alerts is defined %}
+        {% include "components/alerts_array.jinja"%}
+    {% endif %}
+
     {{insert_content_list("timeline", timeline.elements)}}
 
     {%- if timeline.next %}

@@ -51,6 +51,7 @@ class TimelineParser:
 
         # Now the elements contained within
         elements = []
+        signposts = []
         total_raw_elements = len(self.target["elements"])
         for element_index, element in enumerate(self.target["elements"]):
             if result := items.parse_item(
@@ -59,10 +60,15 @@ class TimelineParser:
                     total_raw_elements,
                     use_parsers=(items.PostParser, items.SignpostParser)
                 ):
-                elements.append(result)
+
+                if isinstance(result, models.misc.Signpost):
+                    signposts.append(result)
+                else:
+                    elements.append(result)
 
         return models.timelines.Timeline(
             elements=elements,
+            signposts=signposts,
             next = cursor,
         )
 

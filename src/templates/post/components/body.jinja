@@ -1,3 +1,5 @@
+{% from "components/alerts/create_npf_render_error_alert.jinja" import create_npf_render_error_alert with context %}
+
 {%- if element.content -%}
     {%- if request_poll_data -%}
         {%- set contains_errors, content_tag = format_npf(
@@ -54,6 +56,7 @@
                         )
                 -%}
             {% endif %}
+            {% if trail_contains_errors %}{{create_npf_render_error_alert(trail_contains_errors)}}{% endif %}
             {{- trail_content_tag -}}
         </div>
     {%- endfor -%}
@@ -63,9 +66,11 @@
 {%- if element.trail and element.content -%}
     <div class="trail-post">
         {{create_post_header(request, element, skip_reblog=True)}}
+        {% if contains_errors %}{{create_npf_render_error_alert(contains_errors)}}{% endif %}
         {{- content_tag -}}
     </div>
 {%- else -%}
+    {% if contains_errors %}{{create_npf_render_error_alert(contains_errors)}}{% endif %}
     {{- content_tag -}}
 {%- endif -%}
 
