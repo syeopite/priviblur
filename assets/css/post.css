@@ -161,6 +161,7 @@ a.hidden-reblog {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+  word-break: break-word;
 }
 
 .post-tag {
