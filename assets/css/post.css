@@ -80,6 +80,7 @@ a.blog-name {
   color: var(--color-post-blog-name);
   font-weight: bold;
   align-self: center;
+  word-break: break-word;
 }
 
 a.blog-name:hover {
