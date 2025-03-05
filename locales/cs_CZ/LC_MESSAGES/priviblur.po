@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.3.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2025-02-19 00:06+0000\n"
+"PO-Revision-Date: 2025-02-28 07:02+0000\n"
 "Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/priviblur/"
 "translations/cs/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10.1-dev\n"
+"X-Generator: Weblate 5.10.2-rc\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -369,3 +369,39 @@ msgid "npf_renderer_unsupported_attribution"
 msgstr ""
 "Připsáno prostřednictvím nepodporovaného typu atributu („{attributee}“). "
 "Nahlaste to prosím na https://github.com/syeopite/npf-renderer"
+
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "Tento blog vyžaduje k přístupu heslo"
+
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "Zobrazit protokol chyb"
+
+msgid "alert_restricted_results_heading"
+msgstr "Omezené výsledky vyhledávání"
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "Tento blog vyžaduje k zobrazení účet"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "Mohou být zobrazeny pouze individuální příspěvky, jako je tento"
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "Nepodařilo se vykreslit obsah tohoto příspěvku"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr ""
+"Obsah tohoto příspěvku se nepodařilo vykreslit z důvodu chyby. Pro více "
+"informací se podívejte níže"
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "Informace o výsledcích vašeho vyhledávání"
+
+msgid "alert_restricted_results_message"
+msgstr ""
+"Tyto výsledky vyhledávání byly omezeny službou Tumblr z důvodu porušení "
+"jejich podmínek pro obsah."
+
+msgid "alert_partial_restricted_results_message"
+msgstr ""
+"Tyto výsledky vyhledávání byly částečně omezeny z důvodu podmínek pro obsah "
+"ve službě Tumblr. Mohou se vyskytnout prázdné výsledky."
