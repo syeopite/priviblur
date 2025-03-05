@@ -80,6 +80,7 @@ a.blog-name {
   color: var(--color-post-blog-name);
   font-weight: bold;
   align-self: center;
+  word-break: break-word;
 }
 
 a.blog-name:hover {
@@ -161,6 +162,7 @@ a.hidden-reblog {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+  word-break: break-word;
 }
 
 .post-tag {
