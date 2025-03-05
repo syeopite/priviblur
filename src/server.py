@@ -25,7 +25,7 @@ config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"
 
 LOG_CONFIG = setup_logging.setup_logging(config.logging)
 app = sanic.Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
-
+app.config.OAS = False
 
 app.ctx.LANGUAGES = i18n.initialize_locales()
 app.ctx.SUPPORTED_LANGUAGES = i18n.SUPPORTED_LANGUAGES
