@@ -80,7 +80,9 @@ class TumblrAPI:
             raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
 
         # Invalid response handling
-        if response.status != 200:
+        if response.status == 429:
+            raise exceptions.TumblrRatelimitReachedError(response.status)
+        elif response.status != 200:
             message = result["meta"]["msg"]
             code = result["meta"]["status"]
 
@@ -99,6 +101,8 @@ class TumblrAPI:
             match internal_code:
                 case 13001:
                     raise exceptions.TumblrRestrictedTagError(message, code, details, internal_code)
+                case 5029:
+                    raise exceptions.TumblrRatelimitReachedError(response.status, response.headers.get("X-Rate-Limit-Reset"))
                 case 4012:
                     raise exceptions.TumblrLoginRequiredError(message, code, details, internal_code)
                 case 4013:
