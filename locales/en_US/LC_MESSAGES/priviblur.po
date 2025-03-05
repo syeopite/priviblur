@@ -163,6 +163,12 @@ msgstr "The blog may have been deleted or just never existed in the first place"
 msgid "tumblr_error_blog_requires_password_error_heading"
 msgstr "This blog requires a password to access"
 
+msgid "tumblr_error_ratelimit_reached_heading"
+msgstr "Priviblur has been ratelimited by Tumblr"
+
+msgid "tumblr_error_ratelimit_reached_description"
+msgstr "Please try again later"
+
 msgid "priviblur_error_page_title"
 msgstr "Error"
 
