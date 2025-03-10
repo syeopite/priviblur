@@ -17,7 +17,7 @@ CURRENT_COMMIT = subprocess.run(
 #     stdout=subprocess.PIPE
 # ).stdout.decode("utf-8").split()[0].replace("-", ".")
 
-CURRENT_VERSION = "v0.3.0"
+CURRENT_VERSION = "v0.4.0-dev"
 
 PROJECT_VERSION = f"{CURRENT_VERSION}"
 VERSION = f"{CURRENT_VERSION}-{CURRENT_COMMIT}"

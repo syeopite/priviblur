@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Priviblur v0.3.0\n"
+"Project-Id-Version: Priviblur v0.4.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
 "PO-Revision-Date: 2025-01-28 20:01+0000\n"

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Priviblur v0.3.0\n"
+"Project-Id-Version: Priviblur v0.4.0-dev\n"
 "PO-Revision-Date: 2024-06-29 04:09+0000\n"
 "Last-Translator: syeopite <syeopite@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/priviblur/translations/fr/>\n"
