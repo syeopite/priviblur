@@ -11,7 +11,7 @@ idna==3.10
 intervaltree==3.1.0
 Jinja2==3.1.5
 MarkupSafe==3.0.2
-multidict==6.1.0
+multidict==6.2.0
 npf_renderer==0.13.0
 orjson==3.10.15
 PyYAML==6.0.2
