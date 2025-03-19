@@ -7,7 +7,7 @@ import json
 import urllib.parse
 from typing import Optional
 
-import aiohttp
+import httpx
 
 from . import request_config as rconf
 from .. import helpers
@@ -33,17 +33,16 @@ class TumblrAPI:
     async def create(cls, client=None, main_request_timeout=10, json_loads=json.loads):
         """Creates a Tumblr API instance with the given client. Automatically creates a client obj if not given."""
         if not client:
-            main_request_timeout = aiohttp.ClientTimeout(main_request_timeout)
-
-            client = aiohttp.ClientSession(
-                "https://www.tumblr.com",
+            client = httpx.AsyncClient(
+                base_url="https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
-                timeout=main_request_timeout  # TODO allow fine-tuning the different types of timeouts
+                timeout=main_request_timeout,
+                http2=True
             )
 
         return cls(client, json_loads)
 
-    def __init__(self, client: aiohttp.ClientSession, json_loads=json.loads):
+    def __init__(self, client: httpx.AsyncClient, json_loads=json.loads):
         """Initializes a TumblrAPI instance with the given client"""
         self.client = client
         self.json_loader = json_loads
@@ -69,10 +68,10 @@ class TumblrAPI:
         logger.debug(f"Requested endpoint: /api/v2/{url}")
 
         try:
-            result = await response.json(loads=self.json_loader)
+            result = self.json_loader(response.text)
         except Exception as e:
-            if response.status != 200:
-                raise exceptions.TumblrNon200NorJSONResponse(response.status)
+            if response.status_code != 200:
+                raise exceptions.TumblrNon200NorJSONResponse(response.status_code)
 
             logger.error("Failed to parse JSON response from Tumblr!")
             logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
@@ -80,9 +79,9 @@ class TumblrAPI:
             raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
 
         # Invalid response handling
-        if response.status == 429:
-            raise exceptions.TumblrRatelimitReachedError(response.status)
-        elif response.status != 200:
+        if response.status_code == 429:
+            raise exceptions.TumblrRatelimitReachedError(response.status_code)
+        elif response.status_code != 200:
             message = result["meta"]["msg"]
             code = result["meta"]["status"]
 
