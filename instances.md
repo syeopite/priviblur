@@ -7,6 +7,7 @@
 |[priviblur.pussthecat.org](https://priviblur.pussthecat.org)|Germany|No|No|
 |[priviblur.thebunny.zone](https://priviblur.thebunny.zone)|Croatia|No|No|
 |[priviblur.canine.tools](https://priviblur.canine.tools)|United States|No|No|
+|[pb.cmc.pub](https://pb.cmc.pub)|United States|No|No|
 
 
 ### Tor Onion Services
