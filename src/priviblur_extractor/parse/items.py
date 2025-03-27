@@ -126,9 +126,6 @@ class PostParser:
         reblog_count = self.target.get("reblogCount")
         like_count = self.target.get("likeCount")
 
-        note_type_counts = {"replies": reply_count, "reblogs": reblog_count, "likes": like_count}
-
-        note_viewer_tabs = ("replies", "reblogs", "likes")
         default_note_viewer_tab = "replies"
 
         # Calculate default tab
