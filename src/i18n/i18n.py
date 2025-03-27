@@ -5,7 +5,7 @@ import typing
 import sanic
 
 from .i18n_data import LOCALE_DATA
-from .npf_renderer_localizer import NPFRendererGettextFallback, NPFRendererLocalizer
+from .npf_renderer_localizer import NPFRendererLocalizer
 
 
 class Language:

@@ -1,5 +1,4 @@
 import enum
-from typing import NamedTuple
 
 
 class ExplorePostTypeFilters(enum.Enum):

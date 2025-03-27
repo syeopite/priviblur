@@ -2,8 +2,6 @@ import enum
 import urllib.parse
 
 import sanic
-from sanic import request
-import sanic_ext
 
 from ... import cache, priviblur_extractor
 

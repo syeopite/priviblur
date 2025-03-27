@@ -1,7 +1,4 @@
 import sanic
-import sanic_ext
-
-import urllib.parse
 
 settings = sanic.Blueprint("settings", url_prefix="/settings")
 

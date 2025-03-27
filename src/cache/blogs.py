@@ -1,5 +1,3 @@
-import orjson
-
 from .base import AccessCache
 from .. import priviblur_extractor
 
