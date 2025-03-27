@@ -50,6 +50,9 @@ jobs:
 
     - name: Lint with Ruff
       run: ruff check --output-format=github .
+
+    - name: Check formatter compliance
+      run: ruff format --check
       
     - name: Run Priviblur
       run : |
