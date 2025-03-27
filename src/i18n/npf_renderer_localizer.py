@@ -33,7 +33,7 @@ class NPFRendererLocalizer:
             },
             "datetime": {
                 "__default__": functools.partial(
-                    babel.dates.format_datetime, format=f"short", locale=language
+                    babel.dates.format_datetime, format="short", locale=language
                 )
             },
             "decimal": {

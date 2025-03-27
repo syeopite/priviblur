@@ -211,7 +211,7 @@ class TumblrAPI:
         if continuation:
             url_parameters["cursor"] = continuation
 
-        return await self._get_json(f"timeline/search", url_parameters)
+        return await self._get_json("timeline/search", url_parameters)
 
     async def hubs_timeline(self, tag: str, *, continuation: Optional[str], latest: bool = False):
         """Requests the /hubs/<tag>/timeline endpoint

@@ -39,7 +39,7 @@ class NotesTimelineCache(AccessCache):
         pipeline.setnx(next_key, "0")
         pipeline.expire(next_key, self.cache_ttl)
         self.ctx.LOGGER.debug(
-            f'Cache: Allocating a slot for next "%s" notes batch with key "%s"',
+            'Cache: Allocating a slot for next "%s" notes batch with key "%s"',
             self.type_,
             next_key,
         )

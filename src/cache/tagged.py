@@ -6,7 +6,7 @@ class TagBrowseCache(AccessCache):
     def __init__(self, ctx, tag, latest, continuation, **kwargs):
         super().__init__(
             ctx=ctx,
-            prefix=f"tagged",
+            prefix="tagged",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for,
             continuation=continuation,
             **kwargs,
