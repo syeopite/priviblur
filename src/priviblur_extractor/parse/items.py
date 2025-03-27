@@ -60,7 +60,6 @@ class BlogParser:
             description_npf=self.target["descriptionNpf"],
             uuid=self.target["uuid"],
             theme=self.parse_theme(),
-            is_paywall_on=self.target["isPaywallOn"],
             active=self.target.get("active", True),
             requires_account_to_view=self.target.get("isHiddenFromBlogNetwork")
         )
@@ -90,7 +89,6 @@ class BlogParser:
             description_npf=self.target.get("descriptionNpf", ""),
             uuid=self.target.get("uuid"),
             theme=self.parse_theme(),
-            is_paywall_on=self.target.get("isPaywallOn", False),
             active=self.target.get("active", True)
         )
 
@@ -312,7 +310,6 @@ class ReblogNoteParser:
             uuid=self.target["blogUuid"],
 
             theme=models.blog.BlogTheme(self.target["avatarShape"]),
-            is_paywall_on =False,
             active = True
         )
 
