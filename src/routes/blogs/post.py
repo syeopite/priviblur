@@ -9,6 +9,7 @@ from ... import cache, priviblur_extractor
 
 blog_post_bp = sanic.Blueprint("blog_post", url_prefix="/<post_id:int>")
 
+
 class PostNoteTypes(enum.Enum):
     REPLIES = 0
     REBLOGS = 1
@@ -17,7 +18,9 @@ class PostNoteTypes(enum.Enum):
 
 def get_blog_post_path(request):
     """Returns the path to the user requested blog post endpoint"""
-    post_path = f"/{'/'.join(str(path_component) for path_component in request.match_info.values())}"
+    post_path = (
+        f"/{'/'.join(str(path_component) for path_component in request.match_info.values())}"
+    )
     if request.query_string:
         post_path += f"?{request.query_string}"
 
@@ -61,9 +64,7 @@ async def handle_post_slug(request):
 
 @blog_post_bp.on_request
 async def handle_post_args(request):
-    request.ctx.breq_jinja_context = jinja_context = {
-        "post_url": request.ctx.post_path[1:]
-    }
+    request.ctx.breq_jinja_context = jinja_context = {"post_url": request.ctx.post_path[1:]}
 
     args = request.args
 
@@ -74,7 +75,9 @@ async def handle_post_args(request):
 
     if (rss_feed := args.get("rss_feed")) and sanic.utils.str_to_bool(rss_feed):
         request.ctx.rss = True
-        request.ctx.page_url = f"{request.app.ctx.PRIVIBLUR_CONFIG.deployment.domain or ''}{request.ctx.post_path}"
+        request.ctx.page_url = (
+            f"{request.app.ctx.PRIVIBLUR_CONFIG.deployment.domain or ''}{request.ctx.post_path}"
+        )
 
     # Requesting post notes?
     if note_type := args.get("note_viewer"):
@@ -91,7 +94,9 @@ async def handle_post_args(request):
 @blog_post_bp.get("/")
 @blog_post_bp.get("/<slug:str>", name="_blog_post_with_slug")
 async def _blog_post(request: sanic.Request, **kwargs):
-    blog_info = priviblur_extractor.models.timelines.BlogTimeline(request.ctx.parsed_post.blog, (), None, None)
+    blog_info = priviblur_extractor.models.timelines.BlogTimeline(
+        request.ctx.parsed_post.blog, (), None, None
+    )
 
     if note_type := request.args.get("note_viewer"):
         note_type = getattr(PostNoteTypes, note_type.upper(), None)
@@ -109,7 +114,7 @@ async def _blog_post(request: sanic.Request, **kwargs):
             "app": request.app,
             "blog": blog_info,
             "element": request.ctx.parsed_post,
-        }
+        },
     )
 
 
@@ -130,7 +135,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             "replies",
             request.app.ctx.TumblrAPI.blog_post_replies,
             after_id=after_id,
-            latest=latest
+            latest=latest,
         )
     else:
         parsed_notes = await cache.get_post_notes(
@@ -139,7 +144,7 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             post_id,
             "replies",
             request.app.ctx.TumblrAPI.blog_post_replies,
-            latest=latest
+            latest=latest,
         )
 
     return await request.app.ctx.render(
@@ -150,8 +155,8 @@ async def _blog_post_replies(request: sanic.Request, blog: str, post_id: str, **
             "post_id": str(post_id),
             "latest": latest,
             "note_type": "replies",
-            "notes": parsed_notes
-        }
+            "notes": parsed_notes,
+        },
     )
 
 
@@ -205,7 +210,6 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             **args_to_tumblr_api_wrapper,
         )
 
-
     return await request.app.ctx.render(
         "post/notes/viewer/viewer_page",
         context={
@@ -214,8 +218,8 @@ async def blog_post_reblog_notes(request: sanic.Request, blog: str, post_id: str
             "post_id": str(post_id),
             "note_type": "reblogs",
             "reblog_filter": reblog_filter,
-            "notes": parsed_notes
-        }
+            "notes": parsed_notes,
+        },
     )
 
 
@@ -240,6 +244,6 @@ async def blog_post_like_notes(request: sanic.Request, blog: str, post_id: str, 
             "blog_info": request.ctx.parsed_post.blog,
             "post_id": str(post_id),
             "note_type": "likes",
-            "notes": parsed_notes
-        }
+            "notes": parsed_notes,
+        },
     )

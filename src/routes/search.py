@@ -11,7 +11,9 @@ search = sanic.Blueprint("search", url_prefix="/search")
 async def query_param_redirect(request: sanic.Request):
     """Endpoint for /search to redirect q= queries to /search/<query>"""
     if query := request.args.get("q"):
-        return sanic.redirect(request.app.url_for("search._main", query=urllib.parse.quote(query, safe="")))
+        return sanic.redirect(
+            request.app.url_for("search._main", query=urllib.parse.quote(query, safe=""))
+        )
     else:
         return sanic.redirect(request.app.url_for("explore._trending"))
 
@@ -27,11 +29,15 @@ async def _main(request: sanic.Request, query: str):
 
     timeline = await _query_search(request, query, days=time_filter)
 
-    return await _render(request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None)
+    return await _render(
+        request, timeline, query, time_filter=time_filter, sort_by="popular", post_filter=None
+    )
 
 
 @search.get("/<query:str>/recent")
-@search.get("/<query:str>/recent/rss", name="_sort_by_search_rss", ctx_rss=True, ctx_template="timeline")
+@search.get(
+    "/<query:str>/recent/rss", name="_sort_by_search_rss", ctx_rss=True, ctx_template="timeline"
+)
 async def _sort_by_search(request: sanic.Request, query: str):
     query = urllib.parse.unquote(query)
     time_filter = request.args.get("t")
@@ -42,17 +48,29 @@ async def _sort_by_search(request: sanic.Request, query: str):
 
     timeline = await _query_search(request, query, days=time_filter, latest=True)
 
-    return await _render(request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None)
+    return await _render(
+        request, timeline, query, time_filter=time_filter, sort_by="recent", post_filter=None
+    )
 
 
 @search.get("/<query:str>/<post_filter:str>")
-@search.get("/<query:str>/<post_filter:str>/rss", name="_filter_by_search_rss", ctx_rss=True, ctx_template="timeline")
+@search.get(
+    "/<query:str>/<post_filter:str>/rss",
+    name="_filter_by_search_rss",
+    ctx_rss=True,
+    ctx_template="timeline",
+)
 async def _filter_by_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=False)
 
 
 @search.get("/<query:str>/recent/<post_filter:str>")
-@search.get("/<query:str>/recent/<post_filter:str>/rss", name="_sort_by_and_filter_search_rss", ctx_rss=True, ctx_template="timeline")
+@search.get(
+    "/<query:str>/recent/<post_filter:str>/rss",
+    name="_sort_by_and_filter_search_rss",
+    ctx_rss=True,
+    ctx_template="timeline",
+)
 async def _sort_by_and_filter_search(request: sanic.Request, query: str, post_filter: str):
     return await _request_search_filter_post(request, query, post_filter, latest=True)
 
@@ -79,10 +97,10 @@ async def _request_search_filter_post(request, query, post_filter, latest):
     # As to match Tumblr's behavior we redirect to the main /search endpoint when the
     # given post filter is invalid
     #
-    # If we are sorting by the latest posts then we redirect to /search/recent 
+    # If we are sorting by the latest posts then we redirect to /search/recent
     if not post_filter:
         if latest:
-           url = request.app.url_for("search._sort_by_search", query=urllib.parse.quote(query))
+            url = request.app.url_for("search._sort_by_search", query=urllib.parse.quote(query))
         else:
             url = request.app.url_for("search._main", query=urllib.parse.quote(query))
 
@@ -93,15 +111,19 @@ async def _request_search_filter_post(request, query, post_filter, latest):
     if not time_filter or time_filter not in ("365", "180", "30", "7", "1"):
         time_filter = 0
 
-    timeline = await _query_search(request, query, days=time_filter, post_type_filter=post_filter, latest=latest)
-    
+    timeline = await _query_search(
+        request, query, days=time_filter, post_type_filter=post_filter, latest=latest
+    )
+
     # Swap "answer" to "ask"
     # See above.
     post_filter = "ask" if post_filter == PostFiltersEnum.ANSWER else post_filter.name.lower()
 
     sort_by = "recent" if latest else "popular"
 
-    return await _render(request, timeline, query, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by)
+    return await _render(
+        request, timeline, query, post_filter=post_filter, time_filter=time_filter, sort_by=sort_by
+    )
 
 
 async def _query_search(request, query, **kwargs):
@@ -118,15 +140,11 @@ async def _render(request, timeline, query, **kwargs):
     if request.args.get("continuation"):
         del request.args["continuation"]
 
-    context = {
-        "app": request.app,
-        "timeline": timeline,
-        "query_args": request.args,
-        "query": query
-    }
+    context = {"app": request.app, "timeline": timeline, "query_args": request.args, "query": query}
 
     context.update(kwargs)
 
     return await request.app.ctx.render(
-        "search", context=context,
+        "search",
+        context=context,
     )

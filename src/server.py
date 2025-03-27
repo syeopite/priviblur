@@ -19,12 +19,18 @@ from .helpers import setup_logging, helpers, render, ext_npf_renderer
 from .version import VERSION, CURRENT_COMMIT
 
 
-# Load configuration file 
+# Load configuration file
 
 config = load_config(os.environ.get("PRIVIBLUR_CONFIG_LOCATION", "./config.toml"))
 
 LOG_CONFIG = setup_logging.setup_logging(config.logging)
-app = sanic.Sanic("Priviblur", loads=orjson.loads, dumps=orjson.dumps, env_prefix="PRIVIBLUR_", log_config=LOG_CONFIG)
+app = sanic.Sanic(
+    "Priviblur",
+    loads=orjson.loads,
+    dumps=orjson.dumps,
+    env_prefix="PRIVIBLUR_",
+    log_config=LOG_CONFIG,
+)
 app.config.OAS = False
 
 app.ctx.LANGUAGES = i18n.initialize_locales()
@@ -72,10 +78,7 @@ async def initialize(app):
 
     def create_client(url, timeout=priviblur_backend.image_response_timeout, headers=None):
         return httpx.AsyncClient(
-            base_url=url,
-            headers=headers or media_request_headers,
-            http2=True,
-            timeout=timeout
+            base_url=url, headers=headers or media_request_headers, http2=True, timeout=timeout
         )
 
     app.ctx.Media64Client = create_client("https://64.media.tumblr.com")
@@ -87,11 +90,14 @@ async def initialize(app):
     app.ctx.AudioClient = create_client("https://a.tumblr.com")
     app.ctx.TumblrAssetClient = create_client("https://assets.tumblr.com")
     app.ctx.TumblrStaticClient = create_client("https://static.tumblr.com")
-    app.ctx.TumblrAtClient = create_client("https://at.tumblr.com", headers={
-        "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
-        "connection": "keep-alive",
-        "referer": "https://www.tumblr.com/"
-    })
+    app.ctx.TumblrAtClient = create_client(
+        "https://at.tumblr.com",
+        headers={
+            "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+            "connection": "keep-alive",
+            "referer": "https://www.tumblr.com/",
+        },
+    )
 
     # Initialize database
     if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
@@ -99,7 +105,9 @@ async def initialize(app):
             app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
             await app.ctx.CacheDb.ping()
         except redis.exceptions.ConnectionError:
-            app.ctx.LOGGER.error("Error: Unable to connect to Redis! Disabling cache until the problem can be fixed. Please check your configuration file and the Redis server.")
+            app.ctx.LOGGER.error(
+                "Error: Unable to connect to Redis! Disabling cache until the problem can be fixed. Please check your configuration file and the Redis server."
+            )
             app.ctx.CacheDb = None
     else:
         app.ctx.CacheDb = None
@@ -110,12 +118,16 @@ async def initialize(app):
 
     app.ext.environment.add_extension("jinja2.ext.do")
 
-    app.ext.environment.filters["encodepathsegment"] = functools.partial(urllib.parse.quote, safe="")
+    app.ext.environment.filters["encodepathsegment"] = functools.partial(
+        urllib.parse.quote, safe=""
+    )
 
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
     app.ext.environment.filters["remove_query_params"] = helpers.remove_query_params
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
-    app.ext.environment.filters["ensure_single_prefix_slash"] = helpers.prefix_slash_in_url_if_missing
+    app.ext.environment.filters["ensure_single_prefix_slash"] = (
+        helpers.prefix_slash_in_url_if_missing
+    )
 
     app.ext.environment.filters["format_decimal"] = babel.numbers.format_decimal
     app.ext.environment.filters["format_date"] = babel.dates.format_date
@@ -127,9 +139,13 @@ async def initialize(app):
     app.ext.environment.globals["url_handler"] = helpers.url_handler
     app.ext.environment.globals["format_npf"] = ext_npf_renderer.format_npf
     app.ext.environment.globals["create_poll_callback"] = helpers.create_poll_callback
-    app.ext.environment.globals["create_reblog_attribution"] = helpers.create_reblog_attribution_link
+    app.ext.environment.globals["create_reblog_attribution"] = (
+        helpers.create_reblog_attribution_link
+    )
 
-    app.ext.environment.tests["a_post"] = lambda element : isinstance(element, priviblur_extractor.models.post.Post)
+    app.ext.environment.tests["a_post"] = lambda element: isinstance(
+        element, priviblur_extractor.models.post.Post
+    )
 
 
 @app.listener("main_process_start")
@@ -151,7 +167,7 @@ async def robotstxt_route(request):
 @app.middleware("request", priority=1)
 async def before_all_routes(request):
     request.ctx.preferences = preferences.UserPreferences(
-            **config.default_user_preferences._asdict()
+        **config.default_user_preferences._asdict()
     )
 
     request.ctx.language = request.ctx.preferences.language
@@ -180,6 +196,7 @@ async def after_all_routes(request, response):
         ]
     )
 
+
 # Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
@@ -192,5 +209,5 @@ if __name__ == "__main__":
         host=config.deployment.host,
         port=config.deployment.port,
         workers=config.deployment.workers,
-        dev=config.misc.dev_mode
+        dev=config.misc.dev_mode,
     )

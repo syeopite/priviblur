@@ -17,16 +17,16 @@ def setup_logging(logging_config):
 
     sanic_logging_config["loggers"]["priviblur"] = {
         "level": logging_config.priviblur_logging_level,
-        'handlers': ['priviblur_generic_console'],
-        'propagate': True,
-        'qualname': 'priviblur'
+        "handlers": ["priviblur_generic_console"],
+        "propagate": True,
+        "qualname": "priviblur",
     }
 
     sanic_logging_config["loggers"]["priviblur-extractor"] = {
         "level": logging_config.priviblur_extractor_logging_level,
-        'handlers': ['priviblur_generic_console'],
-        'propagate': True,
-        'qualname': 'priviblur-extractor'
+        "handlers": ["priviblur_generic_console"],
+        "propagate": True,
+        "qualname": "priviblur-extractor",
     }
 
     return sanic_logging_config

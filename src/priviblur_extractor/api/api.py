@@ -3,6 +3,7 @@
 Inspired by Invidious' version for YouTube
 
 """
+
 import json
 import urllib.parse
 from typing import Optional
@@ -26,9 +27,8 @@ class TumblrAPI:
         "te": "trailers",
         "connection": "keep-alive",
         "referer": "https://www.tumblr.com/",
-
         # Authorization token
-        "authorization": "Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh"
+        "authorization": "Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh",
     }
 
     @classmethod
@@ -39,7 +39,7 @@ class TumblrAPI:
                 base_url="https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
                 timeout=main_request_timeout,
-                http2=True
+                http2=True,
             )
 
         return cls(client, json_loads)
@@ -59,9 +59,12 @@ class TumblrAPI:
         # When logging, are we able to prettyprint the output? If so we shall
         try:
             import prettyprinter
+
             _format = prettyprinter.pformat
         except ImportError:
-            def _format(obj): return obj
+
+            def _format(obj):
+                return obj
 
         logger.info(f"Requesting endpoint: /api/v2/{url}")
 
@@ -78,7 +81,7 @@ class TumblrAPI:
             logger.error("Failed to parse JSON response from Tumblr!")
             logger.error(f"Got error: '{type(e).__name__}'. Reason: '{getattr(e, 'message', '')}'")
 
-            raise exceptions.InitialTumblrAPIParseException(getattr(e, 'message', ''))
+            raise exceptions.InitialTumblrAPIParseException(getattr(e, "message", ""))
 
         # Invalid response handling
         if response.status_code == 429:
@@ -91,7 +94,7 @@ class TumblrAPI:
             logger.debug(f"Response headers: {_format(response.headers)}")
 
             if error := result.get("errors"):
-                details = error[0].get('detail')
+                details = error[0].get("detail")
                 internal_code = error[0].get("code")
                 logger.info(f"Reason: {details}")
                 logger.info(f"Tumblr internal error code: {internal_code}")
@@ -103,11 +106,15 @@ class TumblrAPI:
                 case 13001:
                     raise exceptions.TumblrRestrictedTagError(message, code, details, internal_code)
                 case 5029:
-                    raise exceptions.TumblrRatelimitReachedError(response.status, response.headers.get("X-Rate-Limit-Reset"))
+                    raise exceptions.TumblrRatelimitReachedError(
+                        response.status, response.headers.get("X-Rate-Limit-Reset")
+                    )
                 case 4012:
                     raise exceptions.TumblrLoginRequiredError(message, code, details, internal_code)
                 case 4013:
-                    raise exceptions.TumblrPasswordRequiredBlogError(message, code, details, internal_code)
+                    raise exceptions.TumblrPasswordRequiredBlogError(
+                        message, code, details, internal_code
+                    )
                 case 0:
                     raise exceptions.TumblrBlogNotFoundError(message, code, details, internal_code)
                 case _:
@@ -123,7 +130,7 @@ class TumblrAPI:
     async def explore_trending(self, *, continuation: Optional[str] = None):
         """Requests the /explore/trending endpoint"""
 
-        url_parameters : dict = {"reblog_info": "true"}
+        url_parameters: dict = {"reblog_info": "true"}
 
         if continuation:
             url_parameters["cursor"] = continuation
@@ -144,10 +151,12 @@ class TumblrAPI:
             url_parameters["cursor"] = continuation
 
         return await self._get_json("explore/home/today", url_parameters)
-    
-    async def explore_post(self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None):
+
+    async def explore_post(
+        self, post_type: rconf.ExplorePostTypeFilters, *, continuation: Optional[str] = None
+    ):
         """Requests the /explore/posts/<post-type> endpoint with a post type, to get a trending posts of said type"""
-        url_parameters : dict = {"reblog_info": "true"}
+        url_parameters: dict = {"reblog_info": "true"}
 
         if continuation:
             url_parameters["cursor"] = continuation
@@ -156,10 +165,16 @@ class TumblrAPI:
 
         return await self._get_json(f"explore/posts/{post_type.name.lower()}", url_parameters)
 
-    async def timeline_search(self, query: str, timeline_type: rconf.TimelineType, *,
-                              continuation: Optional[str] = None,
-                              latest: bool = False, days: int = 0,
-                              post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None):
+    async def timeline_search(
+        self,
+        query: str,
+        timeline_type: rconf.TimelineType,
+        *,
+        continuation: Optional[str] = None,
+        latest: bool = False,
+        days: int = 0,
+        post_type_filter: Optional[rconf.ExplorePostTypeFilters] = None,
+    ):
         """Requests the /timeline/search endpoint
 
         Parameters:
@@ -175,8 +190,7 @@ class TumblrAPI:
             "limit": 20,
             "days": days,
             "query": query,
-
-            "mode": "top" if not latest else "recent"
+            "mode": "top" if not latest else "recent",
         }
 
         # Special handling
@@ -222,9 +236,13 @@ class TumblrAPI:
 
             url_parameters["cursor"] = continuation
 
-        return await self._get_json(f"hubs/{urllib.parse.quote(tag, safe='')}/timeline", url_parameters)
+        return await self._get_json(
+            f"hubs/{urllib.parse.quote(tag, safe='')}/timeline", url_parameters
+        )
 
-    async def blog_posts(self, blog_name, continuation = None, tag = None, post_type = None, before_id = None):
+    async def blog_posts(
+        self, blog_name, continuation=None, tag=None, post_type=None, before_id=None
+    ):
         """Requests the /blog/<blog name>/posts endpoint
 
         Parameters:
@@ -237,10 +255,10 @@ class TumblrAPI:
         """
 
         url_parameters = {
-         "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
-         "npf": "true",
-         "reblog_info": "true",
-         "include_pinned_posts": "true"
+            "fields[blogs]": rconf.BLOG_POSTS_BLOG_INFO_FIELDS,
+            "npf": "true",
+            "reblog_info": "true",
+            "include_pinned_posts": "true",
         }
 
         if tag:
@@ -256,25 +274,28 @@ class TumblrAPI:
             url_parameters["tumblelog"] = blog_name
             url_parameters["page_number"] = continuation
 
-        return await self._get_json(f"blog/{urllib.parse.quote(blog_name, safe = '')}/posts", url_params=url_parameters)
+        return await self._get_json(
+            f"blog/{urllib.parse.quote(blog_name, safe='')}/posts", url_params=url_parameters
+        )
 
-    async def blog_search(self, blog_name, query, *, continuation = None,
-                          top = None, original_posts = None, post_type = None):
+    async def blog_search(
+        self, blog_name, query, *, continuation=None, top=None, original_posts=None, post_type=None
+    ):
         """Requests the /blog/<blog name>/search/<query> endpoint
-            Parameters:
-                blog_name: name of the blog to search
-                query: search query
+        Parameters:
+            blog_name: name of the blog to search
+            query: search query
 
-                continuation: Continuation token for fetching the next batch of content
-                top: Whether or not to sort by popularity
-                original_posts: Whether or not the search should only return original posts by the blog
-                post_type: Filter by post type
+            continuation: Continuation token for fetching the next batch of content
+            top: Whether or not to sort by popularity
+            original_posts: Whether or not the search should only return original posts by the blog
+            post_type: Filter by post type
         """
-        blog_name = urllib.parse.quote(blog_name, safe = '')
+        blog_name = urllib.parse.quote(blog_name, safe="")
 
         url_parameters = {
-         "reblog_info": "true",
-         "fields[blogs]": rconf.BLOG_SEARCH_BLOG_INFO_FIELDS,
+            "reblog_info": "true",
+            "fields[blogs]": rconf.BLOG_SEARCH_BLOG_INFO_FIELDS,
         }
 
         if post_type:
@@ -295,10 +316,12 @@ class TumblrAPI:
                 "tumblelog": blog_name,
                 "query": query,
                 "rawurldecode": 1,
-                "cursor": continuation
+                "cursor": continuation,
             }
 
-        return await self._get_json(f"blog/{blog_name}/search/{urllib.parse.quote(query)}", url_params=url_parameters)
+        return await self._get_json(
+            f"blog/{blog_name}/search/{urllib.parse.quote(query)}", url_params=url_parameters
+        )
 
     async def blog_post(self, blog_name, post_id):
         """Requests the /blog/<blog name>/posts/<post id> endpoint
@@ -310,45 +333,47 @@ class TumblrAPI:
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_name, safe='')}/posts/{post_id}/permalink",
-            url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"}
+            url_params={"fields[blogs]": rconf.POST_BLOG_INFO_FIELDS, "reblog_info": "true"},
         )
 
-    async def blog_post_replies(self, blog_id, post_id, latest: bool = False, after_id: Optional[str] = None):
+    async def blog_post_replies(
+        self, blog_id, post_id, latest: bool = False, after_id: Optional[str] = None
+    ):
         """Requests the /blog/<blog name>/post/<post id>/replies endpoint
-        
+
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
 
         # When we are fetching a continuation batch
         # the official tumblr client does not send some url parameters
-        if not after_id: 
+        if not after_id:
             url_parameters = {
-            "mode": "replies",
-            "sort": "desc" if latest else "asc",
-            "pin_preview_note": "false",
-            "fields[blogs]": "avatar,theme,name"
+                "mode": "replies",
+                "sort": "desc" if latest else "asc",
+                "pin_preview_note": "false",
+                "fields[blogs]": "avatar,theme,name",
             }
         else:
             url_parameters = {"after": after_id, "sort": "desc" if latest else "asc"}
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/replies",
-            url_params=url_parameters
+            url_params=url_parameters,
         )
 
     async def blog_post_notes_timeline(
         self,
         blog_id,
         post_id,
-        mode : rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS,
+        mode: rconf.ReblogNoteTypes = rconf.ReblogNoteTypes.REBLOGS_WITH_COMMENTS,
         latest: bool = False,
-        before_timestamp : Optional[str] = None,
+        before_timestamp: Optional[str] = None,
     ):
         """Requests the /blog/<blog name>/post/<post id>/notes/timeline endpoint
 
         This endpoint is used to return reblogs.
-        
+
         Note: Unlike most other endpoints, Tumblr uses the blog ID instead of the blog name to request
         post note information. However, both the blog ID and the blog name can be used interchangeably here.
         """
@@ -357,19 +382,19 @@ class TumblrAPI:
             url_parameters = {
                 "id": post_id,
                 "mode": mode.name.lower(),
-                "before_timestamp": before_timestamp
+                "before_timestamp": before_timestamp,
             }
         else:
             url_parameters = {
                 "mode": mode.name.lower(),
                 "sort": "asc" if latest else "desc",
                 "pin_preview_note": "false",
-                "fields[blogs]": "avatar,theme,name"
+                "fields[blogs]": "avatar,theme,name",
             }
 
         return await self._get_json(
             f"blog/{urllib.parse.quote(blog_id, safe='')}/post/{post_id}/notes/timeline",
-            url_params=url_parameters
+            url_params=url_parameters,
         )
 
     async def blog_notes(
@@ -377,8 +402,8 @@ class TumblrAPI:
         blog_id,
         post_id,
         latest: bool = True,
-        return_likes : bool = True,
-        before_timestamp : Optional[str] = None
+        return_likes: bool = True,
+        before_timestamp: Optional[str] = None,
     ):
         """Requests the /blog/<blog name>/notes
 
@@ -395,7 +420,7 @@ class TumblrAPI:
             url_parameters = {
                 "mode": "likes" if return_likes else "reblogs_only",
                 "id": post_id,
-                "before_timestamp": before_timestamp
+                "before_timestamp": before_timestamp,
             }
         else:
             url_parameters = {
@@ -407,8 +432,7 @@ class TumblrAPI:
         # TODO sort is not present when before_timestamp is used... for some reason.
 
         return await self._get_json(
-            f"blog/{urllib.parse.quote(blog_id, safe='')}/notes",
-            url_params=url_parameters
+            f"blog/{urllib.parse.quote(blog_id, safe='')}/notes", url_params=url_parameters
         )
 
     async def poll_results(self, blog_name, post_id, poll_id):

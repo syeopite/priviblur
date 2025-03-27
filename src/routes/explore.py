@@ -7,7 +7,7 @@ from ..cache import get_explore_results
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
 
-async def _handle_explore(request, endpoint, post_type = None):
+async def _handle_explore(request, endpoint, post_type=None):
     app = request.app
     raw_endpoint = endpoint
     endpoint = request.app.url_for(endpoint)
@@ -32,14 +32,16 @@ async def _handle_explore(request, endpoint, post_type = None):
                 "today",
                 continuation,
             )
-            title = request.app.ctx.translate(request.ctx.language, "explore_today_on_tumblr_page_title")
+            title = request.app.ctx.translate(
+                request.ctx.language, "explore_today_on_tumblr_page_title"
+            )
         case _:
             timeline = await get_explore_results(
                 request.app.ctx,
                 request.app.ctx.TumblrAPI.explore_post,
                 post_type.name.lower(),
                 continuation,
-                post_type=post_type
+                post_type=post_type,
             )
             title = request.app.ctx.translate(request.ctx.language, "explore_trending_page_title")
 
@@ -73,46 +75,62 @@ async def _today(request):
 @explore.get("/text")
 @explore.get("/text/rss", ctx_rss=True, name="_text_rss")
 async def _text(request):
-    return await _handle_explore(request, "explore._text", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.TEXT)
+    return await _handle_explore(
+        request, "explore._text", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.TEXT
+    )
 
 
 @explore.get("/photos")
 @explore.get("/photos/rss", ctx_rss=True, name="_photos_rss")
 async def _photos(request):
-    return await _handle_explore(request, "explore._photos", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.PHOTOS)
+    return await _handle_explore(
+        request, "explore._photos", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.PHOTOS
+    )
 
 
 @explore.get("/gifs")
 @explore.get("/gifs/rss", ctx_rss=True, name="_gifs_rss")
 async def _gifs(request):
-    return await _handle_explore(request, "explore._gifs", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.GIFS)
+    return await _handle_explore(
+        request, "explore._gifs", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.GIFS
+    )
 
 
 @explore.get("/quotes")
 @explore.get("/quotes/rss", ctx_rss=True, name="_quotes_rss")
 async def _quotes(request):
-    return await _handle_explore(request, "explore._quotes", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.QUOTES)
+    return await _handle_explore(
+        request, "explore._quotes", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.QUOTES
+    )
 
 
 @explore.get("/chats")
 @explore.get("/chats/rss", ctx_rss=True, name="_chats_rss")
 async def _chats(request):
-    return await _handle_explore(request, "explore._chats", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.CHATS)
+    return await _handle_explore(
+        request, "explore._chats", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.CHATS
+    )
 
 
 @explore.get("/audio")
 @explore.get("/audio/rss", ctx_rss=True, name="_audio_rss")
 async def _audio(request):
-    return await _handle_explore(request, "explore._audio", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.AUDIO)
+    return await _handle_explore(
+        request, "explore._audio", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.AUDIO
+    )
 
 
 @explore.get("/video")
 @explore.get("/video/rss", ctx_rss=True, name="_video_rss")
 async def _video(request):
-    return await _handle_explore(request, "explore._video", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.VIDEO)
+    return await _handle_explore(
+        request, "explore._video", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.VIDEO
+    )
 
 
 @explore.get("/asks")
 @explore.get("/asks/rss", ctx_rss=True, name="_asks_rss")
 async def _asks(request):
-    return await _handle_explore(request, "explore._asks", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.ASKS)
+    return await _handle_explore(
+        request, "explore._asks", request.app.ctx.TumblrAPI.config.ExplorePostTypeFilters.ASKS
+    )

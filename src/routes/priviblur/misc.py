@@ -10,5 +10,5 @@ async def licences(request):
         "misc/licenses",
         context={
             "app": request.app,
-        }
+        },
     )

@@ -10,5 +10,5 @@ BLUEPRINTS = (
     priviblur.priviblur,
     miscellaneous.miscellaneous,
     settings.settings,
-    api.api
+    api.api,
 )

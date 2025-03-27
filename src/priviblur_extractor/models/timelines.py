@@ -4,7 +4,7 @@ from typing import Sequence, Optional, NamedTuple
 from . import base
 from .post import Post, ReplyNote, ReblogNote, LikeNote
 from .misc import Signpost
-from. blog import Blog
+from .blog import Blog
 
 
 class BlogTimeline(NamedTuple):
@@ -12,6 +12,7 @@ class BlogTimeline(NamedTuple):
 
     TODO better documentation
     """
+
     blog_info: Blog
     posts: Sequence[Post]
     total_posts: int | None
@@ -20,7 +21,7 @@ class BlogTimeline(NamedTuple):
     def to_json_serialisable(self):
         json_serializable = {
             "version": base.VERSION,
-            "blog_info": self.blog_info.to_json_serialisable()
+            "blog_info": self.blog_info.to_json_serialisable(),
         }
         json_serializable["posts"] = [post.to_json_serialisable() for post in self.posts]
         json_serializable["total_posts"] = self.total_posts
@@ -50,7 +51,7 @@ class BlogTimeline(NamedTuple):
 
 
 class NoteTimeline(NamedTuple):
-    notes : Sequence[ReplyNote | ReblogNote | LikeNote]
+    notes: Sequence[ReplyNote | ReblogNote | LikeNote]
 
     total_notes: int
     total_replies: int
@@ -97,6 +98,7 @@ class Timeline(NamedTuple):
 
     Refers to data on a certain page. IE Search or explore
     """
+
     elements: Sequence[Post | Blog]
     signposts: Sequence[Signpost] = []
     next: Optional[base.Cursor] = None
@@ -121,7 +123,7 @@ class Timeline(NamedTuple):
             "version": base.VERSION,
             "elements": elements,
             "signposts": signposts,
-            "next": next_
+            "next": next_,
         }
 
     @classmethod
@@ -137,9 +139,7 @@ class Timeline(NamedTuple):
 
         signposts = []
         for signpost in json["signposts"]:
-            signposts.append(
-                Signpost.from_json(signpost)
-            )
+            signposts.append(Signpost.from_json(signpost))
 
         if json["next"]:
             json["next"] = base.Cursor.from_json(json["next"])
