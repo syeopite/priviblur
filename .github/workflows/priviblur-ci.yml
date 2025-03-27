@@ -36,6 +36,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install -r requirements-dev.txt
         pip install -r utils/i18n/requirements.txt
 
     - name: Generate locale data
@@ -46,8 +47,11 @@ jobs:
 
     - name: Compile locales
       run: pybabel compile -d locales -D priviblur
+
+    - name: Lint with Ruff
+      run: ruff check --output-format=github .
       
-    - name: Run 
+    - name: Run Priviblur
       run : |
         python -m src.server &
 
