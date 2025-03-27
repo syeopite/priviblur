@@ -58,7 +58,6 @@ class Blog(NamedTuple):
     description_npf: list[dict]
     uuid: str
     theme: BlogTheme
-    is_paywall_on: bool
 
     # If blog is deactivated or not
     active: bool = False

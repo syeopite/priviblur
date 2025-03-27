@@ -21,9 +21,11 @@ class TumblrAPI:
 
     DEFAULT_HEADERS = {
         "accept": "application/json;format=camelcase",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                      "Chrome/104.0.0.0 Safari/537.36",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0",
         "accept-encoding": "gzip, deflate",
+        "te": "trailers",
+        "connection": "keep-alive",
+        "referer": "https://www.tumblr.com/",
 
         # Authorization token
         "authorization": "Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh"

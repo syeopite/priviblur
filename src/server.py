@@ -60,67 +60,38 @@ async def initialize(app):
 
     media_request_headers = {
         "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
-        "accept-encoding": "gzip, deflate, br",
-        "accept": "image/avif,image/webp,*/*",
+        "accept-encoding": "gzip, deflate",
+        "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
         "accept-language": "en-US,en;q=0.5",
+        "connection": "keep-alive",
         "te": "trailers",
-        "referer": "https://www.tumblr.com",
+        "referer": "https://www.tumblr.com/",
     }
 
     # TODO set pool size for image requests
 
-    def create_image_client(url, timeout):
+    def create_client(url, timeout=priviblur_backend.image_response_timeout, headers=None):
         return httpx.AsyncClient(
             base_url=url,
-            headers=media_request_headers,
+            headers=headers or media_request_headers,
             http2=True,
             timeout=timeout
         )
 
-    app.ctx.Media64Client = create_image_client(
-        "https://64.media.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.Media49Client = create_image_client(
-        "https://49.media.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.Media44Client = create_image_client(
-        "https://44.media.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.MediaVeClient = create_image_client(
-        "https://ve.media.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.MediaVaClient = create_image_client(
-        "https://va.media.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.MediaGenericClient = httpx.AsyncClient(
-        headers=media_request_headers,
-        http2=True,
-        timeout=priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.AudioClient = create_image_client(
-        "https://a.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.TumblrAssetClient = create_image_client(
-        "https://assets.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.TumblrStaticClient = create_image_client(
-        "https://static.tumblr.com", priviblur_backend.image_response_timeout
-    )
-
-    app.ctx.TumblrAtClient = httpx.AsyncClient(
-        base_url="https://at.tumblr.com",
-        headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
-        timeout=priviblur_backend.main_response_timeout,
-        http2=True
-    )
+    app.ctx.Media64Client = create_client("https://64.media.tumblr.com")
+    app.ctx.Media49Client = create_client("https://49.media.tumblr.com")
+    app.ctx.Media44Client = create_client("https://44.media.tumblr.com")
+    app.ctx.MediaVeClient = create_client("https://ve.media.tumblr.com")
+    app.ctx.MediaVaClient = create_client("https://va.media.tumblr.com")
+    app.ctx.MediaGenericClient = create_client(url="")
+    app.ctx.AudioClient = create_client("https://a.tumblr.com")
+    app.ctx.TumblrAssetClient = create_client("https://assets.tumblr.com")
+    app.ctx.TumblrStaticClient = create_client("https://static.tumblr.com")
+    app.ctx.TumblrAtClient = create_client("https://at.tumblr.com", headers={
+        "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+        "connection": "keep-alive",
+        "referer": "https://www.tumblr.com/"
+    })
 
     # Initialize database
     if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
