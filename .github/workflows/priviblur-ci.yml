@@ -103,7 +103,6 @@ jobs:
   
   lint:
     runs-on: ubuntu-latest
-    needs: "generate-static-locale-data"
     continue-on-error: true
 
     steps:
@@ -125,6 +124,12 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
           pip install -r utils/i18n/requirements.txt
+
+      - name: Generate locale data
+        run: python ./utils/i18n/generate.py
+
+      - name: Format static locale data file
+        run: ruff format src/i18n/i18n_data.py 
 
       - name: Lint with Ruff
         run: ruff check --output-format=github .
