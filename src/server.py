@@ -78,7 +78,7 @@ async def initialize(app):
 
     def create_client(url, timeout=priviblur_backend.image_response_timeout, headers=None):
         return httpx.AsyncClient(
-            base_url=url, headers=headers or media_request_headers, http2=True, timeout=timeout
+            base_url=url, headers=headers or media_request_headers, timeout=timeout
         )
 
     app.ctx.Media64Client = create_client("https://64.media.tumblr.com")
