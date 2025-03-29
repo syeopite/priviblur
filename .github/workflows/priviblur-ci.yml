@@ -20,6 +20,7 @@ jobs:
     name: "Build and test on ${{matrix.python-version}}"
     continue-on-error: true
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
 
@@ -31,6 +32,10 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: "pip"
+        cache-dependency-path: |
+          "./requirements.txt"
+          "utils/i18n/requirements.txt"
+          "./requirements-dev.txt"
 
     - name: Install dependencies
       run: |
@@ -38,12 +43,6 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
         pip install -r utils/i18n/requirements.txt
-
-    - name: Generate locale data
-      run: python ./utils/i18n/generate.py
-
-    - name: Format generated static locale data
-      run: ruff format src/i18n/i18n_data.py
 
     - name: Commit static locale data changes if applicable
       if: github.event_name == 'push' && matrix.python-version == '3.13'
@@ -57,12 +56,6 @@ jobs:
 
     - name: Compile locales
       run: pybabel compile -d locales -D priviblur
-
-    - name: Lint with Ruff
-      run: ruff check --output-format=github .
-
-    - name: Check formatter compliance
-      run: ruff format --check
       
     - name: Run Priviblur
       run : |
@@ -70,3 +63,72 @@ jobs:
 
     - name: Wait and test
       run: sleep 5 && curl -Isf http://localhost:8000/explore/trending
+
+  generate-static-locale-data:
+    name: "Regenerate static locale data if applicable"
+    runs-on: "ubuntu-latest"
+
+    permissions:
+      contents: "write"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Set up python 3.13"
+        uses: actions/setup-python@v5
+        with:
+         python-version: 3.13
+         cache: "pip"
+         cache-dependency-path: |
+          "utils/i18n/requirements.txt"
+          "./requirements-dev.txt"
+
+      - name: Install dependencies
+        run: |
+          pip install -r 'utils/i18n/requirements.txt'
+          pip install -r 'requirements-dev.txt'
+
+      - name: Generate locale data
+        run: python ./utils/i18n/generate.py
+
+      - name: Format static locale data file
+        run: ruff format src/i18n/i18n_data.py 
+
+      - name: Commit if applicable
+        if: github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Regenerate static locale data"
+          file_pattern: 'src/i18n/i18n_data.py'
+  
+  lint:
+    runs-on: ubuntu-latest
+    needs: "generate-static-locale-data"
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+          cache: "pip"
+          cache-dependency-path: |
+            "./requirements.txt"
+            "utils/i18n/requirements.txt"
+            "./requirements-dev.txt"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -r utils/i18n/requirements.txt
+
+      - name: Lint with Ruff
+        run: ruff check --output-format=github .
+
+      - name: Check formatter compliance
+        run: ruff format --check
+
