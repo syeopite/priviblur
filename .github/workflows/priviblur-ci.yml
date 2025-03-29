@@ -46,7 +46,7 @@ jobs:
       run: ruff format src/i18n/i18n_data.py
 
     - name: Commit static locale data changes if applicable
-      if: github.event_name == 'push'
+      if: github.event_name == 'push' && matrix.python-version == '3.13'
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "Regenerate static locale data"
