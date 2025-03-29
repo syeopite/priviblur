@@ -42,6 +42,9 @@ jobs:
     - name: Generate locale data
       run: python ./utils/i18n/generate.py
 
+    - name: Format generated static locale data
+      run: ruff format src/helpers/i18n_data.py
+
     - name: Commit static locale data changes if applicable
       if: github.event_name == 'push'
       uses: stefanzweifel/git-auto-commit-action@v5
