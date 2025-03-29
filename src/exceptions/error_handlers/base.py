@@ -1,5 +1,6 @@
 import inspect
 
+
 class ErrorHandlerGroup:
     """Manages and registers error handler functions for specific exceptions
 
@@ -11,11 +12,13 @@ class ErrorHandlerGroup:
 
     This is primary used to organize exception handlers in the codebase.
     """
+
     def __init__(self) -> None:
         self.registered_handlers = {}
 
     def register(self, *attached_exceptions):
         """Decorator used to register an exception handler into the ErrorHandlerGroup instance"""
+
         def registrator(target_handler):
             self.registered_handlers[target_handler] = attached_exceptions
 
@@ -46,10 +49,10 @@ def create_user_friendly_error_message(request, exception):
 
     for trace in reversed(frame):
         if trace.filename.startswith(request.app.ctx.PRIVIBLUR_PARENT_DIR_PATH):
-            local_path = trace.filename[len(request.app.ctx.PRIVIBLUR_PARENT_DIR_PATH) + 1:]
+            local_path = trace.filename[len(request.app.ctx.PRIVIBLUR_PARENT_DIR_PATH) + 1 :]
         else:
             local_path = trace.filename
-        occurrence = f"File \"{local_path}\" line {trace.lineno}: in {trace.function}"
+        occurrence = f'File "{local_path}" line {trace.lineno}: in {trace.function}'
 
         # Add code context is applicable
         if trace.code_context:
@@ -57,4 +60,4 @@ def create_user_friendly_error_message(request, exception):
 
         context.append(occurrence)
 
-    return processed_exception_name, exception_message, '\n'.join(context)
+    return processed_exception_name, exception_message, "\n".join(context)

@@ -4,12 +4,9 @@ from typing import Optional, Dict, Any
 import sanic
 import sanic_ext
 
+
 # Wrapper around sanic_ext.render
-async def render_template(
-    template: str = "",
-    context: Optional[Dict[str, Any]] = None,
-    **kwargs
-):
+async def render_template(template: str = "", context: Optional[Dict[str, Any]] = None, **kwargs):
     jinja_context = context or {}
     # Append additional context
 
@@ -42,12 +39,4 @@ async def render_template(
 
     template = f"{template}.jinja"
 
-    return await sanic_ext.render(
-        template,
-        context=jinja_context,
-        app=request.app,
-        **kwargs
-    )
-
-
-
+    return await sanic_ext.render(template, context=jinja_context, app=request.app, **kwargs)

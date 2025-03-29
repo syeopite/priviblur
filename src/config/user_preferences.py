@@ -1,5 +1,6 @@
 from typing import NamedTuple, Optional
 
+
 class DefaultUserPreferences(NamedTuple):
     """NamedTuple that stores default user Preferences
 

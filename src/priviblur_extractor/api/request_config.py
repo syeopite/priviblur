@@ -3,26 +3,26 @@ from typing import NamedTuple
 
 
 class ExplorePostTypeFilters(enum.Enum):
-    TEXT = 0,
-    PHOTOS = 1,
-    GIFS = 2,
-    QUOTES = 3,
-    CHATS = 4,
-    AUDIO = 5,
-    VIDEO = 6,
+    TEXT = (0,)
+    PHOTOS = (1,)
+    GIFS = (2,)
+    QUOTES = (3,)
+    CHATS = (4,)
+    AUDIO = (5,)
+    VIDEO = (6,)
     ASKS = 7
 
 
 class PostTypeFilters(enum.Enum):
-    TEXT = 0,
-    PHOTO = 1,
-    GIF = 2,
-    QUOTE = 3,
-    LINK = 4,
-    CHAT = 5,
-    AUDIO = 6,
-    VIDEO = 7,
-    ANSWER = 8,
+    TEXT = (0,)
+    PHOTO = (1,)
+    GIF = (2,)
+    QUOTE = (3,)
+    LINK = (4,)
+    CHAT = (5,)
+    AUDIO = (6,)
+    VIDEO = (7,)
+    ANSWER = (8,)
     POLL = 9
 
 

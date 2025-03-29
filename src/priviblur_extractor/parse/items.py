@@ -1,6 +1,4 @@
-
 """Parses individual items from Tumblr's JSON API into an object"""
-
 
 import datetime
 
@@ -39,15 +37,12 @@ class BlogParser:
                 avatar_shape=avatar_shape,
                 background_color=target["backgroundColor"],
                 body_font=target["bodyFont"],
-                header_info=header_info
+                header_info=header_info,
             )
         else:
             # Return limited information otherwise
             return models.blog.BlogTheme(
-                avatar_shape=avatar_shape,
-                background_color=None,
-                body_font=None,
-                header_info=None
+                avatar_shape=avatar_shape, background_color=None, body_font=None, header_info=None
             )
 
     def parse(self):
@@ -61,7 +56,7 @@ class BlogParser:
             uuid=self.target["uuid"],
             theme=self.parse_theme(),
             active=self.target.get("active", True),
-            requires_account_to_view=self.target.get("isHiddenFromBlogNetwork")
+            requires_account_to_view=self.target.get("isHiddenFromBlogNetwork"),
         )
 
     def parse_limited(self):
@@ -89,7 +84,7 @@ class BlogParser:
             description_npf=self.target.get("descriptionNpf", ""),
             uuid=self.target.get("uuid"),
             theme=self.parse_theme(),
-            active=self.target.get("active", True)
+            active=self.target.get("active", True),
         )
 
 
@@ -131,11 +126,7 @@ class PostParser:
         reblog_count = self.target.get("reblogCount")
         like_count = self.target.get("likeCount")
 
-        note_type_counts = {
-            "replies": reply_count,
-            "reblogs": reblog_count,
-            "likes": like_count
-        }
+        note_type_counts = {"replies": reply_count, "reblogs": reblog_count, "likes": like_count}
 
         note_viewer_tabs = ("replies", "reblogs", "likes")
         default_note_viewer_tab = "replies"
@@ -144,13 +135,19 @@ class PostParser:
         # If replies is empty fallback to the next tab and continue forth
         # until we find an not empty tab. If everything is empty then we default to replies
 
-        for tab, counts in zip(("replies", "reblogs", "likes"), (reply_count, reblog_count, like_count)):
+        for tab, counts in zip(
+            ("replies", "reblogs", "likes"), (reply_count, reblog_count, like_count)
+        ):
             if counts > 0:
                 default_note_viewer_tab = tab
                 break
 
         # We check multiple keys as a precautionary measure.
-        if self.target.get("advertiserId") or self.target.get("adId") or self.target.get("adProviderId"):
+        if (
+            self.target.get("advertiserId")
+            or self.target.get("adId")
+            or self.target.get("adProviderId")
+        ):
             is_advertisement = True
         else:
             is_advertisement = False
@@ -178,19 +175,22 @@ class PostParser:
 
             if (trail_post_data := trail_post.get("post")) and not is_broken_trail:
                 trail_post_id = trail_post_data["id"]
-                trail_post_creation_date = datetime.datetime.fromtimestamp(trail_post_data["timestamp"], tz=datetime.timezone.utc)
+                trail_post_creation_date = datetime.datetime.fromtimestamp(
+                    trail_post_data["timestamp"], tz=datetime.timezone.utc
+                )
             else:
                 trail_post_id = None
                 trail_post_creation_date = None
 
-            trails.append(models.post.PostTrail(
-                id=trail_post_id,
-                blog=trail_blog,
-                date=trail_post_creation_date,
-                content=trail_content,
-                layout=trail_layout,
-            ))
-
+            trails.append(
+                models.post.PostTrail(
+                    id=trail_post_id,
+                    blog=trail_blog,
+                    date=trail_post_creation_date,
+                    content=trail_content,
+                    layout=trail_layout,
+                )
+            )
 
         # Reblogged from data
         reblog_from_information = None
@@ -224,33 +224,29 @@ class PostParser:
             is_advertisement=is_advertisement,
             post_url=self.target["postUrl"],
             slug=self.target["slug"],
-            date=datetime.datetime.fromtimestamp(self.target["timestamp"], tz=datetime.timezone.utc),
+            date=datetime.datetime.fromtimestamp(
+                self.target["timestamp"], tz=datetime.timezone.utc
+            ),
             tags=self.target["tags"],
             summary=self.target["summary"],
-
             content=content,
             layout=layout,
             trail=trails,
-
             display_avatar=self.target["displayAvatar"],
-
             reply_count=reply_count,
             reblog_count=reblog_count,
             like_count=like_count,
             note_count=note_count,
-
             default_note_viewer_tab=default_note_viewer_tab,
-
             reblog_from=reblog_from_information,
             reblog_root=reblog_root_information,
-
-            community_labels=community_labels
+            community_labels=community_labels,
         )
 
 
 class ReplyNoteParser:
     def __init__(self, target) -> None:
-            self.target = target
+        self.target = target
 
     @classmethod
     def process(cls, initial_data):
@@ -261,12 +257,12 @@ class ReplyNoteParser:
         return models.post.ReplyNote(
             uuid=self.target["id"],
             reply_id=self.target["replyId"],
-            date=datetime.datetime.fromtimestamp(self.target["timestamp"], tz=datetime.timezone.utc),
-
+            date=datetime.datetime.fromtimestamp(
+                self.target["timestamp"], tz=datetime.timezone.utc
+            ),
             content=self.target["content"],
             layout=self.target["layout"],
-
-            blog=BlogParser(self.target["blog"]).parse_limited()
+            blog=BlogParser(self.target["blog"]).parse_limited(),
         )
 
 
@@ -288,42 +284,40 @@ class ReblogNoteParser:
             uuid=self.target["id"],
             id=self.target["postId"],
             blog=BlogParser(self.target["blog"]).parse_limited(),
-
             content=self.target["content"],
             layout=self.target["content"],
             tags=self.target["tags"],
-
             reblogged_from=self.target["reblogParentBlogName"],
-            date=datetime.datetime.fromtimestamp(self.target["timestamp"], tz=datetime.timezone.utc),
+            date=datetime.datetime.fromtimestamp(
+                self.target["timestamp"], tz=datetime.timezone.utc
+            ),
             community_labels=PostParser.parse_community_label(self.target),
         )
 
     def parse_simple(self):
-        blog=models.blog.Blog(
+        blog = models.blog.Blog(
             name=self.target["blogName"],
             avatar=[{"url": avatar_url} for avatar_url in list(self.target["avatarUrl"].values())],
             title=self.target["blogTitle"],
             url="",
-
             is_adult=False,
             description_npf="",
             uuid=self.target["blogUuid"],
-
             theme=models.blog.BlogTheme(self.target["avatarShape"]),
-            active = True
+            active=True,
         )
 
         return models.post.ReblogNote(
             uuid=self.target["blogUuid"],
             id=self.target["postId"],
             blog=blog,
-
             content=[],
             layout=[],
             tags=self.target["tags"],
-
             reblogged_from=self.target["reblogParentBlogName"],
-            date=datetime.datetime.fromtimestamp(self.target["timestamp"], tz=datetime.timezone.utc),
+            date=datetime.datetime.fromtimestamp(
+                self.target["timestamp"], tz=datetime.timezone.utc
+            ),
             community_labels=[],
         )
 
@@ -342,7 +336,9 @@ class LikeNoteParser:
             blog_name=self.target["blogName"],
             blog_uuid=self.target["blogUuid"],
             blog_title=self.target["blogTitle"],
-            date=datetime.datetime.fromtimestamp(self.target["timestamp"], tz=datetime.timezone.utc),
+            date=datetime.datetime.fromtimestamp(
+                self.target["timestamp"], tz=datetime.timezone.utc
+            ),
             avatar=self.target["avatarUrl"],
         )
 
@@ -373,8 +369,10 @@ def parse_item(element, element_index=0, total_elements=1, use_parsers=None):
 
     # use_parsers must be a iterable object
     for parser_index, parser in enumerate(use_parsers):
-        logger.debug(f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
-                     f"({parser_index + 1}/{len(use_parsers)})...")
+        logger.debug(
+            f"parse_item: Attempting to match item {item_number} with `{parser.__name__}`"
+            f"({parser_index + 1}/{len(use_parsers)})..."
+        )
 
         if parsed_element := parser.process(element):
             return parsed_element

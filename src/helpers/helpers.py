@@ -8,7 +8,7 @@ import dominate.tags
 from ..cache import get_poll_results
 
 
-def is_tumblr_url(url : str | urllib.parse.ParseResult):
+def is_tumblr_url(url: str | urllib.parse.ParseResult):
     """Checks URL is a tumblr URL"""
     if isinstance(url, str):
         url = urllib.parse.urlparse(url)
@@ -24,7 +24,7 @@ def is_tumblr_url(url : str | urllib.parse.ParseResult):
     return False
 
 
-def url_handler(url : str | urllib.parse.ParseResult):
+def url_handler(url: str | urllib.parse.ParseResult):
     """Change URLs found in posts to privacy-friendly alternatives"""
     if isinstance(url, str):
         url = urllib.parse.urlparse(url)
@@ -100,15 +100,12 @@ def create_reblog_attribution_link(post):
             reblog_from_url = f"/{post.reblog_root.blog_name}/{post.reblog_from.id}"
         else:
             # In case we are unable to find a tumblr URL to use
-            return dominate.tags.span(
-                reblogged_from_name,
-                cls="blog-name hidden-reblog"
-            )
+            return dominate.tags.span(reblogged_from_name, cls="blog-name hidden-reblog")
 
     return dominate.tags.a(
         reblogged_from_name,
         href=url_handler(reblog_from_url),
-        cls=' '.join(reblog_attribution_element_classes)
+        cls=" ".join(reblog_attribution_element_classes),
     )
 
 

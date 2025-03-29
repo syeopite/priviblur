@@ -3,7 +3,7 @@ class InitialTumblrAPIParseException(Exception):
         super().__init__(message)
 
 
-# TODO replace 
+# TODO replace
 class TumblrErrorResponse(Exception):
     def __init__(self, message, code, details, internal_code):
         message = f"Tumblr has returned an error response\nHTTP Code: {code}\nMessage: {message}"
@@ -44,6 +44,6 @@ class TumblrNon200NorJSONResponse(Exception):
 
 
 class TumblrRatelimitReachedError(Exception):
-    def __init__(self, status_code, ratelimit_reset_timestamp = None):
+    def __init__(self, status_code, ratelimit_reset_timestamp=None):
         self.status_code = status_code
         self.ratelimit_reset_timestamp = ratelimit_reset_timestamp

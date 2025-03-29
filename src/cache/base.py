@@ -5,6 +5,7 @@ import orjson
 
 from .. import priviblur_extractor
 
+
 class AccessCache(abc.ABC):
     def __init__(self, ctx, prefix, cache_ttl, continuation=None, **kwargs):
         self.ctx = ctx
@@ -51,11 +52,13 @@ class AccessCache(abc.ABC):
             pipeline.setnx(next_key, "0")
             pipeline.expire(next_key, self.cache_ttl)
 
-            self.ctx.LOGGER.debug("Cache: Allocating a slot for continuation batch with key \"%s\"", next_key)
+            self.ctx.LOGGER.debug(
+                'Cache: Allocating a slot for continuation batch with key "%s"', next_key
+            )
 
     async def parse_and_cache(self, base_key, full_key_with_continuation, initial_results):
         """Inserts the given results into the cache within the given key
-        
+
         Creates a placeholder item within the cache for the next continuation batch if applicable
         """
         pipeline = self.ctx.CacheDb.pipeline()
@@ -69,7 +72,7 @@ class AccessCache(abc.ABC):
         # When a given continuation is invalid Tumblr returns the data for the initial page. As such,
         # we need to add in an extra check here to ensure that a malicious user does not arbitrarily add
         # in data to the cache
-        # 
+        #
         # "0" is used as a placeholder
 
         self.allocate_slot_for_continuation(base_key, pipeline, timeline)
@@ -80,7 +83,7 @@ class AccessCache(abc.ABC):
 
     async def get_cached(self):
         """Retrieves an item from the cache
-        
+
         Fetches new data and inserts into the cache when it is unable to do so
         """
         base_key, full_key_with_continuation = self.get_key()
@@ -95,20 +98,27 @@ class AccessCache(abc.ABC):
             if self.continuation and not cached_result:
                 return self.parse(initial_results)
             else:
-                self.ctx.LOGGER.info("Cache: Adding \"%s\" to the cache", full_key_with_continuation)
-                return await self.parse_and_cache(base_key, full_key_with_continuation, initial_results)
+                self.ctx.LOGGER.info('Cache: Adding "%s" to the cache', full_key_with_continuation)
+                return await self.parse_and_cache(
+                    base_key, full_key_with_continuation, initial_results
+                )
         else:
-            self.ctx.LOGGER.info("Cache: Cached version of \"%s\" found", full_key_with_continuation)
+            self.ctx.LOGGER.info('Cache: Cached version of "%s" found', full_key_with_continuation)
 
             initial_results_from_cache = orjson.loads(cached_result)
 
             if initial_results_from_cache["version"] != priviblur_extractor.models.VERSION:
                 self.ctx.LOGGER.debug(
                     "Cache: Version mismatch! Cached object is from a different version of Priviblur (%(cached_version)s != %(priviblur_version)s). Fetching new response...",
-                    dict(cached_version=initial_results_from_cache["version"], priviblur_version=priviblur_extractor.models.VERSION)
+                    dict(
+                        cached_version=initial_results_from_cache["version"],
+                        priviblur_version=priviblur_extractor.models.VERSION,
+                    ),
                 )
                 new_initial_results = await self.fetch()
-                return await self.parse_and_cache(base_key, full_key_with_continuation, new_initial_results)
+                return await self.parse_and_cache(
+                    base_key, full_key_with_continuation, new_initial_results
+                )
 
             return self.parse_cached_json(initial_results_from_cache)
 

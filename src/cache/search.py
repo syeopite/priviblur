@@ -11,7 +11,7 @@ class SearchCache(AccessCache):
             prefix=f"search",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for,
             continuation=continuation,
-            **kwargs
+            **kwargs,
         )
 
         self.query = query
@@ -21,8 +21,8 @@ class SearchCache(AccessCache):
         return await self.ctx.TumblrAPI.timeline_search(
             self.query,
             self.ctx.TumblrAPI.config.TimelineType.POST,
-            continuation=self.continuation, 
-            **self.kwargs
+            continuation=self.continuation,
+            **self.kwargs,
         )
 
     def parse(self, initial_results):
@@ -30,7 +30,9 @@ class SearchCache(AccessCache):
 
     def build_key(self):
         # search:<query>:<latest>:<post_filter>:<time_filter>:<continuation>
-        path_to_cached_results = [self.query, ]
+        path_to_cached_results = [
+            self.query,
+        ]
 
         if self.kwargs.get("latest") is True:
             path_to_cached_results.append("latest")

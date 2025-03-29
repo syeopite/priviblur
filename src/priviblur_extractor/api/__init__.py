@@ -1,1 +1,1 @@
-from . api import TumblrAPI
+from .api import TumblrAPI

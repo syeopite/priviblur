@@ -11,17 +11,14 @@ class ExploreCache(AccessCache):
             prefix=f"explore:{type_}",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for,
             continuation=continuation,
-            **kwargs
+            **kwargs,
         )
 
         self.fetch_function = fetch_function
 
     async def fetch(self):
         """Fetches search results from Tumblr"""
-        return await self.fetch_function(
-            continuation=self.continuation,
-            **self.kwargs
-        )
+        return await self.fetch_function(continuation=self.continuation, **self.kwargs)
 
     def parse(self, initial_results):
         return priviblur_extractor.parse_timeline(initial_results)

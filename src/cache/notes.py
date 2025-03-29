@@ -9,7 +9,7 @@ class NotesTimelineCache(AccessCache):
             prefix=f"blog:{blog}:post:{post_id}:notes:{type_}",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for,
             continuation=kwargs.get("after_id") or kwargs.get("before_timestamp") or None,
-            **kwargs
+            **kwargs,
         )
 
         self.blog = blog
@@ -20,11 +20,7 @@ class NotesTimelineCache(AccessCache):
 
     async def fetch(self):
         """Fetches search results from Tumblr"""
-        return await self.fetch_function(
-            self.blog,
-            self.post_id,
-            **self.kwargs
-        )
+        return await self.fetch_function(self.blog, self.post_id, **self.kwargs)
 
     def parse(self, initial_results):
         return priviblur_extractor.parse_note_timeline(initial_results)
@@ -42,7 +38,11 @@ class NotesTimelineCache(AccessCache):
 
         pipeline.setnx(next_key, "0")
         pipeline.expire(next_key, self.cache_ttl)
-        self.ctx.LOGGER.debug(f"Cache: Allocating a slot for next \"%s\" notes batch with key \"%s\"", self.type_, next_key)
+        self.ctx.LOGGER.debug(
+            f'Cache: Allocating a slot for next "%s" notes batch with key "%s"',
+            self.type_,
+            next_key,
+        )
 
     def build_key(self):
         # blog:<blog_name>:post:<post_id>:<kwargs>

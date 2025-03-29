@@ -22,9 +22,11 @@ async def _main(request: sanic.Request, tag: str):
     else:
         sort_by = "top"
 
-    timeline = await get_tag_browse_results(request.app.ctx, tag, latest=latest, continuation=continuation)
+    timeline = await get_tag_browse_results(
+        request.app.ctx, tag, latest=latest, continuation=continuation
+    )
 
-    # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't 
+    # We remove the continuation parameter used to fetch this page as to ensure the current continuation parameter isn't
     # added when applying a search filter
     if request.args.get("continuation"):
         del request.args["continuation"]

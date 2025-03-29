@@ -1,15 +1,16 @@
 import orjson
 
-async def get_poll_results(ctx, blog, post_id,poll_id, expired=False):
+
+async def get_poll_results(ctx, blog, post_id, poll_id, expired=False):
     """Gets poll results from the given data
-    
+
     Attempts to retrieve from the cache first and foremost, and only requests when the data is either unavailable or expired.
     """
     if ctx.CacheDb:
         cached_result = await ctx.CacheDb.hgetall(f"polls:{poll_id}")
         if cached_result:
             timestamp = cached_result.pop("timestamp")
-            poll_results = {k:int(v) for k, v in cached_result.items()}
+            poll_results = {k: int(v) for k, v in cached_result.items()}
 
             return {"timestamp": timestamp, "results": poll_results}
         else:
@@ -38,13 +39,14 @@ async def _cache_poll_results(ctx, results, poll_id, expired):
 
     cache_id = f"polls:{poll_id}"
 
-    pipeline.hset(cache_id, mapping={
-        **results["results"],
-        "timestamp": results["timestamp"],
-    })
+    pipeline.hset(
+        cache_id,
+        mapping={
+            **results["results"],
+            "timestamp": results["timestamp"],
+        },
+    )
 
     pipeline.expire(cache_id, ttl)
-    
-    await pipeline.execute()
 
-    
+    await pipeline.execute()

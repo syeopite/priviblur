@@ -126,6 +126,7 @@ class LikeNote(NamedTuple):
 
 class ReblogAttribution(NamedTuple):
     """Object representing reblog author information from individual posts"""
+
     post_id: str
     post_url: str
     blog_name: str
@@ -141,7 +142,7 @@ class ReblogAttribution(NamedTuple):
 
 class PostTrail(NamedTuple):
     id: Optional[str]
-    blog : Union[blog.Blog, blog.BrokenBlog]
+    blog: Union[blog.Blog, blog.BrokenBlog]
     date: Optional[datetime.datetime]
     content: Optional[list[dict]]
     layout: Optional[list[dict]]
@@ -227,7 +228,11 @@ class Post(NamedTuple):
             trails.append(PostTrail.from_json(trail))
         json["trail"] = trails
 
-        for key, object_ in (("blog", blog.Blog), ("reblog_from", ReblogAttribution), ("reblog_root", ReblogAttribution)):
+        for key, object_ in (
+            ("blog", blog.Blog),
+            ("reblog_from", ReblogAttribution),
+            ("reblog_root", ReblogAttribution),
+        ):
             if json[key]:
                 json[key] = object_.from_json(json[key])
 

@@ -34,9 +34,11 @@ class NPFParser(npf_renderer.parse.Parser):
         total_votes = None
 
         if self.poll_result_callback:
-            callback_response = await self.poll_result_callback(poll_id, creation_timestamp + expires_after)
+            callback_response = await self.poll_result_callback(
+                poll_id, creation_timestamp + expires_after
+            )
 
-            #{answer_id: vote_count}
+            # {answer_id: vote_count}
             raw_results = callback_response["results"].items()
             processed_results = sorted(raw_results, key=lambda item: -item[1])
 
@@ -48,23 +50,24 @@ class NPFParser(npf_renderer.parse.Parser):
                 total_votes += vote_count
 
                 if index == 0:
-                    votes_dict[results[0]] = npf_renderer.objects.poll_block.PollResult(is_winner=True, vote_count=vote_count)
+                    votes_dict[results[0]] = npf_renderer.objects.poll_block.PollResult(
+                        is_winner=True, vote_count=vote_count
+                    )
                 else:
-                    votes_dict[results[0]] = npf_renderer.objects.poll_block.PollResult(is_winner=False, vote_count=vote_count)
+                    votes_dict[results[0]] = npf_renderer.objects.poll_block.PollResult(
+                        is_winner=False, vote_count=vote_count
+                    )
 
             votes = npf_renderer.objects.poll_block.PollResults(
-                timestamp=callback_response["timestamp"],
-                results=votes_dict
+                timestamp=callback_response["timestamp"], results=votes_dict
             )
 
         return npf_renderer.objects.poll_block.PollBlock(
             poll_id=poll_id,
             question=question,
             answers=answers,
-
             creation_timestamp=int(creation_timestamp),
             expires_after=int(expires_after),
-
             votes=votes,
             total_votes=total_votes,
         )
@@ -117,13 +120,15 @@ class NPFFormatter(npf_renderer.format.Formatter):
             "content": content,
             "layout": layout,
             "url_handler": url_handler,
-            "forbid_external_iframes": forbid_external_iframes
+            "forbid_external_iframes": forbid_external_iframes,
         }
 
         if request:
             # Asking to expand a post is the reverse of asking to truncate a post
             initialization_arguments["truncate"] = not request.ctx.preferences.expand_posts
-            initialization_arguments["localizer"] = request.app.ctx.LANGUAGES[request.ctx.language].npf_renderer_localizer
+            initialization_arguments["localizer"] = request.app.ctx.LANGUAGES[
+                request.ctx.language
+            ].npf_renderer_localizer
 
         super().__init__(**initialization_arguments)
 
@@ -143,12 +148,12 @@ class NPFFormatter(npf_renderer.format.Formatter):
         if (self.blog_name and self.post_id) and not block.votes:
             poll_footer = poll_html[2]
             no_script_fallback = dominate.tags.noscript(
-                    dominate.tags.a(
-                        "See Results",
-                        href=f"/{self.blog_name}/{self.post_id}?fetch_polls=true",
-                        cls="toggle-poll-results"
-                    )
+                dominate.tags.a(
+                    "See Results",
+                    href=f"/{self.blog_name}/{self.post_id}?fetch_polls=true",
+                    cls="toggle-poll-results",
                 )
+            )
 
             poll_footer.children.insert(0, no_script_fallback)
 
@@ -186,20 +191,15 @@ class NPFFormatter(npf_renderer.format.Formatter):
                 dominate.tags.div(
                     dominate.tags.details(
                         dominate.tags.summary("ALT", title=f"{block.alt_text}"),
-                        dominate.tags.p(block.alt_text)
+                        dominate.tags.p(block.alt_text),
                     ),
-                    cls="img-alt-text"
+                    cls="img-alt-text",
                 )
             )
 
 
 async def format_npf(
-    contents,
-    layouts=None,
-    blog_name=None,
-    post_id=None,*,
-    poll_callback=None,
-    request=None
+    contents, layouts=None, blog_name=None, post_id=None, *, poll_callback=None, request=None
 ):
     """Wrapper around npf_renderer.format_npf for extra functionalities
 
@@ -223,12 +223,13 @@ async def format_npf(
         render_error = None
 
         formatted = NPFFormatter(
-            contents, layouts,
+            contents,
+            layouts,
             blog_name=blog_name,
             post_id=post_id,
             url_handler=url_handler,
             forbid_external_iframes=True,
-            request=request
+            request=request,
         ).format()
 
     except Exception as e:

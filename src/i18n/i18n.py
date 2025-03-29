@@ -10,6 +10,7 @@ from .npf_renderer_localizer import NPFRendererGettextFallback, NPFRendererLocal
 
 class Language:
     """Stores metadata about supported translations"""
+
     def __init__(self, locale, priviblur_gettext) -> None:
         self.locale = locale
 
@@ -21,7 +22,17 @@ class Language:
 
 
 SUPPORTED_LANGUAGES = [
-    "en_US", "cs_CZ", "fr", "ja", "uk", "zh_Hans", "zh_Hant", "es", "nb_NO", "de", "ta"
+    "en_US",
+    "cs_CZ",
+    "fr",
+    "ja",
+    "uk",
+    "zh_Hans",
+    "zh_Hant",
+    "es",
+    "nb_NO",
+    "de",
+    "ta",
 ]
 
 SUPPORTED_LANGUAGES.sort()
@@ -32,11 +43,11 @@ def initialize_locales() -> typing.Mapping[str, Language]:
     try:
         # Initialize english locale first so that we may use it as a fallback
 
-        priviblur_english_instance = gettext.translation("priviblur", localedir="locales", languages=("en_US",))
+        priviblur_english_instance = gettext.translation(
+            "priviblur", localedir="locales", languages=("en_US",)
+        )
 
-        languages = {
-            "en_US": Language("en_US", priviblur_english_instance)
-        }
+        languages = {"en_US": Language("en_US", priviblur_english_instance)}
 
         for locale in SUPPORTED_LANGUAGES:
             if locale == "en_US":
@@ -47,10 +58,7 @@ def initialize_locales() -> typing.Mapping[str, Language]:
 
             languages[locale] = Language(locale, instance)
     except FileNotFoundError as e:
-        print(
-            'Error: Unable to find locale files. '
-            'Did you forget to compile them?'
-        )
+        print("Error: Unable to find locale files. Did you forget to compile them?")
 
         sys.exit()
     except Exception as e:
@@ -59,8 +67,12 @@ def initialize_locales() -> typing.Mapping[str, Language]:
     return languages
 
 
-def translate(language : str, id : str, number : int | float | None = None,
-              substitution : str | dict | None = None) -> str:
+def translate(
+    language: str,
+    id: str,
+    number: int | float | None = None,
+    substitution: str | dict | None = None,
+) -> str:
     app = sanic.Sanic.get_app("Priviblur")
 
     gettext_instance = app.ctx.LANGUAGES[language].priviblur_translations

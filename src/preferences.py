@@ -5,6 +5,7 @@ from .i18n import SUPPORTED_LANGUAGES
 
 VERSION = 1
 
+
 @dataclasses.dataclass
 class UserPreferences:
     # See DefaultUserPreferences in config/user_preferences.py
@@ -27,15 +28,15 @@ class UserPreferences:
         if self.theme not in ("auto", "light", "dark"):
             self.theme = "auto"
 
-    def replace_from_forms(self, request) -> 'UserPreferences':
+    def replace_from_forms(self, request) -> "UserPreferences":
         """Returns updated UserPreferences class from POST form data"""
         return self._replace(request, request.form)
 
-    def replace_from_query(self, request) -> 'UserPreferences':
+    def replace_from_query(self, request) -> "UserPreferences":
         """Returns updated UserPreferences class from request query args"""
         return self._replace(request, request.args)
 
-    def replace_from_cookie(self, request) -> 'UserPreferences':
+    def replace_from_cookie(self, request) -> "UserPreferences":
         """Returns updated UserPreferences class from the settings cookie"""
         request.ctx.invalid_settings_cookie = False
 
@@ -50,7 +51,7 @@ class UserPreferences:
                     request.ctx.invalid_settings_cookie = True
         except (TypeError, KeyError, ValueError):
             request.ctx.invalid_settings_cookie = True
-        
+
         return self
 
     def _replace(self, request, raw_new_prefs):
@@ -61,9 +62,7 @@ class UserPreferences:
         # Process Sanic's RequestParameters object to a dictionary
         # mapping the request argument to its first value.
         # Also skips over unknown fields.
-        raw_new_prefs = {
-            key: value[0] for key, value in raw_new_prefs.items() if key in fields
-        }
+        raw_new_prefs = {key: value[0] for key, value in raw_new_prefs.items() if key in fields}
 
         self.convert_value_to_python(raw_new_prefs)
 
@@ -118,7 +117,7 @@ class UserPreferences:
             "key": "settings",
             "value": self.to_url_encoded(),
             "secure": secure,
-            "max_age": 31540000
+            "max_age": 31540000,
         }
 
         if request.app.ctx.PRIVIBLUR_CONFIG.deployment.domain:

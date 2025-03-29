@@ -12,7 +12,7 @@ async def settings_page(request):
         "settings",
         context={
             "app": request.app,
-        }
+        },
     )
 
 
@@ -24,16 +24,15 @@ async def settings_post(request):
         "settings",
         context={
             "app": request.app,
-        }
+        },
     )
 
-    response.add_cookie(
-        **request.ctx.preferences.construct_cookie(request)
-    )
+    response.add_cookie(**request.ctx.preferences.construct_cookie(request))
 
     request.ctx.invalid_settings_cookie = False
 
     return response
+
 
 @settings.get("/restore")
 async def settings_restore(request):
@@ -43,12 +42,10 @@ async def settings_restore(request):
         "settings",
         context={
             "app": request.app,
-        }
+        },
     )
 
-    response.add_cookie(
-        **request.ctx.preferences.construct_cookie(request)
-    )
+    response.add_cookie(**request.ctx.preferences.construct_cookie(request))
 
     request.ctx.invalid_settings_cookie = False
 

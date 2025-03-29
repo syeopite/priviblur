@@ -27,7 +27,7 @@ class PriviblurConfig(NamedTuple):
     misc: misc.MiscellaneousConfig
 
 
-def load_config(path : str) -> PriviblurConfig:
+def load_config(path: str) -> PriviblurConfig:
     """Loads a TOML configuration file into a PriviblurConfig object"""
 
     try:
@@ -45,16 +45,20 @@ def load_config(path : str) -> PriviblurConfig:
 
     # The config file can contain additional arguments that Priviblur does not recognize.
     # As such some processing is needed to only retrieve what Priviblur can understand
-    
+
     # Defines config sections
     config_sections = (
         # Corresponding object, internal name, section name in the config file
         (deployment.DeploymentConfig, "deployment", "deployment"),
         (priviblur_backend.PriviblurBackendConfig, "backend", "priviblur_backend"),
-        (user_preferences.DefaultUserPreferences, "default_user_preferences", "default_user_preferences"),
+        (
+            user_preferences.DefaultUserPreferences,
+            "default_user_preferences",
+            "default_user_preferences",
+        ),
         (cache_config.CacheConfig, "cache", "cache"),
         (logging_config.LoggingConfig, "logging", "logging"),
-        (misc.MiscellaneousConfig, "misc", "misc")
+        (misc.MiscellaneousConfig, "misc", "misc"),
     )
 
     priviblur_config_data = {}
@@ -73,8 +77,4 @@ def load_config(path : str) -> PriviblurConfig:
 
     # TODO Validate invalid config values
 
-    return PriviblurConfig(
-        **priviblur_config_data
-    )
-
-
+    return PriviblurConfig(**priviblur_config_data)

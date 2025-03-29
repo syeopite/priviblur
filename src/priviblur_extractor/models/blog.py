@@ -18,7 +18,7 @@ class BlogTheme(NamedTuple):
     avatar_shape: str
     background_color: Optional[str] = None
     body_font: Optional[str] = None
-    header_info : Optional[HeaderInfo] = None
+    header_info: Optional[HeaderInfo] = None
 
     def to_json_serialisable(self):
         json_serializable = self._asdict()
@@ -77,4 +77,3 @@ class Blog(NamedTuple):
     def from_json(cls, json):
         json["theme"] = BlogTheme.from_json(json["theme"])
         return cls(**json)
-

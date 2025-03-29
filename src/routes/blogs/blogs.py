@@ -19,7 +19,9 @@ async def _blog_posts(request: sanic.Request, blog: str):
     if before_id := request.args.get("before_id"):
         before_id = urllib.parse.unquote(before_id)
 
-    blog = await get_blog_posts(request.app.ctx, blog, continuation=continuation, before_id=before_id)
+    blog = await get_blog_posts(
+        request.app.ctx, blog, continuation=continuation, before_id=before_id
+    )
 
     return await request.app.ctx.render(
         "blog/blog",
@@ -31,6 +33,7 @@ async def _blog_posts(request: sanic.Request, blog: str):
 
 
 # Tags
+
 
 @blogs.get("/tagged/<tag:str>")
 @blogs.get("/tagged/<tag:str>/rss", name="_blog_tags_rss", ctx_rss=True)
@@ -55,6 +58,7 @@ async def _blog_tags(request: sanic.Request, blog: str, tag: str):
 
 # Search
 
+
 @blogs.get("/search/<query:str>")
 @blogs.get("/search/<query:str>/rss", name="_blog_search_rss", ctx_rss=True)
 async def _blog_search(request: sanic.Request, blog: str, query: str):
@@ -65,12 +69,14 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
         continuation = urllib.parse.unquote(continuation)
 
     try:
-        blog_timeline = (await get_blog_search_results(request.app.ctx, blog, query, continuation=continuation))
+        blog_timeline = await get_blog_search_results(
+            request.app.ctx, blog, query, continuation=continuation
+        )
     except IndexError:
         blog_timeline = priviblur_extractor.models.timelines.BlogTimeline(
             blog_info=(await get_blog_posts(request.app.ctx, blog)).blog_info,
             posts=[],
-            total_posts=0
+            total_posts=0,
         )
 
     return await request.app.ctx.render(
@@ -87,12 +93,17 @@ async def _blog_search(request: sanic.Request, blog: str, query: str):
 async def query_param_redirect(request: sanic.Request, blog: str):
     """Endpoint for /search to redirect q= queries to /search/<query>"""
     if query := request.args.get("q"):
-        return sanic.redirect(request.app.url_for("blogs._blog_search", blog=blog, query=urllib.parse.quote(query, safe="")))
+        return sanic.redirect(
+            request.app.url_for(
+                "blogs._blog_search", blog=blog, query=urllib.parse.quote(query, safe="")
+            )
+        )
     else:
         return sanic.redirect(request.app.url_for("blogs._blog_posts", blog=blog))
 
 
 # Redirects for /post/...
+
 
 @blogs.get("/post/<post_id:int>")
 async def redirect_slash_post_no_slug(request: sanic.Request, blog: str, post_id: str):
@@ -101,4 +112,6 @@ async def redirect_slash_post_no_slug(request: sanic.Request, blog: str, post_id
 
 @blogs.get("/post/<post_id:int>/<slug:str>")
 async def redirect_slash_post(request: sanic.Request, blog: str, post_id: str, slug: str):
-    return sanic.redirect(request.app.url_for("blog_post._blog_post_with_slug", blog=blog, post_id=post_id, slug=slug))
+    return sanic.redirect(
+        request.app.url_for("blog_post._blog_post_with_slug", blog=blog, post_id=post_id, slug=slug)
+    )
