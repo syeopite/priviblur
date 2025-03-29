@@ -33,12 +33,12 @@ jobs:
          cache: "pip"
          cache-dependency-path: |
           "utils/i18n/requirements.txt"
-          "./requirements.dev.txt"
+          "./requirements-dev.txt"
 
       - name: Install dependencies
         run: |
           pip install -r 'utils/i18n/requirements.txt'
-          pip install -r 'requirements.dev.txt'
+          pip install -r 'requirements-dev.txt'
 
       - name: Generate locale data
         run: python ./utils/i18n/generate.py
