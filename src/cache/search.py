@@ -1,5 +1,3 @@
-import orjson
-
 from .base import AccessCache
 from .. import priviblur_extractor
 
@@ -8,7 +6,7 @@ class SearchCache(AccessCache):
     def __init__(self, ctx, query, continuation, **kwargs):
         super().__init__(
             ctx=ctx,
-            prefix=f"search",
+            prefix="search",
             cache_ttl=ctx.PRIVIBLUR_CONFIG.cache.cache_feed_for,
             continuation=continuation,
             **kwargs,

@@ -1,4 +1,4 @@
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 
 
 class DefaultUserPreferences(NamedTuple):

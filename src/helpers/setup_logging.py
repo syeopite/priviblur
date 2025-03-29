@@ -1,5 +1,3 @@
-import logging
-
 import sanic.log
 
 

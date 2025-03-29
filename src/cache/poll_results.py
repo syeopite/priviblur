@@ -1,6 +1,3 @@
-import orjson
-
-
 async def get_poll_results(ctx, blog, post_id, poll_id, expired=False):
     """Gets poll results from the given data
 

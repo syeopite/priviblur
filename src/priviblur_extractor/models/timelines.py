@@ -1,4 +1,3 @@
-import json
 from typing import Sequence, Optional, NamedTuple
 
 from . import base

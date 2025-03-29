@@ -1,5 +1,4 @@
 import sanic
-import sanic_ext
 
 misc_bp = sanic.Blueprint("misc", url_prefix="/")
 

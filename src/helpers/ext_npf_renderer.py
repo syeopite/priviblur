@@ -92,7 +92,7 @@ class NPFParser(npf_renderer.parse.Parser):
             case "poll":
                 block = await self._parse_poll_block()
             case _:
-                block = unsupported.Unsupported(self.current["type"])
+                block = npf_renderer.objects.unsupported.Unsupported(self.current["type"])
 
         self.parsed_result.append(block)
 

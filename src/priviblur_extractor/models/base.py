@@ -1,4 +1,4 @@
-from typing import Optional, NamedTuple, Tuple
+from typing import Optional, NamedTuple
 
 # Used for cache busting
 # Applied when .to_json_serialisable() is called

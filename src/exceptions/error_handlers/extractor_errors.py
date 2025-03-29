@@ -1,5 +1,3 @@
-import sanic_ext
-
 from src.exceptions.error_handlers import base
 from src.priviblur_extractor import priviblur_exceptions
 
