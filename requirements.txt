@@ -17,7 +17,7 @@ Jinja2==3.1.6
 MarkupSafe==3.0.2
 multidict==6.4.3
 npf_renderer==0.13.0
-orjson==3.10.16
+orjson==3.10.18
 PyYAML==6.0.2
 redis==5.2.1
 sanic==25.3.0
