@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.4.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2025-01-28 20:01+0000\n"
+"PO-Revision-Date: 2025-06-16 14:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
-"Language-Team: Tamil <https://hosted.weblate.org/projects/priviblur/translations/ta/>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/priviblur/"
+"translations/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 msgid "project_title"
 msgstr "தனியுரிமை"
@@ -101,7 +102,7 @@ msgid "timeline_search_post_type_filter_photo"
 msgstr "புகைப்படம்"
 
 msgid "timeline_search_post_type_filter_gif"
-msgstr "Gifs"
+msgstr "அசைவூட்டங்கள்"
 
 msgid "timeline_search_post_type_filter_quote"
 msgstr "மேற்கோள்"
@@ -291,3 +292,120 @@ msgstr "முதலில் பழமையானது"
 
 msgid "post_note_viewer_view_replies_filter_sort_newest"
 msgstr "புதிய முதல்"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "Error: non-tumblr மூலம் க்கு ஒளிதோற்றம் player"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "இடுகைகளை விரிவாக்கு"
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "படம்"
+
+msgid "tumblr_error_ratelimit_reached_description"
+msgstr "தயவுசெய்து பின்னர் மீண்டும் முயற்சிக்கவும்"
+
+msgid "tumblr_error_ratelimit_reached_heading"
+msgstr "தனியுரிமை Tumblr ஆல் மதிப்பிடப்பட்டுள்ளது"
+
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "பிழை பதிவைக் காட்டு"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr "துண்டிக்கப்பட்ட இடுகைகளை தானாக விரிவுபடுத்துகிறது"
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "அநாமதேய"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} கேட்டார்"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "ஆதரிக்கப்படாத NPF தொகுதி"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr ""
+"ஆதரிக்கப்படாத \"{block}\" வகை NPF தொகுதிக்கான ஒதுக்கிடம் என்னை https://github.com/"
+"syeopite/npf-renderer இல் புகாரளிக்கவும்"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "\"{site}\" க்கான முன்னோட்ட படம்"
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr "பிழை: வீடியோ தொகுதியை வழங்க முடியவில்லை"
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "அசல் தளத்தில் பார்க்க என்னைக் சொடுக்கு செய்க"
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "பிழை: ஆடியோ தொகுதியை வழங்க முடியவில்லை"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "அசல் தளத்தில் கேட்க என்னைக் சொடுக்கு செய்க"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "பிழை: ஆடியோ பிளேயருக்கான டூம்ப்லர் அல்லாத மூல"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "{duration} மீதமுள்ள"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "முடிவடைந்தது: {ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "{author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "{author} ஆல் உருவாக்கப்பட்டது"
+
+msgid "npf_renderer_app_attribution"
+msgstr "{இயங்குதளத்தில் காண்க"
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "இந்த வலைப்பதிவைக் காண ஒரு கணக்கு தேவைப்படுகிறது"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr ""
+"ஆதரிக்கப்படாத (\"{attributee}\") பண்புக்கூறு வகை வழியாக காரணம். இதை https://"
+"github.com/syeopite/npf-renderer இல் புகாரளிக்கவும்"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "இது போன்ற தனிப்பட்ட இடுகைகளை மட்டுமே காட்ட முடியும்"
+
+msgid "alert_partial_restricted_results_message"
+msgstr ""
+"Tumblr இன் உள்ளடக்க வழிகாட்டுதல்கள் காரணமாக இந்த தேடல் முடிவுகள் ஓரளவு "
+"கட்டுப்படுத்தப்பட்டுள்ளன. சில வெற்று முடிவுகளை இங்கே அவ்வப்போது காணலாம்."
+
+msgid "alert_restricted_results_heading"
+msgstr "தடைசெய்யப்பட்ட தேடல் முடிவுகள்"
+
+msgid "alert_restricted_results_message"
+msgstr ""
+"இந்த தேடல் முடிவுகள் அவற்றின் உள்ளடக்க வழிகாட்டுதல்களை மீறியதற்காக Tumblr ஆல் "
+"தடுக்கப்பட்டுள்ளன."
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "இந்த இடுகையின் உள்ளடக்கங்களை வழங்கத் தவறிவிட்டது"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr ""
+"இந்த இடுகையின் உள்ளடக்கங்கள் பிழை காரணமாக வழங்கத் தவறிவிட்டன. மேலும் தகவலுக்கு கீழே "
+"சரிபார்க்கவும்"
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr "உட்பொதிகள் முடக்கப்பட்டுள்ளன"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr "ஆல்பம் கலை"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} வாக்கு"
+msgstr[1] "{votes} வாக்குகள்"
+
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "இந்த வலைப்பதிவை அணுக கடவுச்சொல் தேவை"
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "உங்கள் தேடல் முடிவுகளில் விரைவான புதுப்பிப்பு"
