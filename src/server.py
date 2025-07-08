@@ -4,7 +4,7 @@ import urllib.parse
 import functools
 
 import sanic
-import httpx
+import aiohttp
 import orjson
 import babel.numbers
 import babel.dates
@@ -76,27 +76,51 @@ async def initialize(app):
 
     # TODO set pool size for image requests
 
-    def create_client(url, timeout=priviblur_backend.image_response_timeout, headers=None):
-        return httpx.AsyncClient(
-            base_url=url, headers=headers or media_request_headers, timeout=timeout
-        )
+    def create_image_client(url, timeout=priviblur_backend.image_response_timeout):
+        timeout = aiohttp.ClientTimeout(timeout)
+        return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
 
-    app.ctx.Media64Client = create_client("https://64.media.tumblr.com")
-    app.ctx.Media49Client = create_client("https://49.media.tumblr.com")
-    app.ctx.Media44Client = create_client("https://44.media.tumblr.com")
-    app.ctx.MediaVeClient = create_client("https://ve.media.tumblr.com")
-    app.ctx.MediaVaClient = create_client("https://va.media.tumblr.com")
-    app.ctx.MediaGenericClient = create_client(url="")
-    app.ctx.AudioClient = create_client("https://a.tumblr.com")
-    app.ctx.TumblrAssetClient = create_client("https://assets.tumblr.com")
-    app.ctx.TumblrStaticClient = create_client("https://static.tumblr.com")
-    app.ctx.TumblrAtClient = create_client(
+    app.ctx.Media64Client = create_image_client(
+        "https://64.media.tumblr.com"
+    )
+
+    app.ctx.Media49Client = create_image_client(
+        "https://49.media.tumblr.com"
+    )
+
+    app.ctx.Media44Client = create_image_client(
+        "https://44.media.tumblr.com"
+    )
+
+    app.ctx.MediaVeClient = create_image_client(
+        "https://ve.media.tumblr.com"
+    )
+
+    app.ctx.MediaVaClient = create_image_client(
+        "https://va.media.tumblr.com"
+    )
+
+    app.ctx.MediaGenericClient = aiohttp.ClientSession(
+        headers=media_request_headers,
+        timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout)
+    )
+
+    app.ctx.AudioClient = create_image_client(
+        "https://a.tumblr.com"
+    )
+
+    app.ctx.TumblrAssetClient = create_image_client(
+        "https://assets.tumblr.com"
+    )
+
+    app.ctx.TumblrStaticClient = create_image_client(
+        "https://static.tumblr.com"
+    )
+
+    app.ctx.TumblrAtClient = aiohttp.ClientSession(
         "https://at.tumblr.com",
-        headers={
-            "user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
-            "connection": "keep-alive",
-            "referer": "https://www.tumblr.com/",
-        },
+        headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
+        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout)
     )
 
     # Initialize database
