@@ -1,6 +1,8 @@
-import httpx
+import asyncio
+
 import sanic
 import sanic.exceptions
+import sanic_ext
 
 from src.exceptions import exceptions
 from src.exceptions.error_handlers import base
@@ -8,7 +10,7 @@ from src.exceptions.error_handlers import base
 miscellaneous_errors = base.ErrorHandlerGroup()
 
 
-@miscellaneous_errors.register(httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout)
+@miscellaneous_errors.register(asyncio.TimeoutError)
 async def request_timeout(request, exception):
     return await request.app.ctx.render(
         "misc/msg_error",
