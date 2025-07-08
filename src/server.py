@@ -80,47 +80,31 @@ async def initialize(app):
         timeout = aiohttp.ClientTimeout(timeout)
         return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
 
-    app.ctx.Media64Client = create_image_client(
-        "https://64.media.tumblr.com"
-    )
+    app.ctx.Media64Client = create_image_client("https://64.media.tumblr.com")
 
-    app.ctx.Media49Client = create_image_client(
-        "https://49.media.tumblr.com"
-    )
+    app.ctx.Media49Client = create_image_client("https://49.media.tumblr.com")
 
-    app.ctx.Media44Client = create_image_client(
-        "https://44.media.tumblr.com"
-    )
+    app.ctx.Media44Client = create_image_client("https://44.media.tumblr.com")
 
-    app.ctx.MediaVeClient = create_image_client(
-        "https://ve.media.tumblr.com"
-    )
+    app.ctx.MediaVeClient = create_image_client("https://ve.media.tumblr.com")
 
-    app.ctx.MediaVaClient = create_image_client(
-        "https://va.media.tumblr.com"
-    )
+    app.ctx.MediaVaClient = create_image_client("https://va.media.tumblr.com")
 
     app.ctx.MediaGenericClient = aiohttp.ClientSession(
         headers=media_request_headers,
-        timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout)
+        timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout),
     )
 
-    app.ctx.AudioClient = create_image_client(
-        "https://a.tumblr.com"
-    )
+    app.ctx.AudioClient = create_image_client("https://a.tumblr.com")
 
-    app.ctx.TumblrAssetClient = create_image_client(
-        "https://assets.tumblr.com"
-    )
+    app.ctx.TumblrAssetClient = create_image_client("https://assets.tumblr.com")
 
-    app.ctx.TumblrStaticClient = create_image_client(
-        "https://static.tumblr.com"
-    )
+    app.ctx.TumblrStaticClient = create_image_client("https://static.tumblr.com")
 
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
         "https://at.tumblr.com",
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
-        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout)
+        timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout),
     )
 
     # Initialize database

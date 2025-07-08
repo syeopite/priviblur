@@ -40,7 +40,7 @@ class TumblrAPI:
             client = aiohttp.ClientSession(
                 "https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
-                timeout=main_request_timeout  # TODO allow fine-tuning the different types of timeouts
+                timeout=main_request_timeout,  # TODO allow fine-tuning the different types of timeouts
             )
 
         return cls(client, json_loads)

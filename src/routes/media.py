@@ -6,8 +6,12 @@ from src.exceptions import exceptions
 media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
 
 
-async def get_media(request, client : aiohttp.ClientSession, path_to_request, additional_headers = None, base_url = ""):
-    async with client.get(f"{base_url}/{path_to_request}", headers=additional_headers) as tumblr_response:
+async def get_media(
+    request, client: aiohttp.ClientSession, path_to_request, additional_headers=None, base_url=""
+):
+    async with client.get(
+        f"{base_url}/{path_to_request}", headers=additional_headers
+    ) as tumblr_response:
         # Sanitize the headers given by Tumblr
         priviblur_response_headers = {}
         for header_key, header_value in tumblr_response.headers.items():

@@ -2,7 +2,6 @@ import asyncio
 
 import sanic
 import sanic.exceptions
-import sanic_ext
 
 from src.exceptions import exceptions
 from src.exceptions.error_handlers import base
