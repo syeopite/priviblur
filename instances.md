@@ -9,7 +9,7 @@
 |[priviblur.canine.tools](https://priviblur.canine.tools)|United States|No|No|
 |[pb.cleberg.net](https://pb.cleberg.net)|United States|No|No|
 |[tumblr.nerdvpn.de](https://tumblr.nerdvpn.de)|Ukraine|No|No|
-
+|[pb.proxik.cloud](https://pb.proxik.cloud)|Germany|No|Yes|
 
 ### Tor Onion Services
 
