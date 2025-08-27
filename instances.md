@@ -11,6 +11,7 @@
 |[tumblr.nerdvpn.de](https://tumblr.nerdvpn.de)|Ukraine|No|No|
 |[pb.proxik.cloud](https://pb.proxik.cloud)|Germany|No|Yes|
 |[pb.foobar.vip](https://pb.foobar.vip/)|Switzerland|No|No|
+|[priviblur.privadency.com](https://priviblur.privadency.com)|Germany|No|No|
 
 ### Tor Onion Services
 
