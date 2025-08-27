@@ -10,6 +10,7 @@
 |[pb.cleberg.net](https://pb.cleberg.net)|United States|No|No|
 |[tumblr.nerdvpn.de](https://tumblr.nerdvpn.de)|Ukraine|No|No|
 |[pb.proxik.cloud](https://pb.proxik.cloud)|Germany|No|Yes|
+|[pb.foobar.vip](https://pb.foobar.vip/)|Switzerland|No|No|
 
 ### Tor Onion Services
 
