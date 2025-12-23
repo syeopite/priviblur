@@ -1,0 +1,394 @@
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Priviblur project.
+# syeopite <syeopite@syeopite.dev>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Priviblur v0.4.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: 2025-09-13 22:01+0000\n"
+"Last-Translator: Roel v <roel11112@live.nl>\n"
+"Language-Team: Gothic <https://hosted.weblate.org/projects/priviblur/"
+"translations/got/>\n"
+"Language: got\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
+
+msgid "project_title"
+msgstr "𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂"
+
+msgid "page_title_suffix"
+msgstr "- 𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "{0} 𐌼𐌴𐌻𐌴𐌹𐌽𐍃"
+msgstr[1] "{0} 𐌼𐌴𐌻𐌴𐌹𐌽𐍉𐍃"
+
+msgid "search_bar_placeholder_text"
+msgstr "𐍃𐍉𐌺𐌾𐌰𐌽"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "𐌷𐌹𐌼𐌼𐌰 𐌳𐌰𐌲𐌰 𐌰𐌽𐌰 𐍄𐌰𐌼𐌱𐌻𐍂"
+
+msgid "navbar_trending_icon_title"
+msgstr "𐌲𐌰𐌱𐌰𐌹𐍂𐌷𐍄𐌾𐌰𐌽𐌳𐍉𐌽𐌰"
+
+msgid "navbar_right_view_page_on_tumblr_link_title"
+msgstr "𐌻𐌰𐌿𐍆 𐍃𐌰𐌹𐍈𐌰𐌽 𐌰𐌽𐌰 𐍄𐌰𐌼𐌱𐌻𐍂𐌰"
+
+msgid "navbar_right_settings_page_title"
+msgstr "𐌻𐌰𐌲𐌴𐌹𐌽𐍉𐍃"
+
+msgid "footer_version_text"
+msgstr "𐌿𐍃𐌼𐌴𐍂𐌹 {0}"
+
+msgid "footer_source_link_text"
+msgstr "𐌱𐍂𐌿𐌽𐌽𐌰"
+
+msgid "footer_donate_link_text"
+msgstr "𐌰𐌽𐌳𐍃𐍄𐌰𐌻𐌳𐌰𐌽"
+
+msgid "footer_licences_link_text"
+msgstr "𐌰𐌽𐌳𐌻𐌴𐍄𐌰 𐌸𐌿𐍃 𐌲𐌹𐌱𐌰𐌽𐌰 𐍆𐍂𐌰𐌼 𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂𐌰"
+
+msgid "dropdown_filter_menu_text"
+msgstr "𐍆𐌹𐌻𐍄𐍂"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "𐌹𐌽 𐍄𐌴𐍅𐌰𐌹 𐍆𐍂𐌰𐌼"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "𐌼𐌴𐍂𐌹"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "𐍃𐌴𐌹𐍈𐌰𐌽 𐌱𐌹 𐌳𐌰𐍄𐌰𐌿"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "𐌰𐌹𐍅𐍃"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "𐌷𐌹𐌼𐌼𐌰 𐌳𐌰𐌲𐌰"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐌰 𐍅𐌹𐌺𐍉"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐌰 𐌼𐌴𐌽𐍉𐌸𐍃"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐍉𐍃 𐍃𐌰𐌹𐌷𐍃 𐌼𐌴𐌽𐍉𐌸𐍃"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄 𐌾𐌴𐍂"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "𐌰𐌻𐌻𐍉𐍃 𐌺𐌹𐌽𐌸𐌴𐌹𐍃"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "𐍆𐌹𐌻𐍄𐍂 𐌱𐌹 𐌺𐌹𐌽𐌸𐌰𐌹 𐍅𐌰𐌿𐍂𐌳𐌹𐍃"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "𐌱𐍉𐌺𐍉𐍃"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "𐌻𐌹𐌿𐌷𐌰𐌳𐌰𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "𐌲𐌹𐍆𐍃"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "𐌵𐌹𐍃𐍃"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "𐌲𐌰𐍅𐌹𐍃𐍃"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "𐌲𐌰𐍅𐌰𐌿𐍂𐌳𐌹"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "𐌷𐌻𐌹𐌿𐌸"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "𐌵𐌹𐍅𐌰𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "𐍆𐍂𐌰𐌹𐌷𐌽𐌰𐌽"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "𐍂𐌰𐌲𐌹𐌽"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "𐌹𐌽 𐍄𐌴𐍅𐌰𐌹 𐌱𐌹"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "𐌸𐌰𐍄𐌰 𐌰𐌿𐌷𐌿𐌼𐌹𐍃𐍄𐍉"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "𐌸𐌰𐍄𐌰 𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐍉"
+
+msgid "explore_trending_page_title"
+msgstr "𐍄𐌰𐌿𐍀𐌹𐌺𐍉𐍃 𐌼𐌴𐍂𐌾𐍉𐍃"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "𐌷𐌹𐌼𐌼𐌰 𐌳𐌰𐌲𐌰 𐌰𐌽𐌰 𐍄𐌰𐌼𐌱𐌻𐍂𐌰"
+
+msgid "pagination_next_page"
+msgstr "𐌹𐍆𐍄𐌿𐌼𐌹𐌽 𐌻𐌰𐌿𐌱𐌰"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "𐌸𐌰𐍄𐌰 𐌱𐌻𐌰𐌿𐌲 𐌸𐌰𐍂𐍆 𐍂𐌰𐌷𐌽𐌴𐌹𐌽𐌰𐌹𐍃 𐌳𐌿 𐌱𐌰𐌽𐌳𐍅𐌾𐌰𐌽"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "𐌹𐌸 𐌺𐌹𐌿𐍃𐌰𐌹 𐌱𐌹𐌲𐌹𐍄𐌰𐌽 𐌰𐍆𐍄𐍂𐌰𐌱𐌻𐌰𐌿𐌲𐌰!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "𐌸𐌰𐍄𐌰 𐍃𐍉𐌺𐌽𐌹𐍅𐌰𐌿𐍂𐌳 𐌲𐌰𐌸𐍂𐌴𐌹𐌷𐌰𐌽 𐌹𐍃𐍄 𐌰𐌽𐌰 𐍄𐌰𐌼𐌱𐌻𐍂𐌰"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "𐌼𐌰𐌲𐍄𐌿𐌷 𐌺𐌹𐌿𐍃𐌰𐌽 𐍃𐍉𐌺𐌽𐌰𐌹𐍃"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐍆𐍂𐌰𐌹𐌷𐌽𐌰𐌽 𐌱𐌻𐌰𐌿𐌲 𐌱𐌹𐌲𐌹𐍄𐌰𐌽"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "𐌰𐌿𐍆𐍄𐍉 𐌸𐌰𐍄𐌰 𐌱𐌻𐌰𐌿𐌲 𐌿𐍃𐌵𐌹𐍃𐍄𐌹𐌸 𐌹𐍃𐍄 𐌸𐌰𐌿 𐌽𐌹 𐌰𐌻𐌻𐌹𐍃 𐍅𐌰𐍃 𐌰𐌹𐍅"
+
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "𐌸𐌰𐍄𐌰 𐌱𐌻𐌰𐌿𐌲 𐌸𐌰𐍂𐍆 𐍂𐌿𐌽𐌰𐍅𐌰𐌿𐍂𐌳𐌹𐍃 𐌳𐌿 𐌰𐍄𐌲𐌰𐌲𐌲𐌰𐌽"
+
+msgid "tumblr_error_ratelimit_reached_heading"
+msgstr "𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂 𐌱𐌹𐌳𐌰𐌼𐌰𐍂𐌺𐌰 𐌷𐌰𐌱𐌰𐌹𐌸 𐍆𐍂𐌰𐌼 𐍄𐌰𐌼𐌱𐌻𐍂𐌰"
+
+msgid "tumblr_error_ratelimit_reached_description"
+msgstr "𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺 𐌱𐌹𐌸𐌴 𐌸𐌰𐍄𐌰 𐌺𐌹𐌿𐍃𐌰𐌽"
+
+msgid "priviblur_error_page_title"
+msgstr "𐌰𐌹𐍂𐌶𐌴𐌹"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr ""
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr ""
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "𐌰𐌹𐍂𐌶𐌴𐌹: 𐍄𐌰𐌼𐌱𐌻𐍂 𐌷𐍄𐍄𐍀 301 𐌰𐍄𐍂𐌰𐌹𐌷𐍄𐌴𐌹𐌸 𐌱𐌰𐌽𐌳𐍅𐌰𐍂𐌾𐌴 𐌳𐌿 𐌿𐍂𐌻 𐌰𐌻𐌾𐌰𐌺𐌿𐌽𐌾𐌰𐌼𐌼𐌰"
+
+msgid "priviblur_error_generic"
+msgstr "𐌿𐍃𐍅𐌰𐌽𐌳𐌴𐌹𐌽𐍃 𐌿𐌽𐌺𐌿𐌽𐌸𐌰 𐍅𐌰𐍂𐌸!"
+
+msgid "priviblur_error_generic_description"
+msgstr "𐌸𐌿𐌲𐌺𐌴𐌹𐌸 𐌸𐌰𐍄𐌴𐌹 𐌱𐌹𐌲𐌰𐍃𐍄 𐌰𐌹𐍂𐌶𐌴𐌹𐌽 𐌹𐌽 𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂𐌰."
+
+msgid "priviblur_error_generic_description_2"
+msgstr "𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺, 𐌲𐌰𐍄𐌴𐌹𐌷𐌰𐌽 𐌷𐌴𐍂 𐌰𐍄 𐌲𐌹𐍄𐌷𐌰𐌱"
+
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "𐌻𐌰𐌿𐌲 𐌰𐌹𐍂𐌶𐌴𐌹𐌽𐍉 𐌱𐌰𐌽𐌳𐍅𐌾𐌰𐌽"
+
+msgid "post_community_label_mature_heading"
+msgstr "𐌲𐌰𐌼𐌰𐌹𐌽𐌳𐌿𐌸𐌰𐌹𐍃 𐌺𐌹𐌽𐌸𐍃: 𐌿𐍃𐍅𐌰𐌷𐍃𐌰𐌽"
+
+msgid "post_community_label_generic_explanation"
+msgstr "𐌸𐌰𐍄𐌰 𐍅𐌰𐌿𐍂𐌳 𐌼𐌰𐌲 𐌷𐌰𐌱𐌰𐌽 𐍅𐌰𐌹𐌷𐍄𐌹𐌽𐍃 𐌽𐌹 𐌲𐌰𐍄𐌹𐌻𐍉𐍃 𐌰𐌻𐌻𐌰𐌹𐌼 𐌼𐌰𐌽𐌽𐌰𐌼."
+
+msgid "post_community_label_sexual_themes"
+msgstr "𐌸𐌰𐌹𐌼𐌰𐌽𐍃 𐌲𐌰𐌻𐌹𐌲𐍂𐌾𐌹𐍃"
+
+msgid "post_community_label_drug_use"
+msgstr "𐌲𐌰𐌹𐍂𐌽𐌴𐌹 𐌻𐌿𐌱𐌾𐌴 𐌾𐌰𐌷 𐌰𐌻𐌺𐌰𐌿𐌷𐌰𐌿𐌻𐍃"
+
+msgid "post_community_label_violence"
+msgstr "𐌰𐌽𐌰𐌼𐌰𐌷𐍄𐍃"
+
+msgid "post_community_label_show_post_button"
+msgstr "𐍅𐌰𐌿𐍂𐌳 𐌱𐌰𐌽𐌳𐍅𐌾𐌰𐌽"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "𐌱𐌰𐌽𐌳𐍅𐌴𐌹𐌸 𐍃𐍅𐌰𐌹𐌱𐌾𐌰𐌽𐌳𐌴𐌹𐌽 𐌼𐌿𐍃"
+
+msgid "post_footer_permalink_icon_title"
+msgstr "𐌲𐌰𐍅𐌹𐍃𐍃 𐍃𐌹𐌽𐍄𐌴𐌹𐌽𐌰"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "𐌰𐌽𐌰 𐍄𐌰𐌼𐌱𐌻𐍂𐌰 𐍃𐌰𐌹𐍈𐌰𐌽"
+
+msgid "blog_search_placeholder_text"
+msgstr "𐍅𐌰𐌿𐍂𐌳𐌰 𐍃𐍉𐌺𐌾𐌰𐌽"
+
+msgid "blog_banner_alt"
+msgstr "𐍆𐌰𐌽𐌰 𐌱𐌻𐌰𐌿𐌲𐌹𐍃"
+
+msgid "blog_avatar_alt"
+msgstr "𐌰𐌱𐌰𐍄𐌰𐍂 𐌱𐌻𐌰𐌿𐌲𐌹𐍃"
+
+msgid "settings_header"
+msgstr "𐌻𐌰𐌲𐌴𐌹𐌽𐍉𐍃"
+
+msgid "settings_language_selector"
+msgstr "𐍂𐌰𐌶𐌳𐌰"
+
+msgid "settings_language_selector_desc"
+msgstr "𐍅𐌰𐌻𐌴𐌹 𐍂𐌰𐌶𐌳𐌰 𐌸𐌹𐌶𐍉𐌶𐌴𐌹 𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂 𐌱𐍂𐌿𐌺𐌴𐌹𐌸"
+
+msgid "settings_theme_selector"
+msgstr "𐌸𐌰𐌹𐌼𐌰"
+
+msgid "settings_theme_selector_desc"
+msgstr "𐍅𐌰𐌻𐌴𐌹 𐌰𐍄𐌰𐌿𐌲𐌾𐌰𐌽𐌳𐌰𐌽 𐌸𐌰𐌹𐌼𐌰𐌽 𐌸𐌴𐌹𐌽𐌰𐌽𐌰"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "𐍃𐌹𐌻𐌱𐍉"
+
+msgid "settings_theme_selector_option_light"
+msgstr "𐌻𐌹𐌿𐌷𐌰𐌸"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "𐍂𐌹𐌵𐌹𐍃"
+
+msgid "settings_save_changes"
+msgstr "𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹𐌽𐌹𐌽𐍃 𐌲𐌰𐍆𐌰𐍃𐍄𐌰𐌽"
+
+msgid "settings_cancel_changes"
+msgstr "𐌹𐌽𐍅𐌰𐌽𐌳𐌾𐌰𐌽"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "𐌲𐌰𐌲𐌰𐌻𐌴𐌹𐌺𐍉𐌽 𐍃𐍅𐌴 𐌱𐍉𐌺𐌰𐌼𐌰𐍂𐌺𐌰"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "𐌲𐌰𐌲𐌰𐌻𐌴𐌹𐌺𐍉𐌳𐌰"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐌰𐌲𐌰𐌻𐌴𐌹𐌺𐍉𐌽"
+
+msgid "priviblur_licences_page_title"
+msgstr "𐌰𐌽𐌳𐌻𐌴𐍄𐌰 𐌲𐌹𐌱𐌰𐌽𐌰 𐍆𐍂𐌰𐌼 𐍀𐍂𐌹𐌱𐌹𐌱𐌻𐌰𐍂𐌰"
+
+msgid "post_note_viewer_view_replies_tab_title"
+msgstr "𐌰𐌽𐌳𐌰𐌷𐌰𐍆𐍄𐌴𐌹𐍃"
+
+msgid "post_note_viewer_view_reblogs_tab_title"
+msgstr "𐌰𐍆𐍄𐍂𐌰𐌱𐌻𐌰𐌿𐌲𐌰"
+
+msgid "post_note_viewer_view_likes_tab_title"
+msgstr "𐌻𐌴𐌹𐌺𐌰𐌽𐌳"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "𐍅𐌰𐌿𐍂𐌳𐌰 𐌾𐌰𐌷 𐍃𐍉𐌺𐌽𐌹𐍅𐌰𐌿𐍂𐌳𐌰"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "𐍅𐌰𐌿𐍂𐌳𐌰 𐌸𐌰𐍄𐌰𐌹𐌽𐌴𐌹"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "𐌰𐍆𐍄𐍂𐌰𐌱𐌻𐌰𐌿𐌲𐌰 𐌰𐌽𐌸𐌰𐍂𐌰"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "𐌸𐌰𐍄𐌰 𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐍉 𐍆𐍂𐌿𐌼𐌹𐍃𐍄"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "𐌸𐌰𐍄𐌰 𐌽𐌹𐌿𐌾𐌹𐍃𐍄𐍉 𐍆𐍂𐌿𐌼𐌹𐍃𐍄"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "𐍅𐌰𐌿𐍂𐌳𐌰 𐌿𐍆𐌰𐍂𐌸𐌴𐌹𐌷𐌰𐌽"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr ""
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "𐌿𐌽𐌽𐌰𐌼𐌽𐌹𐌸"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} 𐍆𐍂𐌰𐌷"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "𐌿𐌽𐍃𐍄𐍉𐌳𐌹𐌸 𐌽𐍀𐍆 𐌱𐌻𐌿𐌺𐌺"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr ""
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "𐍆𐍂𐌹𐍃𐌰𐌷𐍄 𐍆𐌰𐌿𐍂𐌰𐍃𐌰𐌹𐍈𐌰𐌽 𐍆𐌰𐌿𐍂 \"{site}\""
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr ""
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr ""
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "𐌱𐌹𐌳𐌾𐌰 𐌸𐌿𐌺 𐌸𐍂𐌿𐌺𐌴𐌹 𐌰𐌽𐌰 𐌼𐌹𐍃 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽 𐌰𐌽𐌰 𐌽𐌰𐍄𐌾𐌰𐍃𐍄𐌰𐌳𐌰 𐍆𐍂𐌿𐌼𐌹𐍃𐍄𐌰𐌼𐌼𐌰"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "𐌰𐌹𐍂𐌶𐌴𐌹: 𐌽𐌹-𐍄𐌰𐌼𐌱𐌻𐍂 𐌱𐍂𐌿𐌽𐌽𐌰 𐍃𐍀𐌹𐌻𐍉𐌽𐌳 𐌵𐌹𐍅𐌰𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr ""
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "𐌰𐌹𐍂𐌶𐌴𐌹: 𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐌰𐍄𐌰𐌿𐌾𐌰𐌽 𐌸𐌰𐍄𐌰 𐌱𐌻𐌿𐌺𐌺 𐌰𐍅𐌳𐌾𐍉𐌽𐍃"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "𐌱𐌹𐌳𐌾𐌰 𐌸𐌿𐌺 𐌸𐍂𐌿𐌺𐌴𐌹 𐌰𐌽𐌰 𐌼𐌹𐍃 𐌳𐌿 𐌷𐌰𐌿𐍃𐌾𐌰𐌽 𐌰𐌽𐌰 𐌽𐌰𐍄𐌾𐌰𐍃𐍄𐌰𐌳𐌰 𐍆𐍂𐌿𐌼𐌹𐍃𐍄𐌰𐌼𐌼𐌰"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "𐌰𐌹𐍂𐌶𐌴𐌹: 𐌽𐌹-𐍄𐌰𐌼𐌱𐌻𐍂 𐌱𐍂𐌿𐌽𐌽𐌰 𐍆𐌰𐌿𐍂 𐍃𐍀𐌹𐌻𐍉𐌽𐌳 𐌰𐍅𐌳𐌾𐍉𐌽𐍃"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} 𐍂𐌰𐌲𐌹𐌽"
+msgstr[1] "{votes} 𐍂𐌰𐌲𐌹𐌽𐌰"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "{duration} 𐌱𐌹𐌻𐌴𐌹𐌱𐌹𐌸"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "𐌿𐍃𐍄𐌰𐌿𐌷 𐌰𐍄: {ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "𐍆𐍂𐌰𐌼 {author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "𐌲𐌰𐍃𐌺𐌰𐍀𐌰𐌽 𐍆𐍂𐌰𐌼 {author}"
+
+msgid "npf_renderer_app_attribution"
+msgstr "𐍃𐌰𐌹 𐌰𐌽𐌰 {platform}"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr ""
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "𐌰𐌽𐌰𐌽𐌹𐌿𐌾𐌹𐌸𐌰 𐍃𐍀𐍂𐌰𐌿𐍄𐌰 𐌰𐌽𐌰 𐍄𐍉𐌾𐌰𐌼 𐍃𐍉𐌺𐌽𐌰𐌹𐍃 𐌸𐌴𐌹𐌽𐌰𐌹𐌼"
+
+msgid "alert_partial_restricted_results_message"
+msgstr ""
+
+msgid "alert_restricted_results_heading"
+msgstr "𐌲𐌰𐌼𐌰𐍂𐌺𐍉𐌳𐌰 𐍄𐍉𐌾𐌰 𐍃𐍉𐌺𐌴𐌹𐌽𐌰𐌹𐍃"
+
+msgid "alert_restricted_results_message"
+msgstr ""
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "𐌸𐌰𐍄𐌰 𐌱𐌻𐌰𐌿𐌲 𐌸𐌰𐍂𐍆 𐍂𐌰𐌷𐌽𐌴𐌹𐌽𐌰𐌹𐍃 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "𐌸𐌰𐍄𐌰𐌹𐌽𐌴𐌹 𐍅𐌰𐌿𐍂𐌳𐌰 𐌿𐌽𐌳𐌰𐌹𐌻𐌹𐌳𐌰𐌲𐌰 𐍃𐍅𐌴 𐌸𐌰𐍄𐌰 𐌼𐌰𐌲𐌿𐌽 𐌰𐍄𐌰𐌿𐌾𐌰𐌽"
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐌰𐍄𐌰𐌿𐌾𐌰𐌽 𐌸𐌰𐍄𐌴𐌹 𐌹𐍃𐍄 𐌹𐌽 𐍅𐌰𐌿𐍂𐌳𐌰 𐌸𐌰𐌼𐌼𐌰"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr ""
+"𐌸𐌰𐍄𐌴𐌹 𐌹𐍃𐍄 𐌹𐌽 𐌸𐌰𐌼𐌼𐌰 𐍅𐌰𐌿𐍂𐌳𐌰 𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐌰𐍄𐌰𐌿𐌾𐌰𐌽 𐌹𐌽 𐌰𐌹𐍂𐌶𐌴𐌹𐌽𐍃. 𐍃𐌰𐌹 𐌳𐌰𐌻𐌰𐌸𐌰 𐌼𐌰𐌹𐌶𐌹𐌽 "
+"𐌺𐌿𐌽𐌸𐌾𐌰"

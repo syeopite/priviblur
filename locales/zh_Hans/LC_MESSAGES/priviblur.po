@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: Priviblur v0.4.0-dev\n"
 "Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
 "POT-Creation-Date: 2023-11-16 00:07-0800\n"
-"PO-Revision-Date: 2025-01-18 16:00+0000\n"
-"Last-Translator: Poesty Li <poesty7450@gmail.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/priviblur/translations/zh_Hans/>\n"
+"PO-Revision-Date: 2025-12-23 16:00+0000\n"
+"Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/priviblur/translations/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 msgid "project_title"
 msgstr "Priviblur"
@@ -28,7 +29,7 @@ msgid_plural "post_note_count_plural"
 msgstr[0] "{0} 条记录"
 
 msgid "timeline_search_sort_by_filter_title"
-msgstr "分类"
+msgstr "分类方式"
 
 msgid "timeline_search_sort_by_filter_popular"
 msgstr "流行"
@@ -97,7 +98,7 @@ msgid "timeline_tagged_sort_by_filter_title"
 msgstr "分类方式"
 
 msgid "timeline_tagged_sort_by_filter_top"
-msgstr "顶部"
+msgstr "最热"
 
 msgid "timeline_tagged_sort_by_filter_recent"
 msgstr "最新"
@@ -121,7 +122,7 @@ msgid "tumblr_error_restricted_tag_error_heading"
 msgstr "这个标签在 Tumblr 上被限制了"
 
 msgid "tumblr_error_restricted_tag_description"
-msgstr "请尝试进行搜索"
+msgstr "尝试进行搜索吧"
 
 msgid "tumblr_error_blog_not_found_error_heading"
 msgstr "无法找到请求的博客"
@@ -290,3 +291,115 @@ msgstr "最旧优先"
 
 msgid "post_note_viewer_view_replies_filter_sort_newest"
 msgstr "最新优先"
+
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "此博客需要密码才能访问"
+
+msgid "tumblr_error_ratelimit_reached_heading"
+msgstr "Priviblur 已被 Tumblr 限流"
+
+msgid "tumblr_error_ratelimit_reached_description"
+msgstr "请稍后再试"
+
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "显示错误日志"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "展开帖文"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr "自动展开被截断的帖文"
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "匿名"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} 提问"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "不受支持的 NPF 区块"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr ""
+"不受支持的 NPF 区块 \"{block}\" 类型的占位符。请通过 https://github.com/"
+"syeopite/npf-renderer 向我报告"
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "图片"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "\"{site}\" 的预览图片"
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr "嵌入内容已禁用"
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr "错误：无法渲染视频区块"
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "请点击我在原网站观看"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "错误：视频播放器的非 Tumblr 来源"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr "专辑封面"
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "错误：无法渲染音频区块"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "请点击我在原网站收听"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "错误：音频播放器的非 Tumblr 来源"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} 票"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "剩余 {duration}"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "结束于：{ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "来自 {author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "由 {author} 创建"
+
+msgid "npf_renderer_app_attribution"
+msgstr "在 {platform} 上查看"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr ""
+"通过不受支持的 (\"{attributee}\") 归属类型进行归属。请通过 https://"
+"github.com/syeopite/npf-renderer 报告此问题"
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "关于您搜索结果的快速更新"
+
+msgid "alert_partial_restricted_results_message"
+msgstr ""
+"由于 Tumblr 的内容准则，这些搜索结果已受到部分限制。您可能会在此处零星地看到"
+"一些空结果。"
+
+msgid "alert_restricted_results_heading"
+msgstr "受限的搜索结果"
+
+msgid "alert_restricted_results_message"
+msgstr "这些搜索结果因违反 Tumblr 的内容准则而被屏蔽。"
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "此博客需要账户才能查看"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "仅能显示像这样的单个帖文"
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "渲染此帖文内容失败"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr "此帖文的内容因错误而无法渲染。请查看下方以获取更多信息"
