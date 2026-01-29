@@ -1,4 +1,4 @@
-FROM alpine:3.21
+FROM alpine:3.23
 WORKDIR /priviblur
 
 COPY ./.git/ ./.git/
@@ -16,7 +16,7 @@ RUN apk add --no-cache git python3 py3-setuptools tini && \
     apk del py3-pip && \
     pybabel compile -d locales -D priviblur && \
     # chown is needed otherwise git will error out with "fatal: detected dubious ownership in repository at '/priviblur'"
-    chown -R priviblur:priviblur /priviblur && \ 
+    chown -R priviblur:priviblur /priviblur && \
     git config --global --add safe.directory /priviblur
 
 EXPOSE 8000
