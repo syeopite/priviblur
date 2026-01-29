@@ -15,14 +15,14 @@
     # workers = 1
 
 
-# # Controls redis cache options
+# # Controls valkey cache options
 # # Ignore to disable the cache
-# # 
-# # To enable caching, Redis is required, you then have to uncomment "url" and set it accordingly. Every other options in this section will use their default value (indicated next to them) if they are kept commented out.
+# #
+# # To enable caching, Valkey is required, you then have to uncomment "url" and set it accordingly. Every other options in this section will use their default value (indicated next to them) if they are kept commented out.
 # [cache]
     # url =
     # # For docker use the following:
-    # url = "redis://priviblur-redis:6379"
+    # url = "valkey://priviblur-valkey:6379"
 
     # # Number of seconds to cache poll results from active polls
     # cache_active_poll_results_for = 3600

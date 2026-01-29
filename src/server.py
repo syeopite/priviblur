@@ -9,7 +9,7 @@ import orjson
 import babel.numbers
 import babel.dates
 import babel.lists
-import redis.asyncio
+import valkey.asyncio
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, priviblur_extractor, preferences, i18n
@@ -110,11 +110,11 @@ async def initialize(app):
     # Initialize database
     if cache_url := app.ctx.PRIVIBLUR_CONFIG.cache.url:
         try:
-            app.ctx.CacheDb = redis.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
+            app.ctx.CacheDb = valkey.asyncio.from_url(cache_url, protocol=3, decode_responses=True)
             await app.ctx.CacheDb.ping()
-        except redis.exceptions.ConnectionError:
+        except valkey.exceptions.ConnectionError:
             app.ctx.LOGGER.error(
-                "Error: Unable to connect to Redis! Disabling cache until the problem can be fixed. Please check your configuration file and the Redis server."
+                "Error: Unable to connect to Valkey! Disabling cache until the problem can be fixed. Please check your configuration file and the Valkey server."
             )
             app.ctx.CacheDb = None
     else:

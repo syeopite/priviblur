@@ -2,10 +2,10 @@ from typing import NamedTuple, Optional
 
 
 class CacheConfig(NamedTuple):
-    """NamedTuple that stores configuration values relating to the redis cache
+    """NamedTuple that stores configuration values relating to the valkey cache
 
     Attributes:
-        url: to connect to the redis instance
+        url: to connect to the valkey instance
         cache_active_poll_results_for: Amount of seconds to cache poll results from active polls
         cache_expired_poll_results_for: Amount of seconds to cache poll results from expired polls
     """
