@@ -9,6 +9,8 @@ import urllib.parse
 from typing import Optional
 
 import aiohttp
+import ssl
+import socket
 
 from . import request_config as rconf
 from .. import helpers
@@ -24,8 +26,6 @@ class TumblrAPI:
         "accept": "application/json;format=camelcase",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0",
         "accept-encoding": "gzip, deflate",
-        "te": "trailers",
-        "connection": "keep-alive",
         "referer": "https://www.tumblr.com/",
         # Authorization token
         "authorization": "Bearer aIcXSOoTtqrzR8L8YEIOmBeW94c3FmbSNSWAUbxsny9KKx5VFh",
@@ -37,10 +37,17 @@ class TumblrAPI:
         if not client:
             main_request_timeout = aiohttp.ClientTimeout(main_request_timeout)
 
+            connector = aiohttp.TCPConnector(
+                force_close=True,
+                family=socket.AF_INET,
+                ssl=ssl.create_default_context(),
+            )
             client = aiohttp.ClientSession(
-                "https://www.tumblr.com",
                 headers=cls.DEFAULT_HEADERS,
                 timeout=main_request_timeout,  # TODO allow fine-tuning the different types of timeouts
+                version=aiohttp.HttpVersion10,  # Tumblr CDN resets aiohttp HTTP/1.1
+                connector=connector,
+                skip_auto_headers=frozenset(["User-Agent"]),
             )
 
         return cls(client, json_loads)
@@ -69,7 +76,7 @@ class TumblrAPI:
 
         logger.info(f"Requesting endpoint: /api/v2/{url}")
 
-        response = await self.client.get(f"/api/v2/{url}")
+        response = await self.client.get(f"https://www.tumblr.com/api/v2/{url}")
 
         logger.debug(f"Requested endpoint: /api/v2/{url}")
 

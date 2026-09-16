@@ -5,6 +5,8 @@ import functools
 
 import sanic
 import aiohttp
+import ssl
+import socket
 import orjson
 import babel.numbers
 import babel.dates
@@ -69,8 +71,6 @@ async def initialize(app):
         "accept-encoding": "gzip, deflate",
         "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
         "accept-language": "en-US,en;q=0.5",
-        "connection": "keep-alive",
-        "te": "trailers",
         "referer": "https://www.tumblr.com/",
     }
 
@@ -78,7 +78,19 @@ async def initialize(app):
 
     def create_image_client(url, timeout=priviblur_backend.image_response_timeout):
         timeout = aiohttp.ClientTimeout(timeout)
-        return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
+        connector = aiohttp.TCPConnector(
+            force_close=True,
+            family=socket.AF_INET,
+            ssl=ssl.create_default_context(),
+        )
+        return aiohttp.ClientSession(
+            url,
+            headers=media_request_headers,
+            timeout=timeout,
+            version=aiohttp.HttpVersion10,  # Tumblr CDN resets aiohttp HTTP/1.1
+            connector=connector,
+            skip_auto_headers=frozenset(["User-Agent"]),
+        )
 
     app.ctx.Media64Client = create_image_client("https://64.media.tumblr.com")
 
@@ -93,6 +105,9 @@ async def initialize(app):
     app.ctx.MediaGenericClient = aiohttp.ClientSession(
         headers=media_request_headers,
         timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout),
+        version=aiohttp.HttpVersion10,
+        connector=aiohttp.TCPConnector(force_close=True, family=socket.AF_INET, ssl=ssl.create_default_context()),
+        skip_auto_headers=frozenset(["User-Agent"]),
     )
 
     app.ctx.AudioClient = create_image_client("https://a.tumblr.com")
@@ -105,6 +120,9 @@ async def initialize(app):
         "https://at.tumblr.com",
         headers={"user-agent": priviblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"]},
         timeout=aiohttp.ClientTimeout(priviblur_backend.main_response_timeout),
+        version=aiohttp.HttpVersion10,
+        connector=aiohttp.TCPConnector(force_close=True, family=socket.AF_INET, ssl=ssl.create_default_context()),
+        skip_auto_headers=frozenset(["User-Agent"]),
     )
 
     # Initialize database
