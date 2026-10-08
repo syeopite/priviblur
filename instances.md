@@ -12,6 +12,7 @@
 |[pb.proxik.cloud](https://pb.proxik.cloud)|Germany|No|Yes|
 |[pb.foobar.vip](https://pb.foobar.vip/)|Switzerland|No|No|
 |[priviblur.privadency.com](https://priviblur.privadency.com)|Germany|No|No|
+|[tumblr.utilibre.org](https://tumblr.utilibre.org)|Germany|[Yes](https://tumblr.utilibre.org/utilibre-source/priviblur-utilibre.tar.gz)|Yes|
 
 ### Tor Onion Services
 
