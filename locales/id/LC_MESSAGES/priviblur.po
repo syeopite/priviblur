@@ -1,0 +1,399 @@
+# Copyright (C) 2023 Syeopite
+# This file is distributed under the same license as the Priviblur project.
+# syeopite <syeopite@syeopite.dev>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Priviblur v0.4.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/syeopite/priviblur/issues\n"
+"POT-Creation-Date: 2023-11-16 00:07-0800\n"
+"PO-Revision-Date: 2026-10-21 08:51+0000\n"
+"Last-Translator: Steven Felix "
+"<stevenfelix505@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/priviblur/"
+"translations/id/>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.11.dev0\n"
+
+msgid "project_title"
+msgstr "Priviblur"
+
+msgid "page_title_suffix"
+msgstr "- Priviblur"
+
+msgid "post_note_count"
+msgid_plural "post_note_count_plural"
+msgstr[0] "{0} catatan"
+
+msgid "search_bar_placeholder_text"
+msgstr "Telusuri"
+
+msgid "navbar_today_on_tumblr_icon_title"
+msgstr "Hari ini di Tumblr"
+
+msgid "navbar_trending_icon_title"
+msgstr "Trending"
+
+msgid "navbar_right_view_page_on_tumblr_link_title"
+msgstr "Lihat halaman di Tumblr"
+
+msgid "navbar_right_settings_page_title"
+msgstr "Pengaturan"
+
+msgid "footer_version_text"
+msgstr "Versi {0}"
+
+msgid "footer_source_link_text"
+msgstr "Sumber"
+
+msgid "footer_donate_link_text"
+msgstr "Donasi"
+
+msgid "footer_licences_link_text"
+msgstr "Lisensi"
+
+msgid "dropdown_filter_menu_text"
+msgstr "Saring"
+
+msgid "timeline_search_sort_by_filter_title"
+msgstr "Urut berdasarkan"
+
+msgid "timeline_search_sort_by_filter_popular"
+msgstr "Populer"
+
+msgid "timeline_search_sort_by_filter_recent"
+msgstr "Terkini"
+
+msgid "timeline_search_filter_by_date_filter_title"
+msgstr "Saring berdasarkan tanggal"
+
+msgid "timeline_search_filter_by_date_filter_0"
+msgstr "Sepanjang Waktu"
+
+msgid "timeline_search_filter_by_date_filter_1"
+msgstr "Hari ini"
+
+msgid "timeline_search_filter_by_date_filter_7"
+msgstr "Minggu terakhir"
+
+msgid "timeline_search_filter_by_date_filter_30"
+msgstr "Bulan terakhir"
+
+msgid "timeline_search_filter_by_date_filter_180"
+msgstr "6 bulan terakhir"
+
+msgid "timeline_search_filter_by_date_filter_365"
+msgstr "Tahun terakhir"
+
+msgid "timeline_search_post_type_filter_none"
+msgstr "Semua Jenis"
+
+msgid "timeline_search_post_type_filter_title"
+msgstr "Saring berdasarkan jenis postingan"
+
+msgid "timeline_search_post_type_filter_text"
+msgstr "Teks"
+
+msgid "timeline_search_post_type_filter_photo"
+msgstr "Foto"
+
+msgid "timeline_search_post_type_filter_gif"
+msgstr "Gif"
+
+msgid "timeline_search_post_type_filter_quote"
+msgstr "Kutipan"
+
+msgid "timeline_search_post_type_filter_link"
+msgstr "Tautan"
+
+msgid "timeline_search_post_type_filter_chat"
+msgstr "Obrolan"
+
+msgid "timeline_search_post_type_filter_audio"
+msgstr "Audio"
+
+msgid "timeline_search_post_type_filter_video"
+msgstr "Video"
+
+msgid "timeline_search_post_type_filter_ask"
+msgstr "Tanyakan"
+
+msgid "timeline_search_post_type_filter_poll"
+msgstr "Jajak pendapat"
+
+msgid "timeline_tagged_sort_by_filter_title"
+msgstr "Urut berdasarkan"
+
+msgid "timeline_tagged_sort_by_filter_top"
+msgstr "Teratas"
+
+msgid "timeline_tagged_sort_by_filter_recent"
+msgstr "Terkini"
+
+msgid "explore_trending_page_title"
+msgstr "Topik yang sedang tren"
+
+msgid "explore_today_on_tumblr_page_title"
+msgstr "Hari ini di Tumblr"
+
+msgid "pagination_next_page"
+msgstr "Halaman berikutnya"
+
+msgid "tumblr_error_blog_login_required_error_heading"
+msgstr "Blog ini memerlukan akun untuk melihatnya"
+
+msgid "tumblr_error_blog_login_required_error_description"
+msgstr "Cobalah mencari reblog saja!"
+
+msgid "tumblr_error_restricted_tag_error_heading"
+msgstr "Tag ini telah dibatasi di Tumblr"
+
+msgid "tumblr_error_restricted_tag_description"
+msgstr "Cobalah melakukan penelusuran saja"
+
+msgid "tumblr_error_blog_not_found_error_heading"
+msgstr "Tidak dapat menemukan blog yang diminta"
+
+msgid "tumblr_error_blog_not_found_error_description"
+msgstr "Blog tersebut mungkin telah dihapus atau tidak pernah ada sejak awal"
+
+msgid "tumblr_error_blog_requires_password_error_heading"
+msgstr "Blog ini memerlukan kata sandi untuk mengaksesnya"
+
+msgid "tumblr_error_ratelimit_reached_heading"
+msgstr "Priviblur telah dibatasi aksesnya oleh Tumblr"
+
+msgid "tumblr_error_ratelimit_reached_description"
+msgstr "Silahkan coba lagi nanti"
+
+msgid "priviblur_error_page_title"
+msgstr "Kesalahan"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_heading"
+msgstr "Kesalahan: Waktu permintaan ke Tumblr habis"
+
+msgid "priviblur_error_request_to_tumblr_timed_out_description"
+msgstr ""
+"Priviblur tidak dapat menyelesaikan permintaan ke Tumblr sebelum waktu habis"
+
+msgid "priviblur_error_invalid_internal_tumblr_redirect"
+msgstr "Kesalahan: Pengalihan HTTP 301 Tumblr menunjuk ke URL asing"
+
+msgid "priviblur_error_generic"
+msgstr "Telah terjadi pengecualian yang tidak diketahui!"
+
+msgid "priviblur_error_generic_description"
+msgstr "Sepertinya Anda telah menemukan bug di Priviblur."
+
+msgid "priviblur_error_generic_description_2"
+msgstr "Silahkan laporkan di sini di GitHub"
+
+msgid "priviblur_error_generic_technical_details_expansion_box_label"
+msgstr "Tampilkan log kesalahan"
+
+msgid "post_community_label_mature_heading"
+msgstr "Label Komunitas: Dewasa"
+
+msgid "post_community_label_generic_explanation"
+msgstr ""
+"Postingan ini mungkin berisi konten yang tidak sesuai untuk semua kalangan."
+
+msgid "post_community_label_sexual_themes"
+msgstr "Tema seksual"
+
+msgid "post_community_label_drug_use"
+msgstr "Kecanduan narkoba dan alkohol"
+
+msgid "post_community_label_violence"
+msgstr "Kekerasan"
+
+msgid "post_community_label_show_post_button"
+msgstr "Tampilkan postingan"
+
+msgid "post_community_label_no_js_show_post_instructions"
+msgstr "Terungkap saat kursor diarahkan"
+
+msgid "post_footer_permalink_icon_title"
+msgstr "Tautan permanen"
+
+msgid "post_footer_view_on_tumblr_icon_title"
+msgstr "Lihat di Tumblr"
+
+msgid "blog_search_placeholder_text"
+msgstr "Telusuri postingan"
+
+msgid "blog_banner_alt"
+msgstr "Spanduk blog"
+
+msgid "blog_avatar_alt"
+msgstr "Avatar blog"
+
+msgid "settings_header"
+msgstr "Pengaturan"
+
+msgid "settings_language_selector"
+msgstr "Bahasa"
+
+msgid "settings_language_selector_desc"
+msgstr "Pilih bahasa yang ingin Anda gunakan untuk Priviblur"
+
+msgid "settings_theme_selector"
+msgstr "Tema"
+
+msgid "settings_theme_selector_desc"
+msgstr "Pilih tema tampilan Anda"
+
+msgid "settings_theme_selector_option_auto"
+msgstr "Otomatis"
+
+msgid "settings_theme_selector_option_light"
+msgstr "Terang"
+
+msgid "settings_theme_selector_option_dark"
+msgstr "Gelap"
+
+msgid "settings_save_changes"
+msgstr "Simpan Perubahan"
+
+msgid "settings_cancel_changes"
+msgstr "Batal"
+
+msgid "settings_copy_as_bookmarklet"
+msgstr "Salin sebagai bookmarklet"
+
+msgid "settings_copy_as_bookmarklet_confirmed"
+msgstr "Disalin"
+
+msgid "settings_copy_as_bookmarklet_failed"
+msgstr "Tidak dapat menyalin"
+
+msgid "priviblur_licences_page_title"
+msgstr "Lisensi"
+
+msgid "post_note_viewer_view_replies_tab_title"
+msgstr "Balasan"
+
+msgid "post_note_viewer_view_reblogs_tab_title"
+msgstr "Reblog"
+
+msgid "post_note_viewer_view_likes_tab_title"
+msgstr "Suka"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_comments"
+msgstr "Komentar dan tag"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_with_content_comments"
+msgstr "Hanya komentar"
+
+msgid "post_note_viewer_view_reblogs_filter_reblogs_only"
+msgstr "Reblog lainnya"
+
+msgid "post_note_viewer_view_replies_filter_sort_oldest"
+msgstr "Yang tertua dulu"
+
+msgid "post_note_viewer_view_replies_filter_sort_newest"
+msgstr "Yang terbaru dulu"
+
+msgid "settings_expand_blogger_truncated_posts"
+msgstr "Perluas postingan"
+
+msgid "settings_expand_blogger_truncated_posts_desc"
+msgstr "Memperluas postingan yang terpotong secara otomatis"
+
+msgid "npf_renderer_asker_with_no_attribution"
+msgstr "Anonim"
+
+msgid "npf_renderer_asker_and_ask_verb"
+msgstr "{name} bertanya"
+
+msgid "npf_renderer_unsupported_block_header"
+msgstr "Blok NPF tidak didukung"
+
+msgid "npf_renderer_unsupported_block_description"
+msgstr ""
+
+msgid "npf_renderer_generic_image_alt_text"
+msgstr "gambar"
+
+msgid "npf_renderer_link_block_poster_alt_text"
+msgstr "Gambar pratinjau untuk \"{site}\""
+
+msgid "npf_renderer_link_block_fallback_embeds_are_disabled"
+msgstr "Penyematan dimatikan"
+
+msgid "npf_renderer_error_video_link_block_fallback_heading"
+msgstr "Kesalahan: tidak dapat merender blok video"
+
+msgid "npf_renderer_video_link_block_fallback_description"
+msgstr "Silahkan klik saya untuk menonton di situs aslinya"
+
+msgid "npf_renderer_error_link_block_fallback_native_video_player_non_tumblr_source"
+msgstr "Kesalahan: sumber non-tumblr untuk pemutar video"
+
+msgid "npf_renderer_fallback_audio_block_thumbnail_alt_text"
+msgstr "Seni album"
+
+msgid "npf_renderer_error_audio_link_block_fallback_heading"
+msgstr "Kesalahan: tidak dapat merender blok audio"
+
+msgid "npf_renderer_audio_link_block_fallback_description"
+msgstr "Silahkan klik saya untuk mendengarkan di situs aslinya"
+
+msgid "npf_renderer_error_link_block_fallback_native_audio_player_non_tumblr_source"
+msgstr "Kesalahan: sumber non-tumblr untuk pemutar audio"
+
+msgid "npf_renderer_poll_total_votes"
+msgid_plural "npf_renderer_poll_total_votes_plural"
+msgstr[0] "{votes} suara"
+
+msgid "npf_renderer_poll_remaining_time"
+msgstr "{duration} tersisa"
+
+msgid "npf_renderer_poll_ended_on"
+msgstr "Berakhir pada: {ended_date}"
+
+msgid "npf_renderer_post_attribution"
+msgstr "Dari {author}"
+
+msgid "npf_renderer_blog_attribution"
+msgstr "Dibuat oleh {author}"
+
+msgid "npf_renderer_app_attribution"
+msgstr "Lihat di {platform}"
+
+msgid "npf_renderer_unsupported_attribution"
+msgstr ""
+
+msgid "alert_partial_restricted_results_heading"
+msgstr "Pembaruan Cepat pada Hasil Pencarian Anda"
+
+msgid "alert_partial_restricted_results_message"
+msgstr ""
+"Hasil pencarian ini telah dibatasi sebagian karena pedoman konten Tumblr. "
+"Anda mungkin sesekali akan melihat hasil yang kosong di sini."
+
+msgid "alert_restricted_results_heading"
+msgstr "Hasil pencarian terbatas"
+
+msgid "alert_restricted_results_message"
+msgstr ""
+"Hasil pencarian ini telah diblokir oleh Tumblr karena melanggar pedoman "
+"konten mereka."
+
+msgid "alert_view_post_on_account_restricted_blog_heading"
+msgstr "Blog ini memerlukan akun untuk melihatnya"
+
+msgid "alert_view_post_on_account_restricted_blog_message"
+msgstr "Hanya postingan individual seperti ini yang dapat ditampilkan"
+
+msgid "alert_error_on_rendering_post_contents_heading"
+msgstr "Gagal merender konten postingan ini"
+
+msgid "alert_error_on_rendering_post_contents"
+msgstr ""
+"Konten postingan ini gagal dirender karena ada kesalahan. Periksa di bawah "
+"untuk informasi lebih lanjut"
